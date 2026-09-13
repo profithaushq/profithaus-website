@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { Pill, OptionCard, ProgressBar } from "./pill-option";
 
 const TOTAL_STEPS = 4;
@@ -47,6 +47,8 @@ function toggleInList(list: string[], value: string) {
 export default function ApplyForm() {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
@@ -82,14 +84,51 @@ export default function ApplyForm() {
   const step1Valid = email.trim() && fullName.trim() && businessName.trim();
   const step2Valid = monthlyRevenue && teamSize;
 
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+
+    if (step < TOTAL_STEPS) {
+      setStep((s) => s + 1);
+      return;
+    }
+
+    setSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const response = await fetch("/api/apply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          fullName,
+          jobPosition,
+          businessName,
+          websiteUrl,
+          brandAge,
+          monthlyRevenue,
+          teamSize,
+          wayOfWorking,
+          supportAreas,
+          brandBlockers,
+          admiredBrands,
+          anythingElse,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Submission failed");
+      setSubmitted(true);
+    } catch {
+      setSubmitError(
+        "Something went wrong sending your application. Please email us directly or try again.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSubmitted(true);
-      }}
-      className="rounded-2xl bg-white p-8 sm:p-10"
-    >
+    <form onSubmit={handleSubmit} className="rounded-2xl bg-white p-8 sm:p-10">
       <ProgressBar step={step} total={TOTAL_STEPS} />
 
       {step === 1 && (
@@ -293,14 +332,19 @@ export default function ApplyForm() {
         ) : (
           <button
             type="submit"
-            className="flex-1 rounded-full bg-maroon px-6 py-3 text-sm font-medium uppercase tracking-wide text-white transition-colors hover:bg-maroon-dark sm:flex-none"
+            disabled={submitting}
+            className="flex-1 rounded-full bg-maroon px-6 py-3 text-sm font-medium uppercase tracking-wide text-white transition-colors hover:bg-maroon-dark disabled:cursor-not-allowed disabled:opacity-60 sm:flex-none"
           >
-            Apply now
+            {submitting ? "Submitting..." : "Apply now"}
           </button>
         )}
       </div>
 
-      {step === TOTAL_STEPS && (
+      {submitError && (
+        <p className="mt-4 text-center text-xs text-accent">{submitError}</p>
+      )}
+
+      {step === TOTAL_STEPS && !submitError && (
         <p className="mt-4 text-center text-xs text-ink-soft">
           Applications are reviewed manually within 72hrs
         </p>
