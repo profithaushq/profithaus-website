@@ -16,7 +16,7 @@ const STORY = [
     title: "Why we exist.",
     paragraphs: [
       "We're the agency our founders wished existed when they were the ones hiring agencies.",
-      "8+ years in-house at fast-paced DTC brands — including start-ups like Known Nutrition and global giant THG, across names like LookFantastic and Coggles — turning websites and marketing channels into actual revenue. Which means we've also sat on your side of the table. Briefing agencies. Chasing agencies. Quietly losing faith in agencies.",
+      "8+ years in-house at fast-paced DTC brands, including start-ups like Known Nutrition and global giant THG, across names like LookFantastic and Coggles, turning websites and marketing channels into actual revenue. Which means we've also sat on your side of the table. Briefing agencies. Chasing agencies. Quietly losing faith in agencies.",
       "The slow replies. The strategy decks that looked great and changed nothing. The hours billed that never quite showed up in the numbers.",
       "Most agencies sell you the work. We care about what it actually does. So we built just that.",
     ],
@@ -25,7 +25,7 @@ const STORY = [
     number: "02",
     title: "How we work.",
     paragraphs: [
-      "No account manager relaying your question to someone who relays it to someone else — the people you meet are the people doing the work.",
+      "No account manager relaying your question to someone who relays it to someone else. The people you meet are the people doing the work.",
       "We're selective on purpose, because we only take on brands we genuinely think we can move, and we'd rather say no than pad a roster. Senior-led, hands-on, and as embedded as you need us to be.",
     ],
   },
@@ -78,7 +78,7 @@ export default function AboutUs() {
       <HeroBand>
         <div className="mx-auto max-w-4xl px-6 py-20 text-center sm:py-28">
           <p className={`${MONO_LABEL} text-white/70`}>About profithaus</p>
-          <h1 className="mt-6 font-[family-name:var(--font-heading)] text-4xl font-light italic leading-tight sm:text-6xl">
+          <h1 className="mt-6 font-[family-name:var(--font-heading)] text-2xl font-normal uppercase tracking-tight leading-tight sm:text-4xl">
             The agency we wished existed.
           </h1>
           <p className="mt-6 text-white/80">
@@ -99,7 +99,7 @@ export default function AboutUs() {
               {section.number}
             </span>
             <div>
-              <h2 className="font-[family-name:var(--font-heading)] text-2xl font-medium">
+              <h2 className="font-[family-name:var(--font-heading)] text-lg font-medium">
                 {section.title}
               </h2>
               {section.paragraphs.map((paragraph) => (
@@ -139,7 +139,7 @@ export default function AboutUs() {
             backed by data, not gut feel. All joined up under one approach, so
             nothing operates in a silo.
           </p>
-          <p className="mt-4 font-[family-name:var(--font-heading)] text-2xl font-medium italic">
+          <p className="mt-4 font-[family-name:var(--font-heading)] text-lg font-medium">
             We&apos;re not here to be your agency. We&apos;re here to be the
             part of your team that actually gets it.
           </p>

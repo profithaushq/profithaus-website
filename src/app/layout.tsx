@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
+import { Anton, Inter, IBM_Plex_Mono } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
 
-const heading = Fraunces({
+const heading = Anton({
   variable: "--font-heading",
   subsets: ["latin"],
-  axes: ["opsz", "SOFT"],
-  weight: "variable",
-  style: ["normal", "italic"],
+  weight: "400",
 });
 
 const body = Inter({

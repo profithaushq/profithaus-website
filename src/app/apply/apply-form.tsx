@@ -72,8 +72,8 @@ export default function ApplyForm() {
   if (submitted) {
     return (
       <div className="rounded-2xl bg-white p-10 text-center">
-        <h2 className="font-[family-name:var(--font-heading)] text-2xl font-medium italic">
-          Thanks — we&apos;ll be in touch.
+        <h2 className="font-[family-name:var(--font-heading)] text-lg font-medium">
+          Thanks, we&apos;ll be in touch.
         </h2>
         <p className="mt-2 text-ink-soft">
           We read every application. If it looks like a fit, we&apos;ll reach

@@ -13,7 +13,7 @@ export default function Faq() {
     <>
       <HeroBand>
         <div className="mx-auto max-w-4xl px-6 py-20 text-center sm:py-28">
-          <h1 className="font-[family-name:var(--font-heading)] text-4xl font-light italic leading-tight sm:text-6xl">
+          <h1 className="font-[family-name:var(--font-heading)] text-2xl font-normal uppercase tracking-tight leading-tight sm:text-4xl">
             Frequently Asked Questions
           </h1>
         </div>
@@ -32,7 +32,7 @@ export default function Faq() {
               If you&apos;ve made it this far and still have questions, we
               respect the dedication.
             </p>
-            <h2 className="mt-2 font-[family-name:var(--font-heading)] text-2xl font-medium">
+            <h2 className="mt-2 font-[family-name:var(--font-heading)] text-lg font-medium">
               Pop us a message below and we&apos;ll reply within 1–2 working
               days.
             </h2>

@@ -4,7 +4,7 @@
   --color-maroon: #7a2424;
   --color-maroon-dark: #5e1b1b;
   --color-accent: #c1392b;
-  --color-cream: #f8f2ea;
+  --color-cream: #ffffff;
   --color-ink: #1c1a19;
   --color-ink-soft: #6b6360;
 }
@@ -70,7 +70,7 @@ body {
 }
 
 .marquee-track {
-  animation: marquee 22s linear infinite;
+  animation: marquee 70s linear infinite;
 }
 
 .marquee-track:hover {

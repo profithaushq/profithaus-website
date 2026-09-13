@@ -11,7 +11,7 @@ const SERVICES = [
   {
     title: "Ecommerce Trading",
     description:
-      "A data-led approach to improving how your website performs — from product focus, pricing and merchandising to customer journey and overall trading strategy.",
+      "A data-led approach to improving how your website performs: product focus, pricing and merchandising, customer journey and overall trading strategy.",
   },
   {
     title: "Website Build & Management",
@@ -21,7 +21,7 @@ const SERVICES = [
   {
     title: "Digital Business Management",
     description:
-      "Full oversight of the commercial engine behind your site — margins, P&Ls, cost of goods and contribution by SKU, so growth decisions are made against real profitability, not just top-line revenue.",
+      "Full oversight of the commercial engine behind your site: margins, P&Ls, cost of goods and contribution by SKU, so growth decisions are made against real profitability, not just top-line revenue.",
   },
 ];
 
@@ -30,25 +30,25 @@ const METHOD_PILLARS = [
     number: "01",
     title: "In-Haus DNA",
     description:
-      "Built from years in-house, we know how strong internal teams actually think and operate — because we've been there, done it, and made it work.",
+      "Built from years in-house, we know how strong internal teams actually think and operate, because we've been there, done it, and made it work.",
   },
   {
     number: "02",
     title: "Senior Leadership",
     description:
-      "We've been in leadership inside D2C giants — making the big calls, rolling up our sleeves and leading execution that actually moves the business forward.",
+      "We've been in leadership inside D2C giants, making the big calls, rolling up our sleeves and leading execution that actually moves the business forward.",
   },
   {
     number: "03",
     title: "Commercial & Creative Mindset",
     description:
-      "We're all about performance, profitability, and industry reputation — not vanity metrics that look cute in reports but don't pay the bills.",
+      "We're all about performance, profitability, and industry reputation, not vanity metrics that look cute in reports but don't pay the bills.",
   },
   {
     number: "04",
     title: "360 Strategy",
     description:
-      "From trading to marketing to creative, we know the full funnel inside out — so if something's not converting, we've probably already spotted it.",
+      "From trading to marketing to creative, we know the full funnel inside out, so if something's not converting, we've probably already spotted it.",
   },
 ];
 
@@ -56,17 +56,17 @@ const ENGAGEMENT_MODELS = [
   {
     title: "Consulting",
     description:
-      "Regular strategic support and direction when you need senior-level input — expert guidance on strategy, priorities, decision-making and growth opportunities without full end-to-end execution.",
+      "Regular strategic support and direction when you need senior-level input: expert guidance on strategy, priorities, decision-making and growth opportunities without full end-to-end execution.",
   },
   {
     title: "One Time Project",
     description:
-      "Focused execution support on specific initiatives — product launch strategies, BTS and shoot-day content creation, and other defined marketing or brand activations.",
+      "Focused execution support on specific initiatives: product launch strategies, BTS and shoot-day content creation, and other defined marketing or brand activations.",
   },
   {
     title: "Retainers",
     description:
-      "Embedded, hands-on support working as a true extension of your team — driving ongoing commercial growth through consistent execution, optimisation, and proactive input across your key channels.",
+      "Embedded, hands-on support working as a true extension of your team, driving ongoing commercial growth through consistent execution, optimisation, and proactive input across your key channels.",
   },
 ];
 
@@ -81,7 +81,7 @@ export default function Home() {
           <p className="mt-4 font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-[0.2em] text-white/70">
             Ecommerce partner for luxury brands
           </p>
-          <h1 className="mt-6 font-[family-name:var(--font-heading)] text-4xl font-light italic leading-tight sm:text-6xl">
+          <h1 className="mt-6 font-[family-name:var(--font-heading)] text-2xl font-normal uppercase tracking-tight leading-tight sm:text-4xl">
             Making brands harder to ignore and easier to buy from
           </h1>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
@@ -146,7 +146,7 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 py-24">
         <Reveal>
           <p className={EYEBROW}>Our approach</p>
-          <h2 className="mt-3 font-[family-name:var(--font-heading)] text-3xl font-medium sm:text-4xl">
+          <h2 className="mt-3 font-[family-name:var(--font-heading)] text-xl font-medium sm:text-2xl">
             The Profit Haus Method™
           </h2>
           <p className="mt-4 max-w-2xl text-ink-soft">
@@ -178,7 +178,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <p className={EYEBROW}>What we do</p>
-            <h2 className="mt-3 max-w-xl font-[family-name:var(--font-heading)] text-3xl font-medium sm:text-4xl">
+            <h2 className="mt-3 max-w-xl font-[family-name:var(--font-heading)] text-xl font-medium sm:text-2xl">
               Built for brands that want to look premium and sell more.
             </h2>
           </Reveal>
@@ -203,16 +203,16 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 py-24">
         <Reveal>
           <p className={EYEBROW}>How we do it</p>
-          <h2 className="mt-3 font-[family-name:var(--font-heading)] text-3xl font-medium sm:text-4xl">
+          <h2 className="mt-3 font-[family-name:var(--font-heading)] text-xl font-medium sm:text-2xl">
             Flexible engagement, senior-led every time.
           </h2>
         </Reveal>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {ENGAGEMENT_MODELS.map((model, i) => (
             <Reveal key={model.title} delay={i * 100}>
               <div className="h-full rounded-2xl bg-maroon p-8 text-white transition-transform duration-300 hover:-translate-y-1">
-                <h3 className="font-[family-name:var(--font-heading)] text-xl font-medium">
+                <h3 className="font-[family-name:var(--font-heading)] text-base font-medium">
                   {model.title}
                 </h3>
                 <p className="mt-3 text-sm text-white/80">
@@ -226,7 +226,7 @@ export default function Home() {
 
       <HeroBand>
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 px-6 py-20 text-center">
-          <h2 className="font-[family-name:var(--font-heading)] text-3xl font-medium sm:text-4xl">
+          <h2 className="font-[family-name:var(--font-heading)] text-xl font-medium sm:text-2xl">
             Got a question or want to get in touch?
           </h2>
           <p className="max-w-xl text-white/80">
