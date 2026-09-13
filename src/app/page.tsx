@@ -81,7 +81,7 @@ export default function Home() {
           <p className="mt-4 font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-[0.2em] text-white/70">
             Ecommerce partner for luxury brands
           </p>
-          <h1 className="mt-6 font-[family-name:var(--font-heading)] text-2xl font-normal uppercase tracking-tight leading-tight sm:text-4xl">
+          <h1 className="mt-6 font-[family-name:var(--font-heading)] text-2xl font-extrabold uppercase tracking-wide leading-tight sm:text-4xl">
             Making brands harder to ignore and easier to buy from
           </h1>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
@@ -98,7 +98,7 @@ export default function Home() {
       <section className="border-b border-ink/10">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 py-16 sm:grid-cols-4">
           <Reveal className="text-center">
-            <p className="font-[family-name:var(--font-heading)] text-2xl font-medium sm:text-3xl">
+            <p className="font-[family-name:var(--font-heading)] text-2xl font-bold sm:text-3xl">
               <CountUp to={50} prefix="£" suffix="m+" />
             </p>
             <p className="mt-2 font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-wide text-ink-soft">
@@ -106,7 +106,7 @@ export default function Home() {
             </p>
           </Reveal>
           <Reveal delay={100} className="text-center">
-            <p className="font-[family-name:var(--font-heading)] text-2xl font-medium text-accent sm:text-3xl">
+            <p className="font-[family-name:var(--font-heading)] text-2xl font-bold text-accent sm:text-3xl">
               Mid Luxury
             </p>
             <p className="mt-2 font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-wide text-ink-soft">
@@ -114,7 +114,7 @@ export default function Home() {
             </p>
           </Reveal>
           <Reveal delay={200} className="text-center">
-            <p className="font-[family-name:var(--font-heading)] text-2xl font-medium sm:text-3xl">
+            <p className="font-[family-name:var(--font-heading)] text-2xl font-bold sm:text-3xl">
               <CountUp to={8} suffix="+ Yrs" />
             </p>
             <p className="mt-2 font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-wide text-ink-soft">
@@ -122,7 +122,7 @@ export default function Home() {
             </p>
           </Reveal>
           <Reveal delay={300} className="text-center">
-            <p className="font-[family-name:var(--font-heading)] text-2xl font-medium sm:text-3xl">
+            <p className="font-[family-name:var(--font-heading)] text-2xl font-bold sm:text-3xl">
               Corporate
             </p>
             <p className="mt-2 font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-wide text-ink-soft">
@@ -146,7 +146,7 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 py-24">
         <Reveal>
           <p className={EYEBROW}>Our approach</p>
-          <h2 className="mt-3 font-[family-name:var(--font-heading)] text-xl font-medium sm:text-2xl">
+          <h2 className="mt-3 font-[family-name:var(--font-heading)] text-xl font-bold sm:text-2xl">
             The Profit Haus Method™
           </h2>
           <p className="mt-4 max-w-2xl text-ink-soft">
@@ -178,7 +178,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <p className={EYEBROW}>What we do</p>
-            <h2 className="mt-3 max-w-xl font-[family-name:var(--font-heading)] text-xl font-medium sm:text-2xl">
+            <h2 className="mt-3 max-w-xl font-[family-name:var(--font-heading)] text-xl font-bold sm:text-2xl">
               Built for brands that want to look premium and sell more.
             </h2>
           </Reveal>
@@ -203,7 +203,7 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 py-24">
         <Reveal>
           <p className={EYEBROW}>How we do it</p>
-          <h2 className="mt-3 font-[family-name:var(--font-heading)] text-xl font-medium sm:text-2xl">
+          <h2 className="mt-3 font-[family-name:var(--font-heading)] text-xl font-bold sm:text-2xl">
             Flexible engagement, senior-led every time.
           </h2>
         </Reveal>
@@ -212,7 +212,7 @@ export default function Home() {
           {ENGAGEMENT_MODELS.map((model, i) => (
             <Reveal key={model.title} delay={i * 100}>
               <div className="h-full rounded-2xl bg-maroon p-8 text-white transition-transform duration-300 hover:-translate-y-1">
-                <h3 className="font-[family-name:var(--font-heading)] text-base font-medium">
+                <h3 className="font-[family-name:var(--font-heading)] text-base font-bold">
                   {model.title}
                 </h3>
                 <p className="mt-3 text-sm text-white/80">
@@ -226,7 +226,7 @@ export default function Home() {
 
       <HeroBand>
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 px-6 py-20 text-center">
-          <h2 className="font-[family-name:var(--font-heading)] text-xl font-medium sm:text-2xl">
+          <h2 className="font-[family-name:var(--font-heading)] text-xl font-bold sm:text-2xl">
             Got a question or want to get in touch?
           </h2>
           <p className="max-w-xl text-white/80">

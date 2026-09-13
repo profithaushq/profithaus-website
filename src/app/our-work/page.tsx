@@ -26,7 +26,7 @@ export default function OurWork() {
       <HeroBand>
         <div className="mx-auto max-w-4xl px-6 py-20 text-center sm:py-28">
           <p className={`${MONO_LABEL} text-white/70`}>Our work</p>
-          <h1 className="mt-6 font-[family-name:var(--font-heading)] text-2xl font-normal uppercase tracking-tight leading-tight sm:text-4xl">
+          <h1 className="mt-6 font-[family-name:var(--font-heading)] text-2xl font-extrabold uppercase tracking-wide leading-tight sm:text-4xl">
             Brands we&apos;ve made harder to ignore
           </h1>
           <p className="mt-6 text-white/80">
@@ -46,7 +46,7 @@ export default function OurWork() {
         <div className="mt-16">
           <Reveal>
             <p className={`${MONO_LABEL} text-accent`}>01 · AXISBIOTIX</p>
-            <h2 className="mt-2 font-[family-name:var(--font-heading)] text-xl font-medium">
+            <h2 className="mt-2 font-[family-name:var(--font-heading)] text-xl font-bold">
               AXISBIOTIX
             </h2>
             <div className={`mt-3 flex flex-wrap gap-x-4 gap-y-1 ${MONO_LABEL} text-ink-soft`}>
@@ -74,7 +74,7 @@ export default function OurWork() {
             <p className={`${MONO_LABEL} text-accent`}>
               02 · The Studio Online
             </p>
-            <h2 className="mt-2 font-[family-name:var(--font-heading)] text-xl font-medium">
+            <h2 className="mt-2 font-[family-name:var(--font-heading)] text-xl font-bold">
               The Studio Online
             </h2>
             <div className={`mt-3 flex flex-wrap gap-x-4 gap-y-1 ${MONO_LABEL} text-ink-soft`}>
@@ -133,7 +133,7 @@ export default function OurWork() {
 
       <HeroBand>
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 px-6 py-20 text-center">
-          <h2 className="font-[family-name:var(--font-heading)] text-xl font-medium sm:text-2xl">
+          <h2 className="font-[family-name:var(--font-heading)] text-xl font-bold sm:text-2xl">
             Want your brand in here?
           </h2>
           <p className="text-white/80">

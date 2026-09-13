@@ -12,7 +12,7 @@ export default function Footer() {
   return (
     <footer className="bg-maroon text-white">
       <div className="mx-auto max-w-6xl px-6 py-16">
-        <p className="font-[family-name:var(--font-heading)] text-xl font-medium">
+        <p className="font-[family-name:var(--font-heading)] text-xl font-bold">
           profithaus. Ecommerce Partner
         </p>
 
