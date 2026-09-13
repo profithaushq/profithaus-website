@@ -21,20 +21,16 @@ const WAYS_OF_WORKING = [
   { title: "Not sure yet", description: "We'll help you decide" },
 ];
 const SUPPORT_AREAS = [
-  "Trading",
-  "CRO / Website Design",
-  "Marketing",
-  "Branding",
-  "Content & Creative",
+  "Ecommerce Trading",
+  "Website Build & Management",
+  "Digital Business Management",
   "Other",
 ];
 const BRAND_BLOCKERS = [
   "Website design/low conversion",
-  "Marketing strategy unclear",
   "Trading strategy needs improvement",
   "Not enough traffic",
-  "Weak retention/repeat customers",
-  "Content not performing",
+  "Margins or profitability unclear",
   "Unsure what's working",
   "Other",
 ];

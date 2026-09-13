@@ -48,7 +48,7 @@ const METHOD_PILLARS = [
     number: "04",
     title: "360 Strategy",
     description:
-      "From trading to marketing to creative, we know the full funnel inside out, so if something's not converting, we've probably already spotted it.",
+      "From trading to website performance to the numbers behind it, we know the full picture, so if something's not converting or the margins don't add up, we've probably already spotted it.",
   },
 ];
 
@@ -61,12 +61,12 @@ const ENGAGEMENT_MODELS = [
   {
     title: "One Time Project",
     description:
-      "Focused execution support on specific initiatives: product launch strategies, BTS and shoot-day content creation, and other defined marketing or brand activations.",
+      "Focused execution support on a specific initiative: a full site rebuild, a trading strategy overhaul, or a deep-dive margin and P&L audit, scoped and delivered as a defined piece of work.",
   },
   {
     title: "Retainers",
     description:
-      "Embedded, hands-on support working as a true extension of your team, driving ongoing commercial growth through consistent execution, optimisation, and proactive input across your key channels.",
+      "Embedded, hands-on support working as a true extension of your team, driving ongoing commercial growth through consistent execution, optimisation, and proactive input across trading, your website and the numbers behind the business.",
   },
 ];
 

@@ -33,7 +33,7 @@ const STORY = [
     number: "03",
     title: "What we bring.",
     paragraphs: [
-      "Real in-house experience. Commercial thinking. A team that's actually been on your side of the table, managing trading targets, building CRM strategies, optimising conversion rates, and turning websites into revenue drivers.",
+      "Real in-house experience. Commercial thinking. A team that's actually been on your side of the table, managing trading targets, overseeing margins and P&Ls, optimising conversion rates, and turning websites into revenue drivers.",
     ],
   },
 ];

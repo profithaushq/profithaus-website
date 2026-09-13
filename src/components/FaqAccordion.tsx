@@ -6,7 +6,7 @@ const FAQS = [
   {
     question: "What is profithaus. and what do you offer?",
     answer:
-      "profithaus. is a modern ecommerce partner built for ambitious brands that want more than a typical agency relationship. We combine trade strategy, marketing, creative and e-commerce expertise to help turn websites and marketing channels into real revenue drivers, without the slow replies, generic strategies or disconnected agency approach. We work closely with a small number of brands at a time, allowing us to stay hands-on, collaborative and genuinely invested in delivering meaningful growth.",
+      "profithaus. is a modern ecommerce partner built for ambitious brands that want more than a typical agency relationship. We combine trade strategy, website performance and commercial expertise to turn your site into a real revenue driver, without the slow replies, generic strategies or disconnected agency approach. We work closely with a small number of brands at a time, allowing us to stay hands-on, collaborative and genuinely invested in delivering meaningful growth.",
   },
   {
     question: "How does the waitlist work?",
