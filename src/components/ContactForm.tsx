@@ -8,7 +8,7 @@ export default function ContactForm() {
   if (submitted) {
     return (
       <div className="rounded-2xl bg-cream p-10 text-center">
-        <h3 className="font-[family-name:var(--font-heading)] text-base font-bold">
+        <h3 className="font-[family-name:var(--font-heading)] text-base font-medium">
           Thanks for reaching out.
         </h3>
         <p className="mt-2 text-sm text-ink-soft">

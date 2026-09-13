@@ -46,7 +46,7 @@ export function OptionCard({
       }`}
     >
       <p
-        className={`font-[family-name:var(--font-heading)] text-lg font-bold ${
+        className={`font-[family-name:var(--font-heading)] text-lg font-medium ${
           selected ? "text-maroon" : "text-ink"
         }`}
       >

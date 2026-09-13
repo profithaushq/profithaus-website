@@ -15,7 +15,7 @@ export default function Apply() {
           <p className="font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-[0.2em] text-white/70">
             Apply to work with us
           </p>
-          <h1 className="mt-6 font-[family-name:var(--font-heading)] text-xl font-extrabold uppercase tracking-wide leading-tight sm:text-3xl">
+          <h1 className="mt-6 font-[family-name:var(--font-heading)] text-xl font-normal uppercase tracking-tight leading-tight sm:text-3xl">
             Let&apos;s see if we&apos;re the right fit.
           </h1>
           <p className="mt-4 text-white/80">

@@ -72,7 +72,7 @@ export default function ApplyForm() {
   if (submitted) {
     return (
       <div className="rounded-2xl bg-white p-10 text-center">
-        <h2 className="font-[family-name:var(--font-heading)] text-lg font-bold">
+        <h2 className="font-[family-name:var(--font-heading)] text-lg font-medium">
           Thanks, we&apos;ll be in touch.
         </h2>
         <p className="mt-2 text-ink-soft">

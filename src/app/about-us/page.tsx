@@ -78,7 +78,7 @@ export default function AboutUs() {
       <HeroBand>
         <div className="mx-auto max-w-4xl px-6 py-20 text-center sm:py-28">
           <p className={`${MONO_LABEL} text-white/70`}>About profithaus</p>
-          <h1 className="mt-6 font-[family-name:var(--font-heading)] text-2xl font-extrabold uppercase tracking-wide leading-tight sm:text-4xl">
+          <h1 className="mt-6 font-[family-name:var(--font-heading)] text-2xl font-normal uppercase tracking-tight leading-tight sm:text-4xl">
             The agency we wished existed.
           </h1>
           <p className="mt-6 text-white/80">
@@ -99,7 +99,7 @@ export default function AboutUs() {
               {section.number}
             </span>
             <div>
-              <h2 className="font-[family-name:var(--font-heading)] text-lg font-bold">
+              <h2 className="font-[family-name:var(--font-heading)] text-lg font-medium">
                 {section.title}
               </h2>
               {section.paragraphs.map((paragraph) => (
@@ -139,7 +139,7 @@ export default function AboutUs() {
             backed by data, not gut feel. All joined up under one approach, so
             nothing operates in a silo.
           </p>
-          <p className="mt-4 font-[family-name:var(--font-heading)] text-lg font-bold">
+          <p className="mt-4 font-[family-name:var(--font-heading)] text-lg font-medium">
             We&apos;re not here to be your agency. We&apos;re here to be the
             part of your team that actually gets it.
           </p>
