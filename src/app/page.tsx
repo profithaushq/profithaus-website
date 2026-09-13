@@ -19,24 +19,9 @@ const SERVICES = [
       "Full-service website builds and ongoing management to keep your site trading efficiently, performing smoothly, and looking every bit as premium as your brand.",
   },
   {
-    title: "Holistic 360 Marketing",
+    title: "Digital Business Management",
     description:
-      "Aligning and executing across all channels under one clear strategy, or delivering individual channel execution when that's what's needed.",
-  },
-  {
-    title: "Conversion Rate Optimisation",
-    description:
-      "Identifying and fixing what's stopping your traffic from converting, turning more visitors into customers with a seamless buying journey.",
-  },
-  {
-    title: "Content Creation",
-    description:
-      "Content designed with intent, built to drive action and community — think of us as the insider of your brand to your followers.",
-  },
-  {
-    title: "Brand Positioning & Storytelling",
-    description:
-      "Defining how your brand looks, sounds and connects. Clear positioning and personality-led messaging that helps you genuinely resonate.",
+      "Full oversight of the commercial engine behind your site — margins, P&Ls, cost of goods and contribution by SKU, so growth decisions are made against real profitability, not just top-line revenue.",
   },
 ];
 
@@ -74,9 +59,14 @@ const ENGAGEMENT_MODELS = [
       "Regular strategic support and direction when you need senior-level input — expert guidance on strategy, priorities, decision-making and growth opportunities without full end-to-end execution.",
   },
   {
-    title: "One-time audit",
+    title: "One Time Project",
     description:
-      "In-depth analysis across your website, trading, or marketing performance, followed by clear, tailored and actionable recommendations.",
+      "Focused execution support on specific initiatives — product launch strategies, BTS and shoot-day content creation, and other defined marketing or brand activations.",
+  },
+  {
+    title: "Retainers",
+    description:
+      "Embedded, hands-on support working as a true extension of your team — driving ongoing commercial growth through consistent execution, optimisation, and proactive input across your key channels.",
   },
 ];
 

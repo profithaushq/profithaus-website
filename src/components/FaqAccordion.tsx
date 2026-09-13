@@ -16,7 +16,7 @@ const FAQS = [
   {
     question: "What type of brands do you work with?",
     answer:
-      "Small to medium businesses! We specialise in fashion & beauty but if your brand has vision, we're interested.",
+      "Mid luxury and high-end luxury brands. We specialise in fashion & beauty, but if your brand has the ambition and standards to match, we're interested.",
   },
   {
     question: "Do you offer one-off projects or ongoing support?",
