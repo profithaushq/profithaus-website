@@ -24,7 +24,7 @@ export default function HeroBand({
     <section
       ref={ref}
       onMouseMove={handleMouseMove}
-      className={`hero-grid relative overflow-hidden bg-maroon text-white ${className}`}
+      className={`relative overflow-hidden bg-maroon text-white ${className}`}
     >
       <div
         aria-hidden
