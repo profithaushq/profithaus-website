@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Anton, Inter, IBM_Plex_Mono } from "next/font/google";
+import { Anton, Inter, Poppins } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
@@ -15,10 +15,10 @@ const body = Inter({
   subsets: ["latin"],
 });
 
-const mono = IBM_Plex_Mono({
+const mono = Poppins({
   variable: "--font-mono-accent",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["500", "600"],
 });
 
 export const metadata: Metadata = {
