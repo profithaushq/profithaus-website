@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { Pill, OptionCard, ProgressBar } from "./pill-option";
 
 const TOTAL_STEPS = 4;
@@ -84,14 +84,7 @@ export default function ApplyForm() {
   const step1Valid = email.trim() && fullName.trim() && businessName.trim();
   const step2Valid = monthlyRevenue && teamSize;
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-
-    if (step < TOTAL_STEPS) {
-      setStep((s) => s + 1);
-      return;
-    }
-
+  async function submitApplication() {
     setSubmitting(true);
     setSubmitError("");
 
@@ -128,7 +121,10 @@ export default function ApplyForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-2xl bg-white p-8 sm:p-10">
+    <form
+      onSubmit={(e) => e.preventDefault()}
+      className="rounded-2xl bg-white p-8 sm:p-10"
+    >
       <ProgressBar step={step} total={TOTAL_STEPS} />
 
       {step === 1 && (
@@ -320,6 +316,7 @@ export default function ApplyForm() {
 
         {step < TOTAL_STEPS ? (
           <button
+            key="next"
             type="button"
             onClick={() => setStep((s) => s + 1)}
             disabled={
@@ -331,7 +328,9 @@ export default function ApplyForm() {
           </button>
         ) : (
           <button
-            type="submit"
+            key="submit"
+            type="button"
+            onClick={submitApplication}
             disabled={submitting}
             className="flex-1 rounded-full bg-maroon px-6 py-3 text-sm font-medium uppercase tracking-wide text-white transition-colors hover:bg-maroon-dark disabled:cursor-not-allowed disabled:opacity-60 sm:flex-none"
           >
