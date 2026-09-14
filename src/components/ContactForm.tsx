@@ -1,9 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
+
+const inputClass =
+  "rounded-lg border border-ink/15 px-4 py-3 text-sm font-normal focus:border-maroon focus:outline-none";
 
 export default function ContactForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [comment, setComment] = useState("");
+
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   if (submitted) {
     return (
@@ -18,52 +28,79 @@ export default function ContactForm() {
     );
   }
 
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    setSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone, comment }),
+      });
+
+      if (!response.ok) throw new Error("Submission failed");
+      setSubmitted(true);
+    } catch {
+      setSubmitError(
+        "Something went wrong sending your message. Please email us directly or try again.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSubmitted(true);
-      }}
-      className="grid gap-4"
-    >
+    <form onSubmit={handleSubmit} className="grid gap-4">
       <label className="flex flex-col gap-2 text-sm font-medium text-ink">
         Name
         <input
           type="text"
-          name="name"
-          className="rounded-lg border border-ink/15 px-4 py-3 text-sm font-normal focus:border-maroon focus:outline-none"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className={inputClass}
         />
       </label>
       <label className="flex flex-col gap-2 text-sm font-medium text-ink">
         Email *
         <input
           type="email"
-          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
-          className="rounded-lg border border-ink/15 px-4 py-3 text-sm font-normal focus:border-maroon focus:outline-none"
+          className={inputClass}
         />
       </label>
       <label className="flex flex-col gap-2 text-sm font-medium text-ink">
         Phone
         <input
           type="tel"
-          name="phone"
-          className="rounded-lg border border-ink/15 px-4 py-3 text-sm font-normal focus:border-maroon focus:outline-none"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          className={inputClass}
         />
       </label>
       <label className="flex flex-col gap-2 text-sm font-medium text-ink">
         Comment
         <textarea
-          name="comment"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
           rows={4}
-          className="rounded-lg border border-ink/15 px-4 py-3 text-sm font-normal focus:border-maroon focus:outline-none"
+          className={inputClass}
         />
       </label>
+
+      {submitError && (
+        <p className="text-sm text-accent">{submitError}</p>
+      )}
+
       <button
         type="submit"
-        className="mt-2 w-full rounded-full bg-maroon px-6 py-3 text-sm font-medium uppercase tracking-wide text-white transition-colors hover:bg-maroon-dark sm:w-auto"
+        disabled={submitting}
+        className="mt-2 w-full rounded-full bg-maroon px-6 py-3 text-sm font-medium uppercase tracking-wide text-white transition-colors hover:bg-maroon-dark disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
-        Send
+        {submitting ? "Sending..." : "Send"}
       </button>
     </form>
   );
