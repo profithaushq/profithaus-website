@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Button from "@/components/Button";
 import HeroBand from "@/components/HeroBand";
 import Reveal from "@/components/Reveal";
@@ -10,11 +11,25 @@ export const metadata: Metadata = {
 const MONO_LABEL =
   "font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-[0.2em]";
 
-function AdPlaceholder({ label, index }: { label: string; index: number }) {
+function AdImage({
+  src,
+  alt,
+  index,
+}: {
+  src: string;
+  alt: string;
+  index: number;
+}) {
   return (
     <Reveal delay={index * 80}>
-      <div className="group flex aspect-[4/5] items-center justify-center rounded-xl bg-ink/5 text-center text-xs font-medium uppercase tracking-wide text-ink-soft transition-all duration-300 hover:-translate-y-1 hover:bg-maroon hover:text-white">
-        {label}
+      <div className="group relative aspect-[9/16] overflow-hidden rounded-xl bg-ink/5 transition-transform duration-300 hover:-translate-y-1">
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes="(min-width: 640px) 25vw, 50vw"
+          className="object-cover"
+        />
       </div>
     </Reveal>
   );
@@ -62,10 +77,26 @@ export default function OurWork() {
           </Reveal>
 
           <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            <AdPlaceholder index={0} label="Axis 01 · Skin Clear / gut-skin" />
-            <AdPlaceholder index={1} label="Axis 02 · Skin Clear / benefit-led" />
-            <AdPlaceholder index={2} label="Axis 03 · Skin Calm / definition" />
-            <AdPlaceholder index={3} label="Axis 04 · Skin Calm / lifestyle" />
+            <AdImage
+              index={0}
+              src="/our-work/axis-01-gut-skin.png"
+              alt="AxisBiotix Skin Clear ad: your skincare routine starts in your gut"
+            />
+            <AdImage
+              index={1}
+              src="/our-work/axis-02-benefit-led.png"
+              alt="AxisBiotix Skin Clear ad: clear skin is an inside job"
+            />
+            <AdImage
+              index={2}
+              src="/our-work/axis-03-definition.png"
+              alt="AxisBiotix Skin Calm ad: word of the day, axisbiotix"
+            />
+            <AdImage
+              index={3}
+              src="/our-work/axis-04-lifestyle.png"
+              alt="AxisBiotix Skin Calm ad: one sachet, daily, that's it"
+            />
           </div>
         </div>
 
@@ -92,15 +123,26 @@ export default function OurWork() {
 
           <p className={`mt-8 ${MONO_LABEL} text-ink-soft`}>Paid social</p>
           <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            <AdPlaceholder index={0} label="Ad 01 · Meta creative" />
-            <AdPlaceholder index={1} label="Ad 02 · Meta creative" />
-            <AdPlaceholder index={2} label="Ad 03 · Meta creative" />
-            <AdPlaceholder index={3} label="Ad 04 · Meta creative" />
-          </div>
-
-          <p className={`mt-8 ${MONO_LABEL} text-ink-soft`}>Website</p>
-          <div className="mt-4">
-            <AdPlaceholder index={0} label="Website screenshots" />
+            <AdImage
+              index={0}
+              src="/our-work/tso-ad-01.png"
+              alt="The Studio Online Meta ad creative: move with intention"
+            />
+            <AdImage
+              index={1}
+              src="/our-work/tso-ad-02.png"
+              alt="The Studio Online Meta ad creative"
+            />
+            <AdImage
+              index={2}
+              src="/our-work/tso-ad-03.png"
+              alt="The Studio Online Meta ad creative"
+            />
+            <AdImage
+              index={3}
+              src="/our-work/tso-ad-04.png"
+              alt="The Studio Online Meta ad creative"
+            />
           </div>
 
           <Reveal>
