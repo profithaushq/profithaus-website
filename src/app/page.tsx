@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Preloader from "@/components/Preloader";
 import Marquee from "@/components/Marquee";
-import HeroPinned from "@/components/home/HeroPinned";
 import FounderNote from "@/components/home/FounderNote";
 import SplitServiceRows from "@/components/home/SplitServiceRows";
 import StackedPillars from "@/components/home/StackedPillars";
@@ -16,7 +15,6 @@ export default function Home() {
     <>
       {!introDone && <Preloader onComplete={() => setIntroDone(true)} />}
 
-      <HeroPinned ready={introDone} />
       <FounderNote />
 
       <section className="border-y border-brand-black/10 bg-white py-10">

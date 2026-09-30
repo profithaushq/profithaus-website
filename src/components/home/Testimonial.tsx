@@ -44,7 +44,7 @@ export default function Testimonial() {
     <section ref={sectionRef} className="bg-white py-24 text-brand-black">
       <div className="mx-auto max-w-3xl px-6 text-center">
         <p className="testimonial-item font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] text-brand-red">
-          Work
+          What clients say
         </p>
 
         <blockquote className="testimonial-item mt-8 font-[family-name:var(--font-manrope)] text-2xl leading-snug font-medium sm:text-3xl">
@@ -54,7 +54,7 @@ export default function Testimonial() {
         </blockquote>
 
         <p className="testimonial-item mt-6 text-sm text-brand-grey">
-          Miriam, Director at The Studio Online
+          Miriam, Director at Oceans Alive
         </p>
       </div>
     </section>

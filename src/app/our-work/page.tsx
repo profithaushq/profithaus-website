@@ -51,9 +51,12 @@ export default function OurWork() {
               platform. We handled the brand and the site build.
             </p>
           </Reveal>
+        </div>
 
+        <div className="mt-24">
           <Reveal>
-            <blockquote className="mt-12 rounded-2xl bg-white p-8 transition-shadow duration-300 hover:shadow-xl">
+            <p className={`${MONO_LABEL} text-accent`}>02 · Oceans Alive</p>
+            <blockquote className="mt-6 rounded-2xl bg-white p-8 transition-shadow duration-300 hover:shadow-xl">
               <p className="text-ink-soft italic">
                 &ldquo;We had the pleasure of working with profithaus. on the
                 redesign of our Oceans Alive website, and we couldn&apos;t be
@@ -73,7 +76,9 @@ export default function OurWork() {
               </p>
               <footer className="mt-4 text-sm font-medium text-ink">
                 Miriam
-                <span className="font-normal text-ink-soft">, Director</span>
+                <span className="font-normal text-ink-soft">
+                  , Director at Oceans Alive
+                </span>
               </footer>
             </blockquote>
           </Reveal>
