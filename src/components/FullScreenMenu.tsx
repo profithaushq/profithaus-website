@@ -100,22 +100,28 @@ export default function FullScreenMenu() {
         ref={headerRef}
         className="sticky top-0 z-40 border-b border-brand-black/10 bg-white"
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <Link href="/" className="shrink-0" onClick={() => setOpen(false)}>
+        <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-6 py-5">
+          <div />
+
+          <Link
+            href="/"
+            className="shrink-0 justify-self-center text-center"
+            onClick={() => setOpen(false)}
+          >
             <Image
               src="/logo.png"
               alt="profithaus."
               width={200}
               height={50}
               priority
-              className="h-7 w-auto sm:h-8"
+              className="mx-auto h-7 w-auto sm:h-8"
             />
             <p className="mt-1 font-[family-name:var(--font-manrope)] text-[10px] font-medium uppercase tracking-[0.15em] text-brand-grey">
               Ecommerce partner for luxury brands
             </p>
           </Link>
 
-          <div className="flex items-center gap-8">
+          <div className="flex items-center justify-end gap-8">
             <Link
               href="/apply"
               className="hidden font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide text-brand-black underline decoration-brand-red decoration-2 underline-offset-4 sm:inline-block"

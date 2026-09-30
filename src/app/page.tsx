@@ -48,7 +48,7 @@ export default function Home() {
       <SplitServiceRows />
 
       <section className="overflow-hidden bg-brand-black py-10 text-white">
-        <Marquee items={PHRASES} variant="phrase" duration={40} separator="·" />
+        <Marquee items={PHRASES} variant="phrase" duration={90} separator="·" />
       </section>
 
       <StackedPillars />
