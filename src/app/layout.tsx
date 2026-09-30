@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Poppins, Manrope } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import FullScreenMenu from "@/components/FullScreenMenu";
 import Footer from "@/components/FooterSignOff";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
@@ -18,12 +18,6 @@ const mono = Poppins({
   weight: ["500", "600"],
 });
 
-const manrope = Manrope({
-  variable: "--font-manrope",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-});
-
 export const metadata: Metadata = {
   title: "profithaus. | Ecommerce Partner for Luxury Brands",
   description:
@@ -34,8 +28,21 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${heading.variable} ${mono.variable} ${manrope.variable} h-full antialiased`}
+      className={`${heading.variable} ${mono.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font -- root layout applies site-wide, not per-page */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <SmoothScrollProvider />
         <CustomCursor />

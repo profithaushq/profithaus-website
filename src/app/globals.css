@@ -13,6 +13,7 @@
   --color-brand-red: #a42324;
   --color-brand-black: #141414;
   --color-brand-grey: #6e6a66;
+  --font-manrope: "Manrope", sans-serif;
 }
 
 @theme inline {
