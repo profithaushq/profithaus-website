@@ -7,7 +7,7 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 export default function HeroPinned({ ready }: { ready: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const wordmarkRef = useRef<HTMLHeadingElement>(null);
+  const wordmarkRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
   const played = useRef(false);
@@ -69,8 +69,6 @@ export default function HeroPinned({ ready }: { ready: boolean }) {
     );
   }, [ready]);
 
-  const wordmark = "PROFITHAUS";
-
   return (
     <section
       ref={sectionRef}
@@ -94,23 +92,29 @@ export default function HeroPinned({ ready }: { ready: boolean }) {
           </span>
         </p>
 
-        <h1
+        <div
           ref={wordmarkRef}
-          className="text-display mt-4 overflow-hidden font-[family-name:var(--font-manrope)] font-extrabold whitespace-nowrap"
+          className="hero-letter mt-6 inline-block rounded-sm bg-white px-6 py-5 sm:px-10 sm:py-7"
           style={{ transformOrigin: "left center" }}
         >
-          {wordmark.split("").map((letter, i) => (
-            <span key={i} className="hero-letter inline-block overflow-hidden">
-              {letter}
-            </span>
-          ))}
-        </h1>
+          <Image
+            src="/logo.png"
+            alt="profithaus."
+            width={2000}
+            height={500}
+            priority
+            className="h-10 w-auto sm:h-16"
+          />
+          <p className="mt-3 font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.2em] text-brand-grey sm:text-sm">
+            Ecommerce partner for the luxury sector
+          </p>
+        </div>
 
         <div className="hero-letter mt-6 flex flex-wrap items-center gap-6">
-          <p className="max-w-md text-white/70">
+          <h1 className="max-w-md font-normal text-white/70">
             The ecommerce partner for luxury brands who want to look premium
             and sell more, run by people who&apos;ve done the job in-house.
-          </p>
+          </h1>
           <Link
             href="/apply"
             className="font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide underline decoration-brand-red decoration-2 underline-offset-4"
