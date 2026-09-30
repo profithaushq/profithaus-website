@@ -54,14 +54,14 @@ export default function IntroBanner() {
           Ex-operators. Not an agency.
         </p>
 
-        <div className="intro-item mx-auto mt-6 w-fit">
+        <div className="intro-item mt-6">
           <Image
             src="/logo.png"
             alt="profithaus."
             width={2000}
             height={500}
             priority
-            className="h-10 w-auto sm:h-14"
+            className="mx-auto block h-10 w-auto sm:h-14"
           />
           <p className="mt-2 font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.2em] text-brand-grey sm:text-sm">
             Ecommerce partner for the luxury sector
