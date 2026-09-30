@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import AmbientLines from "@/components/AmbientLines";
 
 export default function Testimonial() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -41,8 +42,9 @@ export default function Testimonial() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-white py-24 text-brand-black">
-      <div className="mx-auto max-w-3xl px-6 text-center">
+    <section ref={sectionRef} className="relative overflow-hidden bg-white py-24 text-brand-black">
+      <AmbientLines />
+      <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
         <p className="testimonial-item font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] text-brand-red">
           What clients say
         </p>

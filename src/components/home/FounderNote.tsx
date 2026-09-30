@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
+import AmbientLines from "@/components/AmbientLines";
 
 const NOTE_SEGMENTS: { text: string; keyword?: boolean }[] = [
   { text: "We started profithaus because we were tired of watching " },
@@ -47,8 +48,9 @@ export default function FounderNote() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-white py-32 text-brand-black">
-      <div className="mx-auto max-w-4xl px-6">
+    <section ref={sectionRef} className="relative overflow-hidden bg-white py-32 text-brand-black">
+      <AmbientLines />
+      <div className="relative z-10 mx-auto max-w-4xl px-6">
         <p className="font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] text-brand-red">
           A note from the founders
         </p>

@@ -5,7 +5,24 @@ import { gsap } from "@/lib/gsap";
 
 const BASE_SPEED = 1;
 
-export default function Marquee({ items }: { items: string[] }) {
+const VARIANTS = {
+  logos:
+    "whitespace-nowrap font-[family-name:var(--font-manrope)] text-sm font-medium text-brand-grey",
+  phrase:
+    "whitespace-nowrap font-[family-name:var(--font-manrope)] text-3xl font-extrabold uppercase tracking-tight sm:text-5xl",
+};
+
+export default function Marquee({
+  items,
+  variant = "logos",
+  duration = 60,
+  separator,
+}: {
+  items: string[];
+  variant?: keyof typeof VARIANTS;
+  duration?: number;
+  separator?: string;
+}) {
   const repeated = Array.from({ length: 8 }).flatMap(() => items);
   const trackRef = useRef<HTMLDivElement>(null);
 
@@ -22,7 +39,7 @@ export default function Marquee({ items }: { items: string[] }) {
 
     const tween = gsap.to(track, {
       xPercent: -50,
-      duration: 60,
+      duration,
       ease: "none",
       repeat: -1,
     });
@@ -50,17 +67,27 @@ export default function Marquee({ items }: { items: string[] }) {
       clearTimeout(resetTimeout);
       tween.kill();
     };
-  }, []);
+  }, [duration]);
 
   return (
     <div className="overflow-hidden">
-      <div ref={trackRef} className="marquee-track flex w-max gap-16">
+      <div
+        ref={trackRef}
+        className={`marquee-track flex w-max items-center ${separator ? "gap-8" : "gap-16"}`}
+      >
         {repeated.map((item, index) => (
-          <span
-            key={`${item}-${index}`}
-            className="whitespace-nowrap font-[family-name:var(--font-manrope)] text-sm font-medium text-brand-grey"
-          >
-            {item}
+          <span key={`${item}-${index}`} className="flex items-center gap-8">
+            <span className={VARIANTS[variant]}>{item}</span>
+            {separator && (
+              <span
+                aria-hidden
+                className={
+                  variant === "phrase" ? "text-3xl text-brand-red sm:text-5xl" : "text-brand-red"
+                }
+              >
+                {separator}
+              </span>
+            )}
           </span>
         ))}
       </div>
