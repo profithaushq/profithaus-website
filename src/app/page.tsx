@@ -1,6 +1,9 @@
 import Button from "@/components/Button";
 import HeroBand from "@/components/HeroBand";
 import CinematicHero from "@/components/CinematicHero";
+import Scene from "@/components/Scene";
+import KineticStatement from "@/components/KineticStatement";
+import AccentSwoosh from "@/components/AccentSwoosh";
 import Reveal from "@/components/Reveal";
 import CountUp from "@/components/CountUp";
 import Marquee from "@/components/Marquee";
@@ -19,22 +22,19 @@ const HERO_FRAMES = [
 const EYEBROW =
   "font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-[0.2em] text-accent";
 
-const SERVICES = [
-  {
-    title: "Ecommerce Trading",
-    description:
-      "A data-led approach to improving how your website performs: product focus, pricing and merchandising, customer journey and overall trading strategy.",
-  },
-  {
-    title: "Website Build & Management",
-    description:
-      "Full-service website builds and ongoing management to keep your site trading efficiently, performing smoothly, and looking every bit as premium as your brand.",
-  },
-  {
-    title: "Digital Business Management",
-    description:
-      "Full oversight of the commercial engine behind your site: margins, P&Ls, cost of goods and contribution by SKU, so growth decisions are made against real profitability, not just top-line revenue.",
-  },
+type Stat = {
+  value: number | null;
+  prefix?: string;
+  suffix?: string;
+  display?: string;
+  label: string;
+};
+
+const STATS: Stat[] = [
+  { value: 50, prefix: "£", suffix: "m+", label: "Revenue managed" },
+  { value: null, display: "Mid Luxury", label: "& high end luxury brands" },
+  { value: 8, suffix: "+ Yrs", label: "In-house expertise" },
+  { value: null, display: "Corporate", label: "Giant background" },
 ];
 
 const METHOD_PILLARS = [
@@ -61,6 +61,27 @@ const METHOD_PILLARS = [
     title: "360 Strategy",
     description:
       "From trading to website performance to the numbers behind it, we know the full picture, so if something's not converting or the margins don't add up, we've probably already spotted it.",
+  },
+];
+
+const SERVICES = [
+  {
+    number: "01",
+    title: "Ecommerce Trading",
+    description:
+      "A data-led approach to improving how your website performs: product focus, pricing and merchandising, customer journey and overall trading strategy.",
+  },
+  {
+    number: "02",
+    title: "Website Build & Management",
+    description:
+      "Full-service website builds and ongoing management to keep your site trading efficiently, performing smoothly, and looking every bit as premium as your brand.",
+  },
+  {
+    number: "03",
+    title: "Digital Business Management",
+    description:
+      "Full oversight of the commercial engine behind your site: margins, P&Ls, cost of goods and contribution by SKU, so growth decisions are made against real profitability, not just top-line revenue.",
   },
 ];
 
@@ -107,44 +128,26 @@ export default function Home() {
         </div>
       </CinematicHero>
 
-      <section className="border-b border-ink/10">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 py-16 sm:grid-cols-4">
-          <Reveal className="text-center">
-            <p className="font-[family-name:var(--font-heading)] text-2xl font-medium sm:text-3xl">
-              <CountUp to={50} prefix="£" suffix="m+" />
-            </p>
-            <p className="mt-2 font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-wide text-ink-soft">
-              Revenue managed
-            </p>
-          </Reveal>
-          <Reveal delay={100} className="text-center">
-            <p className="font-[family-name:var(--font-heading)] text-2xl font-medium text-accent sm:text-3xl">
-              Mid Luxury
-            </p>
-            <p className="mt-2 font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-wide text-ink-soft">
-              & high end luxury brands
-            </p>
-          </Reveal>
-          <Reveal delay={200} className="text-center">
-            <p className="font-[family-name:var(--font-heading)] text-2xl font-medium sm:text-3xl">
-              <CountUp to={8} suffix="+ Yrs" />
-            </p>
-            <p className="mt-2 font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-wide text-ink-soft">
-              In-house expertise
-            </p>
-          </Reveal>
-          <Reveal delay={300} className="text-center">
-            <p className="font-[family-name:var(--font-heading)] text-2xl font-medium sm:text-3xl">
-              Corporate
-            </p>
-            <p className="mt-2 font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-wide text-ink-soft">
-              Giant background
-            </p>
-          </Reveal>
+      <Scene background="dark" parallaxLabel="RESULTS">
+        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-y-16 px-6 sm:grid-cols-4">
+          {STATS.map((stat) => (
+            <div key={stat.label} className="scene-item text-center">
+              <p className="font-[family-name:var(--font-heading)] text-4xl font-light sm:text-6xl">
+                {stat.value !== null ? (
+                  <CountUp to={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
+                ) : (
+                  stat.display
+                )}
+              </p>
+              <p className="mt-3 font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-wide text-white/50">
+                {stat.label}
+              </p>
+            </div>
+          ))}
         </div>
-      </section>
+      </Scene>
 
-      <section className="border-b border-ink/10 bg-white py-10">
+      <section className="border-y border-ink/10 bg-white py-10">
         <div className="mx-auto max-w-6xl px-6">
           <p className="mb-4 text-center font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-wide text-ink-soft">
             Previously operated
@@ -155,75 +158,94 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-24">
-        <Reveal>
-          <p className={EYEBROW}>Our approach</p>
-          <h2 className="mt-3 font-[family-name:var(--font-heading)] text-2xl font-light sm:text-3xl">
-            The Profit Haus Method™
-          </h2>
-          <p className="mt-4 max-w-2xl text-ink-soft">
-            Running a luxury ecommerce brand is hard enough without
-            disconnected strategies and a site that looks the part but
-            doesn&apos;t pay you back. We&apos;re selective by design, because
-            the best results come when we&apos;re genuinely invested.
-          </p>
-        </Reveal>
+      <KineticStatement
+        eyebrow="Our approach"
+        segments={[
+          { text: "Built from years in-house," },
+          { text: "led inside D2C giants,", accent: true },
+          { text: "with a commercial and creative mindset," },
+          { text: "and one 360 view of the business.", accent: true },
+        ]}
+      />
 
-        <div className="mt-12 grid gap-10 sm:grid-cols-2">
-          {METHOD_PILLARS.map((pillar, i) => (
-            <Reveal key={pillar.number} delay={i * 100} className="group flex gap-5">
-              <span className="font-[family-name:var(--font-mono-accent)] text-2xl font-medium text-accent/50 transition-colors group-hover:text-accent">
-                {pillar.number}
-              </span>
-              <div>
-                <h3 className="font-medium text-ink">{pillar.title}</h3>
-                <p className="mt-2 text-sm text-ink-soft">
-                  {pillar.description}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-white py-24">
+      <Scene background="light">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
-            <p className={EYEBROW}>What we do</p>
-            <h2 className="mt-3 max-w-xl font-[family-name:var(--font-heading)] text-2xl font-light sm:text-3xl">
-              Built for brands that want to look premium and sell more.
-            </h2>
+            <p className={EYEBROW}>The Profit Haus Method™</p>
+            <AccentSwoosh className="mt-3" />
+            <p className="mt-4 max-w-2xl text-ink-soft">
+              Running a luxury ecommerce brand is hard enough without
+              disconnected strategies and a site that looks the part but
+              doesn&apos;t pay you back. We&apos;re selective by design, because
+              the best results come when we&apos;re genuinely invested.
+            </p>
           </Reveal>
 
-          <div className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {SERVICES.map((service, i) => (
-              <Reveal
-                key={service.title}
-                delay={(i % 3) * 100}
-                className="group rounded-2xl border border-transparent p-5 -m-5 transition-colors hover:border-ink/10 hover:bg-cream"
-              >
-                <h3 className="font-medium text-ink">{service.title}</h3>
-                <p className="mt-2 text-sm text-ink-soft">
-                  {service.description}
-                </p>
-              </Reveal>
+          <div className="mt-16 grid gap-10 sm:grid-cols-2">
+            {METHOD_PILLARS.map((pillar) => (
+              <div key={pillar.number} className="scene-item group flex gap-5">
+                <span className="font-[family-name:var(--font-mono-accent)] text-2xl font-medium text-accent/50 transition-colors group-hover:text-accent">
+                  {pillar.number}
+                </span>
+                <div>
+                  <h3 className="font-medium text-ink">{pillar.title}</h3>
+                  <p className="mt-2 text-sm text-ink-soft">
+                    {pillar.description}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
-      </section>
+      </Scene>
 
-      <section className="mx-auto max-w-6xl px-6 py-24">
-        <Reveal>
-          <p className={EYEBROW}>How we do it</p>
-          <h2 className="mt-3 font-[family-name:var(--font-heading)] text-2xl font-light sm:text-3xl">
-            Flexible engagement, senior-led every time.
-          </h2>
-        </Reveal>
+      <Scene background="dark" parallaxLabel="TRADE">
+        <div className="mx-auto max-w-4xl px-6">
+          <Reveal>
+            <p className={EYEBROW}>What we do</p>
+            <p className="mt-3 max-w-xl font-[family-name:var(--font-heading)] text-2xl font-light sm:text-4xl">
+              Built for brands that want to look premium and sell more.
+            </p>
+          </Reveal>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {ENGAGEMENT_MODELS.map((model, i) => (
-            <Reveal key={model.title} delay={i * 100}>
-              <div className="h-full rounded-2xl bg-maroon p-8 text-white transition-transform duration-300 hover:-translate-y-1">
+          <div className="mt-16 flex flex-col divide-y divide-white/10">
+            {SERVICES.map((service) => (
+              <div
+                key={service.title}
+                className="scene-item grid gap-4 py-10 sm:grid-cols-[auto_1fr] sm:gap-10"
+              >
+                <span className="font-[family-name:var(--font-mono-accent)] text-sm font-medium text-white/40">
+                  {service.number}
+                </span>
+                <div>
+                  <h3 className="font-[family-name:var(--font-heading)] text-2xl font-light sm:text-3xl">
+                    {service.title}
+                  </h3>
+                  <p className="mt-3 max-w-xl text-white/70">
+                    {service.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Scene>
+
+      <Scene background="light">
+        <div className="mx-auto max-w-6xl px-6">
+          <Reveal>
+            <p className={EYEBROW}>How we do it</p>
+            <p className="mt-3 font-[family-name:var(--font-heading)] text-2xl font-light sm:text-4xl">
+              Flexible engagement, senior-led every time.
+            </p>
+          </Reveal>
+
+          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {ENGAGEMENT_MODELS.map((model) => (
+              <div
+                key={model.title}
+                className="scene-item h-full rounded-2xl bg-maroon p-8 text-white transition-transform duration-300 hover:-translate-y-1"
+              >
                 <h3 className="font-[family-name:var(--font-heading)] text-base font-medium">
                   {model.title}
                 </h3>
@@ -231,10 +253,10 @@ export default function Home() {
                   {model.description}
                 </p>
               </div>
-            </Reveal>
-          ))}
+            ))}
+          </div>
         </div>
-      </section>
+      </Scene>
 
       <HeroBand>
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 px-6 py-20 text-center">
