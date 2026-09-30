@@ -9,9 +9,9 @@ import { getLenis } from "@/lib/lenis";
 const NAV_LINKS = [
   { href: "/", label: "Home", image: "/hero/frame-01.jpg" },
   { href: "/apply", label: "Apply to work with us", image: "/hero/frame-02.webp" },
-  { href: "/about-us", label: "About Us", image: "/our-work/axis-01-gut-skin.png" },
-  { href: "/our-work", label: "Our Work & Testimonials", image: "/our-work/tso-ad-01.png" },
-  { href: "/faq", label: "FAQ's & Contact Us", image: "/our-work/axis-03-definition.png" },
+  { href: "/about-us", label: "About Us", image: "/hero/frame-01.jpg" },
+  { href: "/our-work", label: "Our Work & Testimonials", image: "/hero/frame-02.webp" },
+  { href: "/faq", label: "FAQ's & Contact Us", image: "/hero/frame-01.jpg" },
 ];
 
 export default function FullScreenMenu() {
@@ -110,6 +110,9 @@ export default function FullScreenMenu() {
               priority
               className="h-7 w-auto sm:h-8"
             />
+            <p className="mt-1 font-[family-name:var(--font-manrope)] text-[10px] font-medium uppercase tracking-[0.15em] text-brand-grey">
+              Ecommerce partner for luxury brands
+            </p>
           </Link>
 
           <div className="flex items-center gap-8">
@@ -180,15 +183,15 @@ export default function FullScreenMenu() {
           </nav>
 
           <div className="relative hidden aspect-[4/5] overflow-hidden rounded-sm lg:block">
-            {NAV_LINKS.map((link) => (
+            {Array.from(new Set(NAV_LINKS.map((link) => link.image))).map((image) => (
               <Image
-                key={link.image}
-                src={link.image}
+                key={image}
+                src={image}
                 alt=""
                 fill
                 sizes="40vw"
                 className="object-cover transition-opacity duration-500"
-                style={{ opacity: hovered === link.image ? 1 : 0 }}
+                style={{ opacity: hovered === image ? 1 : 0 }}
               />
             ))}
           </div>

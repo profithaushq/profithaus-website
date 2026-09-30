@@ -9,19 +9,19 @@ const SERVICES = [
     words: ["ECOMMERCE", "TRADING"],
     description:
       "A data-led approach to improving how your website performs: product focus, pricing and merchandising, customer journey and overall trading strategy.",
-    image: "/our-work/axis-01-gut-skin.png",
+    image: "/hero/frame-01.jpg",
   },
   {
     words: ["WEBSITE", "BUILDS"],
     description:
       "Full-service website builds and ongoing management to keep your site trading efficiently, performing smoothly, and looking every bit as premium as your brand.",
-    image: "/our-work/tso-ad-01.png",
+    image: "/hero/frame-02.webp",
   },
   {
     words: ["BUSINESS", "MANAGEMENT"],
     description:
       "Full oversight of the commercial engine behind your site: margins, P&Ls, cost of goods and contribution by SKU, so growth decisions are made against real profitability.",
-    image: "/our-work/axis-03-definition.png",
+    image: "/hero/frame-01.jpg",
   },
 ];
 

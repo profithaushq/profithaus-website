@@ -56,7 +56,7 @@ const CAPABILITIES = [
       "Full-Service Website Builds",
       "Ongoing Site Management",
       "Conversion Rate Optimisation",
-      "Website Design & Creative",
+      "Website Design",
       "Performance, Uptime & Reliability",
     ],
   },

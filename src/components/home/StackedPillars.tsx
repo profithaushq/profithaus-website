@@ -49,13 +49,16 @@ export default function StackedPillars() {
       const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
       gsap.set(cards.slice(1), { yPercent: 100 });
 
+      gsap.set(cards, { willChange: "transform" });
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: "top top",
           end: () => `+=${(cards.length - 1) * window.innerHeight}`,
-          scrub: 1,
+          scrub: true,
           pin: true,
+          anticipatePin: 1,
           invalidateOnRefresh: true,
         },
       });
@@ -65,7 +68,7 @@ export default function StackedPillars() {
         tl.to(card, { yPercent: 0, ease: "none" }, i - 1);
         tl.to(
           cards[i - 1],
-          { scale: 0.92, filter: "brightness(0.7)", ease: "none" },
+          { scale: 0.92, opacity: 0.5, ease: "none" },
           i - 1,
         );
       });
