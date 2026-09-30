@@ -29,7 +29,7 @@ export default function FounderNote() {
     ).matches;
 
     if (reduceMotion) {
-      gsap.set(words, { color: "var(--color-brand-black)" });
+      gsap.set(words, { opacity: 1 });
       return;
     }
 
@@ -41,7 +41,7 @@ export default function FounderNote() {
           end: "bottom 60%",
           scrub: true,
         },
-      }).to(words, { color: "var(--color-brand-black)", stagger: 1, ease: "none" });
+      }).to(words, { opacity: 1, stagger: 1, ease: "none" });
     }, section);
 
     return () => ctx.revert();
@@ -61,7 +61,7 @@ export default function FounderNote() {
               <span
                 key={`${i}-${j}`}
                 className={`note-word ${segment.keyword ? "font-extrabold" : ""}`}
-                style={{ color: "var(--color-brand-grey)" }}
+                style={{ opacity: 0.35 }}
               >
                 {word}{" "}
               </span>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Preloader from "@/components/Preloader";
 import Marquee from "@/components/Marquee";
+import IntroBanner from "@/components/home/IntroBanner";
 import FounderNote from "@/components/home/FounderNote";
 import BrandMark from "@/components/home/BrandMark";
 import SplitServiceRows from "@/components/home/SplitServiceRows";
@@ -23,6 +24,7 @@ export default function Home() {
     <>
       {!introDone && <Preloader onComplete={() => setIntroDone(true)} />}
 
+      <IntroBanner />
       <FounderNote />
       <BrandMark />
 
