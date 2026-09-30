@@ -10,6 +10,10 @@ const HERO_FRAMES = [
     src: "/hero/frame-01.jpg",
     alt: "Warm, sculptural light and shadow study in profithaus brand tones",
   },
+  {
+    src: "/hero/frame-02.webp",
+    alt: "Flowing warm-toned light forms in profithaus brand tones",
+  },
 ];
 
 const EYEBROW =
