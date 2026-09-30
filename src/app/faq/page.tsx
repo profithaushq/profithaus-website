@@ -13,7 +13,7 @@ export default function Faq() {
     <>
       <HeroBand>
         <div className="mx-auto max-w-4xl px-6 py-20 text-center sm:py-28">
-          <h1 className="font-[family-name:var(--font-heading)] text-2xl font-normal uppercase tracking-tight leading-tight sm:text-4xl">
+          <h1 className="font-[family-name:var(--font-heading)] text-3xl font-light tracking-tight leading-[1.1] sm:text-6xl">
             Frequently Asked Questions
           </h1>
         </div>

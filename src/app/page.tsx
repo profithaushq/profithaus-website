@@ -1,8 +1,16 @@
 import Button from "@/components/Button";
 import HeroBand from "@/components/HeroBand";
+import CinematicHero from "@/components/CinematicHero";
 import Reveal from "@/components/Reveal";
 import CountUp from "@/components/CountUp";
 import Marquee from "@/components/Marquee";
+
+const HERO_FRAMES = [
+  {
+    src: "/hero/frame-01.jpg",
+    alt: "Warm, sculptural light and shadow study in profithaus brand tones",
+  },
+];
 
 const EYEBROW =
   "font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-[0.2em] text-accent";
@@ -73,15 +81,15 @@ const ENGAGEMENT_MODELS = [
 export default function Home() {
   return (
     <>
-      <HeroBand>
-        <div className="mx-auto max-w-4xl px-6 py-24 text-center sm:py-32">
+      <CinematicHero images={HERO_FRAMES}>
+        <div className="mx-auto max-w-4xl px-6 text-center">
           <p className="font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-[0.2em] text-white/70">
             Manchester, UK · Barcelona, ES
           </p>
           <p className="mt-4 font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-[0.2em] text-white/70">
             Ecommerce partner for luxury brands
           </p>
-          <h1 className="mt-6 font-[family-name:var(--font-heading)] text-2xl font-normal uppercase tracking-tight leading-tight sm:text-4xl">
+          <h1 className="mt-6 font-[family-name:var(--font-heading)] text-3xl font-light tracking-tight leading-[1.1] sm:text-6xl">
             Making brands harder to ignore and easier to buy from
           </h1>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
@@ -93,7 +101,7 @@ export default function Home() {
             </Button>
           </div>
         </div>
-      </HeroBand>
+      </CinematicHero>
 
       <section className="border-b border-ink/10">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 py-16 sm:grid-cols-4">
@@ -146,7 +154,7 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 py-24">
         <Reveal>
           <p className={EYEBROW}>Our approach</p>
-          <h2 className="mt-3 font-[family-name:var(--font-heading)] text-xl font-medium sm:text-2xl">
+          <h2 className="mt-3 font-[family-name:var(--font-heading)] text-2xl font-light sm:text-3xl">
             The Profit Haus Method™
           </h2>
           <p className="mt-4 max-w-2xl text-ink-soft">
@@ -178,7 +186,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <p className={EYEBROW}>What we do</p>
-            <h2 className="mt-3 max-w-xl font-[family-name:var(--font-heading)] text-xl font-medium sm:text-2xl">
+            <h2 className="mt-3 max-w-xl font-[family-name:var(--font-heading)] text-2xl font-light sm:text-3xl">
               Built for brands that want to look premium and sell more.
             </h2>
           </Reveal>
@@ -203,7 +211,7 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 py-24">
         <Reveal>
           <p className={EYEBROW}>How we do it</p>
-          <h2 className="mt-3 font-[family-name:var(--font-heading)] text-xl font-medium sm:text-2xl">
+          <h2 className="mt-3 font-[family-name:var(--font-heading)] text-2xl font-light sm:text-3xl">
             Flexible engagement, senior-led every time.
           </h2>
         </Reveal>
@@ -226,7 +234,7 @@ export default function Home() {
 
       <HeroBand>
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 px-6 py-20 text-center">
-          <h2 className="font-[family-name:var(--font-heading)] text-xl font-medium sm:text-2xl">
+          <h2 className="font-[family-name:var(--font-heading)] text-2xl font-light sm:text-3xl">
             Got a question or want to get in touch?
           </h2>
           <p className="max-w-xl text-white/80">

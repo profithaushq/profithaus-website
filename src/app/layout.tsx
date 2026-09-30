@@ -1,19 +1,13 @@
 import type { Metadata } from "next";
-import { Anton, Poppins } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
 
-const heading = Anton({
+const heading = Inter({
   variable: "--font-heading",
   subsets: ["latin"],
-  weight: "400",
-});
-
-const body = Poppins({
-  variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["300", "400", "500", "700", "800"],
 });
 
 const mono = Poppins({
@@ -32,7 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${heading.variable} ${body.variable} ${mono.variable} h-full antialiased`}
+      className={`${heading.variable} ${mono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <Header />

@@ -78,7 +78,7 @@ export default function AboutUs() {
       <HeroBand>
         <div className="mx-auto max-w-4xl px-6 py-20 text-center sm:py-28">
           <p className={`${MONO_LABEL} text-white/70`}>About profithaus</p>
-          <h1 className="mt-6 font-[family-name:var(--font-heading)] text-2xl font-normal uppercase tracking-tight leading-tight sm:text-4xl">
+          <h1 className="mt-6 font-[family-name:var(--font-heading)] text-3xl font-light tracking-tight leading-[1.1] sm:text-6xl">
             The agency we wished existed.
           </h1>
           <p className="mt-6 text-white/80">
