@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap } from "@/lib/gsap";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 const PILLARS = [
   {
@@ -32,7 +32,6 @@ const PILLARS = [
 
 export default function StackedPillars() {
   const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -41,79 +40,55 @@ export default function StackedPillars() {
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    if (reduceMotion) return;
+    const items = section.querySelectorAll(".pillar-item");
 
-    const mm = gsap.matchMedia();
+    if (reduceMotion) {
+      gsap.set(items, { opacity: 1, y: 0 });
+      return;
+    }
 
-    mm.add("(min-width: 1024px)", () => {
-      const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
-      gsap.set(cards.slice(1), { yPercent: 100 });
-
-      gsap.set(cards, { willChange: "transform" });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: () => `+=${(cards.length - 1) * window.innerHeight}`,
-          scrub: true,
-          pin: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
+    gsap.set(items, { opacity: 0, y: 32 });
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top 75%",
+        once: true,
+        onEnter: () =>
+          gsap.to(items, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            stagger: 0.1,
+          }),
       });
+    }, section);
 
-      cards.forEach((card, i) => {
-        if (i === 0) return;
-        tl.to(card, { yPercent: 0, ease: "none" }, i - 1);
-        tl.to(
-          cards[i - 1],
-          { scale: 0.92, opacity: 0.5, ease: "none" },
-          i - 1,
-        );
-      });
-
-      return () => tl.scrollTrigger?.kill();
-    });
-
-    return () => mm.revert();
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative bg-white lg:h-screen">
-      <div className="px-6 pt-20 lg:absolute lg:top-10 lg:left-1/2 lg:z-20 lg:-translate-x-1/2 lg:pt-0">
+    <section ref={sectionRef} className="bg-white py-24 text-brand-black">
+      <div className="mx-auto max-w-6xl px-6">
         <p className="font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] text-brand-red">
           How we&apos;re different
         </p>
-      </div>
 
-      <div className="relative flex flex-col gap-6 px-6 py-12 lg:h-full lg:gap-0 lg:overflow-hidden lg:p-0">
-        {PILLARS.map((pillar, i) => (
-          <div
-            key={pillar.number}
-            ref={(el) => {
-              cardsRef.current[i] = el;
-            }}
-            className="relative flex flex-col justify-center overflow-hidden rounded-sm bg-white p-8 lg:absolute lg:inset-0 lg:rounded-none lg:p-16"
-            style={{ zIndex: i + 1 }}
-          >
-            <span
-              aria-hidden
-              className="pointer-events-none absolute -top-8 -right-4 font-[family-name:var(--font-manrope)] text-[16rem] leading-none font-extrabold text-brand-black/5 select-none"
-            >
-              {pillar.number}
-            </span>
-            <div className="relative max-w-xl">
-              <span className="font-[family-name:var(--font-manrope)] text-sm font-semibold text-brand-red">
+        <div className="mt-10 grid gap-10 sm:grid-cols-2">
+          {PILLARS.map((pillar) => (
+            <div key={pillar.number} className="pillar-item flex gap-5">
+              <span className="font-[family-name:var(--font-manrope)] text-2xl font-extrabold text-brand-red/40">
                 {pillar.number}
               </span>
-              <h3 className="mt-3 font-[family-name:var(--font-manrope)] text-3xl font-extrabold tracking-tight text-brand-black sm:text-5xl">
-                {pillar.title}
-              </h3>
-              <p className="mt-4 text-brand-grey">{pillar.description}</p>
+              <div>
+                <h3 className="font-[family-name:var(--font-manrope)] text-lg font-extrabold tracking-tight">
+                  {pillar.title}
+                </h3>
+                <p className="mt-2 text-brand-grey">{pillar.description}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -23,7 +23,13 @@ export default function Home() {
             Previously operated
           </p>
           <Marquee
-            items={["LOOKFANTASTIC", "COGGLES", "KNOWN NUTRITION", "DMR JEWELLERY"]}
+            items={[
+              "LOOKFANTASTIC",
+              "COGGLES",
+              "KNOWN NUTRITION",
+              "DMR JEWELLERY",
+              "MYVITAMINS",
+            ]}
           />
         </div>
       </section>

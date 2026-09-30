@@ -47,10 +47,21 @@ export default function Testimonial() {
           What clients say
         </p>
 
-        <blockquote className="testimonial-item mt-8 font-[family-name:var(--font-manrope)] text-2xl leading-snug font-medium sm:text-3xl">
-          &ldquo;They took the time to understand our vision and transformed
-          it into a modern, user-friendly website that truly reflects our
-          brand and mission.&rdquo;
+        <blockquote className="testimonial-item mt-8 font-[family-name:var(--font-manrope)] text-lg leading-relaxed font-medium sm:text-xl">
+          &ldquo;We had the pleasure of working with profithaus. on the
+          redesign of our Oceans Alive website, and we couldn&apos;t be
+          happier with the result. From start to finish, they were
+          professional, responsive, and incredibly easy to work with. They
+          took the time to understand our vision and transformed it into a
+          modern, user-friendly website that truly reflects our brand and
+          mission. Their attention to detail, creativity, and technical
+          expertise were evident throughout the entire project. The finished
+          website looks fantastic, functions seamlessly, and has received
+          great feedback from our team and customers alike. Heidi kept us
+          informed at every stage, delivered on time, and went above and
+          beyond to ensure everything was exactly as we wanted. We&apos;d
+          highly recommend them to anyone looking for a talented and reliable
+          web designer.&rdquo;
         </blockquote>
 
         <p className="testimonial-item mt-6 text-sm text-brand-grey">

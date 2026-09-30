@@ -22,7 +22,7 @@ export default function Marquee({ items }: { items: string[] }) {
 
     const tween = gsap.to(track, {
       xPercent: -50,
-      duration: 24,
+      duration: 60,
       ease: "none",
       repeat: -1,
     });
