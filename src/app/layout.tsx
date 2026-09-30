@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { Inter, Poppins, Manrope } from "next/font/google";
+import FullScreenMenu from "@/components/FullScreenMenu";
+import Footer from "@/components/FooterSignOff";
+import SmoothScrollProvider from "@/components/SmoothScrollProvider";
+import CustomCursor from "@/components/CustomCursor";
 import "./globals.css";
 
 const heading = Inter({
@@ -16,6 +18,12 @@ const mono = Poppins({
   weight: ["500", "600"],
 });
 
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
 export const metadata: Metadata = {
   title: "profithaus. | Ecommerce Partner for Luxury Brands",
   description:
@@ -26,10 +34,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${heading.variable} ${mono.variable} h-full antialiased`}
+      className={`${heading.variable} ${mono.variable} ${manrope.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Header />
+        <SmoothScrollProvider />
+        <CustomCursor />
+        <FullScreenMenu />
         <main className="flex-1">{children}</main>
         <Footer />
       </body>

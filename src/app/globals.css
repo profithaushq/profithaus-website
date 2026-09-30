@@ -8,6 +8,11 @@
   --color-ink: #1c1a19;
   --color-ink-soft: #6b6360;
   --font-body: var(--font-heading);
+
+  /* Brand tokens: scroll-led rebuild (Sep 2026) */
+  --color-brand-red: #a42324;
+  --color-brand-black: #141414;
+  --color-brand-grey: #6e6a66;
 }
 
 @theme inline {
@@ -17,9 +22,13 @@
   --color-cream: var(--color-cream);
   --color-ink: var(--color-ink);
   --color-ink-soft: var(--color-ink-soft);
+  --color-brand-red: var(--color-brand-red);
+  --color-brand-black: var(--color-brand-black);
+  --color-brand-grey: var(--color-brand-grey);
   --font-sans: var(--font-body);
   --font-display: var(--font-heading);
   --font-mono-accent: var(--font-mono-accent);
+  --font-manrope: var(--font-manrope);
 }
 
 body {
@@ -91,6 +100,41 @@ body {
   .marquee-track {
     animation: none;
   }
+}
+
+/* Lenis smooth scroll (recommended baseline CSS) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Oversized display type (scroll-led rebuild) */
+.text-display {
+  font-size: clamp(4rem, 14vw, 16rem);
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+}
+
+/* Custom cursor */
+body.ph-cursor-active {
+  cursor: none;
+}
+
+body.ph-cursor-active a,
+body.ph-cursor-active button {
+  cursor: none;
 }
 
 /* Accordion smooth expand */
