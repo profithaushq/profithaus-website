@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Button from "@/components/Button";
-import HeroBand from "@/components/HeroBand";
+import PageHeader from "@/components/PageHeader";
+import AmbientLines from "@/components/AmbientLines";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const MONO_LABEL =
-  "font-[family-name:var(--font-mono-accent)] text-xs font-medium uppercase tracking-[0.2em]";
+  "font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em]";
 
 const STORY = [
   {
@@ -75,18 +76,11 @@ const CAPABILITIES = [
 export default function AboutUs() {
   return (
     <>
-      <HeroBand>
-        <div className="mx-auto max-w-4xl px-6 py-20 text-center sm:py-28">
-          <p className={`${MONO_LABEL} text-white/70`}>About profithaus</p>
-          <h1 className="mt-6 font-[family-name:var(--font-heading)] text-3xl font-light tracking-tight leading-[1.1] sm:text-6xl">
-            The agency we wished existed.
-          </h1>
-          <p className="mt-6 text-white/80">
-            Built by the people who spent years briefing agencies, chasing
-            agencies, and quietly losing faith in them.
-          </p>
-        </div>
-      </HeroBand>
+      <PageHeader
+        eyebrow="About profithaus"
+        title="The agency we wished existed."
+        subcopy="Built by the people who spent years briefing agencies, chasing agencies, and quietly losing faith in them."
+      />
 
       <section className="mx-auto max-w-3xl px-6 py-20">
         {STORY.map((section, i) => (
@@ -95,15 +89,15 @@ export default function AboutUs() {
             delay={i * 100}
             className={`flex gap-6 ${i > 0 ? "mt-16" : ""}`}
           >
-            <span className={`${MONO_LABEL} text-2xl text-accent/50`}>
+            <span className={`${MONO_LABEL} text-2xl text-brand-red/40`}>
               {section.number}
             </span>
             <div>
-              <h2 className="font-[family-name:var(--font-heading)] text-lg font-medium">
+              <h2 className="font-[family-name:var(--font-manrope)] text-lg font-extrabold">
                 {section.title}
               </h2>
               {section.paragraphs.map((paragraph) => (
-                <p key={paragraph} className="mt-4 text-ink-soft">
+                <p key={paragraph} className="mt-4 text-brand-grey">
                   {paragraph}
                 </p>
               ))}
@@ -112,15 +106,16 @@ export default function AboutUs() {
         ))}
       </section>
 
-      <section className="bg-white py-20">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="relative overflow-hidden bg-white py-20">
+        <AmbientLines />
+        <div className="relative z-10 mx-auto max-w-6xl px-6">
           <div className="grid gap-10 sm:grid-cols-3">
             {CAPABILITIES.map((group, i) => (
               <Reveal key={group.category} delay={i * 100}>
-                <h3 className={`${MONO_LABEL} text-accent`}>
+                <h3 className={`${MONO_LABEL} text-brand-red`}>
                   {group.category}
                 </h3>
-                <ul className="mt-4 space-y-2 text-sm text-ink-soft">
+                <ul className="mt-4 space-y-2 text-sm text-brand-grey">
                   {group.items.map((item) => (
                     <li key={item}>{item}</li>
                   ))}
@@ -133,13 +128,13 @@ export default function AboutUs() {
 
       <section className="mx-auto max-w-3xl px-6 py-20 text-center">
         <Reveal>
-          <p className="text-ink-soft">
+          <p className="text-brand-grey">
             Our trading background means we think commercially at every step,
             setting revenue targets, forecasting GP, and making decisions
             backed by data, not gut feel. All joined up under one approach, so
             nothing operates in a silo.
           </p>
-          <p className="mt-4 font-[family-name:var(--font-heading)] text-lg font-medium">
+          <p className="mt-4 font-[family-name:var(--font-manrope)] text-lg font-extrabold text-brand-black">
             We&apos;re not here to be your agency. We&apos;re here to be the
             part of your team that actually gets it.
           </p>

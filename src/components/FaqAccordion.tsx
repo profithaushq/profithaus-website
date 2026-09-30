@@ -39,7 +39,7 @@ export default function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div className="divide-y divide-ink/10 border-y border-ink/10">
+    <div className="divide-y divide-brand-black/10 border-y border-brand-black/10">
       {FAQS.map((faq, index) => {
         const isOpen = openIndex === index;
         return (
@@ -50,18 +50,18 @@ export default function FaqAccordion() {
               className="flex w-full items-center justify-between gap-4 py-5 text-left"
               aria-expanded={isOpen}
             >
-              <span className="font-medium text-ink transition-colors group-hover:text-accent">
+              <span className="font-[family-name:var(--font-manrope)] font-semibold text-brand-black transition-colors hover:text-brand-red">
                 {faq.question}
               </span>
               <span
-                className={`text-xl text-accent transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}
+                className={`text-xl text-brand-red transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}
               >
                 +
               </span>
             </button>
             <div className={`accordion-panel ${isOpen ? "is-open" : ""}`}>
               <div>
-                <p className="pb-5 text-sm text-ink-soft">{faq.answer}</p>
+                <p className="pb-5 text-sm text-brand-grey">{faq.answer}</p>
               </div>
             </div>
           </div>

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import FaqAccordion from "@/components/FaqAccordion";
 import ContactForm from "@/components/ContactForm";
-import HeroBand from "@/components/HeroBand";
+import PageHeader from "@/components/PageHeader";
+import AmbientLines from "@/components/AmbientLines";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -11,13 +12,7 @@ export const metadata: Metadata = {
 export default function Faq() {
   return (
     <>
-      <HeroBand>
-        <div className="mx-auto max-w-4xl px-6 py-20 text-center sm:py-28">
-          <h1 className="font-[family-name:var(--font-heading)] text-3xl font-light tracking-tight leading-[1.1] sm:text-6xl">
-            Frequently Asked Questions
-          </h1>
-        </div>
-      </HeroBand>
+      <PageHeader eyebrow="Got questions" title="Frequently Asked Questions" />
 
       <section className="mx-auto max-w-3xl px-6 py-20">
         <Reveal>
@@ -25,14 +20,15 @@ export default function Faq() {
         </Reveal>
       </section>
 
-      <section className="bg-white py-20">
-        <div className="mx-auto max-w-xl px-6 text-center">
+      <section className="relative overflow-hidden bg-white py-20">
+        <AmbientLines />
+        <div className="relative z-10 mx-auto max-w-xl px-6 text-center">
           <Reveal>
-            <p className="text-ink-soft">
+            <p className="text-brand-grey">
               If you&apos;ve made it this far and still have questions, we
               respect the dedication.
             </p>
-            <h2 className="mt-2 font-[family-name:var(--font-heading)] text-lg font-medium">
+            <h2 className="mt-2 font-[family-name:var(--font-manrope)] text-lg font-extrabold text-brand-black">
               Pop us a message below and we&apos;ll reply within 1–2 working
               days.
             </h2>

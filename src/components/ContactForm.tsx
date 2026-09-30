@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 
 const inputClass =
-  "rounded-lg border border-ink/15 px-4 py-3 text-sm font-normal focus:border-maroon focus:outline-none";
+  "border border-brand-black/15 px-4 py-3 text-sm font-normal focus:border-brand-red focus:outline-none";
 
 export default function ContactForm() {
   const [name, setName] = useState("");
@@ -17,11 +17,11 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="rounded-2xl bg-cream p-10 text-center">
-        <h3 className="font-[family-name:var(--font-heading)] text-base font-medium">
+      <div className="border border-brand-black/10 bg-white p-10 text-center">
+        <h3 className="font-[family-name:var(--font-manrope)] text-base font-extrabold">
           Thanks for reaching out.
         </h3>
-        <p className="mt-2 text-sm text-ink-soft">
+        <p className="mt-2 text-sm text-brand-grey">
           We&apos;ll reply within 1–2 working days.
         </p>
       </div>
@@ -53,7 +53,7 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="grid gap-4">
-      <label className="flex flex-col gap-2 text-sm font-medium text-ink">
+      <label className="flex flex-col gap-2 text-sm font-medium text-brand-black">
         Name
         <input
           type="text"
@@ -62,7 +62,7 @@ export default function ContactForm() {
           className={inputClass}
         />
       </label>
-      <label className="flex flex-col gap-2 text-sm font-medium text-ink">
+      <label className="flex flex-col gap-2 text-sm font-medium text-brand-black">
         Email *
         <input
           type="email"
@@ -72,7 +72,7 @@ export default function ContactForm() {
           className={inputClass}
         />
       </label>
-      <label className="flex flex-col gap-2 text-sm font-medium text-ink">
+      <label className="flex flex-col gap-2 text-sm font-medium text-brand-black">
         Phone
         <input
           type="tel"
@@ -81,7 +81,7 @@ export default function ContactForm() {
           className={inputClass}
         />
       </label>
-      <label className="flex flex-col gap-2 text-sm font-medium text-ink">
+      <label className="flex flex-col gap-2 text-sm font-medium text-brand-black">
         Comment
         <textarea
           value={comment}
@@ -92,13 +92,13 @@ export default function ContactForm() {
       </label>
 
       {submitError && (
-        <p className="text-sm text-accent">{submitError}</p>
+        <p className="text-sm text-brand-red">{submitError}</p>
       )}
 
       <button
         type="submit"
         disabled={submitting}
-        className="mt-2 w-full rounded-full bg-maroon px-6 py-3 text-sm font-medium uppercase tracking-wide text-white transition-colors hover:bg-maroon-dark disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+        className="mt-2 w-full bg-brand-black px-6 py-3 font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
         {submitting ? "Sending..." : "Send"}
       </button>
