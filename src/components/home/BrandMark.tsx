@@ -33,6 +33,13 @@ export default function BrandMark() {
             rotate: 0,
             duration: 0.9,
             ease: "back.out(1.6)",
+            onComplete: () =>
+              gsap.to(mark, {
+                rotate: 360,
+                duration: 24,
+                repeat: -1,
+                ease: "none",
+              }),
           }),
       });
     });

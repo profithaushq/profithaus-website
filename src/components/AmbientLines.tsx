@@ -13,21 +13,28 @@ export default function AmbientLines({ className = "" }: { className?: string })
           className="ambient-line ambient-line-1"
           d="M-100 200C150 100 300 300 550 220C800 140 900 320 1300 180"
           stroke="var(--color-brand-red)"
-          strokeOpacity="0.08"
-          strokeWidth="1.5"
+          strokeOpacity="0.16"
+          strokeWidth="2"
         />
         <path
           className="ambient-line ambient-line-2"
           d="M-100 420C200 500 380 320 620 420C860 520 1000 360 1300 460"
           stroke="var(--color-brand-black)"
-          strokeOpacity="0.06"
-          strokeWidth="1.5"
+          strokeOpacity="0.12"
+          strokeWidth="2"
         />
         <path
           className="ambient-line ambient-line-3"
           d="M-100 620C180 560 420 680 640 600C860 520 1050 660 1300 600"
           stroke="var(--color-brand-red)"
-          strokeOpacity="0.05"
+          strokeOpacity="0.1"
+          strokeWidth="2"
+        />
+        <path
+          className="ambient-line ambient-line-4"
+          d="M-100 40C180 90 360 -20 600 60C840 140 1020 20 1300 90"
+          stroke="var(--color-brand-black)"
+          strokeOpacity="0.08"
           strokeWidth="1.5"
         />
       </svg>

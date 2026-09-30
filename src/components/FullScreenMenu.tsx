@@ -7,16 +7,15 @@ import { gsap } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
 
 const NAV_LINKS = [
-  { href: "/", label: "Home", image: "/hero/frame-01.jpg" },
-  { href: "/apply", label: "Apply to work with us", image: "/hero/frame-02.webp" },
-  { href: "/about-us", label: "About Us", image: "/hero/frame-01.jpg" },
-  { href: "/our-work", label: "Our Work & Testimonials", image: "/hero/frame-02.webp" },
-  { href: "/faq", label: "FAQ's & Contact Us", image: "/hero/frame-01.jpg" },
+  { href: "/", label: "Home" },
+  { href: "/apply", label: "Apply to work with us" },
+  { href: "/about-us", label: "About Us" },
+  { href: "/our-work", label: "Our Work & Testimonials" },
+  { href: "/faq", label: "FAQ's & Contact Us" },
 ];
 
 export default function FullScreenMenu() {
   const [open, setOpen] = useState(false);
-  const [hovered, setHovered] = useState(NAV_LINKS[0].image);
   const headerRef = useRef<HTMLElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
@@ -170,7 +169,7 @@ export default function FullScreenMenu() {
           </button>
         </div>
 
-        <div className="grid flex-1 grid-cols-1 gap-8 overflow-y-auto px-6 pb-8 lg:grid-cols-2 lg:items-center lg:px-16">
+        <div className="flex flex-1 items-center overflow-y-auto px-6 pb-8 lg:px-16">
           <nav className="flex flex-col gap-2">
             {NAV_LINKS.map((link, i) => (
               <Link
@@ -180,27 +179,12 @@ export default function FullScreenMenu() {
                   linkRefs.current[i] = el;
                 }}
                 onClick={() => setOpen(false)}
-                onMouseEnter={() => setHovered(link.image)}
                 className="font-[family-name:var(--font-manrope)] text-4xl font-extrabold tracking-tight text-white/90 transition-colors hover:text-brand-red sm:text-6xl"
               >
                 {link.label}
               </Link>
             ))}
           </nav>
-
-          <div className="relative hidden aspect-[4/5] overflow-hidden rounded-sm lg:block">
-            {Array.from(new Set(NAV_LINKS.map((link) => link.image))).map((image) => (
-              <Image
-                key={image}
-                src={image}
-                alt=""
-                fill
-                sizes="40vw"
-                className="object-cover transition-opacity duration-500"
-                style={{ opacity: hovered === image ? 1 : 0 }}
-              />
-            ))}
-          </div>
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/10 px-6 py-6 lg:px-16">

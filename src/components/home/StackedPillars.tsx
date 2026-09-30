@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import AmbientLines from "@/components/AmbientLines";
 
 const PILLARS = [
   {
@@ -68,15 +69,19 @@ export default function StackedPillars() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-white py-24 text-brand-black">
-      <div className="mx-auto max-w-6xl px-6">
+    <section ref={sectionRef} className="relative overflow-hidden bg-white py-24 text-brand-black">
+      <AmbientLines />
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
         <p className="font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] text-brand-red">
           How we&apos;re different
         </p>
 
         <div className="mt-10 grid gap-10 sm:grid-cols-2">
           {PILLARS.map((pillar) => (
-            <div key={pillar.number} className="pillar-item flex gap-5">
+            <div
+              key={pillar.number}
+              className="pillar-item flex gap-5 transition-transform duration-300 hover:-translate-y-1"
+            >
               <span className="font-[family-name:var(--font-manrope)] text-2xl font-extrabold text-brand-red/40">
                 {pillar.number}
               </span>

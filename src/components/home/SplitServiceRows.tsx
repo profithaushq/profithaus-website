@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import AmbientLines from "@/components/AmbientLines";
 
 const SERVICES = [
   {
@@ -65,15 +66,19 @@ export default function SplitServiceRows() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative bg-white py-24 text-brand-black">
-      <div className="mx-auto max-w-5xl px-6">
+    <section ref={sectionRef} className="relative overflow-hidden bg-white py-24 text-brand-black">
+      <AmbientLines />
+      <div className="relative z-10 mx-auto max-w-5xl px-6">
         <p className="font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] text-brand-red">
           What we do
         </p>
 
         <div className="mt-10 flex flex-col divide-y divide-brand-black/10">
           {SERVICES.map((service) => (
-            <div key={service.words.join("-")} className="service-row group py-10">
+            <div
+              key={service.words.join("-")}
+              className="service-row group py-10 transition-transform duration-300 hover:translate-x-2"
+            >
               <h3 className="flex flex-wrap items-baseline gap-x-4 font-[family-name:var(--font-manrope)] text-4xl font-extrabold tracking-tight sm:text-6xl">
                 <span className="word-left">{service.words[0]} /</span>
                 <span className="word-right text-brand-grey transition-colors group-hover:text-brand-red">

@@ -140,35 +140,45 @@ body.ph-cursor-active button {
 /* Ambient background lines */
 @keyframes ambient-drift-1 {
   0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  50% { transform: translate(2%, -3%) rotate(1deg); }
+  50% { transform: translate(3%, -5%) rotate(2deg); }
 }
 
 @keyframes ambient-drift-2 {
   0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  50% { transform: translate(-3%, 2%) rotate(-1deg); }
+  50% { transform: translate(-5%, 3%) rotate(-2deg); }
 }
 
 @keyframes ambient-drift-3 {
   0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  50% { transform: translate(2%, 2%) rotate(0.5deg); }
+  50% { transform: translate(3%, 3%) rotate(1deg); }
+}
+
+@keyframes ambient-drift-4 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(-3%, -3%) rotate(-1deg); }
 }
 
 .ambient-line-1 {
-  animation: ambient-drift-1 22s ease-in-out infinite;
+  animation: ambient-drift-1 18s ease-in-out infinite;
 }
 
 .ambient-line-2 {
-  animation: ambient-drift-2 28s ease-in-out infinite;
+  animation: ambient-drift-2 24s ease-in-out infinite;
 }
 
 .ambient-line-3 {
-  animation: ambient-drift-3 34s ease-in-out infinite;
+  animation: ambient-drift-3 30s ease-in-out infinite;
+}
+
+.ambient-line-4 {
+  animation: ambient-drift-4 26s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .ambient-line-1,
   .ambient-line-2,
-  .ambient-line-3 {
+  .ambient-line-3,
+  .ambient-line-4 {
     animation: none;
   }
 }
