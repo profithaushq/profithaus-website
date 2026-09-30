@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { gsap } from "@/lib/gsap";
 import { Pill, OptionCard, ProgressBar } from "./pill-option";
 
 const TOTAL_STEPS = 4;
@@ -45,6 +46,7 @@ function toggleInList(list: string[], value: string) {
 }
 
 export default function ApplyForm() {
+  const stepRef = useRef<HTMLDivElement>(null);
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -66,6 +68,22 @@ export default function ApplyForm() {
 
   const [admiredBrands, setAdmiredBrands] = useState("");
   const [anythingElse, setAnythingElse] = useState("");
+
+  useEffect(() => {
+    const node = stepRef.current;
+    if (!node) return;
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduceMotion) return;
+
+    gsap.fromTo(
+      node,
+      { opacity: 0, x: 16 },
+      { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" },
+    );
+  }, [step]);
 
   if (submitted) {
     return (
@@ -127,6 +145,7 @@ export default function ApplyForm() {
     >
       <ProgressBar step={step} total={TOTAL_STEPS} />
 
+      <div ref={stepRef}>
       {step === 1 && (
         <div className="mt-8 grid gap-6 sm:grid-cols-2">
           <label className="flex flex-col gap-2 text-sm font-medium text-brand-black sm:col-span-2">
@@ -302,6 +321,7 @@ export default function ApplyForm() {
           </label>
         </div>
       )}
+      </div>
 
       <div className="mt-10 flex gap-4">
         {step > 1 && (

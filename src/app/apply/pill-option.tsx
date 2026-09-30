@@ -12,7 +12,7 @@ export function Pill({
       type="button"
       onClick={onClick}
       aria-pressed={selected}
-      className={`border px-5 py-2.5 font-[family-name:var(--font-manrope)] text-sm font-medium transition-all duration-200 ${
+      className={`border px-5 py-2.5 font-[family-name:var(--font-manrope)] text-sm font-medium transition-all duration-200 hover:-translate-y-0.5 ${
         selected
           ? "border-brand-black bg-brand-black text-white"
           : "border-brand-black/15 text-brand-black hover:border-brand-black/40"
@@ -39,7 +39,7 @@ export function OptionCard({
       type="button"
       onClick={onClick}
       aria-pressed={selected}
-      className={`border p-5 text-left transition-all duration-200 ${
+      className={`border p-5 text-left transition-all duration-200 hover:-translate-y-0.5 ${
         selected
           ? "border-brand-black bg-brand-black/5"
           : "border-brand-black/15 hover:border-brand-black/40"

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Button from "@/components/Button";
 import PageHeader from "@/components/PageHeader";
 import AmbientLines from "@/components/AmbientLines";
+import Marquee from "@/components/Marquee";
+import BrandMark from "@/components/home/BrandMark";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -10,6 +12,13 @@ export const metadata: Metadata = {
 
 const MONO_LABEL =
   "font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em]";
+
+const PHRASES = [
+  "REAL IN-HOUSE EXPERIENCE.",
+  "SENIOR-LED, HANDS-ON.",
+  "COMMERCIAL THINKING.",
+  "RUN IT LIKE YOU OWN IT.",
+];
 
 const STORY = [
   {
@@ -82,28 +91,40 @@ export default function AboutUs() {
         subcopy="Built by the people who spent years briefing agencies, chasing agencies, and quietly losing faith in them."
       />
 
-      <section className="mx-auto max-w-3xl px-6 py-20">
-        {STORY.map((section, i) => (
-          <Reveal
-            key={section.number}
-            delay={i * 100}
-            className={`flex gap-6 ${i > 0 ? "mt-16" : ""}`}
-          >
-            <span className={`${MONO_LABEL} text-2xl text-brand-red/40`}>
-              {section.number}
-            </span>
-            <div>
-              <h2 className="font-[family-name:var(--font-manrope)] text-lg font-extrabold">
-                {section.title}
-              </h2>
-              {section.paragraphs.map((paragraph) => (
-                <p key={paragraph} className="mt-4 text-brand-grey">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-          </Reveal>
-        ))}
+      <section className="relative overflow-hidden bg-white py-20">
+        <div className="relative z-10 mx-auto max-w-3xl px-6">
+          {STORY.map((section, i) => (
+            <Reveal
+              key={section.number}
+              delay={i * 100}
+              className={`group relative flex gap-6 overflow-hidden transition-transform duration-300 hover:-translate-y-1 ${i > 0 ? "mt-16" : ""}`}
+            >
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -top-6 -right-2 font-[family-name:var(--font-manrope)] text-[8rem] leading-none font-extrabold text-brand-black/5 select-none"
+              >
+                {section.number}
+              </span>
+              <span className={`relative ${MONO_LABEL} text-2xl text-brand-red/40`}>
+                {section.number}
+              </span>
+              <div className="relative">
+                <h2 className="font-[family-name:var(--font-manrope)] text-lg font-extrabold transition-colors group-hover:text-brand-red">
+                  {section.title}
+                </h2>
+                {section.paragraphs.map((paragraph) => (
+                  <p key={paragraph} className="mt-4 text-brand-grey">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section className="overflow-hidden bg-brand-black py-10 text-white">
+        <Marquee items={PHRASES} variant="phrase" duration={90} separator="·" />
       </section>
 
       <section className="relative overflow-hidden bg-white py-20">
@@ -111,7 +132,11 @@ export default function AboutUs() {
         <div className="relative z-10 mx-auto max-w-6xl px-6">
           <div className="grid gap-10 sm:grid-cols-3">
             {CAPABILITIES.map((group, i) => (
-              <Reveal key={group.category} delay={i * 100}>
+              <Reveal
+                key={group.category}
+                delay={i * 100}
+                className="transition-transform duration-300 hover:-translate-y-1"
+              >
                 <h3 className={`${MONO_LABEL} text-brand-red`}>
                   {group.category}
                 </h3>
@@ -125,6 +150,8 @@ export default function AboutUs() {
           </div>
         </div>
       </section>
+
+      <BrandMark />
 
       <section className="mx-auto max-w-3xl px-6 py-20 text-center">
         <Reveal>

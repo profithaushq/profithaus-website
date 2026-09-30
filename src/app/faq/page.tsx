@@ -3,6 +3,7 @@ import FaqAccordion from "@/components/FaqAccordion";
 import ContactForm from "@/components/ContactForm";
 import PageHeader from "@/components/PageHeader";
 import AmbientLines from "@/components/AmbientLines";
+import BrandMark from "@/components/home/BrandMark";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -19,6 +20,8 @@ export default function Faq() {
           <FaqAccordion />
         </Reveal>
       </section>
+
+      <BrandMark />
 
       <section className="relative overflow-hidden bg-white py-20">
         <AmbientLines />

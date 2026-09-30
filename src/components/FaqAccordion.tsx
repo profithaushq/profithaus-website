@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 const FAQS = [
   {
@@ -37,20 +38,58 @@ const FAQS = [
 
 export default function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const rows = container.querySelectorAll(".faq-row");
+
+    if (reduceMotion) {
+      gsap.set(rows, { opacity: 1, x: 0 });
+      return;
+    }
+
+    gsap.set(rows, { opacity: 0, x: -16 });
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: container,
+        start: "top 85%",
+        once: true,
+        onEnter: () =>
+          gsap.to(rows, {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            ease: "power3.out",
+            stagger: 0.08,
+          }),
+      });
+    }, container);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <div className="divide-y divide-brand-black/10 border-y border-brand-black/10">
+    <div
+      ref={containerRef}
+      className="divide-y divide-brand-black/10 border-y border-brand-black/10"
+    >
       {FAQS.map((faq, index) => {
         const isOpen = openIndex === index;
         return (
-          <div key={faq.question}>
+          <div key={faq.question} className="faq-row group">
             <button
               type="button"
               onClick={() => setOpenIndex(isOpen ? null : index)}
-              className="flex w-full items-center justify-between gap-4 py-5 text-left"
+              className="flex w-full items-center justify-between gap-4 py-5 text-left transition-transform duration-300 group-hover:translate-x-1"
               aria-expanded={isOpen}
             >
-              <span className="font-[family-name:var(--font-manrope)] font-semibold text-brand-black transition-colors hover:text-brand-red">
+              <span className="font-[family-name:var(--font-manrope)] font-semibold text-brand-black transition-colors group-hover:text-brand-red">
                 {faq.question}
               </span>
               <span
