@@ -50,7 +50,7 @@ export default function Marquee({
     // The type is smaller on phones, so the track is shorter and the same
     // duration reads as slower. Compensate to keep a similar pace.
     const isPhone = window.matchMedia("(max-width: 767px)").matches;
-    const baseSpeed = isPhone ? BASE_SPEED * 1.6 : BASE_SPEED;
+    const baseSpeed = isPhone ? BASE_SPEED * 2 : BASE_SPEED;
     tween.timeScale(baseSpeed);
 
     let lastY = window.scrollY;
