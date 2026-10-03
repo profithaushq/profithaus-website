@@ -14,7 +14,7 @@ export default function Hero({ ready }: { ready: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const wordRef = useRef<HTMLHeadingElement>(null);
-    const markWrapRef = useRef<HTMLDivElement>(null);
+  const markWrapRef = useRef<HTMLDivElement>(null);
   const markInnerRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLAnchorElement>(null);
   const splitRef = useRef<SplitText | null>(null);
@@ -53,7 +53,9 @@ export default function Hero({ ready }: { ready: boolean }) {
     }
 
     function headerBottom() {
-      const header = document.getElementById("ph-header-mark")?.closest("header");
+      const header = document
+        .getElementById("ph-header-mark")
+        ?.closest("header");
       return header ? header.getBoundingClientRect().height : 104;
     }
 
@@ -74,13 +76,21 @@ export default function Hero({ ready }: { ready: boolean }) {
       // they must not clip glyph overhang (the f hook, overlapping letters).
       const releaseMasks = () =>
         splitRef.current?.masks.forEach((m) => {
-          (m as HTMLElement).style.overflow = "visible";
+          (m as HTMLElement).style.clipPath = "none";
         });
+
+      // While letters rise into place, hide only what is below the line.
+      // Sideways and above stay open so overhangs (the f hook) never clip.
+      splitRef.current.masks.forEach((m) => {
+        const el = m as HTMLElement;
+        el.style.overflow = "visible";
+        el.style.clipPath = "inset(-0.3em -0.6em -0.02em -0.6em)";
+      });
 
       if (reduceMotion) {
         releaseMasks();
         gsap.set(markWrapEl, { opacity: 0 });
-        gsap.set(sectionEl.querySelector(".ph-hero-row"), { opacity: 1 });
+        gsap.set(sectionEl.querySelectorAll(".ph-hero-row"), { opacity: 1 });
         const slot = document.getElementById("ph-header-mark");
         if (slot) gsap.set(slot, { opacity: 1 });
         return;
@@ -104,11 +114,26 @@ export default function Hero({ ready }: { ready: boolean }) {
           },
         });
 
-        tl.to(word, { fontWeight: 200, letterSpacing: "0.035em", ease: "none", duration: 0.96 }, 0)
+        tl.to(
+          word,
+          {
+            fontWeight: 200,
+            letterSpacing: "0.035em",
+            ease: "none",
+            duration: 0.96,
+          },
+          0,
+        )
           .fromTo(
             fadeEls,
             { opacity: 1, y: 0 },
-            { opacity: 0, y: -24, ease: "none", duration: 0.35, immediateRender: false },
+            {
+              opacity: 0,
+              y: -24,
+              ease: "none",
+              duration: 0.35,
+              immediateRender: false,
+            },
             0,
           )
           .to(
@@ -135,7 +160,9 @@ export default function Hero({ ready }: { ready: boolean }) {
               scale: () => {
                 const slot = document.getElementById("ph-header-mark");
                 if (!slot) return 1;
-                return slot.getBoundingClientRect().width / markWrapEl.offsetWidth;
+                return (
+                  slot.getBoundingClientRect().width / markWrapEl.offsetWidth
+                );
               },
               ease: "power2.inOut",
               duration: 0.96,
@@ -181,7 +208,7 @@ export default function Hero({ ready }: { ready: boolean }) {
         ease: "power4.out",
         onComplete: () =>
           split.masks.forEach((m) => {
-            (m as HTMLElement).style.overflow = "visible";
+            (m as HTMLElement).style.clipPath = "none";
           }),
       });
       gsap.fromTo(
@@ -204,6 +231,18 @@ export default function Hero({ ready }: { ready: boolean }) {
       <LivingBackground className="absolute inset-0" />
 
       <div className="relative z-10 flex h-full flex-col justify-end px-4 pb-8 sm:px-8 sm:pb-12">
+        <div className="ph-hero-row mb-6 sm:mb-10">
+          <div className="max-w-xl">
+            <p className="ph-hero-fade font-[family-name:var(--font-manrope)] text-lg font-semibold sm:text-2xl">
+              Ex-operators. Not an agency.
+            </p>
+            <p className="ph-hero-fade mt-2 text-sm leading-relaxed font-medium text-white/80 sm:text-base">
+              The ecommerce partner for luxury fashion, beauty and wellness
+              brands. Trading, website builds and digital business management.
+            </p>
+          </div>
+        </div>
+
         <div ref={wrapRef} className="w-full">
           <h1
             ref={wordRef}
@@ -219,18 +258,7 @@ export default function Hero({ ready }: { ready: boolean }) {
           </h1>
         </div>
 
-        <div className="ph-hero-row mt-6 flex flex-wrap items-end justify-between gap-6 sm:mt-10">
-          <div className="max-w-xl">
-            <p className="ph-hero-fade font-[family-name:var(--font-manrope)] text-lg font-semibold sm:text-2xl">
-              Ex-operators. Not an agency.
-            </p>
-            <p className="ph-hero-fade mt-2 text-sm leading-relaxed font-medium text-white/80 sm:text-base">
-              The ecommerce partner for luxury fashion, beauty and wellness
-              brands. Trading, website builds and digital business
-              management.
-            </p>
-          </div>
-
+        <div className="ph-hero-row mt-6 flex items-end justify-end sm:mt-10">
           <div className="flex items-center gap-6 sm:gap-10">
             <Link
               ref={ctaRef}
