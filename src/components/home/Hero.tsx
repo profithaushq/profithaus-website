@@ -8,7 +8,7 @@ import LivingBackground from "@/components/LivingBackground";
 import Mark from "@/components/Mark";
 
 const WORD = "profithaus.";
-const BASE_SPACING = "-0.04em";
+const BASE_SPACING = "-0.07em";
 
 export default function Hero({ ready }: { ready: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -212,12 +212,9 @@ export default function Hero({ ready }: { ready: boolean }) {
             <p className="ph-hero-fade font-[family-name:var(--font-manrope)] text-lg font-semibold sm:text-2xl">
               Ex-operators. Not an agency.
             </p>
-            <p className="ph-hero-fade mt-3 text-sm leading-relaxed font-medium text-white/80 sm:text-base">
+            <p className="ph-hero-fade mt-2 text-sm leading-relaxed font-medium text-white/80 sm:text-base">
               The ecommerce partner for luxury fashion, beauty and wellness
-              brands. We spent years running trading, websites and P&amp;Ls
-              in-house at LookFantastic, Coggles, Known Nutrition and
-              Myvitamins, and now do the same for you, as if the business were
-              our own.
+              brands.
             </p>
           </div>
 
