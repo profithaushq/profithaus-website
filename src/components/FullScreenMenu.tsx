@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
-import { useMagnetic, useScramble } from "@/lib/interactions";
+import { useMagnetic, useRoll } from "@/lib/interactions";
 import Mark from "@/components/Mark";
 
 const NAV_LINKS = [
@@ -38,7 +38,7 @@ function MenuLink({
   onClose: () => void;
 }) {
   const local = useRef<HTMLAnchorElement | null>(null);
-  useScramble(local, label);
+  useRoll(local, label);
 
   return (
     <Link
@@ -68,7 +68,6 @@ export default function FullScreenMenu() {
   const lastY = useRef(0);
 
   useMagnetic(ctaRef);
-  useScramble(ctaRef, "Book a call");
 
   useEffect(() => {
     const header = headerRef.current;
@@ -229,7 +228,7 @@ export default function FullScreenMenu() {
               ref={ctaRef}
               href="/apply"
               aria-label="Book a call"
-              className="hidden font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide text-brand-black underline decoration-brand-red decoration-2 underline-offset-4 sm:inline-block"
+              className="hidden font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide text-brand-black underline decoration-brand-red decoration-2 underline-offset-4 transition-[text-underline-offset] duration-300 hover:underline-offset-8 sm:inline-block"
             >
               Book a call
             </Link>
