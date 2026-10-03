@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap, ScrollTrigger, SplitText } from "@/lib/gsap";
-import { useMagnetic } from "@/lib/interactions";
 import LivingBackground from "@/components/LivingBackground";
 import Mark from "@/components/Mark";
 
@@ -16,11 +15,8 @@ export default function Hero({ ready }: { ready: boolean }) {
   const wordRef = useRef<HTMLHeadingElement>(null);
   const markWrapRef = useRef<HTMLDivElement>(null);
   const markInnerRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLAnchorElement>(null);
   const splitRef = useRef<SplitText | null>(null);
   const played = useRef(false);
-
-  useMagnetic(ctaRef);
 
   // Layout effect so cleanup reverts pin-spacers before React removes the nodes.
   useLayoutEffect(() => {
@@ -263,7 +259,6 @@ export default function Hero({ ready }: { ready: boolean }) {
         <div className="ph-hero-row mt-6 flex items-end justify-end sm:mt-10">
           <div className="flex items-center gap-6 sm:gap-10">
             <Link
-              ref={ctaRef}
               href="/apply"
               className="ph-hero-fade inline-block font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide underline decoration-white decoration-2 underline-offset-8"
             >

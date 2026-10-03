@@ -128,16 +128,6 @@ html.lenis body {
   letter-spacing: -0.03em;
 }
 
-/* Custom cursor */
-body.ph-cursor-active {
-  cursor: none;
-}
-
-body.ph-cursor-active a,
-body.ph-cursor-active button {
-  cursor: none;
-}
-
 /* Ambient background lines */
 @keyframes ambient-drift-1 {
   0%, 100% { transform: translate(0, 0); }

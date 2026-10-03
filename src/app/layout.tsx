@@ -3,7 +3,6 @@ import { Inter, Poppins } from "next/font/google";
 import FullScreenMenu from "@/components/FullScreenMenu";
 import Footer from "@/components/FooterSignOff";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
-import CustomCursor from "@/components/CustomCursor";
 import PageTransition from "@/components/PageTransition";
 import "./globals.css";
 
@@ -50,7 +49,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="min-h-full flex flex-col">
         <SmoothScrollProvider />
-        <CustomCursor />
         <PageTransition />
         <div className="ph-page relative z-10 flex flex-1 flex-col bg-white">
           <FullScreenMenu />

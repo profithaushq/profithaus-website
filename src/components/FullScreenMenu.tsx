@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
-import { useMagnetic, useRoll } from "@/lib/interactions";
+import { useRoll } from "@/lib/interactions";
 import Mark from "@/components/Mark";
 
 const NAV_LINKS = [
@@ -63,11 +63,9 @@ export default function FullScreenMenu() {
   const headerRef = useRef<HTMLElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const markRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLAnchorElement>(null);
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const lastY = useRef(0);
 
-  useMagnetic(ctaRef);
 
   useEffect(() => {
     const header = headerRef.current;
@@ -225,7 +223,6 @@ export default function FullScreenMenu() {
 
           <div className="flex items-center justify-end gap-8">
             <Link
-              ref={ctaRef}
               href="/apply"
               aria-label="Book a call"
               className="hidden font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide text-brand-black underline decoration-brand-red decoration-2 underline-offset-4 transition-[text-underline-offset] duration-300 hover:underline-offset-8 sm:inline-block"

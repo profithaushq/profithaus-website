@@ -10,49 +10,6 @@ function canHover() {
   );
 }
 
-export function useMagnetic<T extends HTMLElement>(
-  ref: RefObject<T | null>,
-  strength = 0.35,
-) {
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || !canHover()) return;
-
-    const moveX = gsap.quickTo(el, "x", { duration: 0.5, ease: "power3" });
-    const moveY = gsap.quickTo(el, "y", { duration: 0.5, ease: "power3" });
-
-    function onMove(e: PointerEvent) {
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = e.clientX - cx;
-      const dy = e.clientY - cy;
-      const reach = Math.max(rect.width, rect.height) * 1.2;
-      if (Math.hypot(dx, dy) < reach) {
-        moveX(dx * strength);
-        moveY(dy * strength);
-      } else {
-        moveX(0);
-        moveY(0);
-      }
-    }
-
-    function onLeave() {
-      moveX(0);
-      moveY(0);
-    }
-
-    window.addEventListener("pointermove", onMove, { passive: true });
-    el.addEventListener("pointerleave", onLeave);
-    return () => {
-      window.removeEventListener("pointermove", onMove);
-      el.removeEventListener("pointerleave", onLeave);
-      gsap.set(el, { x: 0, y: 0 });
-    };
-  }, [ref, strength]);
-}
-
 /**
  * Hover effect for large links: each letter rolls up and its twin rolls in,
  * staggered left to right. Quiet and precise, no random characters.
