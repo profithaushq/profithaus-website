@@ -216,6 +216,13 @@ html.ph-js .ph-hero-word {
   visibility: hidden;
 }
 
+/* Titles that get split into per-letter boxes: splitting removes kerning and
+   ligatures, so switch them off up front to keep the type from shifting. */
+.ph-nokern {
+  font-kerning: none;
+  font-variant-ligatures: none;
+}
+
 html.ph-js .ph-page-title {
   visibility: hidden;
 }

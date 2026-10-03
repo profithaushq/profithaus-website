@@ -80,7 +80,7 @@ export default function Hero({ ready }: { ready: boolean }) {
       splitRef.current.masks.forEach((m) => {
         const el = m as HTMLElement;
         el.style.overflow = "visible";
-        el.style.clipPath = "inset(-0.3em -0.6em -0.02em -0.6em)";
+        el.style.clipPath = "inset(-0.3em -0.6em -0.3em -0.6em)";
       });
 
       if (reduceMotion) {
@@ -92,7 +92,7 @@ export default function Hero({ ready }: { ready: boolean }) {
         return;
       }
 
-      gsap.set(splitRef.current.chars, { yPercent: 115 });
+      gsap.set(splitRef.current.chars, { yPercent: 135 });
 
       const headerMark = document.getElementById("ph-header-mark");
 
@@ -230,7 +230,7 @@ export default function Hero({ ready }: { ready: boolean }) {
         <div ref={wrapRef} className="w-full">
           <h1
             ref={wordRef}
-            className="ph-hero-word block whitespace-nowrap font-[family-name:var(--font-manrope)] font-extrabold"
+            className="ph-hero-word ph-nokern block whitespace-nowrap font-[family-name:var(--font-manrope)] font-extrabold"
             style={{
               fontSize: "min(17.5vw, 24rem)",
               lineHeight: 1,

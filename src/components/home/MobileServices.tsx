@@ -70,11 +70,11 @@ export default function MobileServices() {
             split.masks.forEach((m) => {
               const el = m as HTMLElement;
               el.style.overflow = "visible";
-              el.style.clipPath = "inset(-0.3em -0.6em 0 -0.6em)";
+              el.style.clipPath = "inset(-0.3em -0.6em -0.3em -0.6em)";
             });
             gsap.fromTo(
               split.chars,
-              { yPercent: 115 },
+              { yPercent: 135 },
               {
                 yPercent: 0,
                 ease: "none",
@@ -156,7 +156,7 @@ export default function MobileServices() {
           </p>
 
           <h3
-            className="ph-mtitle font-[family-name:var(--font-manrope)] text-[12.4vw] leading-[0.92] font-extrabold tracking-[-0.04em] whitespace-nowrap sm:text-[11vw]"
+            className="ph-mtitle ph-nokern font-[family-name:var(--font-manrope)] text-[12.4vw] leading-[0.92] font-extrabold tracking-[-0.04em] whitespace-nowrap sm:text-[11vw]"
             style={{ color: service.fg }}
             aria-label={service.title}
           >

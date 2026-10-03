@@ -43,13 +43,13 @@ export default function StoryBand({
       split.masks.forEach((m) => {
         const el = m as HTMLElement;
         el.style.overflow = "visible";
-        el.style.clipPath = "inset(-0.3em -0.6em 0 -0.6em)";
+        el.style.clipPath = "inset(-0.3em -0.6em -0.3em -0.6em)";
       });
 
       const ctx = gsap.context(() => {
         gsap.fromTo(
           split.chars,
-          { yPercent: 115 },
+          { yPercent: 135 },
           {
             yPercent: 0,
             ease: "none",
@@ -105,7 +105,7 @@ export default function StoryBand({
       <div className="relative z-10 mx-auto grid max-w-7xl gap-10 px-6 sm:px-10 lg:grid-cols-[1fr_1.35fr] lg:gap-16">
         <h2
           ref={titleRef}
-          className="font-[family-name:var(--font-manrope)] text-[clamp(2.5rem,7vw,6.5rem)] leading-[0.95] font-extrabold tracking-[-0.045em]"
+          className="ph-nokern font-[family-name:var(--font-manrope)] text-[clamp(2.5rem,7vw,6.5rem)] leading-[0.95] font-extrabold tracking-[-0.045em]"
         >
           {title}
         </h2>

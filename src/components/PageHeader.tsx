@@ -56,10 +56,10 @@ export default function PageHeader({
           split.masks.forEach((m) => {
             const el = m as HTMLElement;
             el.style.overflow = "visible";
-            el.style.clipPath = "inset(-0.3em -0.6em -0.02em -0.6em)";
+            el.style.clipPath = "inset(-0.3em -0.6em -0.3em -0.6em)";
           });
           gsap.set(titleEl, { visibility: "visible" });
-          gsap.set(split.chars, { yPercent: 115 });
+          gsap.set(split.chars, { yPercent: 135 });
 
           gsap.to(split.chars, {
             yPercent: 0,
@@ -120,7 +120,7 @@ export default function PageHeader({
         </p>
         <h1
           ref={titleRef}
-          className="ph-page-title mt-6 max-w-[15ch] font-[family-name:var(--font-manrope)] text-[clamp(2.75rem,9.5vw,9.5rem)] leading-[0.95] font-extrabold tracking-[-0.05em]"
+          className="ph-page-title ph-nokern mt-6 max-w-[15ch] font-[family-name:var(--font-manrope)] text-[clamp(2.75rem,9.5vw,9.5rem)] leading-[0.95] font-extrabold tracking-[-0.05em]"
         >
           {title}
         </h1>
