@@ -10,6 +10,8 @@ const VARIANTS = {
     "whitespace-nowrap font-[family-name:var(--font-manrope)] text-sm font-medium text-brand-grey",
   phrase:
     "whitespace-nowrap font-[family-name:var(--font-manrope)] text-3xl font-extrabold uppercase tracking-tight sm:text-5xl",
+  display:
+    "whitespace-nowrap font-[family-name:var(--font-manrope)] text-[clamp(4.5rem,13vw,13rem)] leading-none font-extrabold uppercase tracking-tight",
 };
 
 export default function Marquee({
@@ -17,13 +19,15 @@ export default function Marquee({
   variant = "logos",
   duration = 60,
   separator,
+  repeat = 4,
 }: {
   items: string[];
   variant?: keyof typeof VARIANTS;
   duration?: number;
   separator?: string;
+  repeat?: number;
 }) {
-  const repeated = Array.from({ length: 8 }).flatMap(() => items);
+  const repeated = Array.from({ length: repeat * 2 }).flatMap(() => items);
   const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -77,12 +81,24 @@ export default function Marquee({
       >
         {repeated.map((item, index) => (
           <span key={`${item}-${index}`} className="flex items-center gap-8">
-            <span className={VARIANTS[variant]}>{item}</span>
+            <span
+              className={`${VARIANTS[variant]} ${
+                variant === "display" && index % items.length % 2 === 1
+                  ? "ph-outline"
+                  : ""
+              }`}
+            >
+              {item}
+            </span>
             {separator && (
               <span
                 aria-hidden
                 className={
-                  variant === "phrase" ? "text-3xl text-brand-red sm:text-5xl" : "text-brand-red"
+                  variant === "display"
+                    ? "text-[clamp(2rem,6vw,6rem)] text-brand-red"
+                    : variant === "phrase"
+                      ? "text-3xl text-brand-red sm:text-5xl"
+                      : "text-brand-red"
                 }
               >
                 {separator}

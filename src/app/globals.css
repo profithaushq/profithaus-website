@@ -188,3 +188,83 @@ body.ph-cursor-active button {
 .accordion-panel > div {
   overflow: hidden;
 }
+
+/* v2: curtain footer, preloader gate, hero-to-header mark, outline type */
+:root {
+  --ph-footer-h: 80svh;
+  --ph-header-h: 6.5rem;
+}
+
+.ph-page {
+  margin-bottom: var(--ph-footer-h);
+}
+
+.ph-preloader {
+  display: none;
+}
+
+html.ph-preload .ph-preloader {
+  display: flex;
+}
+
+html:has([data-ph-hero]) #ph-header-mark {
+  opacity: 0;
+}
+
+.ph-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--ph-stroke, #ffffff);
+}
+
+@media (max-width: 767px) {
+  .ph-outline {
+    -webkit-text-stroke-width: 1.5px;
+  }
+}
+
+html.ph-js .ph-hero-word {
+  visibility: hidden;
+}
+
+html.ph-js [data-ph-hero] .ph-hero-row {
+  opacity: 0;
+}
+
+/* Services: zoom-through-letters on desktop with motion, plain list otherwise */
+.ph-services-zoom {
+  display: none;
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  html.ph-js .ph-services-zoom {
+    display: block;
+  }
+
+  html.ph-js .ph-services-list {
+    display: none;
+  }
+}
+
+/* Pillars: dealt cards on desktop with motion, vertical list otherwise */
+.ph-pillars-stack {
+  display: none;
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  html.ph-js .ph-pillars-stack {
+    display: block;
+  }
+
+  html.ph-js .ph-pillars-list {
+    display: none;
+  }
+}
+
+/* Scroll-lit words: dim only when JS is running, so no-JS reads at full strength */
+html.ph-js .note-word {
+  opacity: 0.2;
+}
+
+html.ph-js .tl-word {
+  opacity: 0.15;
+}

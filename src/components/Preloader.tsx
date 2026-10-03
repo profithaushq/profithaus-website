@@ -2,76 +2,101 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
+import { getLenis } from "@/lib/lenis";
+import Mark from "@/components/Mark";
 
 const SESSION_KEY = "ph-preloader-seen";
 
 export default function Preloader({ onComplete }: { onComplete: () => void }) {
   const [count, setCount] = useState(0);
   const panelRef = useRef<HTMLDivElement>(null);
-  const doneRef = useRef(false);
+  const markRef = useRef<HTMLDivElement>(null);
+  const completeRef = useRef(onComplete);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    completeRef.current = onComplete;
+  }, [onComplete]);
 
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    const alreadySeen = sessionStorage.getItem(SESSION_KEY);
+  useEffect(() => {
+    const html = document.documentElement;
+    const panel = panelRef.current;
+    const mark = markRef.current;
+    if (!panel || !mark) return;
 
-    if (reduceMotion || alreadySeen) {
-      onComplete();
+    if (!html.classList.contains("ph-preload")) {
+      completeRef.current();
       return;
     }
 
     sessionStorage.setItem(SESSION_KEY, "1");
+    document.body.style.overflow = "hidden";
+    getLenis()?.stop();
 
-    const counter = { value: 0 };
-    const tween = gsap.to(counter, {
-      value: 100,
-      duration: 1.4,
-      ease: "power2.out",
-      onUpdate: () => setCount(Math.round(counter.value)),
-      onComplete: finish,
-    });
+    const q = gsap.utils.selector(mark);
+    gsap.set(q(".ph-mark-disc"), { opacity: 0 });
+    gsap.set(q(".ph-mark-ring"), { opacity: 1 });
+    gsap.set(q(".ph-mark-dot"), { scale: 0, svgOrigin: "447 568" });
+
+    let finished = false;
 
     function finish() {
-      if (doneRef.current) return;
-      doneRef.current = true;
-      tween.kill();
-      const panel = panelRef.current;
-      if (!panel) {
-        onComplete();
-        return;
-      }
+      if (finished) return;
+      finished = true;
+      tl.kill();
+      setCount(100);
+      document.body.style.overflow = "";
+      getLenis()?.start();
       gsap.to(panel, {
         clipPath: "inset(0 0 100% 0)",
-        duration: 0.9,
+        duration: 0.6,
         ease: "expo.inOut",
-        onComplete,
+        onComplete: () => {
+          html.classList.remove("ph-preload");
+          completeRef.current();
+        },
       });
     }
 
-    function handleClick() {
-      finish();
-    }
+    const tl = gsap.timeline({
+      onUpdate: () => setCount(Math.round(tl.progress() * 100)),
+      onComplete: finish,
+    });
 
-    const panel = panelRef.current;
-    panel?.addEventListener("click", handleClick);
+    tl.fromTo(
+      q(".ph-mark-ring, .ph-mark-stem, .ph-mark-bowl"),
+      { drawSVG: "0%" },
+      { drawSVG: "100%", duration: 0.8, ease: "power2.inOut", stagger: 0.12 },
+      0,
+    )
+      .to(
+        q(".ph-mark-dot"),
+        { scale: 1, svgOrigin: "447 568", duration: 0.25, ease: "back.out(2)" },
+        0.7,
+      )
+      .to(q(".ph-mark-disc"), { opacity: 1, duration: 0.3 }, 0.9)
+      .to(q(".ph-mark-ring"), { opacity: 0, duration: 0.2 }, 1.0);
+
+    panel.addEventListener("click", finish);
 
     return () => {
-      tween.kill();
-      panel?.removeEventListener("click", handleClick);
+      panel.removeEventListener("click", finish);
+      tl.kill();
+      document.body.style.overflow = "";
+      getLenis()?.start();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div
       ref={panelRef}
-      className="fixed inset-0 z-[100] flex cursor-pointer flex-col items-center justify-center bg-brand-black text-white"
+      className="ph-preloader fixed inset-0 z-[100] cursor-pointer flex-col items-center justify-center bg-brand-black text-white"
       style={{ clipPath: "inset(0 0 0% 0)" }}
+      aria-hidden
     >
-      <p className="font-[family-name:var(--font-manrope)] text-6xl font-extrabold tabular-nums tracking-tight">
+      <div ref={markRef} className="h-24 w-24 sm:h-32 sm:w-32">
+        <Mark className="h-full w-full" />
+      </div>
+      <p className="mt-8 font-[family-name:var(--font-manrope)] text-6xl font-extrabold tabular-nums tracking-tight">
         {count}
       </p>
       <p className="mt-4 font-[family-name:var(--font-manrope)] text-xs uppercase tracking-[0.2em] text-white/40">

@@ -27,6 +27,10 @@ export default function SmoothScrollProvider() {
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
+    document.fonts.ready.then(() =>
+      window.setTimeout(() => ScrollTrigger.refresh(), 200),
+    );
+
     return () => {
       gsap.ticker.remove(raf);
       lenis.destroy();
