@@ -57,6 +57,7 @@ export default function Hero({ ready }: { ready: boolean }) {
 
     let ctx: gsap.Context | undefined;
     let cancelled = false;
+    let removePhoneListener: (() => void) | undefined;
 
     function setup() {
       if (cancelled) return;
@@ -96,80 +97,174 @@ export default function Hero({ ready }: { ready: boolean }) {
 
       const headerMark = document.getElementById("ph-header-mark");
 
-      ctx = gsap.context(() => {
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: sectionEl,
-            start: () => `top ${headerBottom()}px`,
-            end: () => `+=${window.innerHeight * 0.9}`,
-            pin: true,
-            scrub: true,
-            anticipatePin: 1,
-            refreshPriority: 5,
-            invalidateOnRefresh: true,
-          },
-        });
+      const phone = window.matchMedia("(max-width: 767px)");
 
-        tl.to(
-          word,
-          {
-            fontWeight: 200,
-            letterSpacing: "0.035em",
-            ease: "none",
-            duration: 0.96,
-          },
-          0,
-        )
-          .fromTo(
-            fadeEls,
-            { opacity: 1, y: 0 },
+      function markTarget() {
+        const slot = document.getElementById("ph-header-mark");
+        if (!slot) return null;
+        const s = slot.getBoundingClientRect();
+        const w = markWrapEl.getBoundingClientRect();
+        return {
+          // Viewport-space centres (the section is not pinned on phones, so
+          // the mark's vertical travel is just the page scrolling).
+          dx: s.left + s.width / 2 - (w.left + w.width / 2),
+          scale: s.width / markWrapEl.offsetWidth,
+          scrollDistance: Math.max(
+            120,
+            w.top + w.height / 2 + window.scrollY - (s.top + s.height / 2),
+          ),
+        };
+      }
+
+      function buildPhone() {
+        // Phones: no pin and nothing that re-lays out the giant type. Letters
+        // lift away with transforms only while the mark glides to the header.
+        ctx = gsap.context(() => {
+          const chars = splitRef.current?.chars ?? [];
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: sectionEl,
+              start: () => `top ${headerBottom()}px`,
+              end: () =>
+                `+=${markTarget()?.scrollDistance ?? window.innerHeight * 0.8}`,
+              scrub: true,
+              refreshPriority: 5,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          tl.to(
+            chars,
             {
+              yPercent: -55,
               opacity: 0,
-              y: -24,
               ease: "none",
-              duration: 0.35,
-              immediateRender: false,
+              duration: 0.6,
+              stagger: { each: 0.05, from: "start" },
             },
             0,
           )
-          .to(
-            markInnerEl,
+            .fromTo(
+              fadeEls,
+              { opacity: 1 },
+              {
+                opacity: 0,
+                ease: "none",
+                duration: 0.4,
+                immediateRender: false,
+              },
+              0,
+            )
+            .to(
+              markInnerEl,
+              {
+                x: () => markTarget()?.dx ?? 0,
+                scale: () => markTarget()?.scale ?? 1,
+                ease: "none",
+                duration: 1.1,
+              },
+              0,
+            )
+            .set(headerMark, { opacity: 1 }, 1.1)
+            .set(markWrapEl, { opacity: 0 }, 1.1);
+        }, sectionEl);
+      }
+
+      function buildDesktop() {
+        ctx = gsap.context(() => {
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: sectionEl,
+              start: () => `top ${headerBottom()}px`,
+              end: () => `+=${window.innerHeight * 0.9}`,
+              pin: true,
+              scrub: true,
+              anticipatePin: 1,
+              refreshPriority: 5,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          tl.to(
+            word,
             {
-              x: () => {
-                const slot = document.getElementById("ph-header-mark");
-                if (!slot) return 0;
-                const s = slot.getBoundingClientRect();
-                const w = markWrapEl.getBoundingClientRect();
-                const sr = sectionEl.getBoundingClientRect();
-                const wrapCx = w.left - sr.left + w.width / 2;
-                return s.left + s.width / 2 - wrapCx;
-              },
-              y: () => {
-                const slot = document.getElementById("ph-header-mark");
-                if (!slot) return 0;
-                const s = slot.getBoundingClientRect();
-                const w = markWrapEl.getBoundingClientRect();
-                const sr = sectionEl.getBoundingClientRect();
-                const wrapCy = headerBottom() + (w.top - sr.top) + w.height / 2;
-                return s.top + s.height / 2 - wrapCy;
-              },
-              scale: () => {
-                const slot = document.getElementById("ph-header-mark");
-                if (!slot) return 1;
-                return (
-                  slot.getBoundingClientRect().width / markWrapEl.offsetWidth
-                );
-              },
-              ease: "power2.inOut",
+              fontWeight: 200,
+              letterSpacing: "0.035em",
+              ease: "none",
               duration: 0.96,
             },
             0,
           )
-          .set(headerMark, { opacity: 1 }, 0.96)
-          .set(markWrapEl, { opacity: 0 }, 0.96);
-      }, sectionEl);
+            .fromTo(
+              fadeEls,
+              { opacity: 1, y: 0 },
+              {
+                opacity: 0,
+                y: -24,
+                ease: "none",
+                duration: 0.35,
+                immediateRender: false,
+              },
+              0,
+            )
+            .to(
+              markInnerEl,
+              {
+                x: () => {
+                  const slot = document.getElementById("ph-header-mark");
+                  if (!slot) return 0;
+                  const s = slot.getBoundingClientRect();
+                  const w = markWrapEl.getBoundingClientRect();
+                  const sr = sectionEl.getBoundingClientRect();
+                  const wrapCx = w.left - sr.left + w.width / 2;
+                  return s.left + s.width / 2 - wrapCx;
+                },
+                y: () => {
+                  const slot = document.getElementById("ph-header-mark");
+                  if (!slot) return 0;
+                  const s = slot.getBoundingClientRect();
+                  const w = markWrapEl.getBoundingClientRect();
+                  const sr = sectionEl.getBoundingClientRect();
+                  const wrapCy =
+                    headerBottom() + (w.top - sr.top) + w.height / 2;
+                  return s.top + s.height / 2 - wrapCy;
+                },
+                scale: () => {
+                  const slot = document.getElementById("ph-header-mark");
+                  if (!slot) return 1;
+                  return (
+                    slot.getBoundingClientRect().width / markWrapEl.offsetWidth
+                  );
+                },
+                ease: "power2.inOut",
+                duration: 0.96,
+              },
+              0,
+            )
+            .set(headerMark, { opacity: 1 }, 0.96)
+            .set(markWrapEl, { opacity: 0 }, 0.96);
+        }, sectionEl);
+      }
 
-      ScrollTrigger.refresh();
+      let built = false;
+      function build() {
+        ctx?.revert();
+        if (built) {
+          // Switching between phone and desktop layouts: start clean.
+          gsap.set(markWrapEl, { clearProps: "opacity" });
+          gsap.set(splitRef.current?.chars ?? [], {
+            clearProps: "opacity,transform",
+          });
+        }
+        built = true;
+        if (phone.matches) buildPhone();
+        else buildDesktop();
+        ScrollTrigger.refresh();
+      }
+
+      build();
+      phone.addEventListener("change", build);
+      removePhoneListener = () => phone.removeEventListener("change", build);
     }
 
     document.fonts.ready.then(setup);
@@ -179,6 +274,7 @@ export default function Hero({ ready }: { ready: boolean }) {
 
     return () => {
       cancelled = true;
+      removePhoneListener?.();
       ro.disconnect();
       ctx?.revert();
       splitRef.current?.revert();
