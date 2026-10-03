@@ -227,36 +227,41 @@ export default function Hero({ ready }: { ready: boolean }) {
       <LivingBackground className="absolute inset-0" />
 
       <div className="relative z-10 flex h-full flex-col px-4 pt-6 pb-8 sm:px-8 sm:pt-10 sm:pb-12">
-        <div ref={wrapRef} className="w-full">
-          <h1
-            ref={wordRef}
-            className="ph-hero-word ph-nokern block whitespace-nowrap font-[family-name:var(--font-manrope)] font-extrabold"
+        {/* Title and copy: centred in the space on phones, at the top from sm up */}
+        <div className="flex flex-1 flex-col justify-center sm:flex-none sm:justify-start">
+          <div ref={wrapRef} className="w-full">
+            <h1
+              ref={wordRef}
+              className="ph-hero-word ph-nokern block whitespace-nowrap font-[family-name:var(--font-manrope)] font-extrabold"
+              style={{
+                fontSize: "min(17.5vw, 24rem)",
+                lineHeight: 1,
+                letterSpacing: BASE_SPACING,
+                fontWeight: 800,
+                // Pull the p stem onto the same left edge as the copy below.
+                marginLeft: "-0.069em",
+              }}
+            >
+              {WORD}
+            </h1>
+          </div>
+
+          <div
+            className="ph-hero-row"
+            // Clears the p descender, which hangs below the wordmark's line box.
             style={{
-              fontSize: "min(17.5vw, 24rem)",
-              lineHeight: 1,
-              letterSpacing: BASE_SPACING,
-              fontWeight: 800,
-              // Pull the p stem onto the same left edge as the copy below.
-              marginLeft: "-0.069em",
+              marginTop: "max(1.5rem, calc(min(17.5vw, 24rem) * 0.24))",
             }}
           >
-            {WORD}
-          </h1>
-        </div>
-
-        <div
-          className="ph-hero-row"
-          // Clears the p descender, which hangs below the wordmark's line box.
-          style={{ marginTop: "max(1.5rem, calc(min(17.5vw, 24rem) * 0.24))" }}
-        >
-          <div className="max-w-xl">
-            <p className="ph-hero-fade font-[family-name:var(--font-manrope)] text-lg font-semibold sm:text-2xl">
-              Ex-operators. Not an agency.
-            </p>
-            <p className="ph-hero-fade mt-2 text-sm leading-relaxed font-medium text-white/80 sm:text-base">
-              The ecommerce partner for luxury fashion, beauty and wellness
-              brands. Trading, website builds and digital business management.
-            </p>
+            <div className="max-w-xl">
+              <p className="ph-hero-fade font-[family-name:var(--font-manrope)] text-lg font-semibold sm:text-2xl">
+                Ex-operators. Not an agency.
+              </p>
+              <p className="ph-hero-fade mt-2 text-sm leading-relaxed font-medium text-white/80 sm:text-base">
+                The ecommerce partner for luxury fashion, beauty and wellness
+                brands. Trading, website builds and digital business management.
+              </p>
+            </div>
           </div>
         </div>
 
