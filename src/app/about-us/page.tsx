@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
-import Button from "@/components/Button";
 import PageHeader from "@/components/PageHeader";
-import AmbientLines from "@/components/AmbientLines";
 import Marquee from "@/components/Marquee";
-import BrandMark from "@/components/home/BrandMark";
-import Reveal from "@/components/Reveal";
+import StoryBand from "@/components/StoryBand";
+import CapabilityColumns from "@/components/CapabilityColumns";
+import ClosingStatement from "@/components/ClosingStatement";
 
 export const metadata: Metadata = {
   title: "About Us | profithaus.",
 };
 
-const MONO_LABEL =
-  "font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em]";
+// White, black, grey: the page changes colour as the story moves on.
+const BAND_THEMES = [
+  { bg: "#ffffff", fg: "#141414", muted: "rgba(20,20,20,0.14)" },
+  { bg: "#141414", fg: "#ffffff", muted: "rgba(255,255,255,0.18)" },
+  { bg: "#6e6a66", fg: "#ffffff", muted: "rgba(255,255,255,0.28)" },
+];
 
 const PHRASES = [
   "REAL IN-HOUSE EXPERIENCE.",
@@ -91,85 +94,33 @@ export default function AboutUs() {
         subcopy="Built by the people who spent years briefing agencies, chasing agencies, and quietly losing faith in them."
       />
 
-      <section className="relative overflow-hidden bg-white py-20">
-        <div className="relative z-10 mx-auto max-w-3xl px-6">
-          {STORY.map((section, i) => (
-            <Reveal
-              key={section.number}
-              delay={i * 100}
-              className={`group relative flex gap-6 overflow-hidden transition-transform duration-300 hover:-translate-y-1 ${i > 0 ? "mt-16" : ""}`}
-            >
-              <span
-                aria-hidden
-                className="pointer-events-none absolute -top-6 -right-2 font-[family-name:var(--font-manrope)] text-[8rem] leading-none font-extrabold text-brand-black/5 select-none"
-              >
-                {section.number}
-              </span>
-              <span className={`relative ${MONO_LABEL} text-2xl text-brand-red/40`}>
-                {section.number}
-              </span>
-              <div className="relative">
-                <h2 className="font-[family-name:var(--font-manrope)] text-lg font-extrabold transition-colors group-hover:text-brand-red">
-                  {section.title}
-                </h2>
-                {section.paragraphs.map((paragraph) => (
-                  <p key={paragraph} className="mt-4 text-brand-grey">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-            </Reveal>
-          ))}
-        </div>
+      {STORY.map((section, i) => (
+        <StoryBand
+          key={section.number}
+          number={section.number}
+          title={section.title}
+          paragraphs={section.paragraphs}
+          {...BAND_THEMES[i % BAND_THEMES.length]}
+        />
+      ))}
+
+      <section className="overflow-hidden bg-brand-black py-10 text-white sm:py-14">
+        <Marquee
+          items={PHRASES}
+          variant="display"
+          duration={140}
+          separator="·"
+        />
       </section>
 
-      <section className="overflow-hidden bg-brand-black py-10 text-white">
-        <Marquee items={PHRASES} variant="phrase" duration={90} separator="·" />
-      </section>
+      <CapabilityColumns groups={CAPABILITIES} />
 
-      <section className="relative overflow-hidden bg-white py-20">
-        <AmbientLines />
-        <div className="relative z-10 mx-auto max-w-6xl px-6">
-          <div className="grid gap-10 sm:grid-cols-3">
-            {CAPABILITIES.map((group, i) => (
-              <Reveal
-                key={group.category}
-                delay={i * 100}
-                className="transition-transform duration-300 hover:-translate-y-1"
-              >
-                <h3 className={`${MONO_LABEL} text-brand-red`}>
-                  {group.category}
-                </h3>
-                <ul className="mt-4 space-y-2 text-sm text-brand-grey">
-                  {group.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <BrandMark />
-
-      <section className="mx-auto max-w-3xl px-6 py-20 text-center">
-        <Reveal>
-          <p className="text-brand-grey">
-            Our trading background means we think commercially at every step,
-            setting revenue targets, forecasting GP, and making decisions
-            backed by data, not gut feel. All joined up under one approach, so
-            nothing operates in a silo.
-          </p>
-          <p className="mt-4 font-[family-name:var(--font-manrope)] text-lg font-extrabold text-brand-black">
-            We&apos;re not here to be your agency. We&apos;re here to be the
-            part of your team that actually gets it.
-          </p>
-          <div className="mt-8 flex justify-center">
-            <Button href="/apply">Apply to work with us</Button>
-          </div>
-        </Reveal>
-      </section>
+      <ClosingStatement
+        lead="Our trading background means we think commercially at every step, setting revenue targets, forecasting GP, and making decisions backed by data, not gut feel. All joined up under one approach, so nothing operates in a silo."
+        statement="We're not here to be your agency. We're here to be the part of your team that actually gets it."
+        cta="Apply to work with us"
+        href="/apply"
+      />
     </>
   );
 }

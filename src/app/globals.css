@@ -216,6 +216,14 @@ html.ph-js .ph-hero-word {
   visibility: hidden;
 }
 
+html.ph-js .ph-page-title {
+  visibility: hidden;
+}
+
+html.ph-js .ph-page-item {
+  opacity: 0;
+}
+
 html.ph-js [data-ph-hero] .ph-hero-row {
   opacity: 0;
 }
