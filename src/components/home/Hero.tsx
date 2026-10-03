@@ -104,15 +104,20 @@ export default function Hero({ ready }: { ready: boolean }) {
         if (!slot) return null;
         const s = slot.getBoundingClientRect();
         const w = markWrapEl.getBoundingClientRect();
+        // How far the page would have to scroll to carry the mark to the
+        // header on its own.
+        const natural = Math.max(
+          120,
+          w.top + w.height / 2 + window.scrollY - (s.top + s.height / 2),
+        );
+        // The animation is squeezed into about half a screen so it keeps
+        // pace with a thumb; the mark makes up the rest of the climb itself.
+        const distance = Math.min(natural, window.innerHeight * 0.45);
         return {
-          // Viewport-space centres (the section is not pinned on phones, so
-          // the mark's vertical travel is just the page scrolling).
           dx: s.left + s.width / 2 - (w.left + w.width / 2),
+          dy: distance - natural,
           scale: s.width / markWrapEl.offsetWidth,
-          scrollDistance: Math.max(
-            120,
-            w.top + w.height / 2 + window.scrollY - (s.top + s.height / 2),
-          ),
+          distance,
         };
       }
 
@@ -126,7 +131,7 @@ export default function Hero({ ready }: { ready: boolean }) {
               trigger: sectionEl,
               start: () => `top ${headerBottom()}px`,
               end: () =>
-                `+=${markTarget()?.scrollDistance ?? window.innerHeight * 0.8}`,
+                `+=${markTarget()?.distance ?? window.innerHeight * 0.45}`,
               scrub: true,
               refreshPriority: 5,
               invalidateOnRefresh: true,
@@ -159,6 +164,7 @@ export default function Hero({ ready }: { ready: boolean }) {
               markInnerEl,
               {
                 x: () => markTarget()?.dx ?? 0,
+                y: () => markTarget()?.dy ?? 0,
                 scale: () => markTarget()?.scale ?? 1,
                 ease: "none",
                 duration: 1.1,
