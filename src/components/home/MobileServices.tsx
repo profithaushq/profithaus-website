@@ -144,7 +144,7 @@ export default function MobileServices() {
       {SERVICES.map((service, i) => (
         <article
           key={service.title}
-          className="ph-mslide relative flex h-svh flex-col justify-between overflow-hidden px-6 pt-24 pb-10"
+          className="ph-mslide relative flex h-svh flex-col justify-between overflow-hidden px-6 pt-24 pb-[17svh]"
           style={{
             backgroundColor: service.bg,
             color: service.copy ?? service.fg,
