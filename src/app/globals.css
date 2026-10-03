@@ -276,10 +276,25 @@ html.ph-js [data-ph-hero] .ph-hero-row {
   }
 }
 
-/* The slides and cards that scale as the next one covers them */
-.ph-mslide,
-.ph-pillar-block {
-  will-change: transform;
+/* Phones: the background is one still frame that slowly drifts. Transform
+   only, so the browser composites it with no per-frame drawing. */
+@keyframes ph-bg-drift {
+  from {
+    transform: translate3d(-4%, -3%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(4%, 3%, 0) scale(1.07);
+  }
+}
+
+.ph-bg-drift {
+  animation: ph-bg-drift 24s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ph-bg-drift {
+    animation: none;
+  }
 }
 
 /* Touch: a clear pressed state, and no grey tap flash */

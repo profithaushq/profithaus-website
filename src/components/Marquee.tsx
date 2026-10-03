@@ -81,7 +81,7 @@ export default function Marquee({
     <div className="overflow-hidden">
       <div
         ref={trackRef}
-        className={`marquee-track flex w-max items-center will-change-transform ${separator ? "gap-8" : "gap-16"}`}
+        className={`marquee-track flex w-max items-center ${separator ? "gap-8" : "gap-16"}`}
       >
         {repeated.map((item, index) => (
           <span key={`${item}-${index}`} className="flex items-center gap-8">

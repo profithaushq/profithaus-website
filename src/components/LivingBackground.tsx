@@ -127,9 +127,9 @@ export default function LivingBackground({
       "(prefers-reduced-motion: reduce)",
     ).matches;
     const isSmall = window.matchMedia("(max-width: 767px)").matches;
-    // Phones animate too, just cheaper: lower resolution, 30fps, and the
-    // light follows touch and scroll instead of a mouse.
-    const isStatic = reduceMotion;
+    // Phones draw a single frame (no per-frame GPU work while scrolling) and
+    // the canvas drifts with a CSS animation instead.
+    const isStatic = reduceMotion || isSmall;
 
     let disposed = false;
     let cleanup: (() => void) | undefined;
@@ -142,8 +142,10 @@ export default function LivingBackground({
         const renderer = new Renderer({ alpha: false, antialias: false });
         const gl = renderer.gl;
         const canvas = gl.canvas as HTMLCanvasElement;
-        canvas.style.cssText =
-          "position:absolute;inset:0;width:100%;height:100%;display:block;";
+        canvas.style.cssText = isSmall
+          ? "position:absolute;left:-15%;top:-15%;display:block;"
+          : "position:absolute;inset:0;width:100%;height:100%;display:block;";
+        if (isSmall && !reduceMotion) canvas.classList.add("ph-bg-drift");
         host.appendChild(canvas);
 
         const geometry = new Triangle(gl);
@@ -172,13 +174,15 @@ export default function LivingBackground({
             0.6,
             Math.min(
               window.devicePixelRatio || 1,
-              isSmall ? 0.6 : 1.5,
+              isSmall ? 1 : 1.5,
               Math.sqrt(2.2e6 / (w * h)),
             ),
           );
+          // On phones the canvas is drawn 30% oversized so it can drift.
+          const k = isSmall ? 1.3 : 1;
           renderer.dpr = dpr;
-          renderer.setSize(w, h);
-          program.uniforms.uRes.value = [w * dpr, h * dpr];
+          renderer.setSize(w * k, h * k);
+          program.uniforms.uRes.value = [w * k * dpr, h * k * dpr];
           if (isStatic) draw(14);
         }
 
@@ -188,16 +192,8 @@ export default function LivingBackground({
           renderer.render({ scene: mesh });
         }
 
-        let frame = 0;
-        let lastScroll = 0;
         function tick() {
           if (!visible || pausedRef.current || document.hidden) return;
-          frame += 1;
-          if (isSmall) {
-            if (frame % 2 === 1) return;
-            // Never compete with scrolling for the GPU on a phone.
-            if (performance.now() - lastScroll < 160) return;
-          }
           mouse.x += (mouse.tx - mouse.x) * 0.05;
           mouse.y += (mouse.ty - mouse.y) * 0.05;
           draw(gsap.ticker.time - startTime + 14);
@@ -210,22 +206,6 @@ export default function LivingBackground({
           mouse.ty = 1 - (e.clientY - rect.top) / rect.height;
         }
 
-        function onTouch(e: TouchEvent) {
-          const t = e.touches[0];
-          if (!t || !host) return;
-          const rect = host.getBoundingClientRect();
-          mouse.tx = (t.clientX - rect.left) / rect.width;
-          mouse.ty = 1 - (t.clientY - rect.top) / rect.height;
-        }
-
-        // Scrolling sweeps the light across the folds.
-        function onScroll() {
-          lastScroll = performance.now();
-          const y = window.scrollY;
-          mouse.tx = 0.5 + Math.sin(y / 520) * 0.4;
-          mouse.ty = 0.5 + Math.cos(y / 700) * 0.35;
-        }
-
         const resizeObserver = new ResizeObserver(resize);
         resizeObserver.observe(host);
         resize();
@@ -236,12 +216,9 @@ export default function LivingBackground({
         intersection.observe(host);
 
         if (!isStatic) {
-          window.addEventListener("pointermove", onPointerMove, { passive: true });
-          if (isSmall) {
-            window.addEventListener("touchstart", onTouch, { passive: true });
-            window.addEventListener("touchmove", onTouch, { passive: true });
-            window.addEventListener("scroll", onScroll, { passive: true });
-          }
+          window.addEventListener("pointermove", onPointerMove, {
+            passive: true,
+          });
           gsap.ticker.add(tick);
           running = true;
         }
@@ -249,9 +226,6 @@ export default function LivingBackground({
         cleanup = () => {
           if (running) gsap.ticker.remove(tick);
           window.removeEventListener("pointermove", onPointerMove);
-          window.removeEventListener("touchstart", onTouch);
-          window.removeEventListener("touchmove", onTouch);
-          window.removeEventListener("scroll", onScroll);
           resizeObserver.disconnect();
           intersection.disconnect();
           renderer.gl.getExtension("WEBGL_lose_context")?.loseContext();
