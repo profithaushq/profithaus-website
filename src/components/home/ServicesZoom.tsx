@@ -7,34 +7,31 @@ import SplitServiceRows from "@/components/home/SplitServiceRows";
 
 const SERVICES = [
   {
-    kicker: "Ecommerce",
-    word: "TRADING",
+    lines: ["ECOMMERCE", "TRADING"],
     title: "Ecommerce Trading",
     description:
       "A data-led approach to improving how your website performs: product focus, pricing and merchandising, customer journey and overall trading strategy.",
     bg: "#ffffff",
     copy: "text-brand-black",
-    originChar: 0,
+    originChar: 9,
   },
   {
-    kicker: "Website",
-    word: "BUILDS",
+    lines: ["WEBSITE", "BUILD &", "MANAGEMENT"],
     title: "Website Build & Management",
     description:
       "Full-service website builds and ongoing management to keep your site trading efficiently, performing smoothly, and looking every bit as premium as your brand.",
     bg: "#141414",
     copy: "text-white",
-    originChar: 2,
+    originChar: 9,
   },
   {
-    kicker: "Business",
-    word: "MANAGEMENT",
+    lines: ["DIGITAL", "BUSINESS", "MANAGEMENT"],
     title: "Digital Business Management",
     description:
       "Full oversight of the commercial engine behind your site: margins, P&Ls, cost of goods and contribution by SKU, so growth decisions are made against real profitability.",
     bg: "#a42324",
     copy: "text-white",
-    originChar: 2,
+    originChar: 10,
   },
 ];
 
@@ -54,15 +51,35 @@ export default function ServicesZoom() {
       stage.querySelectorAll<SVGTextElement>(".ph-zoom-text"),
     );
 
-    function fit() {
-      texts.forEach((text) => {
+    // Pivot letter of each word, in SVG user units.
+    const centres = texts.map(() => ({ x: 0, y: 0 }));
+
+    // Sizes each word to the stage, and pins its position in absolute SVG
+    // units (the zoom animates the viewBox, so percentages would drift).
+    function layout() {
+      texts.forEach((text, i) => {
         const svg = text.ownerSVGElement;
         if (!svg) return;
+        const w = svg.clientWidth;
+        const h = svg.clientHeight;
+        if (!w || !h) return;
+        svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+        text.setAttribute("x", String(w / 2));
+        text.setAttribute("y", String(h * 0.46));
+        text
+          .querySelectorAll("tspan")
+          .forEach((t) => t.setAttribute("x", String(w / 2)));
+
         text.style.fontSize = "200px";
-        const width = text.getBBox().width;
-        if (width > 0) {
-          text.style.fontSize = `${200 * ((svg.clientWidth * 0.92) / width)}px`;
+        const box = text.getBBox();
+        if (box.width > 0 && box.height > 0) {
+          const byWidth = (w * 0.92) / box.width;
+          const byHeight = (h * 0.64) / box.height;
+          text.style.fontSize = `${200 * Math.min(byWidth, byHeight)}px`;
         }
+
+        const ext = text.getExtentOfChar(SERVICES[i].originChar);
+        centres[i] = { x: ext.x + ext.width / 2, y: ext.y + ext.height / 2 };
       });
     }
 
@@ -76,15 +93,7 @@ export default function ServicesZoom() {
 
         function setup() {
           if (cancelled) return;
-          fit();
-
-          texts.forEach((text, i) => {
-            const box = text.getBBox();
-            const ext = text.getExtentOfChar(SERVICES[i].originChar);
-            const fx = ((ext.x + ext.width / 2 - box.x) / box.width) * 100;
-            const fy = ((ext.y + ext.height / 2 - box.y) / box.height) * 100;
-            gsap.set(text, { transformOrigin: `${fx}% ${fy}%` });
-          });
+          layout();
 
           ctx = gsap.context(() => {
             gsap.set(texts.slice(1), { opacity: 0 });
@@ -104,13 +113,34 @@ export default function ServicesZoom() {
 
             layers.forEach((layer, i) => {
               const copy = layer.querySelector(".ph-zoom-copy");
+              const svg = texts[i].ownerSVGElement;
+              const zoom = { f: 0 };
+
+              // Zooming the viewBox (not scaling the text) keeps the mask
+              // crisp and cheap: the browser never rasterises a giant glyph.
+              const render = () => {
+                if (!svg) return;
+                const w = svg.clientWidth;
+                const h = svg.clientHeight;
+                const c = centres[i];
+                const scale = 1 + 33 * zoom.f;
+                const vw = w / scale;
+                const vh = h / scale;
+                const cx = w / 2 + (c.x - w / 2) * zoom.f;
+                const cy = h / 2 + (c.y - h / 2) * zoom.f;
+                svg.setAttribute(
+                  "viewBox",
+                  `${cx - vw / 2} ${cy - vh / 2} ${vw} ${vh}`,
+                );
+              };
+
               if (i > 0) {
                 tl.to(texts[i], { opacity: 1, duration: 0.2, ease: "none" }, i - 0.22);
               }
               tl.to(copy, { opacity: 0, y: -24, duration: 0.18, ease: "none" }, i + 0.22)
                 .to(
-                  texts[i],
-                  { scale: 34, duration: 0.7, ease: "power2.in" },
+                  zoom,
+                  { f: 1, duration: 0.7, ease: "power2.in", onUpdate: render },
                   i + 0.28,
                 )
                 .to(layer, { opacity: 0, duration: 0.1, ease: "none" }, i + 0.9);
@@ -118,12 +148,14 @@ export default function ServicesZoom() {
           }, stageEl);
         }
 
+        const handleResize = () => layout();
+
         document.fonts.ready.then(setup);
-        window.addEventListener("resize", fit);
+        window.addEventListener("resize", handleResize);
 
         return () => {
           cancelled = true;
-          window.removeEventListener("resize", fit);
+          window.removeEventListener("resize", handleResize);
           ctx?.revert();
         };
       },
@@ -145,7 +177,7 @@ export default function ServicesZoom() {
         <div ref={stageRef} className="relative h-svh w-full overflow-hidden">
           {SERVICES.map((service, i) => (
             <div
-              key={service.word}
+              key={service.title}
               className="ph-zoom-layer absolute inset-0"
               style={{ zIndex: SERVICES.length - i }}
             >
@@ -168,7 +200,19 @@ export default function ServicesZoom() {
                         transformBox: "fill-box",
                       }}
                     >
-                      {service.word}
+                      {service.lines.map((line, li) => (
+                        <tspan
+                          key={line}
+                          x="50%"
+                          dy={
+                            li === 0
+                              ? `${-(service.lines.length - 1) * 0.45}em`
+                              : "0.9em"
+                          }
+                        >
+                          {line}
+                        </tspan>
+                      ))}
                     </text>
                   </mask>
                 </defs>
@@ -187,7 +231,7 @@ export default function ServicesZoom() {
               >
                 <div className="max-w-xl">
                   <p className="font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] opacity-70">
-                    {service.kicker}
+                    {String(i + 1).padStart(2, "0")} / {String(SERVICES.length).padStart(2, "0")}
                   </p>
                   <p className="mt-3 font-[family-name:var(--font-manrope)] text-base font-medium sm:text-lg">
                     {service.description}
