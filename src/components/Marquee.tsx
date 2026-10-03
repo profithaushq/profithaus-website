@@ -47,7 +47,11 @@ export default function Marquee({
       ease: "none",
       repeat: -1,
     });
-    tween.timeScale(BASE_SPEED);
+    // The type is smaller on phones, so the track is shorter and the same
+    // duration reads as slower. Compensate to keep a similar pace.
+    const isPhone = window.matchMedia("(max-width: 767px)").matches;
+    const baseSpeed = isPhone ? BASE_SPEED * 1.6 : BASE_SPEED;
+    tween.timeScale(baseSpeed);
 
     let lastY = window.scrollY;
     let resetTimeout: ReturnType<typeof setTimeout>;
@@ -59,10 +63,10 @@ export default function Marquee({
 
       const velocityBoost = gsap.utils.clamp(-3, 3, delta * 0.15);
       const direction = delta < 0 ? -1 : 1;
-      tween.timeScale(direction * (BASE_SPEED + Math.abs(velocityBoost)));
+      tween.timeScale(direction * (baseSpeed + Math.abs(velocityBoost)));
 
       clearTimeout(resetTimeout);
-      resetTimeout = setTimeout(() => tween.timeScale(BASE_SPEED), 250);
+      resetTimeout = setTimeout(() => tween.timeScale(baseSpeed), 250);
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true });
