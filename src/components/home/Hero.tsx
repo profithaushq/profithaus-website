@@ -252,6 +252,8 @@ export default function Hero({ ready }: { ready: boolean }) {
               lineHeight: 1,
               letterSpacing: BASE_SPACING,
               fontWeight: 800,
+              // Pull the p stem onto the same left edge as the copy above.
+              marginLeft: "-0.069em",
             }}
           >
             {WORD}

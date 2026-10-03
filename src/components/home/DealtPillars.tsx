@@ -118,7 +118,7 @@ function PillarFace({ pillar }: { pillar: (typeof PILLARS)[number] }) {
       >
         {pillar.number}
       </span>
-      <div className="relative z-10 flex h-full flex-col justify-between px-6 py-10 sm:px-10 sm:py-14">
+      <div className="relative z-10 flex h-full flex-col justify-between px-6 pt-10 pb-[13vh] sm:px-10 sm:pt-14">
         <div className="flex items-center justify-between font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] opacity-70">
           <span>How we&apos;re different</span>
           <span>
@@ -126,10 +126,10 @@ function PillarFace({ pillar }: { pillar: (typeof PILLARS)[number] }) {
           </span>
         </div>
         <div>
-          <h3 className="max-w-[16ch] font-[family-name:var(--font-manrope)] text-[clamp(2.75rem,8.5vw,9rem)] leading-[0.95] font-extrabold tracking-tight">
+          <h3 className="max-w-[16ch] font-[family-name:var(--font-manrope)] text-[clamp(2.5rem,7vw,7.5rem)] leading-[0.95] font-extrabold tracking-tight">
             {pillar.title}
           </h3>
-          <p className="mt-6 max-w-xl text-base font-medium opacity-90 sm:text-lg">
+          <p className="mt-6 max-w-2xl text-lg font-medium opacity-90 sm:text-xl lg:text-2xl">
             {pillar.description}
           </p>
         </div>

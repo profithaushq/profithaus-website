@@ -65,7 +65,7 @@ export default function ServicesZoom() {
         if (!w || !h) return;
         svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
         text.setAttribute("x", String(w / 2));
-        text.setAttribute("y", String(h * 0.46));
+        text.setAttribute("y", String(h * 0.38));
         text
           .querySelectorAll("tspan")
           .forEach((t) => t.setAttribute("x", String(w / 2)));
@@ -73,8 +73,8 @@ export default function ServicesZoom() {
         text.style.fontSize = "200px";
         const box = text.getBBox();
         if (box.width > 0 && box.height > 0) {
-          const byWidth = (w * 0.92) / box.width;
-          const byHeight = (h * 0.64) / box.height;
+          const byWidth = (w * 0.78) / box.width;
+          const byHeight = (h * 0.54) / box.height;
           text.style.fontSize = `${200 * Math.min(byWidth, byHeight)}px`;
         }
 
@@ -227,13 +227,13 @@ export default function ServicesZoom() {
               <h2 className="sr-only">{service.title}</h2>
 
               <div
-                className={`ph-zoom-copy absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-6 px-6 pb-10 sm:px-10 sm:pb-14 ${service.copy}`}
+                className={`ph-zoom-copy absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-6 px-6 pb-[13vh] sm:px-10 ${service.copy}`}
               >
-                <div className="max-w-xl">
+                <div className="max-w-2xl">
                   <p className="font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] opacity-70">
                     {String(i + 1).padStart(2, "0")} / {String(SERVICES.length).padStart(2, "0")}
                   </p>
-                  <p className="mt-3 font-[family-name:var(--font-manrope)] text-base font-medium sm:text-lg">
+                  <p className="mt-3 font-[family-name:var(--font-manrope)] text-lg font-medium sm:text-xl lg:text-2xl">
                     {service.description}
                   </p>
                 </div>

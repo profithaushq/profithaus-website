@@ -68,12 +68,12 @@ export default function FounderNote() {
       className="relative overflow-hidden bg-white py-32 text-brand-black"
     >
       <AmbientLines />
-      <div className="relative z-10 mx-auto max-w-5xl px-6">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10">
         <p className="font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] text-brand-red">
           A note from the founders
         </p>
 
-        <p className="mt-8 font-[family-name:var(--font-manrope)] text-3xl leading-[1.15] font-medium tracking-tight sm:text-5xl lg:text-6xl">
+        <p className="mt-8 font-[family-name:var(--font-manrope)] text-2xl leading-[1.15] font-medium tracking-tight sm:text-4xl lg:text-[3.1rem]">
           {NOTE_SEGMENTS.map((segment, i) =>
             segment.text.split(" ").map((word, j) =>
               word === "" ? null : (
