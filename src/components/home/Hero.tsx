@@ -8,7 +8,7 @@ import LivingBackground from "@/components/LivingBackground";
 import Mark from "@/components/Mark";
 
 const WORD = "profithaus.";
-const BASE_SPACING = "-0.07em";
+const BASE_SPACING = "-0.1em";
 
 export default function Hero({ ready }: { ready: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
