@@ -66,7 +66,6 @@ export default function FullScreenMenu() {
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const lastY = useRef(0);
 
-
   useEffect(() => {
     const header = headerRef.current;
     if (!header) return;
@@ -120,7 +119,14 @@ export default function FullScreenMenu() {
       gsap.fromTo(
         linkRefs.current,
         { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, stagger: 0.06, delay: 0.15, ease: "power3.out" },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.06,
+          delay: 0.15,
+          ease: "power3.out",
+        },
       );
       linkRefs.current[0]?.focus();
     } else {
@@ -177,7 +183,12 @@ export default function FullScreenMenu() {
       ease: "power3.out",
       overwrite: "auto",
     });
-    gsap.to(mark, { rotate: m.rot, duration: 0.9, ease: "power3.out", overwrite: "auto" });
+    gsap.to(mark, {
+      rotate: m.rot,
+      duration: 0.9,
+      ease: "power3.out",
+      overwrite: "auto",
+    });
   }
 
   function setLinkRef(index: number, el: HTMLAnchorElement | null) {
@@ -289,8 +300,11 @@ export default function FullScreenMenu() {
             ))}
           </nav>
 
-          <div className="hidden items-center justify-center lg:flex">
-            <div ref={markRef} className="h-[min(52vh,34vw)] w-[min(52vh,34vw)]">
+          <div className="flex items-center justify-center">
+            <div
+              ref={markRef}
+              className="h-[min(26vh,55vw)] w-[min(26vh,55vw)] lg:h-[min(52vh,34vw)] lg:w-[min(52vh,34vw)]"
+            >
               <Mark className="h-full w-full" />
             </div>
           </div>

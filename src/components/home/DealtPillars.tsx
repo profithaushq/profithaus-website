@@ -125,7 +125,7 @@ function PillarFace({ pillar }: { pillar: (typeof PILLARS)[number] }) {
             {pillar.number} / {String(PILLARS.length).padStart(2, "0")}
           </span>
         </div>
-        <div>
+        <div className="ph-pillar-text">
           <h3 className="max-w-[16ch] font-[family-name:var(--font-manrope)] text-[clamp(2.5rem,7vw,7.5rem)] leading-[0.95] font-extrabold tracking-tight">
             {pillar.title}
           </h3>
@@ -199,8 +199,16 @@ export default function DealtPillars() {
           cards.forEach((card, i) => {
             if (i === 0) return;
             tl.to(card, { yPercent: 0, duration: 1, ease: "none" }, i - 1)
-              .to(veils[i - 1], { opacity: 0.55, duration: 1, ease: "none" }, i - 1)
-              .to(inners[i - 1], { scale: 0.92, duration: 1, ease: "none" }, i - 1)
+              .to(
+                veils[i - 1],
+                { opacity: 0.55, duration: 1, ease: "none" },
+                i - 1,
+              )
+              .to(
+                inners[i - 1],
+                { scale: 0.92, duration: 1, ease: "none" },
+                i - 1,
+              )
               .to(
                 lineSets[i],
                 { drawSVG: "100%", duration: 0.7, stagger: 0.04, ease: "none" },
@@ -215,23 +223,61 @@ export default function DealtPillars() {
 
     const list = listRef.current;
     if (list) {
-      mm.add("(max-width: 1023px) and (prefers-reduced-motion: no-preference)", () => {
-        const blocks = Array.from(
-          list.querySelectorAll<HTMLElement>(".ph-pillar-block"),
-        );
-        const ctx = gsap.context(() => {
-          blocks.forEach((block) => {
-            gsap.from(block, {
-              y: 48,
-              opacity: 0,
-              duration: 0.8,
-              ease: "power3.out",
-              scrollTrigger: { trigger: block, start: "top 85%", once: true },
+      mm.add(
+        "(max-width: 1023px) and (prefers-reduced-motion: no-preference)",
+        () => {
+          const blocks = Array.from(
+            list.querySelectorAll<HTMLElement>(".ph-pillar-block"),
+          );
+          const ctx = gsap.context(() => {
+            blocks.forEach((block, i) => {
+              const text = block.querySelector<HTMLElement>(".ph-pillar-text");
+              const veil = block.querySelector<HTMLElement>(".ph-pillar-veil");
+              const next = blocks[i + 1];
+
+              // Copy rides up into place as the card slides over the last one.
+              if (text) {
+                gsap.fromTo(
+                  text,
+                  { y: 90 },
+                  {
+                    y: 0,
+                    ease: "none",
+                    scrollTrigger: {
+                      trigger: block,
+                      start: i === 0 ? "top 90%" : "top bottom",
+                      end: i === 0 ? "top 30%" : "top top",
+                      scrub: true,
+                    },
+                  },
+                );
+              }
+
+              // The next card covers this one: it shrinks back and dims.
+              if (next && veil) {
+                const cover = {
+                  trigger: next,
+                  start: "top bottom",
+                  end: "top top",
+                  scrub: true,
+                };
+                gsap.to(block, {
+                  scale: 0.92,
+                  transformOrigin: "50% 0%",
+                  ease: "none",
+                  scrollTrigger: cover,
+                });
+                gsap.to(veil, {
+                  opacity: 0.55,
+                  ease: "none",
+                  scrollTrigger: cover,
+                });
+              }
             });
-          });
-        }, list);
-        return () => ctx.revert();
-      });
+          }, list);
+          return () => ctx.revert();
+        },
+      );
     }
 
     return () => mm.revert();
@@ -243,15 +289,22 @@ export default function DealtPillars() {
         {PILLARS.map((pillar) => (
           <article
             key={pillar.number}
-            className="ph-pillar-block relative min-h-[85svh] overflow-hidden"
+            className="ph-pillar-block relative h-svh overflow-hidden"
             style={{ backgroundColor: pillar.bg, color: pillar.fg }}
           >
             <PillarFace pillar={pillar} />
+            <div
+              aria-hidden
+              className="ph-pillar-veil pointer-events-none absolute inset-0 z-20 bg-black opacity-0"
+            />
           </article>
         ))}
       </div>
 
-      <section className="ph-pillars-stack bg-brand-black" aria-label="How we're different">
+      <section
+        className="ph-pillars-stack bg-brand-black"
+        aria-label="How we're different"
+      >
         <div ref={stageRef} className="relative h-svh w-full overflow-hidden">
           {PILLARS.map((pillar, i) => (
             <article

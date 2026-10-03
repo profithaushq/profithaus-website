@@ -250,6 +250,34 @@ html.ph-js [data-ph-hero] .ph-hero-row {
   }
 }
 
+/* Phones and tablets: cards stack over one another with CSS sticky, no pinning */
+@media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
+  html.ph-js .ph-mslide,
+  html.ph-js .ph-pillar-block {
+    position: sticky;
+    top: 0;
+  }
+}
+
+/* Touch: a clear pressed state, and no grey tap flash */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: none) {
+  a,
+  button {
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  a:active,
+  button:active {
+    opacity: 0.7;
+    transform: scale(0.97);
+  }
+}
+
 /* Scroll-lit words: dim only when JS is running, so no-JS reads at full strength */
 html.ph-js .note-word {
   opacity: 0.2;

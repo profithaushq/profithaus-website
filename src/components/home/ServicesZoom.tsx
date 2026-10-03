@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
-import SplitServiceRows from "@/components/home/SplitServiceRows";
+import MobileServices from "@/components/home/MobileServices";
 
 const SERVICES = [
   {
@@ -167,7 +167,7 @@ export default function ServicesZoom() {
   return (
     <>
       <div className="ph-services-list">
-        <SplitServiceRows />
+        <MobileServices />
       </div>
 
       <section
