@@ -228,6 +228,9 @@ html.ph-js [data-ph-hero] .ph-hero-row {
 @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
   html.ph-js .ph-services-zoom {
     display: block;
+    /* The pinned stage is one screen tall; pull the next section up into that
+       space so there is no empty scroll once the last zoom has finished. */
+    margin-bottom: -100svh;
   }
 
   html.ph-js .ph-services-list {

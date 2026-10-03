@@ -226,8 +226,29 @@ export default function Hero({ ready }: { ready: boolean }) {
     >
       <LivingBackground className="absolute inset-0" />
 
-      <div className="relative z-10 flex h-full flex-col justify-end px-4 pb-8 sm:px-8 sm:pb-12">
-        <div className="ph-hero-row mb-6 sm:mb-10">
+      <div className="relative z-10 flex h-full flex-col px-4 pt-6 pb-8 sm:px-8 sm:pt-10 sm:pb-12">
+        <div ref={wrapRef} className="w-full">
+          <h1
+            ref={wordRef}
+            className="ph-hero-word block whitespace-nowrap font-[family-name:var(--font-manrope)] font-extrabold"
+            style={{
+              fontSize: "min(17.5vw, 24rem)",
+              lineHeight: 1,
+              letterSpacing: BASE_SPACING,
+              fontWeight: 800,
+              // Pull the p stem onto the same left edge as the copy below.
+              marginLeft: "-0.069em",
+            }}
+          >
+            {WORD}
+          </h1>
+        </div>
+
+        <div
+          className="ph-hero-row"
+          // Clears the p descender, which hangs below the wordmark's line box.
+          style={{ marginTop: "max(1.5rem, calc(min(17.5vw, 24rem) * 0.24))" }}
+        >
           <div className="max-w-xl">
             <p className="ph-hero-fade font-[family-name:var(--font-manrope)] text-lg font-semibold sm:text-2xl">
               Ex-operators. Not an agency.
@@ -239,24 +260,7 @@ export default function Hero({ ready }: { ready: boolean }) {
           </div>
         </div>
 
-        <div ref={wrapRef} className="w-full">
-          <h1
-            ref={wordRef}
-            className="ph-hero-word block whitespace-nowrap font-[family-name:var(--font-manrope)] font-extrabold"
-            style={{
-              fontSize: "min(17.5vw, 24rem)",
-              lineHeight: 1,
-              letterSpacing: BASE_SPACING,
-              fontWeight: 800,
-              // Pull the p stem onto the same left edge as the copy above.
-              marginLeft: "-0.069em",
-            }}
-          >
-            {WORD}
-          </h1>
-        </div>
-
-        <div className="ph-hero-row mt-6 flex items-end justify-end sm:mt-10">
+        <div className="ph-hero-row mt-auto flex items-end justify-end pt-6">
           <div className="flex items-center gap-6 sm:gap-10">
             <Link
               href="/apply"
