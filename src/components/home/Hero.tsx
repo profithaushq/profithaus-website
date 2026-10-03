@@ -70,7 +70,15 @@ export default function Hero({ ready }: { ready: boolean }) {
       });
       gsap.set(word, { autoAlpha: 1 });
 
+      // The masks only exist to hide letters rising into place. Once settled
+      // they must not clip glyph overhang (the f hook, overlapping letters).
+      const releaseMasks = () =>
+        splitRef.current?.masks.forEach((m) => {
+          (m as HTMLElement).style.overflow = "visible";
+        });
+
       if (reduceMotion) {
+        releaseMasks();
         gsap.set(markWrapEl, { opacity: 0 });
         gsap.set(sectionEl.querySelector(".ph-hero-row"), { opacity: 1 });
         const slot = document.getElementById("ph-header-mark");
@@ -171,6 +179,10 @@ export default function Hero({ ready }: { ready: boolean }) {
         duration: 1.1,
         stagger: 0.04,
         ease: "power4.out",
+        onComplete: () =>
+          split.masks.forEach((m) => {
+            (m as HTMLElement).style.overflow = "visible";
+          }),
       });
       gsap.fromTo(
         ".ph-hero-row",
@@ -214,7 +226,8 @@ export default function Hero({ ready }: { ready: boolean }) {
             </p>
             <p className="ph-hero-fade mt-2 text-sm leading-relaxed font-medium text-white/80 sm:text-base">
               The ecommerce partner for luxury fashion, beauty and wellness
-              brands.
+              brands. Trading, website builds and digital business
+              management.
             </p>
           </div>
 
