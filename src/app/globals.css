@@ -276,6 +276,12 @@ html.ph-js [data-ph-hero] .ph-hero-row {
   }
 }
 
+/* The slides and cards that scale as the next one covers them */
+.ph-mslide,
+.ph-pillar-block {
+  will-change: transform;
+}
+
 /* Touch: a clear pressed state, and no grey tap flash */
 a,
 button {

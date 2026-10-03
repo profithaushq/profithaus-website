@@ -65,6 +65,7 @@ export default function FullScreenMenu() {
   const markRef = useRef<HTMLDivElement>(null);
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const lastY = useRef(0);
+  const hiddenRef = useRef(false);
 
   useEffect(() => {
     const header = headerRef.current;
@@ -94,13 +95,15 @@ export default function FullScreenMenu() {
       const hasHero = !!document.querySelector("[data-ph-hero]");
       const hideAfter = hasHero ? window.innerHeight * 1.5 : 80;
       const goingDown = y > lastY.current && y > hideAfter;
+      lastY.current = y;
+      if (goingDown === hiddenRef.current) return;
+      hiddenRef.current = goingDown;
       gsap.to(header, {
         yPercent: goingDown ? -100 : 0,
         duration: 0.4,
         ease: "power3.out",
         overwrite: "auto",
       });
-      lastY.current = y;
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true });

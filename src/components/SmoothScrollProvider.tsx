@@ -13,6 +13,15 @@ export default function SmoothScrollProvider() {
 
     if (reduceMotion) return;
 
+    // Touch devices already have native momentum scrolling. Running the
+    // smooth-scroll library there only adds per-frame work and jitter.
+    if (window.matchMedia("(pointer: coarse)").matches) {
+      document.fonts.ready.then(() =>
+        window.setTimeout(() => ScrollTrigger.refresh(), 200),
+      );
+      return;
+    }
+
     const lenis = new Lenis({
       lerp: 0.1,
       smoothWheel: true,

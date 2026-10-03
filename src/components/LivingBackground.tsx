@@ -172,7 +172,7 @@ export default function LivingBackground({
             0.6,
             Math.min(
               window.devicePixelRatio || 1,
-              isSmall ? 0.8 : 1.5,
+              isSmall ? 0.6 : 1.5,
               Math.sqrt(2.2e6 / (w * h)),
             ),
           );
@@ -189,10 +189,15 @@ export default function LivingBackground({
         }
 
         let frame = 0;
+        let lastScroll = 0;
         function tick() {
           if (!visible || pausedRef.current || document.hidden) return;
           frame += 1;
-          if (isSmall && frame % 2 === 1) return;
+          if (isSmall) {
+            if (frame % 2 === 1) return;
+            // Never compete with scrolling for the GPU on a phone.
+            if (performance.now() - lastScroll < 160) return;
+          }
           mouse.x += (mouse.tx - mouse.x) * 0.05;
           mouse.y += (mouse.ty - mouse.y) * 0.05;
           draw(gsap.ticker.time - startTime + 14);
@@ -215,6 +220,7 @@ export default function LivingBackground({
 
         // Scrolling sweeps the light across the folds.
         function onScroll() {
+          lastScroll = performance.now();
           const y = window.scrollY;
           mouse.tx = 0.5 + Math.sin(y / 520) * 0.4;
           mouse.ty = 0.5 + Math.cos(y / 700) * 0.35;
