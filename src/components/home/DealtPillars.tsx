@@ -108,17 +108,33 @@ function PillarGraphic({ kind }: { kind: Graphic }) {
   );
 }
 
-function PillarFace({ pillar }: { pillar: (typeof PILLARS)[number] }) {
+function PillarFace({
+  pillar,
+  compact = false,
+}: {
+  pillar: (typeof PILLARS)[number];
+  compact?: boolean;
+}) {
   return (
     <>
       <PillarGraphic kind={pillar.graphic} />
       <span
         aria-hidden
-        className="pointer-events-none absolute -right-[2vw] -bottom-[6vw] font-[family-name:var(--font-manrope)] text-[42vw] leading-none font-extrabold tracking-tighter opacity-[0.08] select-none"
+        className={`pointer-events-none absolute font-[family-name:var(--font-manrope)] leading-none font-extrabold tracking-tighter opacity-[0.08] select-none ${
+          compact
+            ? "-right-[6vw] -bottom-[10vw] text-[58vw]"
+            : "-right-[2vw] -bottom-[6vw] text-[42vw]"
+        }`}
       >
         {pillar.number}
       </span>
-      <div className="relative z-10 flex h-full flex-col justify-between px-6 pt-10 pb-[13vh] sm:px-10 sm:pt-14 lg:pb-[33vh]">
+      <div
+        className={`relative z-10 flex h-full flex-col justify-between ${
+          compact
+            ? "px-5 py-6"
+            : "px-6 pt-10 pb-[13vh] sm:px-10 sm:pt-14 lg:pb-[33vh]"
+        }`}
+      >
         <div className="flex items-center justify-between font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] opacity-70">
           <span>How we&apos;re different</span>
           <span>
@@ -126,10 +142,20 @@ function PillarFace({ pillar }: { pillar: (typeof PILLARS)[number] }) {
           </span>
         </div>
         <div className="ph-pillar-text">
-          <h3 className="max-w-[16ch] font-[family-name:var(--font-manrope)] text-[clamp(2.5rem,7vw,7.5rem)] leading-[0.95] font-extrabold tracking-tight">
+          <h3
+            className={`max-w-[16ch] font-[family-name:var(--font-manrope)] leading-[0.95] font-extrabold tracking-tight ${
+              compact ? "text-[2.1rem]" : "text-[clamp(2.5rem,7vw,7.5rem)]"
+            }`}
+          >
             {pillar.title}
           </h3>
-          <p className="mt-6 max-w-2xl text-lg font-medium opacity-90 sm:text-xl lg:text-2xl">
+          <p
+            className={`max-w-2xl font-medium opacity-90 ${
+              compact
+                ? "mt-4 text-base leading-snug"
+                : "mt-6 text-lg sm:text-xl lg:text-2xl"
+            }`}
+          >
             {pillar.description}
           </p>
         </div>
@@ -223,61 +249,109 @@ export default function DealtPillars() {
 
     const list = listRef.current;
     if (list) {
-      mm.add(
-        "(max-width: 1023px) and (prefers-reduced-motion: no-preference)",
-        () => {
-          const blocks = Array.from(
-            list.querySelectorAll<HTMLElement>(".ph-pillar-block"),
-          );
-          const ctx = gsap.context(() => {
-            blocks.forEach((block, i) => {
-              const text = block.querySelector<HTMLElement>(".ph-pillar-text");
-              const veil = block.querySelector<HTMLElement>(".ph-pillar-veil");
-              const next = blocks[i + 1];
+      mm.add("(max-width: 1023px)", () => {
+        const track = list.querySelector<HTMLElement>(".ph-pillars-track");
+        const cards = Array.from(
+          list.querySelectorAll<HTMLElement>(".ph-pillar-block"),
+        );
+        const dots = Array.from(
+          list.querySelectorAll<HTMLElement>(".ph-pillar-dot"),
+        );
+        if (!track) return;
+        const trackEl = track;
 
-              // Copy rides up into place as the card slides over the last one.
-              if (text) {
-                gsap.fromTo(
-                  text,
-                  { y: 90 },
-                  {
-                    y: 0,
-                    ease: "none",
-                    scrollTrigger: {
-                      trigger: block,
-                      start: i === 0 ? "top 90%" : "top bottom",
-                      end: i === 0 ? "top 30%" : "top top",
-                      scrub: true,
-                    },
-                  },
-                );
-              }
+        const reduceMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
 
-              // The next card covers this one: it shrinks back and dims.
-              if (next && veil) {
-                const cover = {
-                  trigger: next,
-                  start: "top bottom",
-                  end: "top top",
-                  scrub: true,
-                };
-                gsap.to(block, {
-                  scale: 0.92,
-                  transformOrigin: "50% 0%",
-                  ease: "none",
-                  scrollTrigger: cover,
-                });
-                gsap.to(veil, {
-                  opacity: 0.55,
-                  ease: "none",
-                  scrollTrigger: cover,
-                });
-              }
+        const lineSets = cards.map((card) =>
+          Array.from(card.querySelectorAll<SVGElement>(".ph-pillar-line")),
+        );
+        const drawn = new Set<number>();
+        if (!reduceMotion) {
+          lineSets.forEach((lines) => gsap.set(lines, { drawSVG: "0%" }));
+        }
+
+        function draw(i: number) {
+          if (drawn.has(i) || reduceMotion) return;
+          drawn.add(i);
+          gsap.to(lineSets[i], {
+            drawSVG: "100%",
+            duration: 1.2,
+            stagger: 0.05,
+            ease: "power2.out",
+          });
+        }
+
+        let active = -1;
+        let raf = 0;
+
+        function update() {
+          raf = 0;
+          const mid = trackEl.scrollLeft + trackEl.clientWidth / 2;
+          let best = 0;
+          let bestDist = Infinity;
+
+          cards.forEach((card, i) => {
+            const centre = card.offsetLeft + card.offsetWidth / 2;
+            const dist = Math.abs(centre - mid);
+            const t = Math.min(dist / card.offsetWidth, 1);
+            if (dist < bestDist) {
+              bestDist = dist;
+              best = i;
+            }
+            if (reduceMotion) return;
+            // Neighbours sit back: smaller, dimmer, copy trailing a little.
+            gsap.set(card, { scale: 1 - 0.08 * t });
+            gsap.set(card.querySelector(".ph-pillar-veil"), {
+              opacity: 0.55 * t,
             });
-          }, list);
-          return () => ctx.revert();
-        },
-      );
+            gsap.set(card.querySelector(".ph-pillar-text"), {
+              x: (centre < mid ? 1 : -1) * 28 * t,
+            });
+          });
+
+          if (best !== active) {
+            active = best;
+            dots.forEach((d, i) => {
+              d.style.width = i === best ? "2rem" : "0.5rem";
+              d.style.opacity = i === best ? "1" : "0.35";
+            });
+            draw(best);
+          }
+        }
+
+        function onScroll() {
+          if (!raf) raf = requestAnimationFrame(update);
+        }
+
+        trackEl.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+        update();
+
+        return () => {
+          if (raf) cancelAnimationFrame(raf);
+          trackEl.removeEventListener("scroll", onScroll);
+          window.removeEventListener("resize", onScroll);
+          gsap.set(lineSets.flat(), {
+            clearProps:
+              "transform,scale,x,opacity,strokeDasharray,strokeDashoffset",
+          });
+          cards.forEach((card) => {
+            gsap.set(
+              [
+                card,
+                card.querySelector(".ph-pillar-veil"),
+                card.querySelector(".ph-pillar-text"),
+              ],
+              {
+                clearProps:
+                  "transform,scale,x,opacity,strokeDasharray,strokeDashoffset",
+              },
+            );
+          });
+        };
+      });
     }
 
     return () => mm.revert();
@@ -285,21 +359,55 @@ export default function DealtPillars() {
 
   return (
     <>
-      <div ref={listRef} className="ph-pillars-list">
-        {PILLARS.map((pillar) => (
-          <article
-            key={pillar.number}
-            className="ph-pillar-block relative h-svh overflow-hidden"
-            style={{ backgroundColor: pillar.bg, color: pillar.fg }}
-          >
-            <PillarFace pillar={pillar} />
-            <div
-              aria-hidden
-              className="ph-pillar-veil pointer-events-none absolute inset-0 z-20 bg-black opacity-0"
+      <section
+        ref={listRef}
+        className="ph-pillars-list bg-[#e9e6e2] py-16 text-brand-black"
+        aria-label="How we're different"
+      >
+        <div className="flex items-end justify-between px-6">
+          <p className="font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] opacity-70">
+            How we&apos;re different
+          </p>
+          <p className="font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] opacity-50">
+            Swipe
+          </p>
+        </div>
+
+        <div
+          className="ph-pillars-track mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto px-[10vw] pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          style={{ overscrollBehaviorX: "contain" }}
+        >
+          {PILLARS.map((pillar) => (
+            <article
+              key={pillar.number}
+              className="ph-pillar-block relative h-[70svh] min-h-[28rem] w-[80vw] max-w-[26rem] shrink-0 snap-center overflow-hidden"
+              style={{ backgroundColor: pillar.bg, color: pillar.fg }}
+            >
+              <PillarFace pillar={pillar} compact />
+              <div
+                aria-hidden
+                className="ph-pillar-veil pointer-events-none absolute inset-0 z-20 bg-black opacity-0"
+              />
+            </article>
+          ))}
+        </div>
+
+        <div
+          className="mt-6 flex items-center justify-center gap-2"
+          aria-hidden
+        >
+          {PILLARS.map((pillar, i) => (
+            <span
+              key={pillar.number}
+              className="ph-pillar-dot block h-0.5 bg-brand-black transition-[width,opacity] duration-300"
+              style={{
+                width: i === 0 ? "2rem" : "0.5rem",
+                opacity: i === 0 ? 1 : 0.35,
+              }}
             />
-          </article>
-        ))}
-      </div>
+          ))}
+        </div>
+      </section>
 
       <section
         className="ph-pillars-stack bg-brand-black"

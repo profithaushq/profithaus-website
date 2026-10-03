@@ -252,8 +252,7 @@ html.ph-js [data-ph-hero] .ph-hero-row {
 
 /* Phones and tablets: cards stack over one another with CSS sticky, no pinning */
 @media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
-  html.ph-js .ph-mslide,
-  html.ph-js .ph-pillar-block {
+  html.ph-js .ph-mslide {
     position: sticky;
     top: 0;
   }
