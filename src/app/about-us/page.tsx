@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   title: "About Us | profithaus.",
 };
 
-// White, black, grey: the page changes colour as the story moves on.
+// Black, grey, white: the page changes colour as the story moves on.
 const BAND_THEMES = [
-  { bg: "#ffffff", fg: "#141414", muted: "rgba(20,20,20,0.14)" },
   { bg: "#141414", fg: "#ffffff", muted: "rgba(255,255,255,0.18)" },
   { bg: "#6e6a66", fg: "#ffffff", muted: "rgba(255,255,255,0.28)" },
+  { bg: "#ffffff", fg: "#141414", muted: "rgba(20,20,20,0.14)" },
 ];
 
 const PHRASES = [
@@ -94,6 +94,8 @@ export default function AboutUs() {
         subcopy="Built by the people who spent years briefing agencies, chasing agencies, and quietly losing faith in them."
       />
 
+      <CapabilityColumns groups={CAPABILITIES} />
+
       {STORY.map((section, i) => (
         <StoryBand
           key={section.number}
@@ -112,8 +114,6 @@ export default function AboutUs() {
           separator="·"
         />
       </section>
-
-      <CapabilityColumns groups={CAPABILITIES} />
 
       <ClosingStatement
         lead="Our trading background means we think commercially at every step, setting revenue targets, forecasting GP, and making decisions backed by data, not gut feel. All joined up under one approach, so nothing operates in a silo."
