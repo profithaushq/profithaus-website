@@ -49,42 +49,57 @@ const FRAGMENT = /* glsl */ `
     return v;
   }
 
+  float fbm2(vec2 p) {
+    return 0.65 * noise(p) + 0.35 * noise(p * 2.03 + 7.1);
+  }
+
+  // Slow, low-frequency warp: reads as folds of satin rather than flame.
+  float field(vec2 p, float t) {
+    vec2 q = vec2(
+      fbm2(p * 0.6 + vec2(0.0, t)),
+      fbm2(p * 0.6 + vec2(5.2, 1.3) - t)
+    );
+    float w = fbm2(p * 0.7 + 1.6 * q);
+    return 0.5 + 0.5 * sin(w * 7.0 + p.x * 0.8 + p.y * 0.6);
+  }
+
   void main() {
     vec2 uv = vUv;
     float aspect = uRes.x / uRes.y;
-    vec2 p = (uv - 0.5) * vec2(aspect, 1.0);
-    vec2 m = (uMouse - 0.5) * vec2(aspect, 1.0);
-    float t = uTime * 0.05;
+    vec2 p = (uv - 0.5) * vec2(aspect, 1.0) * 1.25;
+    float t = uTime * 0.018;
 
-    vec2 toM = m - p;
-    float pull = exp(-dot(toM, toM) * 2.5);
-    p += toM * pull * 0.18;
+    // Height of the cloth and its surface normal from finite differences.
+    float e = 0.015;
+    float h = field(p, t);
+    float hx = field(p + vec2(e, 0.0), t) - h;
+    float hy = field(p + vec2(0.0, e), t) - h;
+    vec3 n = normalize(vec3(-hx / e * 0.2, -hy / e * 0.2, 1.0));
 
-    vec2 q = vec2(fbm(p * 1.4 + vec2(0.0, t)), fbm(p * 1.4 + vec2(5.2, 1.3) - t));
-    vec2 r = vec2(
-      fbm(p * 1.8 + 3.2 * q + vec2(1.7, 9.2) + t * 1.3),
-      fbm(p * 1.8 + 3.2 * q + vec2(8.3, 2.8) - t * 1.1)
-    );
-    float f = fbm(p * 1.6 + 3.6 * r);
+    // A soft key light that drifts toward the pointer.
+    vec2 m = (uMouse - 0.5) * 0.9;
+    vec3 L = normalize(vec3(-0.45 + m.x, 0.55 + m.y, 0.75));
+    vec3 V = vec3(0.0, 0.0, 1.0);
+    float diff = clamp(dot(n, L), 0.0, 1.0);
+    vec3 H = normalize(L + V);
+    float spec = pow(clamp(dot(n, H), 0.0, 1.0), 70.0);
+    float sheen = pow(clamp(dot(n, H), 0.0, 1.0), 7.0);
 
-    float body = smoothstep(0.48, 0.56, f);
-    float core = smoothstep(0.60, 0.72, f + r.x * 0.25);
-    float hair = smoothstep(0.015, 0.0, abs(f - 0.52) - 0.004);
-
-    vec3 black = vec3(0.075);
-    vec3 deep = vec3(0.30, 0.055, 0.065);
+    vec3 black = vec3(0.055, 0.050, 0.052);
+    vec3 oxblood = vec3(0.30, 0.045, 0.058);
     vec3 red = vec3(0.64, 0.137, 0.141);
+    vec3 pearl = vec3(0.96, 0.84, 0.80);
 
     vec3 col = black;
-    col = mix(col, deep, body);
-    col = mix(col, red, core);
-    col += hair * vec3(0.55, 0.12, 0.12) * 0.45;
+    col = mix(col, oxblood, smoothstep(0.5, 1.0, diff) * 0.8);
+    col += red * sheen * 0.22;
+    col += mix(red, pearl, 0.55) * spec * 0.7;
 
     float g = hash(gl_FragCoord.xy + floor(uTime * 24.0)) - 0.5;
-    col += g * 0.075;
+    col += g * 0.03;
 
-    float v = smoothstep(1.15, 0.35, length(uv - 0.5) * 1.25);
-    col *= mix(0.55, 1.0, v);
+    float v = smoothstep(1.2, 0.3, length(uv - 0.5) * 1.3);
+    col *= mix(0.5, 1.0, v);
 
     gl_FragColor = vec4(col, 1.0);
   }

@@ -12,9 +12,9 @@ export default function BrandsMarquee() {
   return (
     <section
       aria-label="Previously operated"
-      className="overflow-hidden bg-brand-black py-16 text-white sm:py-24"
+      className="overflow-hidden bg-brand-black py-10 text-white sm:py-14"
     >
-      <p className="mb-8 px-6 font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] text-white/50 sm:px-10">
+      <p className="mb-5 px-6 font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] text-white/50 sm:px-10">
         Previously operated
       </p>
       <Marquee

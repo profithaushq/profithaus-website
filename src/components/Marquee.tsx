@@ -11,7 +11,7 @@ const VARIANTS = {
   phrase:
     "whitespace-nowrap font-[family-name:var(--font-manrope)] text-3xl font-extrabold uppercase tracking-tight sm:text-5xl",
   display:
-    "whitespace-nowrap font-[family-name:var(--font-manrope)] text-[clamp(4.5rem,13vw,13rem)] leading-none font-extrabold uppercase tracking-tight",
+    "whitespace-nowrap font-[family-name:var(--font-manrope)] text-[clamp(3rem,8vw,8rem)] leading-none font-extrabold uppercase tracking-tight",
 };
 
 export default function Marquee({
