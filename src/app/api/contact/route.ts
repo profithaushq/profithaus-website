@@ -59,10 +59,7 @@ export async function POST(request: Request) {
   const body = (await request.json()) as Partial<ContactPayload>;
 
   if (!body.email) {
-    return NextResponse.json(
-      { error: "Email is required." },
-      { status: 400 },
-    );
+    return NextResponse.json({ error: "Email is required." }, { status: 400 });
   }
 
   const [firstName, ...rest] = (body.name || "").trim().split(" ");

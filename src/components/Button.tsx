@@ -2,14 +2,18 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 const VARIANTS = {
-  solid: "bg-brand-black text-white hover:bg-black",
-  "solid-white": "bg-white text-brand-black hover:bg-white/90",
-  outline:
-    "border border-brand-black/20 text-brand-black hover:border-brand-black/40 hover:bg-brand-black/5",
-  "outline-white":
-    "border border-white/60 text-white hover:border-white hover:bg-white/10",
+  solid: "bg-brand-black text-white hover:bg-brand-red",
+  white: "bg-white text-brand-black hover:bg-brand-red hover:text-white",
 };
 
+const BASE =
+  "inline-block rounded-[3px] px-6 py-3.5 text-center text-sm font-semibold transition-colors duration-200";
+
+export function buttonClass(variant: keyof typeof VARIANTS = "solid") {
+  return `${BASE} ${VARIANTS[variant]}`;
+}
+
+/** Near-square, black turning red on hover. */
 export default function Button({
   href,
   children,
@@ -20,14 +24,8 @@ export default function Button({
   variant?: keyof typeof VARIANTS;
 }) {
   return (
-    <Link
-      href={href}
-      className={`group inline-flex items-center justify-center gap-2 px-6 py-3 font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 ${VARIANTS[variant]}`}
-    >
+    <Link href={href} className={buttonClass(variant)}>
       {children}
-      <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
-        →
-      </span>
     </Link>
   );
 }

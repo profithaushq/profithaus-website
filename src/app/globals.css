@@ -1,68 +1,119 @@
 @import "tailwindcss";
 
 :root {
-  --color-maroon: #7a2424;
-  --color-maroon-dark: #5e1b1b;
-  --color-accent: #c1392b;
-  --color-cream: #ffffff;
-  --color-ink: #1c1a19;
-  --color-ink-soft: #6b6360;
-  --font-body: var(--font-heading);
-
-  /* Brand tokens: scroll-led rebuild (Sep 2026) */
+  /* Brand tokens */
   --color-brand-red: #a42324;
   --color-brand-black: #141414;
   --color-brand-grey: #6e6a66;
+  --color-stone: #f4f0eb;
+  --color-hairline: rgba(20, 20, 20, 0.12);
+  /* The brand red is too dark to read as small text on black; this is the
+     same hue, lifted, for labels on dark sections only. */
+  --color-brand-red-on-dark: #e0494b;
   --font-manrope: "Manrope", sans-serif;
 }
 
 @theme inline {
-  --color-maroon: var(--color-maroon);
-  --color-maroon-dark: var(--color-maroon-dark);
-  --color-accent: var(--color-accent);
-  --color-cream: var(--color-cream);
-  --color-ink: var(--color-ink);
-  --color-ink-soft: var(--color-ink-soft);
   --color-brand-red: var(--color-brand-red);
   --color-brand-black: var(--color-brand-black);
   --color-brand-grey: var(--color-brand-grey);
-  --font-sans: var(--font-body);
-  --font-display: var(--font-heading);
-  --font-mono-accent: var(--font-mono-accent);
+  --color-stone: var(--color-stone);
+  --color-hairline: var(--color-hairline);
+  --color-brand-red-on-dark: var(--color-brand-red-on-dark);
   --font-manrope: var(--font-manrope);
 }
 
+html {
+  scroll-padding-top: 5rem;
+}
+
 body {
-  background: var(--color-cream);
-  color: var(--color-ink);
-  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: var(--color-brand-black);
+  font-family: var(--font-manrope), Arial, Helvetica, sans-serif;
 }
 
-/* Cinematic hero image drift */
-@keyframes ken-burns {
-  from {
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid var(--color-brand-red);
+  outline-offset: 3px;
+}
+
+.on-dark :focus-visible {
+  outline-color: #ffffff;
+}
+
+/* Hero label: a small red dot with a quiet ring that expands and fades */
+@keyframes ph-pulse {
+  0% {
     transform: scale(1);
+    opacity: 0.55;
   }
-  to {
-    transform: scale(1.08);
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
   }
 }
 
-.animate-ken-burns {
-  animation: ken-burns 8s ease-out forwards;
+.pulse-dot {
+  position: relative;
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--color-brand-red);
+}
+
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-brand-red);
+  animation: ph-pulse 2.2s ease-out infinite;
+}
+
+/* Hero headline: each line slides up out of its own mask, staggered */
+.ph-line-mask {
+  display: block;
+  /* Hides only what is below the line; ascenders, descenders and the
+     overhang of tightly tracked letters stay whole. */
+  clip-path: inset(-0.15em -0.2em -0.2em -0.2em);
+}
+
+.ph-line {
+  display: block;
+  transform: translateY(135%);
+  animation: ph-line-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 120ms + 120ms);
+}
+
+@keyframes ph-line-up {
+  to {
+    transform: translateY(0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-ken-burns {
+  .ph-line {
+    transform: none;
     animation: none;
   }
+
+  .pulse-dot::after {
+    animation: none;
+    opacity: 0;
+  }
 }
+
+/* ---- Shared by the About and FAQ pages (kept, hidden from the nav) ---- */
 
 /* Scroll reveal */
 .reveal {
   opacity: 0;
   transform: translateY(36px);
-  transition: opacity 1.2s cubic-bezier(0.19, 1, 0.22, 1),
+  transition:
+    opacity 1.2s cubic-bezier(0.19, 1, 0.22, 1),
     transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
@@ -103,67 +154,6 @@ body {
   }
 }
 
-/* Lenis smooth scroll (recommended baseline CSS) */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-
-/* Oversized display type (scroll-led rebuild) */
-.text-display {
-  font-size: clamp(4rem, 14vw, 16rem);
-  line-height: 0.88;
-  letter-spacing: -0.03em;
-}
-
-/* Ambient background lines */
-@keyframes ambient-drift-1 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(1.5%, -1%); }
-}
-
-@keyframes ambient-drift-2 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-1.5%, 1%); }
-}
-
-@keyframes ambient-drift-3 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(1%, 1.5%); }
-}
-
-.ambient-line-1 {
-  animation: ambient-drift-1 26s ease-in-out infinite;
-}
-
-.ambient-line-2 {
-  animation: ambient-drift-2 32s ease-in-out infinite;
-}
-
-.ambient-line-3 {
-  animation: ambient-drift-3 38s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .ambient-line-1,
-  .ambient-line-2,
-  .ambient-line-3 {
-    animation: none;
-  }
-}
-
 /* Accordion smooth expand */
 .accordion-panel {
   display: grid;
@@ -179,28 +169,6 @@ html.lenis body {
   overflow: hidden;
 }
 
-/* v2: curtain footer, preloader gate, hero-to-header mark, outline type */
-:root {
-  --ph-footer-h: 80svh;
-  --ph-header-h: 6.5rem;
-}
-
-.ph-page {
-  margin-bottom: var(--ph-footer-h);
-}
-
-.ph-preloader {
-  display: none;
-}
-
-html.ph-preload .ph-preloader {
-  display: flex;
-}
-
-html:has([data-ph-hero]) #ph-header-mark {
-  opacity: 0;
-}
-
 .ph-outline {
   color: transparent;
   -webkit-text-stroke: 2px var(--ph-stroke, #ffffff);
@@ -210,10 +178,6 @@ html:has([data-ph-hero]) #ph-header-mark {
   .ph-outline {
     -webkit-text-stroke-width: 1.5px;
   }
-}
-
-html.ph-js .ph-hero-word {
-  visibility: hidden;
 }
 
 /* Titles that get split into per-letter boxes: splitting removes kerning and
@@ -231,53 +195,7 @@ html.ph-js .ph-page-item {
   opacity: 0;
 }
 
-html.ph-js [data-ph-hero] .ph-hero-row {
-  opacity: 0;
-}
-
-/* Services: zoom-through-letters on desktop with motion, plain list otherwise */
-.ph-services-zoom {
-  display: none;
-}
-
-@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
-  html.ph-js .ph-services-zoom {
-    display: block;
-    /* The pinned stage is one screen tall; pull the next section up into that
-       space so there is no empty scroll once the last zoom has finished. */
-    margin-bottom: -100svh;
-  }
-
-  html.ph-js .ph-services-list {
-    display: none;
-  }
-}
-
-/* Pillars: dealt cards on desktop with motion, vertical list otherwise */
-.ph-pillars-stack {
-  display: none;
-}
-
-@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
-  html.ph-js .ph-pillars-stack {
-    display: block;
-  }
-
-  html.ph-js .ph-pillars-list {
-    display: none;
-  }
-}
-
-/* Phones and tablets: cards stack over one another with CSS sticky, no pinning */
-@media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
-  html.ph-js .ph-mslide {
-    position: sticky;
-    top: 0;
-  }
-}
-
-/* Phones: the background is one still frame that slowly drifts. Transform
-   only, so the browser composites it with no per-frame drawing. */
+/* Background drawn once on phones, drifting with a transform-only animation */
 @keyframes ph-bg-drift {
   from {
     transform: translate3d(-4%, -3%, 0) scale(1);
@@ -297,30 +215,8 @@ html.ph-js [data-ph-hero] .ph-hero-row {
   }
 }
 
-/* Touch: a clear pressed state, and no grey tap flash */
+/* Touch: no grey tap flash */
 a,
 button {
   -webkit-tap-highlight-color: transparent;
-}
-
-@media (hover: none) {
-  a,
-  button {
-    transition: opacity 0.15s ease, transform 0.15s ease;
-  }
-
-  a:active,
-  button:active {
-    opacity: 0.7;
-    transform: scale(0.97);
-  }
-}
-
-/* Scroll-lit words: dim only when JS is running, so no-JS reads at full strength */
-html.ph-js .note-word {
-  opacity: 0.2;
-}
-
-html.ph-js .tl-word {
-  opacity: 0.15;
 }

@@ -1,385 +1,55 @@
-"use client";
+import type { CSSProperties } from "react";
+import Button from "@/components/Button";
+import Label from "@/components/Label";
+import { BRAND_NAME } from "@/config/site";
 
-import Link from "next/link";
-import { useEffect, useLayoutEffect, useRef } from "react";
-import { gsap, ScrollTrigger, SplitText } from "@/lib/gsap";
-import LivingBackground from "@/components/LivingBackground";
-import Mark from "@/components/Mark";
+const LINES = [
+  "Growth for fashion",
+  "and beauty brands",
+  "that won't look",
+  "cheap to get it.",
+];
 
-const WORD = "profithaus.";
-const BASE_SPACING = "-0.1em";
-
-export default function Hero({ ready }: { ready: boolean }) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const wordRef = useRef<HTMLHeadingElement>(null);
-  const markWrapRef = useRef<HTMLDivElement>(null);
-  const markInnerRef = useRef<HTMLDivElement>(null);
-  const splitRef = useRef<SplitText | null>(null);
-  const played = useRef(false);
-
-  // Layout effect so cleanup reverts pin-spacers before React removes the nodes.
-  useLayoutEffect(() => {
-    const section = sectionRef.current;
-    const wrap = wrapRef.current;
-    const word = wordRef.current;
-    const markWrap = markWrapRef.current;
-    const markInner = markInnerRef.current;
-    if (!section || !wrap || !word || !markWrap || !markInner) return;
-    const sectionEl = section;
-    const markWrapEl = markWrap;
-    const markInnerEl = markInner;
-    const fadeEls = sectionEl.querySelectorAll(".ph-hero-fade");
-
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    function fit() {
-      if (!wrap || !word) return;
-      const probe = document.createElement("span");
-      probe.textContent = WORD;
-      probe.style.cssText = `position:absolute;visibility:hidden;white-space:nowrap;font-family:${getComputedStyle(word).fontFamily};font-weight:800;letter-spacing:${BASE_SPACING};font-size:100px;line-height:1;`;
-      wrap.appendChild(probe);
-      const width = probe.getBoundingClientRect().width;
-      probe.remove();
-      if (width > 0) {
-        word.style.fontSize = `${(wrap.clientWidth / width) * 100 * 0.995}px`;
-      }
-    }
-
-    function headerBottom() {
-      const header = document
-        .getElementById("ph-header-mark")
-        ?.closest("header");
-      return header ? header.getBoundingClientRect().height : 104;
-    }
-
-    let ctx: gsap.Context | undefined;
-    let cancelled = false;
-    let removePhoneListener: (() => void) | undefined;
-
-    function setup() {
-      if (cancelled) return;
-      fit();
-      splitRef.current?.revert();
-      splitRef.current = SplitText.create(word, {
-        type: "chars",
-        mask: "chars",
-      });
-      gsap.set(word, { autoAlpha: 1 });
-
-      // The masks only exist to hide letters rising into place. Once settled
-      // they must not clip glyph overhang (the f hook, overlapping letters).
-      const releaseMasks = () =>
-        splitRef.current?.masks.forEach((m) => {
-          (m as HTMLElement).style.clipPath = "none";
-        });
-
-      // While letters rise into place, hide only what is below the line.
-      // Sideways and above stay open so overhangs (the f hook) never clip.
-      splitRef.current.masks.forEach((m) => {
-        const el = m as HTMLElement;
-        el.style.overflow = "visible";
-        el.style.clipPath = "inset(-0.3em -0.6em -0.3em -0.6em)";
-      });
-
-      if (reduceMotion) {
-        releaseMasks();
-        gsap.set(markWrapEl, { opacity: 0 });
-        gsap.set(sectionEl.querySelectorAll(".ph-hero-row"), { opacity: 1 });
-        const slot = document.getElementById("ph-header-mark");
-        if (slot) gsap.set(slot, { opacity: 1 });
-        return;
-      }
-
-      gsap.set(splitRef.current.chars, { yPercent: 135 });
-
-      const headerMark = document.getElementById("ph-header-mark");
-
-      const phone = window.matchMedia("(max-width: 767px)");
-
-      function markTarget() {
-        const slot = document.getElementById("ph-header-mark");
-        if (!slot) return null;
-        const s = slot.getBoundingClientRect();
-        const w = markWrapEl.getBoundingClientRect();
-        // How far the page would have to scroll to carry the mark to the
-        // header on its own.
-        const natural = Math.max(
-          120,
-          w.top + w.height / 2 + window.scrollY - (s.top + s.height / 2),
-        );
-        // The animation is squeezed into about half a screen so it keeps
-        // pace with a thumb; the mark makes up the rest of the climb itself.
-        const distance = Math.min(natural, window.innerHeight * 0.45);
-        return {
-          dx: s.left + s.width / 2 - (w.left + w.width / 2),
-          dy: distance - natural,
-          scale: s.width / markWrapEl.offsetWidth,
-          distance,
-        };
-      }
-
-      function buildPhone() {
-        // Phones: no pin and nothing that re-lays out the giant type. Letters
-        // lift away with transforms only while the mark glides to the header.
-        ctx = gsap.context(() => {
-          const chars = splitRef.current?.chars ?? [];
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: sectionEl,
-              start: () => `top ${headerBottom()}px`,
-              end: () =>
-                `+=${markTarget()?.distance ?? window.innerHeight * 0.45}`,
-              scrub: true,
-              refreshPriority: 5,
-              invalidateOnRefresh: true,
-            },
-          });
-
-          tl.to(
-            chars,
-            {
-              yPercent: -55,
-              opacity: 0,
-              ease: "none",
-              duration: 0.6,
-              stagger: { each: 0.05, from: "start" },
-            },
-            0,
-          )
-            .fromTo(
-              fadeEls,
-              { opacity: 1 },
-              {
-                opacity: 0,
-                ease: "none",
-                duration: 0.4,
-                immediateRender: false,
-              },
-              0,
-            )
-            .to(
-              markInnerEl,
-              {
-                x: () => markTarget()?.dx ?? 0,
-                y: () => markTarget()?.dy ?? 0,
-                scale: () => markTarget()?.scale ?? 1,
-                ease: "none",
-                duration: 1.1,
-              },
-              0,
-            )
-            .set(headerMark, { opacity: 1 }, 1.1)
-            .set(markWrapEl, { opacity: 0 }, 1.1);
-        }, sectionEl);
-      }
-
-      function buildDesktop() {
-        ctx = gsap.context(() => {
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: sectionEl,
-              start: () => `top ${headerBottom()}px`,
-              end: () => `+=${window.innerHeight * 0.9}`,
-              pin: true,
-              scrub: true,
-              anticipatePin: 1,
-              refreshPriority: 5,
-              invalidateOnRefresh: true,
-            },
-          });
-
-          tl.to(
-            word,
-            {
-              fontWeight: 200,
-              letterSpacing: "0.035em",
-              ease: "none",
-              duration: 0.96,
-            },
-            0,
-          )
-            .fromTo(
-              fadeEls,
-              { opacity: 1, y: 0 },
-              {
-                opacity: 0,
-                y: -24,
-                ease: "none",
-                duration: 0.35,
-                immediateRender: false,
-              },
-              0,
-            )
-            .to(
-              markInnerEl,
-              {
-                x: () => {
-                  const slot = document.getElementById("ph-header-mark");
-                  if (!slot) return 0;
-                  const s = slot.getBoundingClientRect();
-                  const w = markWrapEl.getBoundingClientRect();
-                  const sr = sectionEl.getBoundingClientRect();
-                  const wrapCx = w.left - sr.left + w.width / 2;
-                  return s.left + s.width / 2 - wrapCx;
-                },
-                y: () => {
-                  const slot = document.getElementById("ph-header-mark");
-                  if (!slot) return 0;
-                  const s = slot.getBoundingClientRect();
-                  const w = markWrapEl.getBoundingClientRect();
-                  const sr = sectionEl.getBoundingClientRect();
-                  const wrapCy =
-                    headerBottom() + (w.top - sr.top) + w.height / 2;
-                  return s.top + s.height / 2 - wrapCy;
-                },
-                scale: () => {
-                  const slot = document.getElementById("ph-header-mark");
-                  if (!slot) return 1;
-                  return (
-                    slot.getBoundingClientRect().width / markWrapEl.offsetWidth
-                  );
-                },
-                ease: "power2.inOut",
-                duration: 0.96,
-              },
-              0,
-            )
-            .set(headerMark, { opacity: 1 }, 0.96)
-            .set(markWrapEl, { opacity: 0 }, 0.96);
-        }, sectionEl);
-      }
-
-      let built = false;
-      function build() {
-        ctx?.revert();
-        if (built) {
-          // Switching between phone and desktop layouts: start clean.
-          gsap.set(markWrapEl, { clearProps: "opacity" });
-          gsap.set(splitRef.current?.chars ?? [], {
-            clearProps: "opacity,transform",
-          });
-        }
-        built = true;
-        if (phone.matches) buildPhone();
-        else buildDesktop();
-        ScrollTrigger.refresh();
-      }
-
-      build();
-      phone.addEventListener("change", build);
-      removePhoneListener = () => phone.removeEventListener("change", build);
-    }
-
-    document.fonts.ready.then(setup);
-
-    const ro = new ResizeObserver(() => fit());
-    ro.observe(wrap);
-
-    return () => {
-      cancelled = true;
-      removePhoneListener?.();
-      ro.disconnect();
-      ctx?.revert();
-      splitRef.current?.revert();
-      splitRef.current = null;
-      gsap.set("#ph-header-mark", { clearProps: "opacity" });
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!ready || played.current) return;
-    played.current = true;
-
-    const run = () => {
-      const split = splitRef.current;
-      const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-      if (!split || reduceMotion) return;
-      gsap.to(split.chars, {
-        yPercent: 0,
-        duration: 1.1,
-        stagger: 0.04,
-        ease: "power4.out",
-        onComplete: () =>
-          split.masks.forEach((m) => {
-            (m as HTMLElement).style.clipPath = "none";
-          }),
-      });
-      gsap.fromTo(
-        ".ph-hero-row",
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.8, delay: 0.5, ease: "power3.out" },
-      );
-    };
-
-    document.fonts.ready.then(() => requestAnimationFrame(run));
-  }, [ready]);
-
+export default function Hero() {
   return (
-    <section
-      ref={sectionRef}
-      data-ph-hero
-      className="relative z-[45] overflow-x-clip bg-brand-black text-white"
-      style={{ height: "calc(100svh - var(--ph-header-h, 6.5rem))" }}
-    >
-      <LivingBackground className="absolute inset-0" />
+    <section className="px-6 pt-14 pb-16 sm:px-10 sm:pt-20 sm:pb-24">
+      <div className="mx-auto max-w-[1280px]">
+        <Label dot>
+          Growth and marketing strategy for mid-luxury fashion and beauty
+        </Label>
 
-      <div className="relative z-10 flex h-full flex-col px-4 pt-6 pb-8 sm:px-8 sm:pt-10 sm:pb-12">
-        {/* Title and copy: centred in the space on phones, at the top from sm up */}
-        <div className="flex flex-1 flex-col justify-center sm:flex-none sm:justify-start">
-          <div ref={wrapRef} className="w-full">
-            <h1
-              ref={wordRef}
-              className="ph-hero-word ph-nokern block whitespace-nowrap font-[family-name:var(--font-manrope)] font-extrabold"
-              style={{
-                fontSize: "min(17.5vw, 24rem)",
-                lineHeight: 1,
-                letterSpacing: BASE_SPACING,
-                fontWeight: 800,
-                // Pull the p stem onto the same left edge as the copy below.
-                marginLeft: "-0.069em",
-              }}
-            >
-              {WORD}
-            </h1>
+        <h1 className="mt-8 text-[clamp(2.15rem,8.4vw,8.25rem)] leading-[1] font-light tracking-[-0.05em]">
+          {LINES.map((line, i) => (
+            <span key={line} className="ph-line-mask">
+              <span className="ph-line" style={{ "--i": i } as CSSProperties}>
+                {line}
+              </span>
+            </span>
+          ))}
+        </h1>
+
+        <hr className="mt-12 border-hairline sm:mt-16" />
+
+        <div className="mt-10 grid gap-10 lg:grid-cols-[1.35fr_1fr] lg:items-start lg:gap-16">
+          <div className="max-w-xl">
+            <p className="text-xl leading-snug font-medium sm:text-2xl">
+              {BRAND_NAME} is the senior growth partner for mid-luxury fashion
+              and beauty brands.
+            </p>
+            <p className="mt-4 text-lg leading-relaxed text-brand-grey">
+              Brand, content, channels and the website, run as one plan by
+              people who&apos;ve done it in-house.
+            </p>
           </div>
 
-          <div
-            className="ph-hero-row"
-            // Clears the p descender, which hangs below the wordmark's line box.
-            style={{
-              marginTop: "max(1.5rem, calc(min(17.5vw, 24rem) * 0.24))",
-            }}
-          >
-            <div className="max-w-xl">
-              <p className="ph-hero-fade font-[family-name:var(--font-manrope)] text-lg font-semibold sm:text-2xl">
-                Ex-operators. Not an agency.
-              </p>
-              <p className="ph-hero-fade mt-2 text-sm leading-relaxed font-medium text-white/80 sm:text-base">
-                The ecommerce partner for luxury fashion, beauty and wellness
-                brands. Trading, website builds and digital business management.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="ph-hero-row mt-auto flex items-end justify-end pt-6">
-          <div className="flex items-center gap-6 sm:gap-10">
-            <Link
-              href="/apply"
-              className="ph-hero-fade inline-block font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide underline decoration-white decoration-2 underline-offset-8"
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-4 lg:justify-end">
+            <Button href="/apply">Apply to work with us</Button>
+            <a
+              href="#about"
+              className="text-sm font-semibold underline decoration-brand-red decoration-2 underline-offset-[6px] transition-colors hover:text-brand-red"
             >
-              Book a call
-            </Link>
-            <div ref={markWrapRef} className="h-14 w-14 sm:h-20 sm:w-20">
-              <div ref={markInnerRef} className="h-full w-full">
-                <Mark className="h-full w-full" />
-              </div>
-            </div>
+              Meet Heidi
+            </a>
           </div>
         </div>
       </div>

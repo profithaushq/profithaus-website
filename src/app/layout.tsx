@@ -1,40 +1,23 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
-import FullScreenMenu from "@/components/FullScreenMenu";
-import Footer from "@/components/FooterSignOff";
-import SmoothScrollProvider from "@/components/SmoothScrollProvider";
-import PageTransition from "@/components/PageTransition";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import { SITE_DESCRIPTION, SITE_TITLE } from "@/config/site";
 import "./globals.css";
 
-const heading = Inter({
-  variable: "--font-heading",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "700", "800"],
-});
-
-const mono = Poppins({
-  variable: "--font-mono-accent",
-  subsets: ["latin"],
-  weight: ["500", "600"],
-});
-
 export const metadata: Metadata = {
-  title: "profithaus. | Ecommerce Partner for Luxury Brands",
-  description:
-    "profithaus. is an ecommerce partner for luxury brands, making brands harder to ignore and easier to buy from.",
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
 };
 
-const PRELOAD_GATE = `try{var d=document.documentElement;d.classList.add('ph-js');if(!sessionStorage.getItem('ph-preloader-seen')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('ph-preload')}}catch(e){}`;
+// Marks the page as script-enabled so JS-driven reveals can hide their start
+// state without hiding content from visitors with scripts off.
+const JS_FLAG = `try{document.documentElement.classList.add('ph-js')}catch(e){}`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${heading.variable} ${mono.variable} h-full antialiased`}
-    >
+    <html lang="en" suppressHydrationWarning className="h-full antialiased">
       <head>
-        <script dangerouslySetInnerHTML={{ __html: PRELOAD_GATE }} />
+        <script dangerouslySetInnerHTML={{ __html: JS_FLAG }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -47,14 +30,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-full flex flex-col">
-        <SmoothScrollProvider />
-        <PageTransition />
-        <div className="ph-page relative z-10 flex flex-1 flex-col bg-white">
-          <FullScreenMenu />
-          <main className="flex-1">{children}</main>
-        </div>
-        <Footer />
+      <body className="flex min-h-full flex-col">
+        <SiteHeader />
+        <main className="flex-1">{children}</main>
+        <SiteFooter />
       </body>
     </html>
   );

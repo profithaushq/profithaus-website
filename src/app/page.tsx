@@ -1,30 +1,23 @@
-"use client";
-
-import { useState } from "react";
-import Preloader from "@/components/Preloader";
 import Hero from "@/components/home/Hero";
-import FounderNote from "@/components/home/FounderNote";
-import BrandsMarquee from "@/components/home/BrandsMarquee";
-import ServicesZoom from "@/components/home/ServicesZoom";
-import WorkReel from "@/components/home/WorkReel";
-import DealtPillars from "@/components/home/DealtPillars";
-import TestimonialLine from "@/components/home/TestimonialLine";
-import { REEL } from "@/data/reel";
+import Problem from "@/components/home/Problem";
+import ScrollBand from "@/components/home/ScrollBand";
+import WhatWeDo from "@/components/home/WhatWeDo";
+import About from "@/components/home/About";
+import WhoItsFor from "@/components/home/WhoItsFor";
+import HowItWorks from "@/components/home/HowItWorks";
+import FinalCta from "@/components/home/FinalCta";
 
 export default function Home() {
-  const [introDone, setIntroDone] = useState(false);
-
   return (
     <>
-      {!introDone && <Preloader onComplete={() => setIntroDone(true)} />}
-
-      <Hero ready={introDone} />
-      <FounderNote />
-      <BrandsMarquee />
-      <ServicesZoom />
-      <WorkReel items={REEL} />
-      <DealtPillars />
-      <TestimonialLine />
+      <Hero />
+      <Problem />
+      <ScrollBand />
+      <WhatWeDo />
+      <About />
+      <WhoItsFor />
+      <HowItWorks />
+      <FinalCta />
     </>
   );
 }

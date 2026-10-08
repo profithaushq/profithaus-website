@@ -7,6 +7,8 @@ import ClosingStatement from "@/components/ClosingStatement";
 
 export const metadata: Metadata = {
   title: "About Us | profithaus.",
+  // Hidden for now: the copy still describes the previous positioning.
+  robots: { index: false, follow: false },
 };
 
 // Black, grey, white: the page changes colour as the story moves on.
