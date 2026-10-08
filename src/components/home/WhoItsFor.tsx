@@ -1,4 +1,5 @@
 import Label from "@/components/Label";
+import SilkLines from "@/components/SilkLines";
 
 const FIT = [
   "You're a founder-led fashion or beauty brand with a product people already love.",
@@ -17,9 +18,10 @@ export default function WhoItsFor() {
   return (
     <section
       aria-labelledby="fit-heading"
-      className="px-6 py-24 sm:px-10 sm:py-36"
+      className="relative overflow-hidden px-6 py-24 sm:px-10 sm:py-36"
     >
-      <div className="mx-auto max-w-[1280px]">
+      <SilkLines className="-scale-x-100 text-brand-black/[0.08]" count={14} />
+      <div className="relative mx-auto max-w-[1280px]">
         <Label>Who it&apos;s for</Label>
         <h2
           id="fit-heading"

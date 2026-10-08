@@ -1,4 +1,5 @@
 import Label from "@/components/Label";
+import LivingBackground from "@/components/LivingBackground";
 import { BRAND_NAME } from "@/config/site";
 
 const COLUMNS = [
@@ -21,9 +22,10 @@ export default function Problem() {
   return (
     <section
       aria-labelledby="problem-heading"
-      className="on-dark grain bg-brand-black px-6 py-24 text-white sm:px-10 sm:py-36"
+      className="on-dark grain relative overflow-hidden bg-brand-black px-6 py-24 text-white sm:px-10 sm:py-36"
     >
-      <div className="mx-auto max-w-[1280px]">
+      <LivingBackground className="absolute inset-0 opacity-40" />
+      <div className="relative mx-auto max-w-[1280px]">
         <Label onDark>The problem</Label>
         <h2
           id="problem-heading"

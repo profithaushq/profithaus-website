@@ -1,4 +1,5 @@
 import Label from "@/components/Label";
+import SilkLines from "@/components/SilkLines";
 
 const ROWS = [
   {
@@ -24,9 +25,10 @@ export default function WhatWeDo() {
     <section
       id="approach"
       aria-labelledby="approach-heading"
-      className="scroll-mt-20 px-6 py-24 sm:px-10 sm:py-36"
+      className="relative scroll-mt-20 overflow-hidden px-6 py-24 sm:px-10 sm:py-36"
     >
-      <div className="mx-auto max-w-[1280px]">
+      <SilkLines className="text-brand-black/[0.09]" />
+      <div className="relative mx-auto max-w-[1280px]">
         <Label>What we do</Label>
         <h2
           id="approach-heading"

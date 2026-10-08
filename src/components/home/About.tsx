@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Label from "@/components/Label";
+import SilkLines from "@/components/SilkLines";
 import { FOUNDER_FIRST_NAME, FOUNDER_PHOTO } from "@/config/site";
 
 const BRANDS = [
@@ -15,9 +16,10 @@ export default function About() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="scroll-mt-20 bg-stone px-6 py-24 sm:px-10 sm:py-36"
+      className="relative scroll-mt-20 overflow-hidden bg-stone px-6 py-24 sm:px-10 sm:py-36"
     >
-      <div className="mx-auto grid max-w-[1280px] gap-14 lg:grid-cols-[1fr_1.25fr] lg:gap-24">
+      <SilkLines className="text-brand-red/[0.16]" count={12} />
+      <div className="relative mx-auto grid max-w-[1280px] gap-14 lg:grid-cols-[1fr_1.25fr] lg:gap-24">
         <div>
           {FOUNDER_PHOTO && (
             <div className="relative mb-12 aspect-[4/5] max-w-sm overflow-hidden">

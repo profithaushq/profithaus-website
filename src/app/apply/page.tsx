@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Label from "@/components/Label";
+import SilkLines from "@/components/SilkLines";
 import { BRAND_NAME, CONTACT_EMAIL } from "@/config/site";
 import ApplyForm from "./apply-form";
 
@@ -16,8 +17,9 @@ const NEXT_STEPS = [
 
 export default function Apply() {
   return (
-    <section className="px-6 py-14 sm:px-10 sm:py-20">
-      <div className="mx-auto grid max-w-[1280px] gap-14 lg:grid-cols-[1fr_1.05fr] lg:gap-24">
+    <section className="relative overflow-hidden px-6 py-14 sm:px-10 sm:py-20">
+      <SilkLines className="text-brand-black/[0.08]" count={14} />
+      <div className="relative mx-auto grid max-w-[1280px] gap-14 lg:grid-cols-[1fr_1.05fr] lg:gap-24">
         <div>
           <Label dot>Apply to work with us</Label>
           <h1 className="display mt-8 text-[clamp(3rem,7.4vw,6.75rem)] leading-[0.98]">
