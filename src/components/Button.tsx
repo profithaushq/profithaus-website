@@ -7,13 +7,13 @@ const VARIANTS = {
 };
 
 const BASE =
-  "inline-block rounded-[3px] px-6 py-3.5 text-center text-sm font-semibold transition-colors duration-200";
+  "caps inline-block rounded-[2px] px-7 py-4 text-center transition-colors duration-300";
 
 export function buttonClass(variant: keyof typeof VARIANTS = "solid") {
   return `${BASE} ${VARIANTS[variant]}`;
 }
 
-/** Near-square, black turning red on hover. */
+/** Near-square, black turning red on hover; small tracked capitals. */
 export default function Button({
   href,
   children,

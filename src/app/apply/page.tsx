@@ -20,8 +20,8 @@ export default function Apply() {
       <div className="mx-auto grid max-w-[1280px] gap-14 lg:grid-cols-[1fr_1.05fr] lg:gap-24">
         <div>
           <Label dot>Apply to work with us</Label>
-          <h1 className="mt-6 text-[clamp(2.6rem,6.4vw,5.75rem)] leading-[1] font-light tracking-[-0.05em]">
-            Tell us about the brand.
+          <h1 className="display mt-8 text-[clamp(3rem,7.4vw,6.75rem)] leading-[0.98]">
+            Tell us about <em>the brand</em>.
           </h1>
           <p className="mt-8 max-w-md text-lg leading-relaxed text-brand-grey">
             We work with a small number of mid-luxury fashion and beauty brands

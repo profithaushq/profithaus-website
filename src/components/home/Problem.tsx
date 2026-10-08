@@ -21,26 +21,32 @@ export default function Problem() {
   return (
     <section
       aria-labelledby="problem-heading"
-      className="on-dark bg-brand-black px-6 py-20 text-white sm:px-10 sm:py-28"
+      className="on-dark grain bg-brand-black px-6 py-24 text-white sm:px-10 sm:py-36"
     >
       <div className="mx-auto max-w-[1280px]">
         <Label onDark>The problem</Label>
         <h2
           id="problem-heading"
-          className="mt-6 max-w-[26ch] text-[clamp(1.9rem,4.2vw,3.5rem)] leading-[1.08] font-light tracking-[-0.04em]"
+          className="display mt-8 max-w-[22ch] text-[clamp(2.2rem,5vw,4.5rem)] leading-[1.04]"
         >
-          Fashion and beauty brands usually end up choosing between two kinds of
-          agency. Neither was built for them.
+          Fashion and beauty brands usually end up choosing between{" "}
+          <em>two kinds</em> of agency. Neither was built for them.
         </h2>
 
-        <div className="mt-14 grid border-t border-white/15 md:mt-20 md:grid-cols-3">
-          {COLUMNS.map((col) => (
+        <div className="mt-16 grid border-t border-white/15 md:mt-24 md:grid-cols-3">
+          {COLUMNS.map((col, i) => (
             <div
               key={col.title}
-              className="border-b border-white/15 py-8 last:border-b-0 md:border-b-0 md:border-l md:px-8 md:py-10 md:first:border-l-0 md:first:pl-0"
+              className="border-b border-white/15 py-9 last:border-b-0 md:border-b-0 md:border-l md:px-9 md:py-12 md:first:border-l-0 md:first:pl-0"
             >
+              <p
+                aria-hidden
+                className="display text-2xl text-white/35 tabular-nums"
+              >
+                0{i + 1}
+              </p>
               <h3
-                className={`flex items-center gap-3 text-lg font-bold ${
+                className={`mt-5 flex items-center gap-3 text-lg font-bold ${
                   col.us ? "text-white" : "text-white/90"
                 }`}
               >

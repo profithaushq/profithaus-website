@@ -17,24 +17,24 @@ export default function WhoItsFor() {
   return (
     <section
       aria-labelledby="fit-heading"
-      className="px-6 py-20 sm:px-10 sm:py-28"
+      className="px-6 py-24 sm:px-10 sm:py-36"
     >
       <div className="mx-auto max-w-[1280px]">
         <Label>Who it&apos;s for</Label>
         <h2
           id="fit-heading"
-          className="mt-6 max-w-[26ch] text-[clamp(1.9rem,4.2vw,3.5rem)] leading-[1.08] font-light tracking-[-0.04em]"
+          className="display mt-8 max-w-[22ch] text-[clamp(2.2rem,5vw,4.5rem)] leading-[1.04]"
         >
           We work with a small number of brands at a time. This is who
-          we&apos;re best for.
+          we&apos;re <em>best</em> for.
         </h2>
 
-        <div className="mt-14 grid gap-12 md:mt-20 md:grid-cols-2 md:gap-0">
+        <div className="mt-16 grid gap-14 md:mt-24 md:grid-cols-2 md:gap-0">
           <div className="md:pr-12 lg:pr-20">
             <h3 className="text-lg font-bold">A good fit if</h3>
-            <ul className="mt-6 space-y-5">
+            <ul className="mt-6 divide-y divide-hairline border-t border-hairline">
               {FIT.map((item) => (
-                <li key={item} className="flex gap-4 text-lg leading-snug">
+                <li key={item} className="flex gap-4 py-5 text-lg leading-snug">
                   <span
                     aria-hidden
                     className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-red"
@@ -57,15 +57,15 @@ export default function WhoItsFor() {
             </ul>
           </div>
 
-          <div className="border-t border-hairline pt-12 md:border-t-0 md:border-l md:pt-0 md:pl-12 lg:pl-20">
+          <div className="md:border-l md:border-hairline md:pl-12 lg:pl-20">
             <h3 className="text-lg font-bold text-brand-grey">
               Probably not if
             </h3>
-            <ul className="mt-6 space-y-5">
+            <ul className="mt-6 divide-y divide-hairline border-t border-hairline">
               {NOT_FIT.map((item) => (
                 <li
                   key={item}
-                  className="flex gap-4 text-lg leading-snug text-brand-grey"
+                  className="flex gap-4 py-5 text-lg leading-snug text-brand-grey"
                 >
                   <span
                     aria-hidden

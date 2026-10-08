@@ -24,28 +24,34 @@ export default function WhatWeDo() {
     <section
       id="approach"
       aria-labelledby="approach-heading"
-      className="scroll-mt-20 px-6 py-20 sm:px-10 sm:py-28"
+      className="scroll-mt-20 px-6 py-24 sm:px-10 sm:py-36"
     >
       <div className="mx-auto max-w-[1280px]">
         <Label>What we do</Label>
         <h2
           id="approach-heading"
-          className="mt-6 max-w-[24ch] text-[clamp(1.9rem,4.2vw,3.5rem)] leading-[1.08] font-light tracking-[-0.04em]"
+          className="display mt-8 max-w-[20ch] text-[clamp(2.2rem,5vw,4.5rem)] leading-[1.04]"
         >
-          Four things that should work together, instead of four separate
-          invoices.
+          Four things that should work <em>together</em>, instead of four
+          separate invoices.
         </h2>
 
-        <div className="mt-14 border-b border-hairline md:mt-20">
-          {ROWS.map((row) => (
+        <div className="mt-16 border-b border-hairline md:mt-24">
+          {ROWS.map((row, i) => (
             <div
               key={row.title}
-              className="grid gap-4 border-t border-hairline py-8 md:grid-cols-[1fr_1.1fr] md:gap-16 md:py-12"
+              className="rule-row group grid gap-5 border-t border-hairline py-9 md:grid-cols-[4rem_1fr_1.1fr] md:items-baseline md:gap-10 md:py-14"
             >
-              <h3 className="text-[clamp(2rem,4.6vw,4rem)] leading-none font-light tracking-[-0.045em]">
+              <p
+                aria-hidden
+                className="display text-xl text-brand-grey tabular-nums"
+              >
+                0{i + 1}
+              </p>
+              <h3 className="display text-[clamp(2.6rem,6.4vw,5.75rem)] leading-none transition-transform duration-500 ease-out group-hover:translate-x-2">
                 {row.title}
               </h3>
-              <p className="max-w-xl text-lg leading-relaxed text-brand-grey md:pt-2">
+              <p className="max-w-xl text-lg leading-relaxed text-brand-grey">
                 {row.body}
               </p>
             </div>

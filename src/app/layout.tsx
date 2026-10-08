@@ -26,7 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
         {/* eslint-disable-next-line @next/next/no-page-custom-font -- root layout applies site-wide, not per-page */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
           rel="stylesheet"
         />
       </head>

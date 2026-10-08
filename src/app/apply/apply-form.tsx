@@ -209,7 +209,7 @@ export default function ApplyForm() {
   if (submitted) {
     return (
       <div role="status" className="py-10">
-        <h2 className="text-[clamp(2rem,4vw,3rem)] leading-[1.05] font-light tracking-[-0.04em]">
+        <h2 className="display text-[clamp(2.6rem,5vw,4rem)] leading-[1.02]">
           Application received.
         </h2>
         <p className="mt-5 max-w-md text-lg leading-relaxed text-brand-grey">
@@ -358,7 +358,7 @@ export default function ApplyForm() {
         <button
           type="submit"
           disabled={submitting}
-          className="rounded-[3px] bg-brand-black px-7 py-4 text-sm font-semibold text-white transition-colors duration-200 hover:bg-brand-red disabled:cursor-wait disabled:opacity-70"
+          className="caps rounded-[2px] bg-brand-black px-8 py-4 text-white transition-colors duration-300 hover:bg-brand-red disabled:cursor-wait disabled:opacity-70"
         >
           {submitting ? "Sending..." : "Send application"}
         </button>

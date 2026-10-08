@@ -52,16 +52,20 @@ export default function ScrollBand() {
     <section
       ref={sectionRef}
       aria-label={LABEL}
-      className="overflow-hidden border-b border-hairline py-14 sm:py-20"
+      className="overflow-hidden border-b border-hairline py-16 sm:py-24"
     >
       <div
         ref={trackRef}
         aria-hidden="true"
-        className="flex w-max items-center px-6 text-[clamp(3.4rem,12vw,12rem)] leading-none font-extralight tracking-[-0.04em] whitespace-nowrap sm:px-10 motion-reduce:w-auto motion-reduce:flex-wrap motion-reduce:gap-y-2 motion-reduce:text-[clamp(2.5rem,9vw,6rem)]"
+        className="display flex w-max items-center px-6 text-[clamp(4rem,14vw,14rem)] leading-[0.95] whitespace-nowrap sm:px-10 motion-reduce:w-auto motion-reduce:flex-wrap motion-reduce:gap-y-2 motion-reduce:text-[clamp(2.5rem,9vw,6rem)]"
       >
         {WORDS.map((word, i) => (
           <span key={word} className="flex items-center">
-            <span className={word === "One plan." ? "font-bold" : undefined}>
+            <span
+              className={
+                word === "One plan." ? "italic !font-medium" : undefined
+              }
+            >
               {word}
             </span>
             {i < WORDS.length - 1 && (

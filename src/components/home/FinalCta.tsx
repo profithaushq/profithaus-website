@@ -1,16 +1,19 @@
 import Button from "@/components/Button";
+import LineMotif from "@/components/LineMotif";
 import { CONTACT_EMAIL } from "@/config/site";
 
 export default function FinalCta() {
   return (
-    <section aria-label="Apply" className="px-4 pb-16 sm:px-8 sm:pb-24">
-      <div className="on-dark mx-auto grid max-w-[1280px] gap-10 rounded-[14px] bg-brand-black px-7 py-12 text-white sm:px-14 sm:py-16 lg:grid-cols-[1.5fr_1fr] lg:items-center lg:gap-16">
-        <p className="max-w-[20ch] text-[clamp(1.9rem,4.4vw,3.75rem)] leading-[1.06] font-light tracking-[-0.045em]">
-          If the brand&apos;s worth protecting, it&apos;s worth growing
+    <section aria-label="Apply" className="px-4 pb-20 sm:px-8 sm:pb-32">
+      <div className="on-dark grain relative mx-auto grid max-w-[1280px] gap-12 overflow-hidden rounded-[14px] bg-brand-black px-7 py-16 text-white sm:px-16 sm:py-24 lg:grid-cols-[1.5fr_1fr] lg:items-center lg:gap-16">
+        <LineMotif className="top-1/2 right-0 h-[170%] -translate-y-1/2 translate-x-[34%] text-white/[0.09]" />
+
+        <p className="display relative max-w-[17ch] text-[clamp(2.4rem,5.4vw,5rem)] leading-[1.02]">
+          If the brand&apos;s <em>worth protecting</em>, it&apos;s worth growing
           properly.
         </p>
 
-        <div className="flex flex-col items-start gap-5 lg:items-end">
+        <div className="relative flex flex-col items-start gap-6 lg:items-end">
           <Button href="/apply" variant="white">
             Apply to work with us
           </Button>
