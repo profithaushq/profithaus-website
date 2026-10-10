@@ -7,9 +7,9 @@ import LivingBackground from "@/components/LivingBackground";
 import Mark from "@/components/Mark";
 /**
  * The homepage opening, after the 5c concept: oxblood ground, the divide,
- * a white card carrying the line, and the seal zoomed in and cropped by the
- * frame. Motion lives on the blocks themselves: the divide draws, the card
- * wipes open, the seal fades up.
+ * the line set straight onto the oxblood, and the seal zoomed in and cropped by the
+ * frame. Motion lives on the blocks themselves: the divide draws, the copy
+ * rises in, the seal fades up.
  */
 export default function Hero({ ready }: { ready: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -33,23 +33,17 @@ export default function Hero({ ready }: { ready: boolean }) {
         scaleY: 1,
         duration: 1.2,
         ease: "power3.inOut",
-      })
-        .to(
-          ".ph-h-card",
-          { clipPath: "inset(0% 0 0 0)", duration: 1.3, ease: "lux" },
-          0.45,
-        )
-        .to(
-          ".ph-h-item",
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.9,
-            stagger: 0.1,
-            ease: "lux",
-          },
-          1.0,
-        );
+      }).to(
+        ".ph-h-item",
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          stagger: 0.1,
+          ease: "lux",
+        },
+        1.0,
+      );
     }, section);
 
     return () => ctx.revert();
@@ -85,28 +79,32 @@ export default function Hero({ ready }: { ready: boolean }) {
       {/* The divide: pink, vertical, edge to edge, one per layout */}
       <span
         aria-hidden
-        className="ph-h-divide absolute inset-y-0 left-[72%] w-[3px] origin-top bg-pink lg:left-[51.4%]"
+        className="ph-h-divide absolute top-0 left-[72%] hidden h-full w-[3px] origin-top bg-pink sm:block lg:left-[51.4%]"
       />
 
-      <div className="ph-h-card absolute right-4 bottom-4 left-4 z-10 flex flex-col gap-4 bg-white p-6 text-oxblood sm:right-auto sm:bottom-10 sm:left-10 sm:w-[min(30rem,calc(72%-3.5rem))] sm:gap-5 sm:p-8 lg:bottom-12 lg:left-12 lg:w-[min(34rem,calc(51.4%-4.5rem))]">
-        <p className="ph-h-item font-sans text-xs font-medium tracking-[0.12em] text-burgundy uppercase">
+      <div className="absolute right-6 bottom-8 left-6 z-10 flex flex-col gap-5 sm:top-1/2 sm:right-auto sm:bottom-auto sm:left-12 sm:w-[min(36rem,calc(72%-4rem))] sm:-translate-y-1/2 lg:w-[min(38rem,calc(51.4%-6rem))]">
+        <p className="ph-h-item font-sans text-[11px] font-medium tracking-[0.2em] text-powder uppercase">
           E-commerce strategic partner
         </p>
-        <h1 className="ph-h-item font-serif text-[clamp(2rem,3.5vw,3.5rem)] leading-[0.97] tracking-[-0.03em]">
-          Making brands harder to ignore and <em>easier to buy from.</em>
+        <h1 className="ph-h-item font-serif text-[clamp(2.1rem,4vw,3.9rem)] leading-[0.97] tracking-[-0.03em]">
+          Making brands harder to ignore and{" "}
+          <em className="text-powder">easier to buy from.</em>
         </h1>
-        <span aria-hidden className="ph-h-item block h-px bg-pink" />
-        <p className="ph-h-item max-w-sm text-sm leading-relaxed text-ink">
-          Your e-commerce director, without the ridiculous salary. Senior advice
-          for small and medium brands, from people who have done the job
-          in-house. We advise first, and can build it too.
+        <p className="ph-h-item text-base text-white/80">
+          Your e-commerce director, without the ridiculous salary.
         </p>
         <p className="ph-h-item">
           <Link
             href="/apply"
-            className="inline-block bg-oxblood px-5 py-3 font-sans text-[11px] font-medium tracking-[0.1em] text-white uppercase transition-colors duration-300 hover:bg-burgundy"
+            className="group inline-flex items-center gap-3 border-b border-pink pb-2 text-xs font-medium tracking-[0.18em] text-white uppercase transition-colors duration-300 hover:text-powder"
           >
             Apply to work with us
+            <span
+              aria-hidden
+              className="transition-transform duration-500 ease-out group-hover:translate-x-1.5"
+            >
+              →
+            </span>
           </Link>
         </p>
       </div>
