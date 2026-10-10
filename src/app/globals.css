@@ -242,12 +242,21 @@ html.ph-preload .ph-preloader {
   font-variant-ligatures: none;
 }
 
+html.ph-js .ph-h-word {
+  opacity: 0;
+  transform: translateY(2.5rem);
+}
+
 html.ph-js .ph-h-item {
   opacity: 0;
   transform: translateY(14px);
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html.ph-js .ph-h-word {
+    opacity: 1;
+    transform: none;
+  }
   html.ph-js .ph-h-item {
     opacity: 1;
     transform: none;

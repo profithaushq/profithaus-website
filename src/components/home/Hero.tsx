@@ -1,15 +1,16 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
-import LivingBackground from "@/components/LivingBackground";
-import Mark from "@/components/Mark";
+import Logo from "@/components/Logo";
 
 /**
- * The homepage opening: oxblood ground, the line set straight onto it, and
- * the seal zoomed in and cropped by the frame. The copy rises in once and the
- * seal fades up.
+ * The homepage opening: a studio photograph with the wordmark set huge
+ * between the floor and the subject. The photo is two matching layers, the
+ * full picture at the back and a cut-out of the trousers and shoe on top, so
+ * the logo passes behind the legs. The wordmark rises in once.
  */
 export default function Hero({ ready }: { ready: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -27,13 +28,20 @@ export default function Hero({ ready }: { ready: boolean }) {
     if (reduce) return;
 
     const ctx = gsap.context(() => {
+      gsap.to(".ph-h-word", {
+        opacity: 1,
+        y: 0,
+        duration: 1.6,
+        ease: "lux",
+        delay: 0.1,
+      });
       gsap.to(".ph-h-item", {
         opacity: 1,
         y: 0,
         duration: 1,
         stagger: 0.1,
         ease: "lux",
-        delay: 0.2,
+        delay: 0.7,
       });
     }, section);
 
@@ -44,44 +52,58 @@ export default function Hero({ ready }: { ready: boolean }) {
     <section
       ref={sectionRef}
       data-ph-hero
-      className="relative overflow-hidden bg-oxblood text-white sm:min-h-[40rem] lg:h-[calc(100svh-5.2rem)] lg:max-h-[52rem]"
+      className="relative bg-porcelain text-oxblood lg:h-[min(calc(100svh-5.2rem),46rem)] lg:min-h-[36rem]"
     >
-      {/* A quiet sheen in the oxblood, nothing more */}
-      <LivingBackground className="absolute inset-0 opacity-30" />
+      {/* The picture: floor, then the wordmark, then the subject on top */}
+      <div className="relative h-[17.5rem] overflow-hidden bg-[#a8acb0] sm:h-[28rem] lg:absolute lg:inset-0 lg:h-auto">
+        <Image
+          src="/images/hero/studio.jpg"
+          alt="Wide-leg grey trousers and a pointed black shoe on a grey studio floor"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
 
-      {/* The seal, zoomed in and cropped by the frame */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute hidden sm:-top-10 sm:right-[-8rem] sm:block sm:w-[30rem] lg:top-1/2 lg:right-[-12%] lg:w-[clamp(34rem,56vw,60rem)] lg:-translate-y-1/2"
-      >
-        <div className="ph-h-item">
-          <Mark
-            className="h-auto w-full"
-            style={
-              {
-                "--mark-disc": "var(--burgundy)",
-                "--mark-glyph": "var(--porcelain)",
-              } as React.CSSProperties
-            }
-          />
+        <div className="pointer-events-none absolute top-[34%] left-[50.7%] -translate-x-[51.3%] -translate-y-1/2">
+          <div className="ph-h-word">
+            <Logo
+              className="whitespace-nowrap"
+              style={{ fontSize: "min(27vw, 50svh)" }}
+            />
+          </div>
         </div>
+
+        <Image
+          src="/images/hero/studio-subject.webp"
+          alt=""
+          aria-hidden
+          fill
+          priority
+          sizes="100vw"
+          className="pointer-events-none object-cover object-center"
+        />
       </div>
 
-      <div className="relative z-10 flex flex-col gap-5 px-6 py-24 sm:absolute sm:top-1/2 sm:right-auto sm:bottom-auto sm:left-12 sm:p-0 sm:w-[min(36rem,calc(72%-4rem))] sm:-translate-y-1/2 lg:w-[min(38rem,calc(51.4%-6rem))]">
-        <p className="ph-h-item font-sans text-[11px] font-medium tracking-[0.2em] text-powder uppercase">
+      {/* The line */}
+      <div className="relative z-10 flex flex-col gap-4 px-6 py-8 sm:px-10 sm:py-10 lg:absolute lg:bottom-12 lg:left-12 lg:w-[min(30rem,32%)] lg:p-0">
+        <p className="ph-h-item font-sans text-[11px] font-medium tracking-[0.2em] text-burgundy uppercase">
           E-commerce strategic partner
         </p>
-        <h1 className="ph-h-item font-serif text-[6.4vw] leading-[0.97] tracking-[-0.03em] sm:text-[clamp(2.1rem,4vw,3.9rem)]">
-          Making brands harder to ignore and{" "}
-          <em className="block text-powder">easier to buy from.</em>
+        <h1 className="ph-h-item font-serif text-[clamp(1.9rem,2.9vw,2.9rem)] leading-[0.98] tracking-[-0.03em]">
+          <span className="block text-balance">
+            Making brands harder to ignore and
+          </span>
+          <em className="block text-burgundy">easier to buy from.</em>
         </h1>
-        <p className="ph-h-item text-base text-white/80">
-          Your e-commerce director, without the ridiculous salary.
+        <p className="ph-h-item max-w-md text-[15px] leading-relaxed text-ink">
+          Your e-commerce director, without the ridiculous salary. Senior advice
+          for small and medium brands.
         </p>
         <p className="ph-h-item">
           <Link
             href="/apply"
-            className="group inline-flex items-center gap-3 border-b border-pink pb-2 text-xs font-medium tracking-[0.18em] text-white uppercase transition-colors duration-300 hover:text-powder"
+            className="group inline-flex items-center gap-3 border-b border-oxblood pb-2 text-xs font-medium tracking-[0.18em] uppercase transition-colors duration-300 hover:text-burgundy"
           >
             Apply to work with us
             <span

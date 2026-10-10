@@ -9,9 +9,11 @@
 export default function Logo({
   tone = "dark",
   className = "",
+  style,
 }: {
   tone?: "dark" | "light";
   className?: string;
+  style?: React.CSSProperties;
 }) {
   const ink = tone === "light" ? "text-white" : "text-oxblood";
   return (
@@ -19,6 +21,7 @@ export default function Logo({
       role="img"
       aria-label="profithaus"
       className={`inline-flex items-baseline font-serif leading-none tracking-[-0.04em] ${ink} ${className}`}
+      style={style}
     >
       <span aria-hidden className="ph-logo-profit">
         profit
