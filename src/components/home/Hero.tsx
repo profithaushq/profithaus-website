@@ -2,24 +2,14 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import LivingBackground from "@/components/LivingBackground";
 
-const SHOTS = [
-  { src: "/images/hero/wax.jpg", alt: "The pH seal pressed into silver wax" },
-  {
-    src: "/images/hero/tote.jpg",
-    alt: "A leather tote debossed with the pH seal",
-  },
-  { src: "/images/hero/glass.jpg", alt: "The pH seal on a glass of water" },
-  {
-    src: "/images/hero/plaster.jpg",
-    alt: "The profit|haus wordmark pressed into plaster",
-  },
-  { src: "/images/hero/seals.jpg", alt: "Embossed pH seals on a roll of tape" },
-  { src: "/images/hero/patch.jpg", alt: "The pH seal as an embroidered patch" },
-];
+const IMAGE = {
+  src: "/images/hero/wax.jpg",
+  alt: "The pH seal pressed into silver wax",
+};
 
 /**
  * The homepage opening, after the 5c concept: oxblood ground, the reading
@@ -32,17 +22,6 @@ export default function Hero({ ready }: { ready: boolean }) {
   const intRef = useRef<HTMLSpanElement>(null);
   const decRef = useRef<HTMLElement>(null);
   const played = useRef(false);
-  const [shot, setShot] = useState(0);
-
-  // The brand in the world: a slow crossfade through the mockups
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = window.setInterval(
-      () => setShot((n) => (n + 1) % SHOTS.length),
-      5600,
-    );
-    return () => window.clearInterval(id);
-  }, [shot]);
 
   // Start from 0.0 so the count has somewhere to climb from
   useLayoutEffect(() => {
@@ -122,50 +101,15 @@ export default function Hero({ ready }: { ready: boolean }) {
 
       {/* Brand imagery, duotoned into the oxblood */}
       <div className="ph-h-stage absolute inset-0 isolate overflow-hidden bg-oxblood lg:left-[51.4%]">
-        {SHOTS.map((s, i) => (
-          <div
-            key={s.src}
-            className={`absolute inset-0 transition-opacity duration-[1600ms] ease-out ${
-              i === shot ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <Image
-              src={s.src}
-              alt={i === shot ? s.alt : ""}
-              fill
-              priority={i === 0}
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className={`object-cover mix-blend-lighten brightness-[0.75] contrast-125 grayscale transition-transform duration-[7000ms] ease-out ${
-                i === shot ? "scale-100" : "scale-[1.08]"
-              }`}
-            />
-          </div>
-        ))}
+        <Image
+          src={IMAGE.src}
+          alt={IMAGE.alt}
+          fill
+          priority
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          className="object-cover mix-blend-lighten brightness-[0.75] contrast-125 grayscale"
+        />
         <div className="absolute inset-0 bg-oxblood/80 lg:bg-oxblood/30" />
-        <div
-          role="group"
-          aria-label="Brand imagery"
-          className="absolute top-5 left-6 z-10 flex lg:left-8"
-        >
-          {SHOTS.map((s, i) => (
-            <button
-              key={s.src}
-              type="button"
-              aria-label={`Show image ${i + 1} of ${SHOTS.length}`}
-              aria-pressed={i === shot}
-              onClick={() => setShot(i)}
-              className="group cursor-pointer px-1 py-3"
-            >
-              <span
-                className={`block h-[2px] w-7 transition-colors duration-500 ${
-                  i === shot
-                    ? "bg-white"
-                    : "bg-white/30 group-hover:bg-white/60"
-                }`}
-              />
-            </button>
-          ))}
-        </div>
       </div>
 
       <p className="ph-h-item absolute top-7 right-6 z-10 font-sans font-medium text-xs tracking-[0.12em] text-powder uppercase sm:right-10">
@@ -193,8 +137,7 @@ export default function Hero({ ready }: { ready: boolean }) {
       />
 
       <div className="absolute right-6 bottom-8 left-6 z-10 flex flex-col gap-6 text-white sm:right-auto sm:bottom-14 sm:left-12 sm:w-[min(40rem,calc(51.4%-4.5rem))]">
-        <p className="ph-h-item flex items-center gap-4 text-[11px] tracking-[0.2em] text-powder uppercase">
-          <span aria-hidden className="block h-px w-8 bg-pink" />
+        <p className="ph-h-item text-[11px] tracking-[0.2em] text-powder uppercase">
           E-commerce strategic partner
         </p>
         <h1 className="ph-h-item font-serif text-[clamp(2.6rem,4.8vw,4.6rem)] leading-[0.95] tracking-[-0.03em]">
