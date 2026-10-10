@@ -2,8 +2,10 @@
 
 import { useState, type FormEvent } from "react";
 
+const labelClass =
+  "flex flex-col gap-1 font-sans text-[11px] font-medium tracking-[0.16em] text-powder uppercase";
 const inputClass =
-  "border border-brand-black/15 px-4 py-3 text-sm font-normal focus:border-brand-red focus:outline-none";
+  "border-0 border-b border-white/30 bg-transparent px-0 py-3 font-sans text-base font-normal tracking-normal text-white normal-case transition-colors focus:border-pink focus:outline-none";
 
 export default function ContactForm() {
   const [name, setName] = useState("");
@@ -17,11 +19,11 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="border border-brand-black/10 bg-white p-10 text-center">
-        <h3 className="font-sans text-base font-medium">
+      <div>
+        <h3 className="font-serif text-3xl leading-tight tracking-[-0.02em]">
           Thanks for reaching out.
         </h3>
-        <p className="mt-2 text-sm text-brand-grey">
+        <p className="mt-3 text-white/80">
           We&apos;ll reply within one to two working days.
         </p>
       </div>
@@ -52,8 +54,8 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="grid gap-4">
-      <label className="flex flex-col gap-2 text-sm font-medium text-brand-black">
+    <form onSubmit={handleSubmit} className="grid gap-5">
+      <label className={labelClass}>
         Name
         <input
           type="text"
@@ -62,7 +64,7 @@ export default function ContactForm() {
           className={inputClass}
         />
       </label>
-      <label className="flex flex-col gap-2 text-sm font-medium text-brand-black">
+      <label className={labelClass}>
         Email *
         <input
           type="email"
@@ -72,7 +74,7 @@ export default function ContactForm() {
           className={inputClass}
         />
       </label>
-      <label className="flex flex-col gap-2 text-sm font-medium text-brand-black">
+      <label className={labelClass}>
         Phone
         <input
           type="tel"
@@ -81,7 +83,7 @@ export default function ContactForm() {
           className={inputClass}
         />
       </label>
-      <label className="flex flex-col gap-2 text-sm font-medium text-brand-black">
+      <label className={labelClass}>
         Comment
         <textarea
           value={comment}
@@ -91,12 +93,12 @@ export default function ContactForm() {
         />
       </label>
 
-      {submitError && <p className="text-sm text-brand-red">{submitError}</p>}
+      {submitError && <p className="text-sm text-powder">{submitError}</p>}
 
       <button
         type="submit"
         disabled={submitting}
-        className="mt-2 w-full bg-brand-black px-6 py-3 font-sans font-medium text-sm uppercase tracking-[0.1em] text-white transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+        className="mt-4 inline-flex w-full items-center justify-center bg-porcelain px-7 py-4 font-sans text-xs font-medium tracking-[0.18em] text-oxblood uppercase transition-colors duration-300 hover:bg-white disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
         {submitting ? "Sending..." : "Send"}
       </button>

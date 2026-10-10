@@ -75,32 +75,38 @@ export default function FaqAccordion() {
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="divide-y divide-brand-black/10 border-y border-brand-black/10"
-    >
+    <div ref={containerRef} className="border-t border-line-strong">
       {FAQS.map((faq, index) => {
         const isOpen = openIndex === index;
         return (
-          <div key={faq.question} className="faq-row group">
+          <div
+            key={faq.question}
+            className="faq-row group border-b border-line-strong"
+          >
             <button
               type="button"
               onClick={() => setOpenIndex(isOpen ? null : index)}
-              className="flex w-full items-center justify-between gap-4 py-5 text-left transition-transform duration-300 group-hover:translate-x-1"
+              className="flex w-full items-start gap-5 py-6 text-left sm:gap-8 sm:py-8"
               aria-expanded={isOpen}
             >
-              <span className="font-sans font-medium text-brand-black transition-colors group-hover:text-brand-red">
+              <span className="w-6 shrink-0 pt-2 font-sans text-xs font-medium tracking-[0.12em] text-burgundy">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span className="flex-1 font-serif text-[clamp(1.45rem,2.3vw,2rem)] leading-[1.08] tracking-[-0.015em] text-oxblood transition-transform duration-500 ease-out group-hover:translate-x-1.5">
                 {faq.question}
               </span>
               <span
-                className={`text-xl text-brand-red transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}
+                aria-hidden
+                className={`pt-1 font-serif text-3xl leading-none text-burgundy transition-transform duration-500 ease-out ${isOpen ? "rotate-45" : ""}`}
               >
                 +
               </span>
             </button>
             <div className={`accordion-panel ${isOpen ? "is-open" : ""}`}>
               <div>
-                <p className="pb-5 text-sm text-brand-grey">{faq.answer}</p>
+                <p className="max-w-xl pb-7 pl-11 text-[15px] leading-relaxed text-ink sm:pb-9 sm:pl-[3.75rem]">
+                  {faq.answer}
+                </p>
               </div>
             </div>
           </div>

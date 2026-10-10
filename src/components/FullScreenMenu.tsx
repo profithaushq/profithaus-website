@@ -9,18 +9,11 @@ import Mark from "@/components/Mark";
 import Logo from "@/components/Logo";
 import PH from "@/components/PH";
 
-// Same links as the concept's site header; the last one is the call to action
-const BAR_LINKS = [
-  { href: "/#elements", label: "The elements" },
-  { href: "/#work", label: "Work" },
-  { href: "/#about", label: "About" },
-];
+// The site header: questions and contact, then the call to action
+const BAR_LINKS = [{ href: "/faq", label: "FAQ and contact" }];
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/#elements", label: "The elements" },
-  { href: "/#work", label: "Work" },
-  { href: "/#about", label: "About" },
   { href: "/apply", label: "Work with us" },
   { href: "/faq", label: "FAQ and contact" },
 ];

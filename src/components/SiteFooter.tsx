@@ -3,9 +3,6 @@ import Logo from "@/components/Logo";
 import PH from "@/components/PH";
 
 const LINKS = [
-  { href: "/#elements", label: "The elements" },
-  { href: "/#work", label: "Work" },
-  { href: "/#about", label: "About" },
   { href: "/faq", label: "FAQ and contact" },
   { href: "/apply", label: "Work with us" },
 ];
