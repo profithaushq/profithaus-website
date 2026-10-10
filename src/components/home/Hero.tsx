@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import LivingBackground from "@/components/LivingBackground";
-import Mark from "@/components/Mark";
 
 const STEPS = Array.from({ length: 15 }, (_, i) => i);
 
@@ -91,13 +90,6 @@ export default function Hero({ ready }: { ready: boolean }) {
         duration: 1.2,
         ease: "power3.inOut",
       })
-        .to(".ph-h-stage", { opacity: 1, duration: 0.2 }, 1.2)
-        .fromTo(
-          ".ph-h-seal",
-          { scale: 1.4 },
-          { scale: 1, duration: 0.7, ease: "power4.out" },
-          1.2,
-        )
         .to(
           reading,
           {
@@ -137,21 +129,6 @@ export default function Hero({ ready }: { ready: boolean }) {
     >
       {/* A quiet sheen in the oxblood, nothing more */}
       <LivingBackground className="absolute inset-0 opacity-30" />
-
-      {/* The seal, stamped onto the divide */}
-      <div className="ph-h-stage pointer-events-none absolute top-[7%] left-[51.4%] z-10 hidden -translate-x-1/2 lg:block">
-        <div className="ph-h-seal rounded-full shadow-[0_14px_40px_rgba(0,0,0,0.35)] ring-2 ring-pink ring-offset-[7px] ring-offset-oxblood">
-          <Mark
-            className="size-36 xl:size-44"
-            style={
-              {
-                "--mark-disc": "var(--porcelain)",
-                "--mark-glyph": "var(--oxblood)",
-              } as React.CSSProperties
-            }
-          />
-        </div>
-      </div>
 
       <p className="ph-h-item absolute top-7 right-6 z-10 font-sans font-medium text-xs tracking-[0.12em] text-powder uppercase sm:right-10">
         {hover === null ? "Neutral · 7.0" : `${zoneLabel(hover)} · ${hover}.0`}

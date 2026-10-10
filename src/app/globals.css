@@ -246,10 +246,6 @@ html.ph-js .ph-h-divide {
   transform: scaleY(0);
 }
 
-html.ph-js .ph-h-stage {
-  opacity: 0;
-}
-
 html.ph-js .ph-h-item {
   opacity: 0;
   transform: translateY(14px);
@@ -258,9 +254,6 @@ html.ph-js .ph-h-item {
 @media (prefers-reduced-motion: reduce) {
   html.ph-js .ph-h-divide {
     transform: none;
-  }
-  html.ph-js .ph-h-stage {
-    opacity: 1;
   }
   html.ph-js .ph-h-item {
     opacity: 1;
