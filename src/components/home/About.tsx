@@ -39,8 +39,18 @@ export default function About() {
               segments={NOTE}
               className="max-w-4xl font-serif text-[clamp(1.9rem,3.6vw,3.3rem)] leading-[1.1] tracking-[-0.015em]"
             />
+            <Reveal delay={150}>
+              <div className="mt-10 flex items-baseline gap-5">
+                <span className="font-sans text-[11px] font-medium tracking-[0.18em] text-burgundy uppercase">
+                  Signed
+                </span>
+                <p className="font-serif text-[clamp(1.9rem,3vw,2.6rem)] leading-none tracking-[-0.01em] italic">
+                  Heidi, Saxon and Tim
+                </p>
+              </div>
+            </Reveal>
             <Reveal delay={200}>
-              <p className="mt-10 font-sans text-xs font-medium tracking-[0.12em] text-burgundy uppercase">
+              <p className="mt-8 font-sans text-xs font-medium tracking-[0.12em] text-burgundy uppercase">
                 Nearly 10 years in the industry · £50m+ in revenue managed
               </p>
             </Reveal>
