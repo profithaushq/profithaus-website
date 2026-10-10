@@ -21,7 +21,7 @@ const SIGNS = [
   {
     name: "Heidi",
     font: biro.style.fontFamily,
-    className: "text-[clamp(1.5rem,2.4vw,2rem)] -rotate-2 translate-y-1",
+    className: "text-[clamp(1.9rem,3vw,2.6rem)] -rotate-2 translate-y-1",
     ink: "#1b2238",
     delay: "0.5s",
   },
