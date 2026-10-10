@@ -118,14 +118,14 @@ export default function Elements() {
         <Reveal>
           <h2
             id="elements-heading"
-            className="font-sans text-xs font-medium tracking-[0.12em] text-burgundy uppercase"
+            className="font-serif text-[clamp(2.6rem,5vw,4.4rem)] leading-none tracking-[-0.02em]"
           >
-            The elements
+            Six elements, <em>one balance.</em>
           </h2>
         </Reveal>
 
         {/* The instrument */}
-        <Reveal delay={120} className="mt-10">
+        <Reveal delay={120} className="mt-14">
           <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
             <p className="font-sans font-medium text-xs tracking-[0.1em] text-burgundy uppercase">
               <PH /> {v.toFixed(1)} · {ZONE_COPY[zone].tag}
