@@ -2,6 +2,14 @@ import type { SVGProps } from "react";
 
 const SERIF = "'Instrument Serif', Georgia, serif";
 
+/** The letters must not pick up case or spacing from whatever label they sit in. */
+const INK = {
+  fontFamily: SERIF,
+  textTransform: "none",
+  letterSpacing: "normal",
+  fontWeight: 400,
+} as const;
+
 /**
  * The seal: a lowercase p, the divide and an italic H. For anywhere the
  * wordmark will not fit: avatars, favicons, stamps and sign-offs (Brand Book 02).
@@ -23,7 +31,7 @@ export default function Mark(props: SVGProps<SVGSVGElement>) {
         x="34.5"
         y="66"
         textAnchor="middle"
-        style={{ fontFamily: SERIF, fontSize: 54 }}
+        style={{ ...INK, fontSize: 54 }}
         fill="var(--mark-glyph, #ffffff)"
       >
         p
@@ -42,7 +50,7 @@ export default function Mark(props: SVGProps<SVGSVGElement>) {
         x="67.5"
         y="64.5"
         textAnchor="middle"
-        style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 44 }}
+        style={{ ...INK, fontStyle: "italic", fontSize: 44 }}
         fill="var(--mark-glyph, #ffffff)"
       >
         H

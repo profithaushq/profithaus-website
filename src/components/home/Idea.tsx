@@ -28,7 +28,7 @@ export default function Idea() {
         <Reveal>
           <p className="flex items-center gap-2.5 font-sans text-xs font-medium tracking-[0.12em] text-burgundy uppercase">
             <span>The</span>
-            <Mark className="size-7" />
+            <Mark className="size-8" />
             <span className="sr-only">pH</span>
             <span>balance formula</span>
           </p>
