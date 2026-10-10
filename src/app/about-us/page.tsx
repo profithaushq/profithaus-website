@@ -15,7 +15,7 @@ const STORY = [
     title: "Why we exist.",
     paragraphs: [
       "We're the agency our founders wished existed when they were the ones hiring agencies.",
-      "8+ years in-house at fast-paced DTC brands, including start-ups like Known Nutrition and global giant THG, across names like LookFantastic and Coggles, turning websites and marketing channels into actual revenue. Which means we've also sat on your side of the table. Briefing agencies. Chasing agencies. Quietly losing faith in agencies.",
+      "Nearly 10 years combined in-house at fast-paced DTC brands, including start-ups like Known Nutrition and global giant THG, across names like LookFantastic and Coggles, turning websites and marketing channels into actual revenue. Which means we've also sat on your side of the table. Briefing agencies. Chasing agencies. Quietly losing faith in agencies.",
       "The slow replies. The strategy decks that looked great and changed nothing. The hours billed that never quite showed up in the numbers.",
       "Most agencies sell you the work. We care about what it actually does. So we built just that.",
     ],
@@ -32,7 +32,7 @@ const STORY = [
     number: "03",
     title: "What we bring.",
     paragraphs: [
-      "Real in-house experience. Commercial thinking. A team that's actually been on your side of the table, managing trading targets, overseeing margins and P&Ls, optimising conversion rates, and turning websites into revenue drivers.",
+      "Real in-house experience. Commercial thinking. A team that's actually been on your side of the table, managing trading targets, overseeing margins and P&Ls, optimising conversion rates, and turning websites into revenue drivers. Between us, we have managed over £50m in revenue.",
     ],
   },
 ];

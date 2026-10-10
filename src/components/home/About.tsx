@@ -36,6 +36,11 @@ export default function About() {
           segments={NOTE}
           className="mt-8 max-w-6xl font-serif text-[clamp(1.9rem,3.9vw,3.5rem)] leading-[1.1] tracking-[-0.015em]"
         />
+        <Reveal delay={200}>
+          <p className="mt-10 font-mono text-xs tracking-[0.12em] text-burgundy uppercase">
+            Nearly 10 years in the industry · £50m+ in revenue managed
+          </p>
+        </Reveal>
       </div>
     </section>
   );

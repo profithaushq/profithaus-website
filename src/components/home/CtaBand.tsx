@@ -12,6 +12,9 @@ export default function CtaBand() {
           >
             Find out where <em className="text-powder">yours reads.</em>
           </h2>
+          <p className="mt-5 font-mono text-[11px] tracking-[0.12em] text-powder uppercase">
+            £50m+ in revenue managed
+          </p>
         </Reveal>
         <Reveal delay={140}>
           <Link
