@@ -67,7 +67,7 @@ export default function Hero({ ready }: { ready: boolean }) {
         </div>
       </div>
 
-      <div className="relative z-10 flex flex-col gap-5 px-6 py-16 sm:absolute sm:top-1/2 sm:right-auto sm:bottom-auto sm:left-12 sm:p-0 sm:w-[min(36rem,calc(72%-4rem))] sm:-translate-y-1/2 lg:w-[min(38rem,calc(51.4%-6rem))]">
+      <div className="relative z-10 flex flex-col gap-5 px-6 py-24 sm:absolute sm:top-1/2 sm:right-auto sm:bottom-auto sm:left-12 sm:p-0 sm:w-[min(36rem,calc(72%-4rem))] sm:-translate-y-1/2 lg:w-[min(38rem,calc(51.4%-6rem))]">
         <p className="ph-h-item font-sans text-[11px] font-medium tracking-[0.2em] text-powder uppercase">
           E-commerce strategic partner
         </p>
