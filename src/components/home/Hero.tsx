@@ -55,16 +55,22 @@ export default function Hero({ ready }: { ready: boolean }) {
       </p>
 
       <div className="relative z-10 py-8 sm:py-10">
-        <h1 className="ph-h-item font-serif text-[clamp(2.7rem,6.4vw,6.6rem)] leading-[0.92] tracking-[-0.035em]">
+        <h1 className="ph-h-item font-serif text-[clamp(2.2rem,4.6vw,4.7rem)] leading-[0.95] tracking-[-0.03em]">
           Making brands harder to ignore and{" "}
           <em className="text-powder">easier to buy from.</em>
         </h1>
 
-        <div className="mt-7 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between sm:gap-14">
-          <p className="ph-h-item max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
-            Your e-commerce director, without the ridiculous salary. Senior
-            advice for small and medium brands, from people who have done the
-            job in-house. We advise first, and can build it too.
+        <div className="mt-8 grid gap-6 md:grid-cols-[1.1fr_1fr_auto] md:items-end md:gap-12">
+          <p className="ph-h-item font-serif text-[clamp(1.5rem,2.4vw,2.2rem)] leading-[1.08] tracking-[-0.015em]">
+            Your e-commerce director,{" "}
+            <em className="text-powder">without the ridiculous salary.</em>
+          </p>
+          <p className="ph-h-item max-w-sm border-l-2 border-pink pl-5 text-[15px] leading-relaxed text-white/75">
+            Senior advice for small and medium brands, from people who have done
+            the job in-house.{" "}
+            <span className="text-white">
+              We advise first, and can build it too.
+            </span>
           </p>
           <p className="ph-h-item shrink-0">
             <Link
