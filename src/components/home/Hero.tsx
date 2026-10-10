@@ -4,22 +4,12 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import LivingBackground from "@/components/LivingBackground";
-
-const PROOF = [
-  { value: "Nearly 10", caption: "years in the industry", big: true },
-  { value: "£50m+", caption: "in revenue managed", big: true },
-  {
-    value: "THG, Known Nutrition",
-    caption: "LookFantastic, Coggles and more",
-    big: false,
-  },
-];
-
+import Mark from "@/components/Mark";
 /**
  * The homepage opening, after the 5c concept: oxblood ground, the divide,
- * a white card carrying the line, and the track record set large on the
- * other side. Motion lives on the blocks themselves: the divide draws, the
- * card wipes open, the proof rises in.
+ * a white card carrying the line, and the seal zoomed in and cropped by the
+ * frame. Motion lives on the blocks themselves: the divide draws, the card
+ * wipes open, the seal fades up.
  */
 export default function Hero({ ready }: { ready: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -69,33 +59,28 @@ export default function Hero({ ready }: { ready: boolean }) {
     <section
       ref={sectionRef}
       data-ph-hero
-      className="relative min-h-[47rem] overflow-hidden sm:min-h-[40rem] bg-oxblood text-white lg:h-[calc(100svh-5.2rem)] lg:max-h-[52rem]"
+      className="relative min-h-[40rem] overflow-hidden bg-oxblood text-white lg:h-[calc(100svh-5.2rem)] lg:max-h-[52rem]"
     >
       {/* A quiet sheen in the oxblood, nothing more */}
       <LivingBackground className="absolute inset-0 opacity-30" />
 
-      {/* The track record, on the far side of the divide */}
-      <ul className="absolute top-8 right-6 left-6 z-10 grid grid-cols-[1fr] gap-4 pr-[34%] sm:right-10 sm:left-auto sm:pr-0 lg:top-0 lg:bottom-0 lg:left-[calc(51.4%+4rem)] lg:flex lg:flex-col lg:justify-center lg:gap-0">
-        {PROOF.map((item) => (
-          <li
-            key={item.value}
-            className="ph-h-item lg:border-t lg:border-white/20 lg:py-9 lg:first:border-t-0"
-          >
-            <p
-              className={`font-serif leading-none tracking-[-0.03em] ${
-                item.big
-                  ? "text-[clamp(1.7rem,7vw,2.2rem)] lg:text-[clamp(3.4rem,6.2vw,6rem)]"
-                  : "text-[clamp(1.3rem,5.4vw,1.7rem)] lg:text-[clamp(1.8rem,3vw,3rem)]"
-              }`}
-            >
-              {item.value}
-            </p>
-            <p className="mt-2 font-sans text-[10px] font-medium tracking-[0.16em] text-powder uppercase lg:mt-3 lg:text-xs">
-              {item.caption}
-            </p>
-          </li>
-        ))}
-      </ul>
+      {/* The seal, zoomed in and cropped by the frame */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-10 -right-24 w-[22rem] sm:-right-32 sm:w-[30rem] lg:top-1/2 lg:right-[-12%] lg:w-[clamp(34rem,56vw,60rem)] lg:-translate-y-1/2"
+      >
+        <div className="ph-h-item">
+          <Mark
+            className="h-auto w-full"
+            style={
+              {
+                "--mark-disc": "var(--burgundy)",
+                "--mark-glyph": "var(--porcelain)",
+              } as React.CSSProperties
+            }
+          />
+        </div>
+      </div>
 
       {/* The divide: pink, vertical, edge to edge, one per layout */}
       <span
