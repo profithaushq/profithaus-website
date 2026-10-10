@@ -5,11 +5,11 @@ import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import LivingBackground from "@/components/LivingBackground";
 import Mark from "@/components/Mark";
+
 /**
- * The homepage opening, after the 5c concept: oxblood ground, the divide,
- * the line set straight onto the oxblood, and the seal zoomed in and cropped by the
- * frame. Motion lives on the blocks themselves: the divide draws, the copy
- * rises in, the seal fades up.
+ * The homepage opening: oxblood ground, the line set straight onto it, and
+ * the seal zoomed in and cropped by the frame. The copy rises in once and the
+ * seal fades up.
  */
 export default function Hero({ ready }: { ready: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -27,23 +27,14 @@ export default function Hero({ ready }: { ready: boolean }) {
     if (reduce) return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
-
-      tl.to(".ph-h-divide", {
-        scaleY: 1,
-        duration: 1.2,
-        ease: "power3.inOut",
-      }).to(
-        ".ph-h-item",
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          stagger: 0.1,
-          ease: "lux",
-        },
-        1.0,
-      );
+      gsap.to(".ph-h-item", {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.1,
+        ease: "lux",
+        delay: 0.2,
+      });
     }, section);
 
     return () => ctx.revert();
@@ -75,12 +66,6 @@ export default function Hero({ ready }: { ready: boolean }) {
           />
         </div>
       </div>
-
-      {/* The divide: pink, vertical, edge to edge, one per layout */}
-      <span
-        aria-hidden
-        className="ph-h-divide absolute top-0 left-[72%] hidden h-full w-[3px] origin-top bg-pink sm:block lg:left-[51.4%]"
-      />
 
       <div className="absolute right-6 bottom-8 left-6 z-10 flex flex-col gap-5 sm:top-1/2 sm:right-auto sm:bottom-auto sm:left-12 sm:w-[min(36rem,calc(72%-4rem))] sm:-translate-y-1/2 lg:w-[min(38rem,calc(51.4%-6rem))]">
         <p className="ph-h-item font-sans text-[11px] font-medium tracking-[0.2em] text-powder uppercase">
