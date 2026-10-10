@@ -61,7 +61,7 @@ export const ELEMENTS: Element[] = [
     title: "Marketing",
     side: "haus",
     description:
-      "Strategy across paid, organic and partnerships, pointed at the same target, so each channel stops claiming the same sale.",
+      "One strategy across paid, organic and partnerships, aimed at the same goal, so your channels stop fighting over credit for the same sale.",
   },
 ];
 
