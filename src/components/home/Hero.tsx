@@ -6,9 +6,9 @@ import { gsap } from "@/lib/gsap";
 import LivingBackground from "@/components/LivingBackground";
 
 const PROOF = [
-  { value: "Nearly 10", caption: "years in the industry" },
-  { value: "£50m+", caption: "in revenue managed" },
-  { value: "THG, Known Nutrition", caption: "LookFantastic, Coggles and more" },
+  "Nearly 10 years in the industry",
+  "£50m+ in revenue managed",
+  "Previously THG, Known Nutrition and LookFantastic",
 ];
 
 /**
@@ -48,7 +48,7 @@ export default function Hero({ ready }: { ready: boolean }) {
       className="relative flex flex-col overflow-hidden bg-oxblood px-6 pt-6 text-white sm:px-10"
     >
       {/* A quiet sheen in the oxblood, nothing more */}
-      <LivingBackground className="absolute inset-0 opacity-30" />
+      <LivingBackground className="absolute inset-0 opacity-15" />
 
       <p className="ph-h-item relative z-10 text-[11px] font-medium tracking-[0.2em] text-powder uppercase">
         E-commerce strategic partner
@@ -60,17 +60,11 @@ export default function Hero({ ready }: { ready: boolean }) {
           <em className="text-powder">easier to buy from.</em>
         </h1>
 
-        <div className="mt-8 grid gap-6 md:grid-cols-[1.1fr_1fr_auto] md:items-end md:gap-12">
-          <p className="ph-h-item font-serif text-[clamp(1.5rem,2.4vw,2.2rem)] leading-[1.08] tracking-[-0.015em]">
-            Your e-commerce director,{" "}
-            <em className="text-powder">without the ridiculous salary.</em>
-          </p>
-          <p className="ph-h-item max-w-sm border-l-2 border-pink pl-5 text-[15px] leading-relaxed text-white/75">
-            Senior advice for small and medium brands, from people who have done
-            the job in-house.{" "}
-            <span className="text-white">
-              We advise first, and can build it too.
-            </span>
+        <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between sm:gap-14">
+          <p className="ph-h-item max-w-xl text-base leading-relaxed text-white/80 sm:text-[17px]">
+            Your e-commerce director, without the ridiculous salary. Senior
+            advice for small and medium brands, from people who have done the
+            job in-house.
           </p>
           <p className="ph-h-item shrink-0">
             <Link
@@ -89,20 +83,10 @@ export default function Hero({ ready }: { ready: boolean }) {
         </div>
       </div>
 
-      {/* The track record */}
-      <ul className="ph-h-item relative z-10 -mx-6 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-white/20 px-6 py-5 sm:-mx-10 sm:px-10 md:grid-cols-[1fr_1fr_1.6fr] md:gap-x-10">
-        {PROOF.map((item, i) => (
-          <li
-            key={item.value}
-            className={i === PROOF.length - 1 ? "col-span-2 md:col-span-1" : ""}
-          >
-            <p className="font-serif text-[clamp(1.7rem,2.6vw,2.4rem)] leading-none tracking-[-0.02em]">
-              {item.value}
-            </p>
-            <p className="mt-2 text-[11px] font-medium tracking-[0.16em] text-powder uppercase">
-              {item.caption}
-            </p>
-          </li>
+      {/* The track record, kept quiet */}
+      <ul className="ph-h-item relative z-10 -mx-6 flex flex-col gap-1.5 border-t border-white/15 px-6 py-4 text-[11px] font-medium tracking-[0.16em] text-powder/80 uppercase sm:-mx-10 sm:flex-row sm:flex-wrap sm:gap-x-10 sm:gap-y-1 sm:px-10">
+        {PROOF.map((item) => (
+          <li key={item}>{item}</li>
         ))}
       </ul>
     </section>
