@@ -1,6 +1,6 @@
-import { Caveat, Nothing_You_Could_Do, Reenie_Beanie } from "next/font/google";
+import { Caveat, Indie_Flower, Reenie_Beanie } from "next/font/google";
 
-const biro = Nothing_You_Could_Do({
+const biro = Indie_Flower({
   subsets: ["latin"],
   weight: "400",
   display: "swap",
@@ -21,7 +21,7 @@ const SIGNS = [
   {
     name: "Heidi",
     font: biro.style.fontFamily,
-    className: "text-[clamp(1.9rem,3vw,2.6rem)] -rotate-2 translate-y-1",
+    className: "text-[clamp(1.55rem,2.5vw,2.1rem)] -rotate-2 translate-y-1",
     ink: "#1b2238",
     delay: "0.5s",
   },
