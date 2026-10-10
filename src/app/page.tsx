@@ -5,7 +5,6 @@ import Preloader from "@/components/Preloader";
 import Hero from "@/components/home/Hero";
 import Idea from "@/components/home/Idea";
 import Elements from "@/components/home/Elements";
-import Principles from "@/components/home/Principles";
 import Work from "@/components/home/Work";
 import About from "@/components/home/About";
 import CtaBand from "@/components/home/CtaBand";
@@ -20,7 +19,6 @@ export default function Home() {
       <Hero ready={introDone} />
       <Idea />
       <Elements />
-      <Principles />
       <Work />
       <About />
       <CtaBand />
