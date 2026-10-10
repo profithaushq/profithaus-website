@@ -10,10 +10,13 @@ export default function Logo({
   tone = "dark",
   className = "",
   style,
+  divide = true,
 }: {
   tone?: "dark" | "light";
   className?: string;
   style?: React.CSSProperties;
+  /** false keeps the gap but hides the pink line, for the hero where the subject covers it */
+  divide?: boolean;
 }) {
   const ink = tone === "light" ? "text-white" : "text-oxblood";
   return (
@@ -28,7 +31,7 @@ export default function Logo({
       </span>
       <span
         aria-hidden
-        className="ph-divide self-center bg-pink"
+        className={`ph-divide self-center ${divide ? "bg-pink" : "bg-transparent"}`}
         style={{
           width: "max(1.5px, 0.0165em)",
           height: "0.82em",

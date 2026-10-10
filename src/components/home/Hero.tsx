@@ -10,7 +10,7 @@ import Logo from "@/components/Logo";
  * The homepage opening: a studio photograph with the wordmark set huge
  * between the floor and the subject. The photo is two matching layers, the
  * full picture at the back and a cut-out of the trousers and shoe on top, so
- * the logo passes behind the legs. The wordmark rises in once.
+ * the logo passes behind the legs. The line sits centred underneath.
  */
 export default function Hero({ ready }: { ready: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -28,13 +28,6 @@ export default function Hero({ ready }: { ready: boolean }) {
     if (reduce) return;
 
     const ctx = gsap.context(() => {
-      gsap.to(".ph-h-word", {
-        opacity: 1,
-        y: 0,
-        duration: 1.6,
-        ease: "lux",
-        delay: 0.1,
-      });
       gsap.to(".ph-h-item", {
         opacity: 1,
         y: 0,
@@ -52,16 +45,16 @@ export default function Hero({ ready }: { ready: boolean }) {
     <section
       ref={sectionRef}
       data-ph-hero
-      className="relative bg-porcelain text-oxblood lg:h-[var(--hero-h)]"
+      className="relative bg-porcelain text-oxblood"
       style={
         {
-          // Desktop height; the wordmark and the line are sized from it so they never collide
-          "--hero-h": "clamp(46rem, calc(100svh - 5.2rem), 60rem)",
+          // The picture fills what is left of the screen once the line underneath has its room
+          "--stage-h": "clamp(24rem, 31vw, 36rem)",
         } as React.CSSProperties
       }
     >
       {/* The picture: floor, then the wordmark, then the subject on top */}
-      <div className="relative h-[17.5rem] overflow-hidden bg-[#a8acb0] sm:h-[28rem] lg:absolute lg:inset-0 lg:h-auto">
+      <div className="relative h-[17rem] overflow-hidden bg-[#a8acb0] sm:h-[22rem] lg:h-[var(--stage-h)]">
         <Image
           src="/images/hero/studio.jpg"
           alt="Wide-leg grey trousers and a pointed black shoe on a grey studio floor"
@@ -69,14 +62,15 @@ export default function Hero({ ready }: { ready: boolean }) {
           priority
           quality={92}
           sizes="(min-width: 1024px) 170vw, 100vw"
-          className="object-cover object-center"
+          className="object-cover object-[50%_20%]"
         />
 
-        <div className="pointer-events-none absolute top-[34%] left-[50.7%] -translate-x-[51.3%] -translate-y-1/2 lg:top-[29%]">
-          <div className="ph-h-word">
+        <div className="pointer-events-none absolute top-[40%] left-[50.7%] -translate-x-[51.3%] -translate-y-1/2 lg:top-[41%]">
+          <div>
             <Logo
+              divide={false}
               className="whitespace-nowrap"
-              style={{ fontSize: "min(27vw, calc(var(--hero-h) * 0.4))" }}
+              style={{ fontSize: "min(25.5vw, calc(var(--stage-h) * 0.78))" }}
             />
           </div>
         </div>
@@ -89,7 +83,7 @@ export default function Hero({ ready }: { ready: boolean }) {
           priority
           quality={92}
           sizes="(min-width: 1024px) 170vw, 100vw"
-          className="pointer-events-none object-cover object-center"
+          className="pointer-events-none object-cover object-[50%_20%]"
         />
 
         {/* A fine film grain over the whole picture, wordmark included */}
@@ -103,20 +97,20 @@ export default function Hero({ ready }: { ready: boolean }) {
         />
       </div>
 
-      {/* The line */}
-      <div className="relative z-10 flex flex-col gap-4 px-6 py-8 sm:px-10 sm:py-10 lg:absolute lg:bottom-12 lg:left-12 lg:w-[min(30rem,32%)] lg:p-0">
+      {/* The line, centred underneath */}
+      <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-5 px-6 py-12 text-center sm:px-10 lg:py-14">
         <p className="ph-h-item font-sans text-[11px] font-medium tracking-[0.2em] text-burgundy uppercase">
           E-commerce strategic partner
         </p>
-        <h1 className="ph-h-item font-serif text-[clamp(1.9rem,2.9vw,2.9rem)] leading-[0.98] tracking-[-0.03em]">
+        <h1 className="ph-h-item font-serif text-[clamp(2rem,4.6vw,4.4rem)] leading-[0.98] tracking-[-0.03em]">
           <span className="block text-balance">
             Making brands harder to ignore and
           </span>
           <em className="block text-burgundy">easier to buy from.</em>
         </h1>
-        <p className="ph-h-item max-w-md text-[15px] leading-relaxed text-ink">
-          Your e-commerce director, without the ridiculous salary. Senior advice
-          for small and medium brands.
+        <p className="ph-h-item max-w-4xl text-base leading-relaxed text-ink sm:text-lg">
+          Your e-commerce director, without the ridiculous salary. Senior
+          support for small and medium brands.
         </p>
         <p className="ph-h-item">
           <Link
