@@ -1,4 +1,5 @@
 import WordReveal, { type Segment } from "@/components/WordReveal";
+import Image from "next/image";
 import Reveal from "@/components/Reveal";
 
 const NOTE: Segment[] = [
@@ -32,15 +33,30 @@ export default function About() {
             A note from the founders
           </h2>
         </Reveal>
-        <WordReveal
-          segments={NOTE}
-          className="mt-8 max-w-6xl font-serif text-[clamp(1.9rem,3.9vw,3.5rem)] leading-[1.1] tracking-[-0.015em]"
-        />
-        <Reveal delay={200}>
-          <p className="mt-10 font-sans font-medium text-xs tracking-[0.12em] text-burgundy uppercase">
-            Nearly 10 years in the industry · £50m+ in revenue managed
-          </p>
-        </Reveal>
+        <div className="mt-8 grid items-start gap-12 lg:grid-cols-[1fr_21rem] lg:gap-16">
+          <div>
+            <WordReveal
+              segments={NOTE}
+              className="max-w-4xl font-serif text-[clamp(1.9rem,3.6vw,3.3rem)] leading-[1.1] tracking-[-0.015em]"
+            />
+            <Reveal delay={200}>
+              <p className="mt-10 font-sans text-xs font-medium tracking-[0.12em] text-burgundy uppercase">
+                Nearly 10 years in the industry · £50m+ in revenue managed
+              </p>
+            </Reveal>
+          </div>
+          <Reveal delay={150}>
+            <div className="group relative mx-auto aspect-[3/4] w-full max-w-[18rem] overflow-hidden bg-porcelain lg:max-w-none">
+              <Image
+                src="/images/brand/wax.jpg"
+                alt="The pH seal pressed into silver wax"
+                fill
+                sizes="(min-width: 1024px) 21rem, 18rem"
+                className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]"
+              />
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

@@ -1,6 +1,5 @@
 import Reveal from "@/components/Reveal";
 import Mark from "@/components/Mark";
-import BrandGallery from "@/components/home/BrandGallery";
 import { ELEMENTS } from "@/data/elements";
 
 const SIDES = [
@@ -86,12 +85,6 @@ export default function Idea() {
           </p>
         </Reveal>
       </div>
-
-      <Reveal delay={100}>
-        <div className="mx-auto mt-16 max-w-[1400px] sm:mt-20">
-          <BrandGallery />
-        </div>
-      </Reveal>
     </section>
   );
 }
