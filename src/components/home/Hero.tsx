@@ -52,7 +52,7 @@ export default function Hero({ ready }: { ready: boolean }) {
       {/* The seal, zoomed in and cropped by the frame */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-10 -right-24 w-[22rem] sm:-right-32 sm:w-[30rem] lg:top-1/2 lg:right-[-12%] lg:w-[clamp(34rem,56vw,60rem)] lg:-translate-y-1/2"
+        className="pointer-events-none absolute top-10 left-1/2 w-[15rem] -translate-x-1/2 sm:-top-10 sm:right-[-8rem] sm:left-auto sm:w-[30rem] sm:translate-x-0 lg:top-1/2 lg:right-[-12%] lg:w-[clamp(34rem,56vw,60rem)] lg:-translate-y-1/2"
       >
         <div className="ph-h-item">
           <Mark
