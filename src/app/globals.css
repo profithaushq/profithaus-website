@@ -395,3 +395,12 @@ html.ph-js .word-reveal.is-in .word-reveal-w span[style] {
     transition: none;
   }
 }
+
+/* iOS zooms the page when a field under 16px is focused */
+@media (max-width: 767px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}

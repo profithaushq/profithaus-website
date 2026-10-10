@@ -22,7 +22,7 @@ export default function ContactForm() {
           Thanks for reaching out.
         </h3>
         <p className="mt-2 text-sm text-brand-grey">
-          We&apos;ll reply within 1–2 working days.
+          We&apos;ll reply within one to two working days.
         </p>
       </div>
     );

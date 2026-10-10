@@ -101,6 +101,9 @@ export default function FullScreenMenu() {
     const overlay = overlayRef.current;
     if (!overlay) return;
 
+    // A stale open/close tween must never finish after a newer one starts
+    gsap.killTweensOf(overlay);
+
     if (open) {
       getLenis()?.stop();
       document.body.style.overflow = "hidden";
@@ -227,7 +230,7 @@ export default function FullScreenMenu() {
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="flex flex-col gap-1.5 p-2 md:hidden"
+            className="-mr-2 flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
             aria-label="Toggle menu"
             aria-expanded={open}
           >

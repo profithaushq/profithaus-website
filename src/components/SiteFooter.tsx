@@ -26,13 +26,13 @@ export default function SiteFooter() {
         <div className="flex flex-col gap-6 md:items-end">
           <nav
             aria-label="Footer"
-            className="flex flex-wrap gap-x-7 gap-y-2 font-sans font-medium text-xs tracking-[0.08em]"
+            className="flex flex-wrap gap-x-7 gap-y-0 font-sans font-medium text-xs tracking-[0.08em]"
           >
             {LINKS.map((l) => (
               <Link
                 key={l.href + l.label}
                 href={l.href}
-                className="transition-colors duration-300 hover:text-burgundy"
+                className="py-3 transition-colors duration-300 hover:text-burgundy"
               >
                 {l.label}
               </Link>
@@ -41,7 +41,7 @@ export default function SiteFooter() {
           <p className="font-sans font-medium text-[11px] tracking-[0.1em] text-ink-soft uppercase">
             <a
               href="mailto:team@profithaus.co.uk"
-              className="hover:text-burgundy"
+              className="inline-block py-2 hover:text-burgundy"
             >
               team@profithaus.co.uk
             </a>{" "}
