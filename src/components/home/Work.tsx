@@ -24,7 +24,7 @@ export default function Work() {
     >
       <div className="mx-auto max-w-[1400px]">
         <Reveal>
-          <p className="font-mono text-xs tracking-[0.12em] text-burgundy uppercase">
+          <p className="font-sans font-medium text-xs tracking-[0.12em] text-burgundy uppercase">
             Work
           </p>
           <h2 id="work-heading" className="sr-only">
@@ -35,18 +35,18 @@ export default function Work() {
         <div className="mt-8 grid gap-4 lg:grid-cols-[2fr_1fr]">
           <Reveal>
             <figure className="group flex h-full min-h-[22rem] flex-col justify-between bg-oxblood p-7 text-white transition-[transform,background-color] duration-500 ease-out hover:-translate-y-1.5 hover:bg-burgundy sm:p-10">
-              <figcaption className="font-mono text-xs tracking-[0.12em] text-powder uppercase">
+              <figcaption className="font-sans font-medium text-xs tracking-[0.12em] text-powder uppercase">
                 What clients say
               </figcaption>
               <blockquote className="mt-10 font-serif text-[clamp(1.9rem,3.4vw,3.2rem)] leading-[1.02] tracking-[-0.02em]">
                 &ldquo;{LINE}&rdquo;
               </blockquote>
               <div className="mt-10">
-                <p className="font-mono text-[11px] tracking-[0.1em] text-powder uppercase">
+                <p className="font-sans font-medium text-[11px] tracking-[0.1em] text-powder uppercase">
                   Miriam, Director at Oceans Alive
                 </p>
                 <details className="mt-5 max-w-2xl">
-                  <summary className="inline-flex cursor-pointer list-none font-mono text-[11px] tracking-[0.1em] uppercase underline decoration-pink underline-offset-[6px] [&::-webkit-details-marker]:hidden">
+                  <summary className="inline-flex cursor-pointer list-none font-sans font-medium text-[11px] tracking-[0.1em] uppercase underline decoration-pink underline-offset-[6px] [&::-webkit-details-marker]:hidden">
                     Read the full review
                   </summary>
                   <p className="ph-swap mt-5 text-[15px] leading-relaxed text-white/90">
@@ -59,7 +59,7 @@ export default function Work() {
 
           <Reveal delay={120}>
             <div className="flex h-full min-h-[22rem] flex-col justify-between bg-porcelain p-7 sm:p-10">
-              <p className="font-mono text-xs tracking-[0.12em] text-burgundy uppercase">
+              <p className="font-sans font-medium text-xs tracking-[0.12em] text-burgundy uppercase">
                 Previously operated
               </p>
               <ul className="mt-10">
@@ -78,7 +78,7 @@ export default function Work() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-8 font-mono text-[11px] tracking-[0.1em] uppercase">
+              <p className="mt-8 font-sans font-medium text-[11px] tracking-[0.1em] uppercase">
                 Across the THG group and Known Nutrition
               </p>
             </div>

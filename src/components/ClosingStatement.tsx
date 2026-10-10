@@ -23,7 +23,7 @@ export default function ClosingStatement({
           </h2>
           <Link
             href={href}
-            className="mt-12 inline-block bg-porcelain px-7 py-4 font-mono text-xs tracking-[0.1em] text-oxblood uppercase transition-[transform,background-color] duration-500 ease-out hover:-translate-y-1 hover:bg-white"
+            className="mt-12 inline-block bg-porcelain px-7 py-4 font-sans font-medium text-xs tracking-[0.1em] text-oxblood uppercase transition-[transform,background-color] duration-500 ease-out hover:-translate-y-1 hover:bg-white"
           >
             Apply to work with us
           </Link>

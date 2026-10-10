@@ -26,7 +26,7 @@ export default function PageHeader({
       />
 
       <div className="relative mx-auto flex min-h-[26rem] max-w-[1400px] flex-col justify-between px-6 pt-8 pb-14 sm:min-h-[32rem] sm:px-10 sm:pb-20">
-        <div className="flex items-baseline justify-between font-mono text-xs tracking-[0.12em] text-powder uppercase">
+        <div className="flex items-baseline justify-between font-sans font-medium text-xs tracking-[0.12em] text-powder uppercase">
           <span>{eyebrow}</span>
           <span className="hidden sm:inline">
             <span className="normal-case">pH</span> 7.0 · Neutral

@@ -203,7 +203,7 @@ export default function FullScreenMenu() {
 
           <nav
             aria-label="Main"
-            className="hidden items-center gap-8 font-mono text-xs tracking-[0.08em] md:flex"
+            className="hidden items-center gap-8 font-sans font-medium text-xs tracking-[0.08em] md:flex"
           >
             {BAR_LINKS.map((link) => (
               <Link
@@ -250,7 +250,7 @@ export default function FullScreenMenu() {
         aria-label="Site menu"
       >
         <div className="flex items-center justify-between px-6 py-5">
-          <span className="font-mono text-xs tracking-[0.14em] text-powder uppercase">
+          <span className="font-sans font-medium text-xs tracking-[0.14em] text-powder uppercase">
             Menu · <PH /> 7.0
           </span>
           <button
@@ -296,11 +296,11 @@ export default function FullScreenMenu() {
         <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/15 px-6 py-6 lg:px-16">
           <a
             href="mailto:team@profithaus.co.uk"
-            className="font-mono text-xs tracking-[0.1em] text-powder uppercase underline decoration-white/30 underline-offset-4 hover:text-white"
+            className="font-sans font-medium text-xs tracking-[0.1em] text-powder uppercase underline decoration-white/30 underline-offset-4 hover:text-white"
           >
             team@profithaus.co.uk
           </a>
-          <div className="flex gap-6 font-mono text-xs tracking-[0.1em] text-powder/60 uppercase">
+          <div className="flex gap-6 font-sans font-medium text-xs tracking-[0.1em] text-powder/60 uppercase">
             <span>Instagram</span>
             <span>LinkedIn</span>
           </div>

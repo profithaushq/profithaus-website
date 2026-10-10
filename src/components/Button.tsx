@@ -22,7 +22,7 @@ export default function Button({
   return (
     <Link
       href={href}
-      className={`group inline-flex items-center justify-center gap-2 px-6 py-3 font-mono text-sm uppercase tracking-[0.1em] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 ${VARIANTS[variant]}`}
+      className={`group inline-flex items-center justify-center gap-2 px-6 py-3 font-sans font-medium text-sm uppercase tracking-[0.1em] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 ${VARIANTS[variant]}`}
     >
       {children}
       <span

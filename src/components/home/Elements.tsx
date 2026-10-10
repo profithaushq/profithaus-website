@@ -133,7 +133,7 @@ export default function Elements() {
         {/* The instrument */}
         <Reveal delay={120} className="mt-14">
           <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
-            <p className="font-mono text-xs tracking-[0.1em] text-burgundy uppercase">
+            <p className="font-sans font-medium text-xs tracking-[0.1em] text-burgundy uppercase">
               <PH /> {v.toFixed(1)} · {ZONE_COPY[zone].tag}
             </p>
             <p
@@ -168,7 +168,7 @@ export default function Elements() {
                     style={{ height: on ? 44.8 : 28 }}
                   />
                   <span
-                    className={`font-mono text-[11px] transition-colors duration-300 ${
+                    className={`font-sans font-medium text-[11px] transition-colors duration-300 ${
                       on ? "text-oxblood" : "text-mute"
                     }`}
                   >
@@ -179,7 +179,7 @@ export default function Elements() {
             })}
           </div>
 
-          <div className="mt-3 flex justify-between font-mono text-[10px] tracking-[0.08em] text-oxblood uppercase sm:text-[11px]">
+          <div className="mt-3 flex justify-between font-sans font-medium text-[10px] tracking-[0.08em] text-oxblood uppercase sm:text-[11px]">
             <span>0 · All profit, no pull</span>
             <span className="hidden sm:inline">7 · profithaus</span>
             <span>14 · All haus, no sales</span>
@@ -205,7 +205,7 @@ export default function Elements() {
                     } ${isActive ? "outline-2 outline-offset-4 outline-oxblood" : ""}`}
                   >
                     <span
-                      className={`flex justify-between font-mono text-[9px] tracking-[0.08em] sm:text-[10px] ${
+                      className={`flex justify-between font-sans font-medium text-[9px] tracking-[0.08em] sm:text-[10px] ${
                         profit ? "text-powder" : "text-burgundy"
                       }`}
                     >
@@ -241,7 +241,7 @@ export default function Elements() {
           </div>
           <div key={`d-${active.n}`} className="ph-swap max-w-2xl">
             <p
-              className={`font-mono text-xs tracking-[0.12em] uppercase ${
+              className={`font-sans font-medium text-xs tracking-[0.12em] uppercase ${
                 profitSide ? "text-powder" : "text-burgundy"
               }`}
             >
@@ -258,7 +258,7 @@ export default function Elements() {
               {active.description}
             </p>
             <p
-              className={`mt-5 font-mono text-[11px] tracking-[0.1em] uppercase ${
+              className={`mt-5 font-sans font-medium text-[11px] tracking-[0.1em] uppercase ${
                 profitSide ? "text-powder" : "text-burgundy"
               }`}
             >
@@ -271,7 +271,7 @@ export default function Elements() {
         <Reveal className="mt-12">
           <div className="grid gap-px bg-line-strong md:grid-cols-[1.1fr_1fr_1fr]">
             <div className="bg-white py-8 pr-6 md:py-10">
-              <p className="font-mono text-xs tracking-[0.12em] text-burgundy uppercase">
+              <p className="font-sans font-medium text-xs tracking-[0.12em] text-burgundy uppercase">
                 How we work
               </p>
               <p className="mt-4 font-serif text-[clamp(2.1rem,3.8vw,3.2rem)] leading-[1.05] tracking-[-0.02em]">
@@ -279,7 +279,7 @@ export default function Elements() {
               </p>
             </div>
             <div className="bg-porcelain p-7 sm:p-8">
-              <p className="font-mono text-[11px] tracking-[0.12em] text-burgundy uppercase">
+              <p className="font-sans font-medium text-[11px] tracking-[0.12em] text-burgundy uppercase">
                 01 · The main job
               </p>
               <p className="mt-3 font-serif text-2xl leading-tight">
@@ -291,7 +291,7 @@ export default function Elements() {
               </p>
             </div>
             <div className="bg-porcelain p-7 sm:p-8">
-              <p className="font-mono text-[11px] tracking-[0.12em] text-burgundy uppercase">
+              <p className="font-sans font-medium text-[11px] tracking-[0.12em] text-burgundy uppercase">
                 02 · When it fits
               </p>
               <p className="mt-3 font-serif text-2xl leading-tight">

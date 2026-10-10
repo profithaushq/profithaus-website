@@ -7,9 +7,9 @@ import LivingBackground from "@/components/LivingBackground";
 
 /**
  * The homepage opening, after the 5c concept: oxblood ground, the reading
- * (7.0) set huge and bleeding off the edge, the divide, and a white card
- * carrying the line. Motion lives on the blocks themselves: the reading
- * counts up, the divide draws, the card wipes open.
+ * (7.0) set huge and bleeding off the edge, the divide, and the line set
+ * straight onto the oxblood. Motion lives on the elements themselves: the
+ * reading counts up, the divide draws, the copy rises in.
  */
 export default function Hero({ ready }: { ready: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -68,11 +68,6 @@ export default function Hero({ ready }: { ready: boolean }) {
           0.1,
         )
         .to(
-          ".ph-h-card",
-          { clipPath: "inset(0% 0 0 0)", duration: 1.3, ease: "lux" },
-          0.45,
-        )
-        .to(
           ".ph-h-item",
           {
             opacity: 1,
@@ -97,7 +92,7 @@ export default function Hero({ ready }: { ready: boolean }) {
       {/* A quiet sheen in the oxblood, nothing more */}
       <LivingBackground className="absolute inset-0 opacity-30" />
 
-      <p className="ph-h-item absolute top-7 right-6 z-10 font-mono text-xs tracking-[0.12em] text-powder uppercase sm:right-10">
+      <p className="ph-h-item absolute top-7 right-6 z-10 font-sans font-medium text-xs tracking-[0.12em] text-powder uppercase sm:right-10">
         Neutral · 7.0
       </p>
 
@@ -118,27 +113,34 @@ export default function Hero({ ready }: { ready: boolean }) {
       {/* The divide: pink, vertical, edge to edge, one per layout */}
       <span
         aria-hidden
-        className="ph-h-divide absolute inset-y-0 left-[72%] w-[3px] origin-top bg-pink lg:left-[51.4%]"
+        className="ph-h-divide absolute top-0 left-[72%] h-[34%] w-[2px] origin-top bg-pink sm:h-full lg:left-[51.4%]"
       />
 
-      <div className="ph-h-card absolute right-4 bottom-4 left-4 z-10 flex flex-col gap-5 bg-white p-7 text-oxblood sm:right-auto sm:bottom-12 sm:left-12 sm:w-[min(40rem,calc(51.4%-4.5rem))] sm:p-10">
-        <p className="ph-h-item font-mono text-xs tracking-[0.12em] text-burgundy uppercase">
+      <div className="absolute right-6 bottom-8 left-6 z-10 flex flex-col gap-6 text-white sm:right-auto sm:bottom-14 sm:left-12 sm:w-[min(40rem,calc(51.4%-4.5rem))]">
+        <p className="ph-h-item flex items-center gap-4 text-[11px] tracking-[0.2em] text-powder uppercase">
+          <span aria-hidden className="block h-px w-8 bg-pink" />
           E-commerce partner
         </p>
-        <h1 className="ph-h-item font-serif text-[clamp(2.4rem,4.4vw,4.1rem)] leading-[0.95] tracking-[-0.03em]">
-          Making brands harder to ignore and <em>easier to buy from.</em>
+        <h1 className="ph-h-item font-serif text-[clamp(2.6rem,4.8vw,4.6rem)] leading-[0.95] tracking-[-0.03em]">
+          Making brands harder to ignore and{" "}
+          <em className="text-powder">easier to buy from.</em>
         </h1>
-        <span aria-hidden className="ph-h-item block h-[2px] bg-pink" />
-        <p className="ph-h-item max-w-md text-[15px] leading-relaxed text-ink">
+        <p className="ph-h-item max-w-md text-[15px] leading-relaxed text-white/80">
           An e-commerce consultancy for small and medium brands, run by people
           who have done the job in-house. We advise first, and can build it too.
         </p>
         <p className="ph-h-item">
           <Link
             href="/apply"
-            className="inline-block bg-oxblood px-6 py-3.5 font-mono text-xs tracking-[0.1em] text-white uppercase transition-colors duration-300 hover:bg-burgundy"
+            className="group inline-flex items-center gap-3 border-b border-pink pb-2 text-xs tracking-[0.18em] text-white uppercase transition-colors duration-300 hover:text-powder"
           >
             Apply to work with us
+            <span
+              aria-hidden
+              className="transition-transform duration-500 ease-out group-hover:translate-x-1.5"
+            >
+              →
+            </span>
           </Link>
         </p>
       </div>

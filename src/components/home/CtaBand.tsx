@@ -12,14 +12,14 @@ export default function CtaBand() {
           >
             Find out where <em className="text-powder">yours reads.</em>
           </h2>
-          <p className="mt-5 font-mono text-[11px] tracking-[0.12em] text-powder uppercase">
+          <p className="mt-5 font-sans font-medium text-[11px] tracking-[0.12em] text-powder uppercase">
             £50m+ in revenue managed
           </p>
         </Reveal>
         <Reveal delay={140}>
           <Link
             href="/apply"
-            className="inline-block bg-porcelain px-7 py-4 font-mono text-xs tracking-[0.1em] text-oxblood uppercase transition-[transform,background-color] duration-500 ease-out hover:-translate-y-1 hover:bg-white"
+            className="inline-block bg-porcelain px-7 py-4 font-sans font-medium text-xs tracking-[0.1em] text-oxblood uppercase transition-[transform,background-color] duration-500 ease-out hover:-translate-y-1 hover:bg-white"
           >
             Apply to work with us
           </Link>

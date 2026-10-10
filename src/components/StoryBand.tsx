@@ -27,7 +27,7 @@ export default function StoryBand({
       <div className="mx-auto grid max-w-[1400px] gap-10 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
         <Reveal>
           <p
-            className={`font-mono text-xs tracking-[0.12em] uppercase ${
+            className={`font-sans font-medium text-xs tracking-[0.12em] uppercase ${
               dark ? "text-powder" : "text-burgundy"
             }`}
           >

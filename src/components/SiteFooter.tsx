@@ -18,7 +18,7 @@ export default function SiteFooter() {
           <Link href="/" aria-label="profithaus home">
             <Logo className="text-[2.4rem]" />
           </Link>
-          <p className="mt-3 font-mono text-[11px] tracking-[0.14em] uppercase">
+          <p className="mt-3 font-sans font-medium text-[11px] tracking-[0.14em] uppercase">
             <PH /> 7.0 · E-commerce partner
           </p>
         </div>
@@ -26,7 +26,7 @@ export default function SiteFooter() {
         <div className="flex flex-col gap-6 md:items-end">
           <nav
             aria-label="Footer"
-            className="flex flex-wrap gap-x-7 gap-y-2 font-mono text-xs tracking-[0.08em]"
+            className="flex flex-wrap gap-x-7 gap-y-2 font-sans font-medium text-xs tracking-[0.08em]"
           >
             {LINKS.map((l) => (
               <Link
@@ -38,7 +38,7 @@ export default function SiteFooter() {
               </Link>
             ))}
           </nav>
-          <p className="font-mono text-[11px] tracking-[0.1em] text-ink-soft uppercase">
+          <p className="font-sans font-medium text-[11px] tracking-[0.1em] text-ink-soft uppercase">
             <a
               href="mailto:team@profithaus.co.uk"
               className="hover:text-burgundy"

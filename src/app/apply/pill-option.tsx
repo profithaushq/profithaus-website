@@ -60,7 +60,7 @@ export function OptionCard({
 export function ProgressBar({ step, total }: { step: number; total: number }) {
   return (
     <div className="mb-2">
-      <p className="text-center font-mono text-xs uppercase tracking-[0.12em] text-brand-grey">
+      <p className="text-center font-sans font-medium text-xs uppercase tracking-[0.12em] text-brand-grey">
         Step {step} of {total}
       </p>
       <div className="mt-4 flex gap-2">

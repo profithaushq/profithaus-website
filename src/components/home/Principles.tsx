@@ -32,7 +32,7 @@ export default function Principles() {
     >
       <div className="mx-auto max-w-[1400px]">
         <Reveal>
-          <p className="font-mono text-xs tracking-[0.12em] text-burgundy uppercase">
+          <p className="font-sans font-medium text-xs tracking-[0.12em] text-burgundy uppercase">
             How we behave
           </p>
           <h2 id="principles-heading" className="sr-only">
@@ -50,7 +50,9 @@ export default function Principles() {
                     aria-hidden
                     className="absolute -top-px left-0 h-px w-full origin-left scale-x-0 bg-oxblood transition-transform duration-700 ease-out group-hover:scale-x-100"
                   />
-                  <p className="font-mono text-xs text-burgundy">{p.n}</p>
+                  <p className="font-sans font-medium text-xs text-burgundy">
+                    {p.n}
+                  </p>
                   <h3 className="mt-5 font-serif text-[2rem] leading-[1] tracking-[-0.02em] transition-transform duration-500 ease-out group-hover:translate-x-1.5">
                     {p.title}
                   </h3>

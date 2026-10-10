@@ -340,7 +340,7 @@ export default function ApplyForm() {
           <button
             type="button"
             onClick={() => setStep((s) => s - 1)}
-            className="flex-1 border border-brand-black/15 px-6 py-3 font-mono text-sm uppercase tracking-[0.1em] text-brand-black transition-colors hover:border-brand-black/30 sm:flex-none"
+            className="flex-1 border border-brand-black/15 px-6 py-3 font-sans font-medium text-sm uppercase tracking-[0.1em] text-brand-black transition-colors hover:border-brand-black/30 sm:flex-none"
           >
             Back
           </button>
@@ -354,7 +354,7 @@ export default function ApplyForm() {
             disabled={
               (step === 1 && !step1Valid) || (step === 2 && !step2Valid)
             }
-            className="flex-1 bg-brand-black px-6 py-3 font-mono text-sm uppercase tracking-[0.1em] text-white transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-40 sm:flex-none"
+            className="flex-1 bg-brand-black px-6 py-3 font-sans font-medium text-sm uppercase tracking-[0.1em] text-white transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-40 sm:flex-none"
           >
             Next
           </button>
@@ -364,7 +364,7 @@ export default function ApplyForm() {
             type="button"
             onClick={submitApplication}
             disabled={submitting}
-            className="flex-1 bg-brand-black px-6 py-3 font-mono text-sm uppercase tracking-[0.1em] text-white transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-60 sm:flex-none"
+            className="flex-1 bg-brand-black px-6 py-3 font-sans font-medium text-sm uppercase tracking-[0.1em] text-white transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-60 sm:flex-none"
           >
             {submitting ? "Submitting..." : "Apply now"}
           </button>
