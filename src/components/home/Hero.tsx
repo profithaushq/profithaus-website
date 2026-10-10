@@ -52,7 +52,13 @@ export default function Hero({ ready }: { ready: boolean }) {
     <section
       ref={sectionRef}
       data-ph-hero
-      className="relative bg-porcelain text-oxblood lg:h-[min(calc(100svh-5.2rem),46rem)] lg:min-h-[36rem]"
+      className="relative bg-porcelain text-oxblood lg:h-[var(--hero-h)]"
+      style={
+        {
+          // Desktop height; the wordmark and the line are sized from it so they never collide
+          "--hero-h": "clamp(46rem, calc(100svh - 5.2rem), 60rem)",
+        } as React.CSSProperties
+      }
     >
       {/* The picture: floor, then the wordmark, then the subject on top */}
       <div className="relative h-[17.5rem] overflow-hidden bg-[#a8acb0] sm:h-[28rem] lg:absolute lg:inset-0 lg:h-auto">
@@ -65,11 +71,11 @@ export default function Hero({ ready }: { ready: boolean }) {
           className="object-cover object-center"
         />
 
-        <div className="pointer-events-none absolute top-[34%] left-[50.7%] -translate-x-[51.3%] -translate-y-1/2">
+        <div className="pointer-events-none absolute top-[34%] left-[50.7%] -translate-x-[51.3%] -translate-y-1/2 lg:top-[29%]">
           <div className="ph-h-word">
             <Logo
               className="whitespace-nowrap"
-              style={{ fontSize: "min(27vw, 50svh)" }}
+              style={{ fontSize: "min(27vw, calc(var(--hero-h) * 0.4))" }}
             />
           </div>
         </div>
