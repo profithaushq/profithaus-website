@@ -87,7 +87,7 @@ export default function Marquee({
           <span key={`${item}-${index}`} className="flex items-center gap-8">
             <span
               className={`${VARIANTS[variant]} ${
-                variant === "display" && (index % items.length) % 2 === 1
+                variant === "display" && index % items.length % 2 === 1
                   ? "ph-outline"
                   : ""
               }`}

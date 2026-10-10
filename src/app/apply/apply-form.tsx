@@ -1,374 +1,373 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent } from "react";
-import { CONTACT_EMAIL } from "@/config/site";
+import { useEffect, useRef, useState } from "react";
+import { gsap } from "@/lib/gsap";
+import { Pill, OptionCard, ProgressBar } from "./pill-option";
 
-const ROLES = [
-  "Founder or co-founder",
-  "Head of marketing or ecommerce",
+const TOTAL_STEPS = 4;
+
+const REVENUE_BANDS = ["£0–5k", "£5–10k", "£10–20k", "£20–50k", "£50k+"];
+const TEAM_SIZES = [
+  "Just me",
+  "Under 5 people",
+  "5–15 people",
+  "15–30 people",
+  "30+ people",
+];
+const WAYS_OF_WORKING = [
+  { title: "Consulting", description: "Strategic guidance" },
+  { title: "Custom Partner Retainer", description: "Ongoing partnership" },
+  { title: "One Time Audit", description: "Deep dive review" },
+  { title: "One Time Project", description: "Specific deliverable" },
+  { title: "Not sure yet", description: "We'll help you decide" },
+];
+const SUPPORT_AREAS = [
+  "Ecommerce Trading",
+  "Website Build & Management",
+  "Digital Business Management",
   "Other",
 ];
-const CATEGORIES = [
-  "Fashion",
-  "Beauty",
-  "Accessories or jewellery",
-  "Something else",
-];
-const REVENUES = [
-  "Pre-launch",
-  "Under £500k",
-  "£500k to £2m",
-  "£2m to £10m",
-  "£10m+",
-];
-const SOURCES = [
-  "LinkedIn",
-  "Instagram or TikTok",
-  "Referral",
-  "Search",
+const BRAND_BLOCKERS = [
+  "Website design/low conversion",
+  "Trading strategy needs improvement",
+  "Not enough traffic",
+  "Margins or profitability unclear",
+  "Unsure what's working",
   "Other",
 ];
 
-type Values = {
-  name: string;
-  email: string;
-  brand: string;
-  website: string;
-  role: string;
-  category: string;
-  revenue: string;
-  challenge: string;
-  source: string;
-};
+const inputClass =
+  "border border-brand-black/15 px-4 py-3 text-sm font-normal focus:border-brand-red focus:outline-none";
 
-const EMPTY: Values = {
-  name: "",
-  email: "",
-  brand: "",
-  website: "",
-  role: "",
-  category: "",
-  revenue: "",
-  challenge: "",
-  source: "",
-};
-
-type Errors = Partial<Record<keyof Values, string>>;
-
-function validate(v: Values): Errors {
-  const e: Errors = {};
-  if (!v.name.trim()) e.name = "Add your name so we know who to reply to";
-  if (!v.email.trim()) e.email = "Add your email so we can reply";
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim()))
-    e.email = "That email doesn't look quite right, can you check it?";
-  if (!v.brand.trim()) e.brand = "Add the name of the brand";
-  if (!v.website.trim())
-    e.website = "Add the brand's website, for example yourbrand.com";
-  if (!v.role) e.role = "Choose the option closest to your role";
-  if (!v.category) e.category = "Choose the category that fits best";
-  if (!v.revenue) e.revenue = "Choose a rough revenue range, roughly is fine";
-  if (!v.challenge.trim())
-    e.challenge = "Tell us what's hardest right now, a sentence is fine";
-  return e;
-}
-
-const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign"] as const;
-
-const FIELD_ORDER: (keyof Values)[] = [
-  "name",
-  "email",
-  "brand",
-  "website",
-  "role",
-  "category",
-  "revenue",
-  "challenge",
-];
-
-const baseField =
-  "w-full border-0 border-b border-stone bg-transparent px-0 py-3 text-base text-brand-black outline-none transition-colors duration-300 placeholder:text-stone focus:border-brand-red focus:shadow-[0_1px_0_0_var(--color-brand-red)] aria-[invalid=true]:border-brand-red";
-
-const chevron = {
-  backgroundImage:
-    "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%23141414' stroke-width='1.6'><path d='M1 1.5l5 5 5-5'/></svg>\")",
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "right 0.25rem center",
-} as const;
-
-function Field({
-  id,
-  label,
-  optional,
-  error,
-  children,
-}: {
-  id: string;
-  label: string;
-  optional?: boolean;
-  error?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div>
-      <label htmlFor={id} className="caps block text-brand-black">
-        {label}
-        {optional && <span className="text-ink-soft"> (optional)</span>}
-      </label>
-      {children}
-      {error && (
-        <p id={`${id}-error`} className="mt-2 text-sm text-brand-black">
-          {error}
-        </p>
-      )}
-    </div>
-  );
+function toggleInList(list: string[], value: string) {
+  return list.includes(value)
+    ? list.filter((v) => v !== value)
+    : [...list, value];
 }
 
 export default function ApplyForm() {
-  const formRef = useRef<HTMLFormElement>(null);
-  const [values, setValues] = useState<Values>(EMPTY);
-  const [touched, setTouched] = useState<
-    Partial<Record<keyof Values, boolean>>
-  >({});
-  const [attempted, setAttempted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+  const stepRef = useRef<HTMLDivElement>(null);
+  const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
-  // Keep any campaign tags from the landing URL in hidden fields, so we can
-  // see which posts drive applications.
+  const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [jobPosition, setJobPosition] = useState("");
+  const [businessName, setBusinessName] = useState("");
+  const [websiteUrl, setWebsiteUrl] = useState("");
+  const [brandAge, setBrandAge] = useState("");
+
+  const [monthlyRevenue, setMonthlyRevenue] = useState("");
+  const [teamSize, setTeamSize] = useState("");
+  const [wayOfWorking, setWayOfWorking] = useState("");
+
+  const [supportAreas, setSupportAreas] = useState<string[]>([]);
+  const [brandBlockers, setBrandBlockers] = useState<string[]>([]);
+
+  const [admiredBrands, setAdmiredBrands] = useState("");
+  const [anythingElse, setAnythingElse] = useState("");
+
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    UTM_KEYS.forEach((key) => {
-      const input = formRef.current?.elements.namedItem(key);
-      if (input instanceof HTMLInputElement) {
-        input.value = params.get(key) ?? "";
-      }
-    });
-  }, []);
+    const node = stepRef.current;
+    if (!node) return;
 
-  const errors = validate(values);
-  const show = (k: keyof Values) =>
-    attempted || touched[k] ? errors[k] : undefined;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduceMotion) return;
 
-  function set<K extends keyof Values>(key: K, value: Values[K]) {
-    setValues((prev) => ({ ...prev, [key]: value }));
+    gsap.fromTo(
+      node,
+      { opacity: 0, x: 16 },
+      { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" },
+    );
+  }, [step]);
+
+  if (submitted) {
+    return (
+      <div className="border border-brand-black/10 bg-white p-10 text-center">
+        <h2 className="font-[family-name:var(--font-manrope)] text-lg font-extrabold">
+          Thanks, we&apos;ll be in touch.
+        </h2>
+        <p className="mt-2 text-brand-grey">
+          We read every application. If it looks like a fit, we&apos;ll reach
+          out to book a Discovery Call.
+        </p>
+      </div>
+    );
   }
 
-  function props(key: keyof Values) {
-    const err = show(key);
-    return {
-      id: key,
-      name: key,
-      value: values[key],
-      onBlur: () => setTouched((t) => ({ ...t, [key]: true })),
-      "aria-invalid": err ? true : undefined,
-      "aria-describedby": err ? `${key}-error` : undefined,
-    } as const;
-  }
+  const step1Valid = email.trim() && fullName.trim() && businessName.trim();
+  const step2Valid = monthlyRevenue && teamSize;
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    setAttempted(true);
+  async function submitApplication() {
+    setSubmitting(true);
     setSubmitError("");
 
-    const first = FIELD_ORDER.find((k) => errors[k]);
-    if (first) {
-      formRef.current?.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
-      return;
-    }
-
-    setSubmitting(true);
     try {
       const response = await fetch("/api/apply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...values,
-          ...Object.fromEntries(
-            UTM_KEYS.map((key) => [
-              key,
-              new URLSearchParams(window.location.search).get(key) ?? "",
-            ]),
-          ),
+          email,
+          fullName,
+          jobPosition,
+          businessName,
+          websiteUrl,
+          brandAge,
+          monthlyRevenue,
+          teamSize,
+          wayOfWorking,
+          supportAreas,
+          brandBlockers,
+          admiredBrands,
+          anythingElse,
         }),
       });
-      if (!response.ok) throw new Error("Request failed");
+
+      if (!response.ok) throw new Error("Submission failed");
       setSubmitted(true);
     } catch {
       setSubmitError(
-        `That didn't send. Please try again, or email ${CONTACT_EMAIL}.`,
+        "Something went wrong sending your application. Please email us directly or try again.",
       );
     } finally {
       setSubmitting(false);
     }
   }
 
-  if (submitted) {
-    return (
-      <div role="status" className="py-10">
-        <h2 className="display text-[clamp(2.8rem,5vw,4.5rem)]">
-          Application received.
-        </h2>
-        <p className="mt-6 max-w-md text-ink-soft">
-          Thanks for taking the time. I&apos;ll read it properly and be in touch
-          within a few working days.
-        </p>
-      </div>
-    );
-  }
-
   return (
     <form
-      ref={formRef}
-      onSubmit={handleSubmit}
-      noValidate
-      className="space-y-9"
+      onSubmit={(e) => e.preventDefault()}
+      className="border border-brand-black/10 bg-white p-8 sm:p-10"
     >
-      <Field id="name" label="Your name" error={show("name")}>
-        <input
-          {...props("name")}
-          type="text"
-          autoComplete="name"
-          onChange={(e) => set("name", e.target.value)}
-          className={baseField}
-        />
-      </Field>
+      <ProgressBar step={step} total={TOTAL_STEPS} />
 
-      <Field id="email" label="Email" error={show("email")}>
-        <input
-          {...props("email")}
-          type="email"
-          autoComplete="email"
-          onChange={(e) => set("email", e.target.value)}
-          className={baseField}
-        />
-      </Field>
+      <div ref={stepRef}>
+      {step === 1 && (
+        <div className="mt-8 grid gap-6 sm:grid-cols-2">
+          <label className="flex flex-col gap-2 text-sm font-medium text-brand-black sm:col-span-2">
+            Email *
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className={inputClass}
+            />
+          </label>
+          <label className="flex flex-col gap-2 text-sm font-medium text-brand-black">
+            Full name *
+            <input
+              type="text"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              required
+              className={inputClass}
+            />
+          </label>
+          <label className="flex flex-col gap-2 text-sm font-medium text-brand-black">
+            Job position
+            <input
+              type="text"
+              value={jobPosition}
+              onChange={(e) => setJobPosition(e.target.value)}
+              className={inputClass}
+            />
+          </label>
+          <label className="flex flex-col gap-2 text-sm font-medium text-brand-black">
+            Business name *
+            <input
+              type="text"
+              value={businessName}
+              onChange={(e) => setBusinessName(e.target.value)}
+              required
+              className={inputClass}
+            />
+          </label>
+          <label className="flex flex-col gap-2 text-sm font-medium text-brand-black">
+            Website URL
+            <input
+              type="url"
+              value={websiteUrl}
+              onChange={(e) => setWebsiteUrl(e.target.value)}
+              className={inputClass}
+            />
+          </label>
+          <label className="flex flex-col gap-2 text-sm font-medium text-brand-black sm:col-span-2">
+            Brand age
+            <input
+              type="text"
+              value={brandAge}
+              onChange={(e) => setBrandAge(e.target.value)}
+              className={inputClass}
+            />
+          </label>
+        </div>
+      )}
 
-      <Field id="brand" label="Brand name" error={show("brand")}>
-        <input
-          {...props("brand")}
-          type="text"
-          autoComplete="organization"
-          onChange={(e) => set("brand", e.target.value)}
-          className={baseField}
-        />
-      </Field>
+      {step === 2 && (
+        <div className="mt-8 space-y-8">
+          <div>
+            <p className="text-sm font-medium text-brand-black">
+              Approximate monthly revenue <span className="text-brand-red">*</span>
+            </p>
+            <div className="mt-3 flex flex-wrap gap-3">
+              {REVENUE_BANDS.map((band) => (
+                <Pill
+                  key={band}
+                  label={band}
+                  selected={monthlyRevenue === band}
+                  onClick={() => setMonthlyRevenue(band)}
+                />
+              ))}
+            </div>
+          </div>
 
-      <Field id="website" label="Website" error={show("website")}>
-        <input
-          {...props("website")}
-          type="text"
-          inputMode="url"
-          autoComplete="url"
-          placeholder="yourbrand.com"
-          onChange={(e) => set("website", e.target.value)}
-          className={baseField}
-        />
-      </Field>
+          <div>
+            <p className="text-sm font-medium text-brand-black">
+              Team size <span className="text-brand-red">*</span>
+            </p>
+            <div className="mt-3 flex flex-wrap gap-3">
+              {TEAM_SIZES.map((size) => (
+                <Pill
+                  key={size}
+                  label={size}
+                  selected={teamSize === size}
+                  onClick={() => setTeamSize(size)}
+                />
+              ))}
+            </div>
+          </div>
 
-      <Field id="role" label="Your role" error={show("role")}>
-        <select
-          {...props("role")}
-          onChange={(e) => set("role", e.target.value)}
-          className={`${baseField} appearance-none pr-8`}
-          style={chevron}
-        >
-          <option value="" disabled>
-            Choose one
-          </option>
-          {ROLES.map((o) => (
-            <option key={o}>{o}</option>
-          ))}
-        </select>
-      </Field>
+          <div>
+            <p className="text-sm font-medium text-brand-black">Way of working</p>
+            <div className="mt-3 grid gap-4 sm:grid-cols-2">
+              {WAYS_OF_WORKING.map((option) => (
+                <OptionCard
+                  key={option.title}
+                  title={option.title}
+                  description={option.description}
+                  selected={wayOfWorking === option.title}
+                  onClick={() => setWayOfWorking(option.title)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
-      <Field id="category" label="Category" error={show("category")}>
-        <select
-          {...props("category")}
-          onChange={(e) => set("category", e.target.value)}
-          className={`${baseField} appearance-none pr-8`}
-          style={chevron}
-        >
-          <option value="" disabled>
-            Choose one
-          </option>
-          {CATEGORIES.map((o) => (
-            <option key={o}>{o}</option>
-          ))}
-        </select>
-      </Field>
+      {step === 3 && (
+        <div className="mt-8 space-y-8">
+          <div>
+            <p className="text-sm font-medium text-brand-black">
+              Where do you need support?
+            </p>
+            <div className="mt-3 flex flex-wrap gap-3">
+              {SUPPORT_AREAS.map((area) => (
+                <Pill
+                  key={area}
+                  label={area}
+                  selected={supportAreas.includes(area)}
+                  onClick={() =>
+                    setSupportAreas((prev) => toggleInList(prev, area))
+                  }
+                />
+              ))}
+            </div>
+          </div>
 
-      <Field
-        id="revenue"
-        label="Annual online revenue (roughly is fine)"
-        error={show("revenue")}
-      >
-        <select
-          {...props("revenue")}
-          onChange={(e) => set("revenue", e.target.value)}
-          className={`${baseField} appearance-none pr-8`}
-          style={chevron}
-        >
-          <option value="" disabled>
-            Choose one
-          </option>
-          {REVENUES.map((o) => (
-            <option key={o}>{o}</option>
-          ))}
-        </select>
-      </Field>
+          <div>
+            <p className="text-sm font-medium text-brand-black">
+              What&apos;s holding your brand back?
+            </p>
+            <div className="mt-3 flex flex-wrap gap-3">
+              {BRAND_BLOCKERS.map((blocker) => (
+                <Pill
+                  key={blocker}
+                  label={blocker}
+                  selected={brandBlockers.includes(blocker)}
+                  onClick={() =>
+                    setBrandBlockers((prev) => toggleInList(prev, blocker))
+                  }
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
-      <Field
-        id="challenge"
-        label="What's the hardest thing about growing the brand right now?"
-        error={show("challenge")}
-      >
-        <textarea
-          {...props("challenge")}
-          rows={4}
-          onChange={(e) => set("challenge", e.target.value)}
-          className={`${baseField} resize-y`}
-        />
-      </Field>
+      {step === 4 && (
+        <div className="mt-8 space-y-6">
+          <label className="flex flex-col gap-2 text-sm font-medium text-brand-black">
+            What brands do you admire in your space?
+            <textarea
+              value={admiredBrands}
+              onChange={(e) => setAdmiredBrands(e.target.value)}
+              rows={4}
+              className={inputClass}
+            />
+          </label>
+          <label className="flex flex-col gap-2 text-sm font-medium text-brand-black">
+            Anything else you&apos;d like us to know?
+            <textarea
+              value={anythingElse}
+              onChange={(e) => setAnythingElse(e.target.value)}
+              rows={4}
+              className={inputClass}
+            />
+          </label>
+        </div>
+      )}
+      </div>
 
-      <Field id="source" label="How did you find us?" optional>
-        <select
-          {...props("source")}
-          onChange={(e) => set("source", e.target.value)}
-          className={`${baseField} appearance-none pr-8`}
-          style={chevron}
-        >
-          <option value="">Choose one</option>
-          {SOURCES.map((o) => (
-            <option key={o}>{o}</option>
-          ))}
-        </select>
-      </Field>
+      <div className="mt-10 flex gap-4">
+        {step > 1 && (
+          <button
+            type="button"
+            onClick={() => setStep((s) => s - 1)}
+            className="flex-1 border border-brand-black/15 px-6 py-3 font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide text-brand-black transition-colors hover:border-brand-black/30 sm:flex-none"
+          >
+            Back
+          </button>
+        )}
 
-      {UTM_KEYS.map((key) => (
-        // No value prop on purpose: the effect above fills these from the URL and
-        // React must not reset them on re-render.
-        <input key={key} type="hidden" name={key} />
-      ))}
-
-      <div>
-        <button
-          type="submit"
-          disabled={submitting}
-          className="caps border border-brand-black bg-transparent px-9 py-4 text-brand-black transition-colors duration-500 ease-out hover:bg-brand-black hover:text-white disabled:cursor-wait disabled:opacity-60"
-        >
-          {submitting ? "Sending..." : "Send application"}
-        </button>
-        <p className="mt-5 text-sm text-ink-soft">
-          We&apos;ll only use this to reply to you.
-        </p>
-        {submitError && (
-          <p role="alert" className="mt-4 text-sm text-brand-black">
-            {submitError}
-          </p>
+        {step < TOTAL_STEPS ? (
+          <button
+            key="next"
+            type="button"
+            onClick={() => setStep((s) => s + 1)}
+            disabled={
+              (step === 1 && !step1Valid) || (step === 2 && !step2Valid)
+            }
+            className="flex-1 bg-brand-black px-6 py-3 font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-40 sm:flex-none"
+          >
+            Next
+          </button>
+        ) : (
+          <button
+            key="submit"
+            type="button"
+            onClick={submitApplication}
+            disabled={submitting}
+            className="flex-1 bg-brand-black px-6 py-3 font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-60 sm:flex-none"
+          >
+            {submitting ? "Submitting..." : "Apply now"}
+          </button>
         )}
       </div>
+
+      {submitError && (
+        <p className="mt-4 text-center text-xs text-brand-red">{submitError}</p>
+      )}
+
+      {step === TOTAL_STEPS && !submitError && (
+        <p className="mt-4 text-center text-xs text-brand-grey">
+          Applications are reviewed manually within 72hrs
+        </p>
+      )}
     </form>
   );
 }

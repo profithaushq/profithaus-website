@@ -1,154 +1,68 @@
 @import "tailwindcss";
 
 :root {
-  /* Palette. Red is a rare signature: the wordmark full stop, link hovers and
-     the form focus state. Nothing else. */
+  --color-maroon: #7a2424;
+  --color-maroon-dark: #5e1b1b;
+  --color-accent: #c1392b;
+  --color-cream: #ffffff;
+  --color-ink: #1c1a19;
+  --color-ink-soft: #6b6360;
+  --font-body: var(--font-heading);
+
+  /* Brand tokens: scroll-led rebuild (Sep 2026) */
   --color-brand-red: #a42324;
-  --color-brand-black: #141414; /* ink: all text */
-  --color-bone: #f2eee9; /* alternate sections */
-  --color-bone-deep: #e6e0d8; /* image placeholders: reads on white and on bone */
-  --color-stone: #8c847d; /* hairlines and quiet separators */
-  --color-ink-soft: #5c564f; /* secondary text; stone itself is too light to read */
-  --color-hairline: rgba(140, 132, 125, 0.3);
+  --color-brand-black: #141414;
+  --color-brand-grey: #6e6a66;
   --font-manrope: "Manrope", sans-serif;
-  /* Editorial display serif. PP Editorial New (Pangram Pangram, commercial
-     licence) goes first so it takes over the moment it is loaded; see the
-     @font-face note at the end of this file. Bodoni Moda is the fallback. */
-  --font-display-serif: "PP Editorial New", "Bodoni Moda", Georgia, serif;
 }
 
 @theme inline {
+  --color-maroon: var(--color-maroon);
+  --color-maroon-dark: var(--color-maroon-dark);
+  --color-accent: var(--color-accent);
+  --color-cream: var(--color-cream);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
   --color-brand-red: var(--color-brand-red);
   --color-brand-black: var(--color-brand-black);
-  --color-bone: var(--color-bone);
-  --color-bone-deep: var(--color-bone-deep);
-  --color-stone: var(--color-stone);
-  --color-ink-soft: var(--color-ink-soft);
-  /* Kept so the hidden About and FAQ pages keep their secondary text colour */
-  --color-brand-grey: var(--color-ink-soft);
-  --color-hairline: var(--color-hairline);
+  --color-brand-grey: var(--color-brand-grey);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
+  --font-mono-accent: var(--font-mono-accent);
   --font-manrope: var(--font-manrope);
 }
 
-html {
-  scroll-padding-top: 5rem;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
 body {
-  background: #ffffff;
-  color: var(--color-brand-black);
-  font-family: var(--font-manrope), Arial, Helvetica, sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.65;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
 }
 
-/* Headlines: high-contrast editorial serif, roman. Italic is reserved for the
-   scroll band and Heidi's name (use .serif-italic). */
-.display {
-  font-family: var(--font-display-serif);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  font-optical-sizing: auto;
-}
-
-.serif-italic {
-  font-family: var(--font-display-serif);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-}
-
-/* Navigation, labels and captions: tiny, quiet, tracked */
-.caps {
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  line-height: 1.5;
-}
-
-/* Ink text link: underlined capitals, red only on hover */
-.text-link {
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.55em;
-  transition: color 0.4s cubic-bezier(0.2, 0.7, 0.1, 1);
-}
-
-.text-link:hover {
-  color: var(--color-brand-red);
-}
-
-/* Visible keyboard focus everywhere */
-:focus-visible {
-  outline: 2px solid var(--color-brand-black);
-  outline-offset: 4px;
-}
-
-/* ---- Imagery: slow clip-path reveals ----------------------------------- */
-
-/* Starts hidden only when scripts run, so no-JS visitors still see images */
-html.ph-js .img-reveal {
-  clip-path: inset(0 0 100% 0);
-}
-
-/* The hero image wipes open on load, then the headline fades up after it */
-@keyframes ph-wipe {
+/* Cinematic hero image drift */
+@keyframes ken-burns {
   from {
-    clip-path: inset(0 0 100% 0);
+    transform: scale(1);
   }
   to {
-    clip-path: inset(0 0 0% 0);
+    transform: scale(1.08);
   }
 }
 
-.ph-wipe {
-  animation: ph-wipe 1.6s cubic-bezier(0.2, 0.7, 0.1, 1) both;
-}
-
-@keyframes ph-fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.ph-fade-up {
-  animation: ph-fade-up 1.4s cubic-bezier(0.2, 0.7, 0.1, 1) both;
-  animation-delay: var(--d, 0.9s);
+.animate-ken-burns {
+  animation: ken-burns 8s ease-out forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html.ph-js .img-reveal {
-    clip-path: none;
-  }
-
-  .ph-wipe,
-  .ph-fade-up {
+  .animate-ken-burns {
     animation: none;
   }
 }
-
-/* ---- Shared by the About and FAQ pages (kept, hidden from the nav) ---- */
 
 /* Scroll reveal */
 .reveal {
   opacity: 0;
   transform: translateY(36px);
-  transition:
-    opacity 1.2s cubic-bezier(0.19, 1, 0.22, 1),
+  transition: opacity 1.2s cubic-bezier(0.19, 1, 0.22, 1),
     transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
@@ -189,6 +103,67 @@ html.ph-js .img-reveal {
   }
 }
 
+/* Lenis smooth scroll (recommended baseline CSS) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Oversized display type (scroll-led rebuild) */
+.text-display {
+  font-size: clamp(4rem, 14vw, 16rem);
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+}
+
+/* Ambient background lines */
+@keyframes ambient-drift-1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(1.5%, -1%); }
+}
+
+@keyframes ambient-drift-2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-1.5%, 1%); }
+}
+
+@keyframes ambient-drift-3 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(1%, 1.5%); }
+}
+
+.ambient-line-1 {
+  animation: ambient-drift-1 26s ease-in-out infinite;
+}
+
+.ambient-line-2 {
+  animation: ambient-drift-2 32s ease-in-out infinite;
+}
+
+.ambient-line-3 {
+  animation: ambient-drift-3 38s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-line-1,
+  .ambient-line-2,
+  .ambient-line-3 {
+    animation: none;
+  }
+}
+
 /* Accordion smooth expand */
 .accordion-panel {
   display: grid;
@@ -204,6 +179,28 @@ html.ph-js .img-reveal {
   overflow: hidden;
 }
 
+/* v2: curtain footer, preloader gate, hero-to-header mark, outline type */
+:root {
+  --ph-footer-h: 80svh;
+  --ph-header-h: 6.5rem;
+}
+
+.ph-page {
+  margin-bottom: var(--ph-footer-h);
+}
+
+.ph-preloader {
+  display: none;
+}
+
+html.ph-preload .ph-preloader {
+  display: flex;
+}
+
+html:has([data-ph-hero]) #ph-header-mark {
+  opacity: 0;
+}
+
 .ph-outline {
   color: transparent;
   -webkit-text-stroke: 2px var(--ph-stroke, #ffffff);
@@ -213,6 +210,10 @@ html.ph-js .img-reveal {
   .ph-outline {
     -webkit-text-stroke-width: 1.5px;
   }
+}
+
+html.ph-js .ph-hero-word {
+  visibility: hidden;
 }
 
 /* Titles that get split into per-letter boxes: splitting removes kerning and
@@ -230,7 +231,53 @@ html.ph-js .ph-page-item {
   opacity: 0;
 }
 
-/* Background drawn once on phones, drifting with a transform-only animation */
+html.ph-js [data-ph-hero] .ph-hero-row {
+  opacity: 0;
+}
+
+/* Services: zoom-through-letters on desktop with motion, plain list otherwise */
+.ph-services-zoom {
+  display: none;
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  html.ph-js .ph-services-zoom {
+    display: block;
+    /* The pinned stage is one screen tall; pull the next section up into that
+       space so there is no empty scroll once the last zoom has finished. */
+    margin-bottom: -100svh;
+  }
+
+  html.ph-js .ph-services-list {
+    display: none;
+  }
+}
+
+/* Pillars: dealt cards on desktop with motion, vertical list otherwise */
+.ph-pillars-stack {
+  display: none;
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  html.ph-js .ph-pillars-stack {
+    display: block;
+  }
+
+  html.ph-js .ph-pillars-list {
+    display: none;
+  }
+}
+
+/* Phones and tablets: cards stack over one another with CSS sticky, no pinning */
+@media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
+  html.ph-js .ph-mslide {
+    position: sticky;
+    top: 0;
+  }
+}
+
+/* Phones: the background is one still frame that slowly drifts. Transform
+   only, so the browser composites it with no per-frame drawing. */
 @keyframes ph-bg-drift {
   from {
     transform: translate3d(-4%, -3%, 0) scale(1);
@@ -250,30 +297,30 @@ html.ph-js .ph-page-item {
   }
 }
 
-/* Touch: no grey tap flash */
+/* Touch: a clear pressed state, and no grey tap flash */
 a,
 button {
   -webkit-tap-highlight-color: transparent;
 }
 
-/*
- * Swapping in PP Editorial New once licensed:
- *   1. Put the .woff2 files in /public/fonts/ (Regular and Italic).
- *   2. Uncomment the block below. The font stack in :root already lists
- *      "PP Editorial New" first, so nothing else changes.
- *
- * @font-face {
- *   font-family: "PP Editorial New";
- *   src: url("/fonts/PPEditorialNew-Regular.woff2") format("woff2");
- *   font-weight: 400;
- *   font-style: normal;
- *   font-display: swap;
- * }
- * @font-face {
- *   font-family: "PP Editorial New";
- *   src: url("/fonts/PPEditorialNew-Italic.woff2") format("woff2");
- *   font-weight: 400;
- *   font-style: italic;
- *   font-display: swap;
- * }
- */
+@media (hover: none) {
+  a,
+  button {
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  a:active,
+  button:active {
+    opacity: 0.7;
+    transform: scale(0.97);
+  }
+}
+
+/* Scroll-lit words: dim only when JS is running, so no-JS reads at full strength */
+html.ph-js .note-word {
+  opacity: 0.2;
+}
+
+html.ph-js .tl-word {
+  opacity: 0.15;
+}

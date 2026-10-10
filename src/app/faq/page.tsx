@@ -6,8 +6,6 @@ import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "FAQ's & Contact Us | profithaus.",
-  // Hidden for now: the copy still describes the previous positioning.
-  robots: { index: false, follow: false },
 };
 
 export default function Faq() {

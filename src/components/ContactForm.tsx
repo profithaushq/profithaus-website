@@ -91,7 +91,9 @@ export default function ContactForm() {
         />
       </label>
 
-      {submitError && <p className="text-sm text-brand-red">{submitError}</p>}
+      {submitError && (
+        <p className="text-sm text-brand-red">{submitError}</p>
+      )}
 
       <button
         type="submit"

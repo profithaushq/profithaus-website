@@ -1,23 +1,24 @@
 import { NextResponse } from "next/server";
-import { CONTACT_EMAIL } from "@/config/site";
 
 const KLAVIYO_METRIC_NAME = "Application Submitted";
 const KLAVIYO_ALERT_METRIC_NAME = "New Application Alert";
+const KLAVIYO_TEAM_EMAIL = "team@profithaus.co.uk";
 const KLAVIYO_API_REVISION = "2024-10-15";
 
 type ApplyPayload = {
-  name: string;
   email: string;
-  brand: string;
-  website: string;
-  role: string;
-  category: string;
-  revenue: string;
-  challenge: string;
-  source?: string;
-  utm_source?: string;
-  utm_medium?: string;
-  utm_campaign?: string;
+  fullName: string;
+  jobPosition: string;
+  businessName: string;
+  websiteUrl: string;
+  brandAge: string;
+  monthlyRevenue: string;
+  teamSize: string;
+  wayOfWorking: string;
+  supportAreas: string[];
+  brandBlockers: string[];
+  admiredBrands: string;
+  anythingElse: string;
 };
 
 function klaviyoEvent(
@@ -54,9 +55,6 @@ function klaviyoEvent(
   });
 }
 
-const clean = (value: unknown) =>
-  typeof value === "string" ? value.trim() || undefined : undefined;
-
 export async function POST(request: Request) {
   const apiKey = process.env.KLAVIYO_PRIVATE_API_KEY;
   if (!apiKey) {
@@ -67,86 +65,68 @@ export async function POST(request: Request) {
     );
   }
 
-  let body: Partial<ApplyPayload>;
-  try {
-    body = (await request.json()) as Partial<ApplyPayload>;
-  } catch {
-    return NextResponse.json({ error: "Invalid request." }, { status: 400 });
-  }
+  const body = (await request.json()) as Partial<ApplyPayload>;
 
-  const required: (keyof ApplyPayload)[] = [
-    "name",
-    "email",
-    "brand",
-    "website",
-    "role",
-    "category",
-    "revenue",
-    "challenge",
-  ];
-  const missing = required.filter((key) => !clean(body[key]));
-  if (missing.length > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email!)) {
+  if (!body.email || !body.fullName || !body.businessName) {
     return NextResponse.json(
-      { error: "Please complete the required fields." },
+      { error: "Email, full name and business name are required." },
       { status: 400 },
     );
   }
 
-  const fullName = body.name!.trim();
-  const [firstName, ...rest] = fullName.split(" ");
+  const [firstName, ...rest] = body.fullName.trim().split(" ");
   const lastName = rest.join(" ") || undefined;
 
-  // Property names the existing Klaviyo alert flow already uses are kept
-  // (applicant_name, applicant_email, business_name, job_position,
-  // website_url, monthly_revenue); the rest are new for this form.
   const sharedProperties = {
-    applicant_name: fullName,
-    applicant_email: body.email!.trim(),
-    business_name: clean(body.brand),
-    website_url: clean(body.website),
-    job_position: clean(body.role),
-    category: clean(body.category),
-    annual_online_revenue: clean(body.revenue),
-    hardest_thing_about_growth: clean(body.challenge),
-    how_they_found_us: clean(body.source),
-    utm_source: clean(body.utm_source),
-    utm_medium: clean(body.utm_medium),
-    utm_campaign: clean(body.utm_campaign),
+    applicant_name: body.fullName,
+    applicant_email: body.email,
+    business_name: body.businessName,
+    job_position: body.jobPosition || undefined,
+    website_url: body.websiteUrl || undefined,
+    brand_age: body.brandAge || undefined,
+    monthly_revenue: body.monthlyRevenue || undefined,
+    team_size: body.teamSize || undefined,
+    way_of_working: body.wayOfWorking || undefined,
+    support_areas: body.supportAreas || [],
+    brand_blockers: body.brandBlockers || [],
+    admired_brands: body.admiredBrands || undefined,
+    anything_else: body.anythingElse || undefined,
   };
 
   // Event on the applicant's own profile, for CRM/segmentation history.
   const applicantEvent = klaviyoEvent(
     apiKey,
     KLAVIYO_METRIC_NAME,
-    body.email!.trim(),
+    body.email,
     {
       first_name: firstName,
       last_name: lastName,
-      organization: clean(body.brand),
-      title: clean(body.role),
+      organization: body.businessName,
+      title: body.jobPosition || undefined,
     },
     sharedProperties,
   );
 
-  // Separate event on the founder's own profile, so the internal-alert flow
-  // (a standard Email action) emails the founder directly, not the applicant.
-  const founderAlertEvent = klaviyoEvent(
+  // Separate event tied to the internal team's own profile, so the
+  // internal-alert flow (a standard Email action) sends to
+  // team@profithaus.co.uk directly rather than to the applicant.
+  const teamAlertEvent = klaviyoEvent(
     apiKey,
     KLAVIYO_ALERT_METRIC_NAME,
-    CONTACT_EMAIL,
+    KLAVIYO_TEAM_EMAIL,
     {},
     sharedProperties,
   );
 
-  const [applicantResponse, founderResponse] = await Promise.all([
+  const [applicantResponse, teamResponse] = await Promise.all([
     applicantEvent,
-    founderAlertEvent,
+    teamAlertEvent,
   ]);
 
-  if (!applicantResponse.ok || !founderResponse.ok) {
+  if (!applicantResponse.ok || !teamResponse.ok) {
     const errorText = !applicantResponse.ok
       ? await applicantResponse.text()
-      : await founderResponse.text();
+      : await teamResponse.text();
     console.error("Klaviyo event failed", errorText);
     return NextResponse.json(
       { error: "Could not submit application. Please try again." },

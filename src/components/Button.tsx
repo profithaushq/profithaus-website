@@ -1,37 +1,33 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-/** Square-cornered ink outline that fills with ink on hover. */
-export const outlineButtonClass =
-  "caps inline-block border border-brand-black bg-transparent px-8 py-4 text-center text-brand-black transition-colors duration-500 ease-out hover:bg-brand-black hover:text-white";
+const VARIANTS = {
+  solid: "bg-brand-black text-white hover:bg-black",
+  "solid-white": "bg-white text-brand-black hover:bg-white/90",
+  outline:
+    "border border-brand-black/20 text-brand-black hover:border-brand-black/40 hover:bg-brand-black/5",
+  "outline-white":
+    "border border-white/60 text-white hover:border-white hover:bg-white/10",
+};
 
 export default function Button({
   href,
   children,
+  variant = "solid",
 }: {
   href: string;
   children: ReactNode;
+  variant?: keyof typeof VARIANTS;
 }) {
   return (
-    <Link href={href} className={outlineButtonClass}>
+    <Link
+      href={href}
+      className={`group inline-flex items-center justify-center gap-2 px-6 py-3 font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 ${VARIANTS[variant]}`}
+    >
       {children}
-    </Link>
-  );
-}
-
-/** Underlined uppercase text link, red only on hover. */
-export function TextLink({
-  href,
-  children,
-  className = "",
-}: {
-  href: string;
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <Link href={href} className={`text-link ${className}`}>
-      {children}
+      <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
+        →
+      </span>
     </Link>
   );
 }
