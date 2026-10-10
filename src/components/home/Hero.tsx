@@ -61,11 +61,16 @@ export default function Hero({ ready }: { ready: boolean }) {
         </h1>
 
         <div className="mt-10 flex flex-col gap-7 sm:flex-row sm:items-end sm:justify-between sm:gap-14">
-          <p className="ph-h-item max-w-xl text-base leading-relaxed text-white/80 sm:text-[17px]">
-            Your e-commerce director, without the ridiculous salary. Senior
-            advice for small and medium brands, from people who have done the
-            job in-house.
-          </p>
+          <div className="ph-h-item max-w-2xl">
+            <p className="font-serif text-[clamp(1.7rem,2.9vw,2.6rem)] leading-[1.1] tracking-[-0.015em]">
+              Your e-commerce director,{" "}
+              <em className="text-powder">without the ridiculous salary.</em>
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-white/70">
+              Senior advice for small and medium brands, from people who have
+              done the job in-house.
+            </p>
+          </div>
           <p className="ph-h-item shrink-0">
             <Link
               href="/apply"
