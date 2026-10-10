@@ -137,17 +137,19 @@ export default function Hero({ ready }: { ready: boolean }) {
       {/* A quiet sheen in the oxblood, nothing more */}
       <LivingBackground className="absolute inset-0 opacity-30" />
 
-      {/* Brand imagery, duotoned into the oxblood */}
-      <div className="ph-h-stage absolute inset-0 isolate overflow-hidden bg-oxblood lg:left-[51.4%]">
-        <Image
-          src={IMAGE.src}
-          alt={IMAGE.alt}
-          fill
-          priority
-          sizes="(min-width: 1024px) 50vw, 100vw"
-          className="object-cover mix-blend-lighten brightness-[0.65] contrast-150 grayscale"
-        />
-        <div className="absolute inset-0 bg-oxblood/80 lg:bg-oxblood/35" />
+      {/* The seal, pressed onto the divide */}
+      <div className="ph-h-stage pointer-events-none absolute top-[7%] left-[51.4%] z-10 hidden -translate-x-1/2 lg:block">
+        <div className="relative isolate size-44 overflow-hidden rounded-full bg-oxblood ring-2 ring-pink xl:size-52">
+          <Image
+            src={IMAGE.src}
+            alt={IMAGE.alt}
+            fill
+            priority
+            sizes="208px"
+            className="scale-110 object-cover mix-blend-lighten brightness-[0.7] contrast-150 grayscale"
+          />
+          <div className="absolute inset-0 bg-oxblood/30" />
+        </div>
       </div>
 
       <p className="ph-h-item absolute top-7 right-6 z-10 font-sans font-medium text-xs tracking-[0.12em] text-powder uppercase sm:right-10">
