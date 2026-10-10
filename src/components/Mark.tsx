@@ -20,7 +20,7 @@ export default function Mark(props: SVGProps<SVGSVGElement>) {
       />
       <text
         className="ph-mark-p"
-        x="35.5"
+        x="34.5"
         y="66"
         textAnchor="middle"
         style={{ fontFamily: SERIF, fontSize: 54 }}
@@ -39,7 +39,7 @@ export default function Mark(props: SVGProps<SVGSVGElement>) {
       />
       <text
         className="ph-mark-h"
-        x="64.5"
+        x="67.5"
         y="64.5"
         textAnchor="middle"
         style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 44 }}
