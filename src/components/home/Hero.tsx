@@ -97,10 +97,6 @@ export default function Hero({ ready }: { ready: boolean }) {
       {/* A quiet sheen in the oxblood, nothing more */}
       <LivingBackground className="absolute inset-0 opacity-30" />
 
-      <p className="ph-h-item absolute top-7 right-6 z-10 font-sans font-medium text-xs tracking-[0.12em] text-powder uppercase sm:right-10">
-        Neutral · 7.0
-      </p>
-
       {/* The reading, cropped by the edge of the frame */}
       <p
         aria-label="pH 7.0"
