@@ -7,6 +7,7 @@ import { gsap } from "@/lib/gsap";
 import LivingBackground from "@/components/LivingBackground";
 
 const SHOTS = [
+  { src: "/images/hero/wax.jpg", alt: "The pH seal pressed into silver wax" },
   {
     src: "/images/hero/tote.jpg",
     alt: "A leather tote debossed with the pH seal",
