@@ -1,30 +1,36 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-const VARIANTS = {
-  solid: "bg-brand-black text-white hover:bg-brand-red",
-  white: "bg-white text-brand-black hover:bg-brand-red hover:text-white",
-};
+/** Square-cornered ink outline that fills with ink on hover. */
+export const outlineButtonClass =
+  "caps inline-block border border-brand-black bg-transparent px-8 py-4 text-center text-brand-black transition-colors duration-500 ease-out hover:bg-brand-black hover:text-white";
 
-const BASE =
-  "caps inline-block rounded-[2px] px-7 py-4 text-center transition-colors duration-300";
-
-export function buttonClass(variant: keyof typeof VARIANTS = "solid") {
-  return `${BASE} ${VARIANTS[variant]}`;
-}
-
-/** Near-square, black turning red on hover; small tracked capitals. */
 export default function Button({
   href,
   children,
-  variant = "solid",
 }: {
   href: string;
   children: ReactNode;
-  variant?: keyof typeof VARIANTS;
 }) {
   return (
-    <Link href={href} className={buttonClass(variant)}>
+    <Link href={href} className={outlineButtonClass}>
+      {children}
+    </Link>
+  );
+}
+
+/** Underlined uppercase text link, red only on hover. */
+export function TextLink({
+  href,
+  children,
+  className = "",
+}: {
+  href: string;
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <Link href={href} className={`text-link ${className}`}>
       {children}
     </Link>
   );

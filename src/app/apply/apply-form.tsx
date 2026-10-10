@@ -86,7 +86,7 @@ const FIELD_ORDER: (keyof Values)[] = [
 ];
 
 const baseField =
-  "w-full border-0 border-b border-brand-black/30 bg-transparent px-0 py-3 text-base text-brand-black outline-none transition-colors placeholder:text-brand-black/35 focus:border-brand-red focus:shadow-[0_1px_0_0_var(--color-brand-red)] aria-[invalid=true]:border-brand-red";
+  "w-full border-0 border-b border-stone bg-transparent px-0 py-3 text-base text-brand-black outline-none transition-colors duration-300 placeholder:text-stone focus:border-brand-red focus:shadow-[0_1px_0_0_var(--color-brand-red)] aria-[invalid=true]:border-brand-red";
 
 const chevron = {
   backgroundImage:
@@ -110,15 +110,13 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="block text-sm font-semibold">
+      <label htmlFor={id} className="caps block text-brand-black">
         {label}
-        {optional && (
-          <span className="font-normal text-brand-grey"> (optional)</span>
-        )}
+        {optional && <span className="text-ink-soft"> (optional)</span>}
       </label>
       {children}
       {error && (
-        <p id={`${id}-error`} className="mt-2 text-sm text-brand-red">
+        <p id={`${id}-error`} className="mt-2 text-sm text-brand-black">
           {error}
         </p>
       )}
@@ -209,10 +207,10 @@ export default function ApplyForm() {
   if (submitted) {
     return (
       <div role="status" className="py-10">
-        <h2 className="display text-[clamp(2.6rem,5vw,4rem)] leading-[1.02]">
+        <h2 className="display text-[clamp(2.8rem,5vw,4.5rem)]">
           Application received.
         </h2>
-        <p className="mt-5 max-w-md text-lg leading-relaxed text-brand-grey">
+        <p className="mt-6 max-w-md text-ink-soft">
           Thanks for taking the time. I&apos;ll read it properly and be in touch
           within a few working days.
         </p>
@@ -225,7 +223,7 @@ export default function ApplyForm() {
       ref={formRef}
       onSubmit={handleSubmit}
       noValidate
-      className="space-y-7"
+      className="space-y-9"
     >
       <Field id="name" label="Your name" error={show("name")}>
         <input
@@ -358,15 +356,15 @@ export default function ApplyForm() {
         <button
           type="submit"
           disabled={submitting}
-          className="caps rounded-[2px] bg-brand-black px-8 py-4 text-white transition-colors duration-300 hover:bg-brand-red disabled:cursor-wait disabled:opacity-70"
+          className="caps border border-brand-black bg-transparent px-9 py-4 text-brand-black transition-colors duration-500 ease-out hover:bg-brand-black hover:text-white disabled:cursor-wait disabled:opacity-60"
         >
           {submitting ? "Sending..." : "Send application"}
         </button>
-        <p className="mt-4 text-sm text-brand-grey">
+        <p className="mt-5 text-sm text-ink-soft">
           We&apos;ll only use this to reply to you.
         </p>
         {submitError && (
-          <p role="alert" className="mt-4 text-sm text-brand-red">
+          <p role="alert" className="mt-4 text-sm text-brand-black">
             {submitError}
           </p>
         )}

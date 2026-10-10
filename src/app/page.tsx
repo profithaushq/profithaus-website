@@ -1,23 +1,21 @@
 import Hero from "@/components/home/Hero";
-import Problem from "@/components/home/Problem";
+import PointOfView from "@/components/home/PointOfView";
 import ScrollBand from "@/components/home/ScrollBand";
-import WhatWeDo from "@/components/home/WhatWeDo";
+import Approach from "@/components/home/Approach";
 import About from "@/components/home/About";
-import WhoItsFor from "@/components/home/WhoItsFor";
-import HowItWorks from "@/components/home/HowItWorks";
-import FinalCta from "@/components/home/FinalCta";
+import HowItBegins from "@/components/home/HowItBegins";
+import Close from "@/components/home/Close";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <Problem />
+      <PointOfView />
       <ScrollBand />
-      <WhatWeDo />
+      <Approach />
       <About />
-      <WhoItsFor />
-      <HowItWorks />
-      <FinalCta />
+      <HowItBegins />
+      <Close />
     </>
   );
 }

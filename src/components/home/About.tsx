@@ -1,9 +1,8 @@
-import Image from "next/image";
+import ImageSlot from "@/components/ImageSlot";
 import Label from "@/components/Label";
-import SilkLines from "@/components/SilkLines";
-import { FOUNDER_FIRST_NAME, FOUNDER_PHOTO } from "@/config/site";
+import { FOUNDER_FULL_NAME } from "@/config/site";
 
-const BRANDS = [
+const PREVIOUSLY = [
   "LOOKFANTASTIC",
   "Coggles",
   "Myprotein",
@@ -16,58 +15,38 @@ export default function About() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="relative scroll-mt-20 overflow-hidden bg-stone px-6 py-24 sm:px-10 sm:py-36"
+      className="scroll-mt-20 bg-bone px-6 py-32 sm:px-10 sm:py-40 lg:px-14 lg:py-48"
     >
-      <SilkLines className="text-brand-red/[0.16]" count={12} />
-      <div className="relative mx-auto grid max-w-[1280px] gap-14 lg:grid-cols-[1fr_1.25fr] lg:gap-24">
-        <div>
-          {FOUNDER_PHOTO && (
-            <div className="relative mb-12 aspect-[4/5] max-w-sm overflow-hidden">
-              <Image
-                src={FOUNDER_PHOTO}
-                alt={`${FOUNDER_FIRST_NAME}, founder`}
-                fill
-                sizes="(min-width: 1024px) 24rem, 90vw"
-                className="object-cover"
-              />
-            </div>
-          )}
-          <Label>Who you&apos;ll work with</Label>
+      <div className="mx-auto grid max-w-[1440px] gap-y-16 lg:grid-cols-12 lg:gap-x-10">
+        <ImageSlot
+          slot="portrait"
+          className="aspect-[4/5] w-full max-w-md lg:col-span-5 lg:max-w-none"
+          sizes="(min-width: 1024px) 38vw, 90vw"
+        />
+
+        <div className="lg:col-span-5 lg:col-start-8 lg:pt-24">
+          <Label>The founder</Label>
           <h2
             id="about-heading"
-            className="display mt-8 text-[clamp(3.6rem,9vw,8.5rem)] leading-[0.92]"
+            className="display mt-8 text-[clamp(2.8rem,5.6vw,6rem)]"
           >
-            Hi, I&apos;m <em>{FOUNDER_FIRST_NAME}</em>.
+            <span className="serif-italic">{FOUNDER_FULL_NAME}</span>
           </h2>
-        </div>
 
-        <div className="max-w-2xl lg:border-l lg:border-brand-black/10 lg:pl-16">
-          <p className="display text-[clamp(1.7rem,2.8vw,2.4rem)] leading-[1.22] tracking-[-0.005em] !font-normal">
-            I&apos;ve spent six years in ecommerce, brand-side then agency-side,
-            including running brands in-house across the THG group and at Known
-            Nutrition, with over £50M of revenue managed.
+          <p className="mt-10 text-lg leading-relaxed">
+            Six years in ecommerce, brand-side then agency-side, including
+            running brands in-house across the THG group and at Known Nutrition,
+            with over £50M of revenue managed.
           </p>
-          <p className="mt-8 text-lg leading-relaxed text-brand-black/80">
-            That meant trading calls, launch calendars, forecasts, and the
-            slightly awkward meeting when a number got missed. It also taught me
-            that the brands that grow well are the ones where brand and revenue
-            stop arguing with each other.
-          </p>
-          <p className="mt-5 text-lg leading-relaxed text-brand-black/80">
-            Profithaus is senior-led on purpose. You work with me, not a junior
-            account manager reading my notes.
+          <p className="mt-6 max-w-md text-ink-soft">
+            The brands that grow well are the ones where brand and revenue stop
+            arguing. Profithaus is senior-led on purpose - you work with me
+            directly.
           </p>
 
-          <hr className="mt-12 border-brand-black/15" />
-
-          <p className="mt-8 text-sm text-brand-grey">
-            Brands I&apos;ve worked on
+          <p className="caps mt-14 border-t border-hairline pt-6 text-ink-soft">
+            Previously - {PREVIOUSLY.join(", ")}
           </p>
-          <ul className="mt-5 flex flex-wrap gap-x-9 gap-y-3 text-lg font-bold tracking-[-0.01em]">
-            {BRANDS.map((brand) => (
-              <li key={brand}>{brand}</li>
-            ))}
-          </ul>
         </div>
       </div>
     </section>

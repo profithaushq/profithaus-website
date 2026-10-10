@@ -1,54 +1,36 @@
-import Image from "next/image";
 import Link from "next/link";
-import { BRAND_NAME, CONTACT_EMAIL } from "@/config/site";
+import { BRAND_NAME, CONTACT_EMAIL, LINKEDIN_URL } from "@/config/site";
+import Wordmark from "@/components/Wordmark";
 
 export default function SiteFooter() {
   return (
-    <footer className="border-t border-hairline px-6 py-14 sm:px-10 sm:py-16">
-      <div className="mx-auto flex max-w-[1280px] flex-col items-center gap-8 text-center">
+    <footer className="border-t border-hairline px-6 py-14 sm:px-10 lg:px-14">
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-10 md:flex-row md:items-end md:justify-between">
         <Link href="/" aria-label={`${BRAND_NAME} home`}>
-          <Image
-            src="/logo.png"
-            alt={BRAND_NAME}
-            width={200}
-            height={50}
-            className="h-7 w-auto"
-          />
+          <Wordmark byline={false} />
         </Link>
 
-        <nav
-          aria-label="Footer"
-          className="caps flex flex-wrap justify-center gap-x-9 gap-y-3"
-        >
-          <Link
-            href="/#approach"
-            className="transition-colors hover:text-brand-red"
-          >
-            Approach
-          </Link>
-          <Link
-            href="/#about"
-            className="transition-colors hover:text-brand-red"
-          >
-            About
-          </Link>
-          <Link
-            href="/apply"
-            className="transition-colors hover:text-brand-red"
-          >
-            Apply
-          </Link>
+        <div className="caps flex flex-wrap items-center gap-x-9 gap-y-3">
           <a
             href={`mailto:${CONTACT_EMAIL}`}
-            className="transition-colors hover:text-brand-red"
+            className="transition-colors duration-300 hover:text-brand-red"
           >
-            Contact
+            {CONTACT_EMAIL}
           </a>
-        </nav>
-
-        <p className="text-xs tracking-[0.08em] text-brand-grey">
-          &copy; {new Date().getFullYear()} {BRAND_NAME}
-        </p>
+          {LINKEDIN_URL && (
+            <a
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors duration-300 hover:text-brand-red"
+            >
+              LinkedIn
+            </a>
+          )}
+          <span className="text-ink-soft">
+            &copy; {BRAND_NAME} {new Date().getFullYear()}
+          </span>
+        </div>
       </div>
     </footer>
   );

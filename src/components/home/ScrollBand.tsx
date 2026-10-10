@@ -3,8 +3,8 @@
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
-const WORDS = ["Brand", "Content", "Channels", "Website", "One plan."];
-const LABEL = "Brand, Content, Channels, Website, One plan.";
+const WORDS = ["Brand", "Content", "Channels", "Website", "One plan"];
+const LABEL = "Brand, Content, Channels, Website, One plan";
 
 /**
  * One oversized line of type that travels sideways as the section scrolls
@@ -31,7 +31,7 @@ export default function ScrollBand() {
             trigger: section,
             start: "top bottom",
             end: "bottom top",
-            scrub: true,
+            scrub: 1.2,
             invalidateOnRefresh: true,
           },
         },
@@ -52,24 +52,18 @@ export default function ScrollBand() {
     <section
       ref={sectionRef}
       aria-label={LABEL}
-      className="overflow-hidden border-b border-hairline py-16 sm:py-24"
+      className="overflow-hidden py-24 sm:py-32 lg:py-40"
     >
       <div
         ref={trackRef}
         aria-hidden="true"
-        className="display flex w-max items-center px-6 text-[clamp(4rem,14vw,14rem)] leading-[0.95] whitespace-nowrap sm:px-10 motion-reduce:w-auto motion-reduce:flex-wrap motion-reduce:gap-y-2 motion-reduce:text-[clamp(2.5rem,9vw,6rem)]"
+        className="serif-italic flex w-max items-center px-6 text-[clamp(3.4rem,10vw,10rem)] leading-[1] whitespace-nowrap text-brand-black sm:px-10 lg:px-14 motion-reduce:w-auto motion-reduce:flex-wrap motion-reduce:gap-y-2 motion-reduce:text-[clamp(2.6rem,8vw,5rem)]"
       >
         {WORDS.map((word, i) => (
           <span key={word} className="flex items-center">
-            <span
-              className={
-                word === "One plan." ? "italic !font-medium" : undefined
-              }
-            >
-              {word}
-            </span>
+            <span>{word}</span>
             {i < WORDS.length - 1 && (
-              <span className="mx-[0.28em] inline-block h-[0.13em] w-[0.13em] rounded-full bg-brand-red" />
+              <span className="mx-[0.4em] text-stone not-italic">&middot;</span>
             )}
           </span>
         ))}

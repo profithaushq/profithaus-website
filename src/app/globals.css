@@ -1,27 +1,32 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand tokens */
+  /* Palette. Red is a rare signature: the wordmark full stop, link hovers and
+     the form focus state. Nothing else. */
   --color-brand-red: #a42324;
-  --color-brand-black: #141414;
-  --color-brand-grey: #6e6a66;
-  --color-stone: #f4f0eb;
-  --color-hairline: rgba(20, 20, 20, 0.12);
-  /* The brand red is too dark to read as small text on black; this is the
-     same hue, lifted, for labels on dark sections only. */
-  --color-brand-red-on-dark: #e0494b;
+  --color-brand-black: #141414; /* ink: all text */
+  --color-bone: #f2eee9; /* alternate sections */
+  --color-bone-deep: #e6e0d8; /* image placeholders: reads on white and on bone */
+  --color-stone: #8c847d; /* hairlines and quiet separators */
+  --color-ink-soft: #5c564f; /* secondary text; stone itself is too light to read */
+  --color-hairline: rgba(140, 132, 125, 0.3);
   --font-manrope: "Manrope", sans-serif;
-  /* Display serif for headlines (Odd Muse-style light serif with italics) */
-  --font-display-serif: "Cormorant Garamond", "Cormorant", Georgia, serif;
+  /* Editorial display serif. PP Editorial New (Pangram Pangram, commercial
+     licence) goes first so it takes over the moment it is loaded; see the
+     @font-face note at the end of this file. Bodoni Moda is the fallback. */
+  --font-display-serif: "PP Editorial New", "Bodoni Moda", Georgia, serif;
 }
 
 @theme inline {
   --color-brand-red: var(--color-brand-red);
   --color-brand-black: var(--color-brand-black);
-  --color-brand-grey: var(--color-brand-grey);
+  --color-bone: var(--color-bone);
+  --color-bone-deep: var(--color-bone-deep);
   --color-stone: var(--color-stone);
+  --color-ink-soft: var(--color-ink-soft);
+  /* Kept so the hidden About and FAQ pages keep their secondary text colour */
+  --color-brand-grey: var(--color-ink-soft);
   --color-hairline: var(--color-hairline);
-  --color-brand-red-on-dark: var(--color-brand-red-on-dark);
   --font-manrope: var(--font-manrope);
 }
 
@@ -31,157 +36,108 @@ html {
   text-rendering: optimizeLegibility;
 }
 
-/* Light display serif for headlines; <em> inside is the italic emphasis word */
-.display {
-  font-family: var(--font-display-serif);
-  font-weight: 300;
-  letter-spacing: -0.015em;
-}
-
-.display em {
-  font-style: italic;
-  font-weight: 300;
-}
-
-/* Small tracked capitals for nav, buttons and text links */
-.caps {
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.17em;
-  text-transform: uppercase;
-}
-
-/* A thin underlined text link that draws its rule on hover */
-.link-rule {
-  background-image: linear-gradient(currentColor, currentColor);
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 100% 1px;
-  padding-bottom: 0.4rem;
-  transition:
-    background-size 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    color 0.2s;
-}
-
-.link-rule:hover {
-  background-size: 0% 1px;
-  background-position: 100% 100%;
-}
-
-/* Fine film grain on dark sections: tactile, not decorative */
-.grain {
-  position: relative;
-  isolation: isolate;
-}
-
-.grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.07;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-}
-
-/* A row whose top rule draws across in red on hover */
-.rule-row {
-  position: relative;
-}
-
-.rule-row::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: 0;
-  height: 1px;
-  width: 100%;
-  background: var(--color-brand-red);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.rule-row:hover::before {
-  transform: scaleX(1);
-}
-
 body {
   background: #ffffff;
   color: var(--color-brand-black);
   font-family: var(--font-manrope), Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+/* Headlines: high-contrast editorial serif, roman. Italic is reserved for the
+   scroll band and Heidi's name (use .serif-italic). */
+.display {
+  font-family: var(--font-display-serif);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-optical-sizing: auto;
+}
+
+.serif-italic {
+  font-family: var(--font-display-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+/* Navigation, labels and captions: tiny, quiet, tracked */
+.caps {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+/* Ink text link: underlined capitals, red only on hover */
+.text-link {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.55em;
+  transition: color 0.4s cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+.text-link:hover {
+  color: var(--color-brand-red);
 }
 
 /* Visible keyboard focus everywhere */
 :focus-visible {
-  outline: 2px solid var(--color-brand-red);
-  outline-offset: 3px;
+  outline: 2px solid var(--color-brand-black);
+  outline-offset: 4px;
 }
 
-.on-dark :focus-visible {
-  outline-color: #ffffff;
+/* ---- Imagery: slow clip-path reveals ----------------------------------- */
+
+/* Starts hidden only when scripts run, so no-JS visitors still see images */
+html.ph-js .img-reveal {
+  clip-path: inset(0 0 100% 0);
 }
 
-/* Hero label: a small red dot with a quiet ring that expands and fades */
-@keyframes ph-pulse {
-  0% {
-    transform: scale(1);
-    opacity: 0.55;
+/* The hero image wipes open on load, then the headline fades up after it */
+@keyframes ph-wipe {
+  from {
+    clip-path: inset(0 0 100% 0);
   }
-  100% {
-    transform: scale(2.6);
-    opacity: 0;
-  }
-}
-
-.pulse-dot {
-  position: relative;
-  display: inline-block;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 9999px;
-  background: var(--color-brand-red);
-}
-
-.pulse-dot::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: var(--color-brand-red);
-  animation: ph-pulse 2.2s ease-out infinite;
-}
-
-/* Hero headline: each line slides up out of its own mask, staggered */
-.ph-line-mask {
-  display: block;
-  /* Hides only what is below the line; ascenders, descenders and the
-     overhang of tightly tracked letters stay whole. */
-  clip-path: inset(-0.15em -0.2em -0.2em -0.2em);
-}
-
-.ph-line {
-  display: block;
-  transform: translateY(135%);
-  animation: ph-line-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: calc(var(--i, 0) * 120ms + 120ms);
-}
-
-@keyframes ph-line-up {
   to {
+    clip-path: inset(0 0 0% 0);
+  }
+}
+
+.ph-wipe {
+  animation: ph-wipe 1.6s cubic-bezier(0.2, 0.7, 0.1, 1) both;
+}
+
+@keyframes ph-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
     transform: translateY(0);
   }
 }
 
+.ph-fade-up {
+  animation: ph-fade-up 1.4s cubic-bezier(0.2, 0.7, 0.1, 1) both;
+  animation-delay: var(--d, 0.9s);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .ph-line {
-    transform: none;
-    animation: none;
+  html.ph-js .img-reveal {
+    clip-path: none;
   }
 
-  .pulse-dot::after {
+  .ph-wipe,
+  .ph-fade-up {
     animation: none;
-    opacity: 0;
   }
 }
 
@@ -299,3 +255,25 @@ a,
 button {
   -webkit-tap-highlight-color: transparent;
 }
+
+/*
+ * Swapping in PP Editorial New once licensed:
+ *   1. Put the .woff2 files in /public/fonts/ (Regular and Italic).
+ *   2. Uncomment the block below. The font stack in :root already lists
+ *      "PP Editorial New" first, so nothing else changes.
+ *
+ * @font-face {
+ *   font-family: "PP Editorial New";
+ *   src: url("/fonts/PPEditorialNew-Regular.woff2") format("woff2");
+ *   font-weight: 400;
+ *   font-style: normal;
+ *   font-display: swap;
+ * }
+ * @font-face {
+ *   font-family: "PP Editorial New";
+ *   src: url("/fonts/PPEditorialNew-Italic.woff2") format("woff2");
+ *   font-weight: 400;
+ *   font-style: italic;
+ *   font-display: swap;
+ * }
+ */

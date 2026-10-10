@@ -2,11 +2,11 @@
 // changes everywhere the brand is written out in the new homepage and /apply.
 export const BRAND_NAME = "Profithaus";
 export const FOUNDER_FIRST_NAME = "Heidi";
+export const FOUNDER_FULL_NAME = "Heidi Gardner";
 export const CONTACT_EMAIL = "heidi@profithaus.co.uk";
 
-// Optional founder photo for the About section (4:5 portrait). Leave empty to
-// hide it, or set a path under /public, for example "/heidi.jpg".
-export const FOUNDER_PHOTO = "";
+// Set this to Heidi's LinkedIn profile URL to show the link in the footer.
+export const LINKEDIN_URL = "";
 
 export const SITE_TITLE = `${BRAND_NAME} | Growth strategy for mid-luxury fashion and beauty brands`;
 export const SITE_DESCRIPTION =
