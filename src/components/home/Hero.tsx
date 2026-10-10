@@ -71,9 +71,9 @@ export default function Hero({ ready }: { ready: boolean }) {
         <p className="ph-h-item font-sans text-[11px] font-medium tracking-[0.2em] text-powder uppercase">
           E-commerce strategic partner
         </p>
-        <h1 className="ph-h-item font-serif text-[clamp(2.1rem,4vw,3.9rem)] leading-[0.97] tracking-[-0.03em]">
+        <h1 className="ph-h-item font-serif text-[6.4vw] leading-[0.97] tracking-[-0.03em] sm:text-[clamp(2.1rem,4vw,3.9rem)]">
           Making brands harder to ignore and{" "}
-          <em className="text-powder">easier to buy from.</em>
+          <em className="block text-powder">easier to buy from.</em>
         </h1>
         <p className="ph-h-item text-base text-white/80">
           Your e-commerce director, without the ridiculous salary.
