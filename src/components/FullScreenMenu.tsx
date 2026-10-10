@@ -21,7 +21,7 @@ const NAV_LINKS = [
   { href: "/#elements", label: "The elements" },
   { href: "/#work", label: "Work" },
   { href: "/#about", label: "About" },
-  { href: "/apply", label: "Test your pH" },
+  { href: "/apply", label: "Work with us" },
   { href: "/faq", label: "FAQ and contact" },
 ];
 
@@ -219,7 +219,7 @@ export default function FullScreenMenu() {
               href="/apply"
               className="group relative py-1 text-burgundy transition-colors duration-300 hover:text-oxblood"
             >
-              Test your <PH />
+              Work with us
               <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-pink transition-transform duration-500 ease-out group-hover:scale-x-100" />
             </Link>
           </nav>

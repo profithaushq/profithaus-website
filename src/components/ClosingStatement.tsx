@@ -1,5 +1,4 @@
 import Link from "next/link";
-import PH from "@/components/PH";
 import Reveal from "@/components/Reveal";
 
 /** An oxblood closing band: one statement, then the call to act. */
@@ -26,7 +25,7 @@ export default function ClosingStatement({
             href={href}
             className="mt-12 inline-block bg-porcelain px-7 py-4 font-mono text-xs tracking-[0.1em] text-oxblood uppercase transition-[transform,background-color] duration-500 ease-out hover:-translate-y-1 hover:bg-white"
           >
-            Test your <PH />
+            Apply to work with us
           </Link>
         </Reveal>
       </div>

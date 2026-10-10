@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import LivingBackground from "@/components/LivingBackground";
-import PH from "@/components/PH";
 
 /**
  * The homepage opening, after the 5c concept: oxblood ground, the reading
@@ -139,7 +138,7 @@ export default function Hero({ ready }: { ready: boolean }) {
             href="/apply"
             className="inline-block bg-oxblood px-6 py-3.5 font-mono text-xs tracking-[0.1em] text-white uppercase transition-colors duration-300 hover:bg-burgundy"
           >
-            Test your <PH />
+            Apply to work with us
           </Link>
         </p>
       </div>

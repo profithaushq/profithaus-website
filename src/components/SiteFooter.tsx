@@ -7,7 +7,7 @@ const LINKS = [
   { href: "/#work", label: "Work" },
   { href: "/#about", label: "About" },
   { href: "/faq", label: "FAQ and contact" },
-  { href: "/apply", label: "Test your pH" },
+  { href: "/apply", label: "Work with us" },
 ];
 
 export default function SiteFooter() {
@@ -34,13 +34,7 @@ export default function SiteFooter() {
                 href={l.href}
                 className="transition-colors duration-300 hover:text-burgundy"
               >
-                {l.label === "Test your pH" ? (
-                  <>
-                    Test your <PH />
-                  </>
-                ) : (
-                  l.label
-                )}
+                {l.label}
               </Link>
             ))}
           </nav>

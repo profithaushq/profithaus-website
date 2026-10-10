@@ -1,5 +1,4 @@
 import Link from "next/link";
-import PH from "@/components/PH";
 import Reveal from "@/components/Reveal";
 
 export default function CtaBand() {
@@ -19,7 +18,7 @@ export default function CtaBand() {
             href="/apply"
             className="inline-block bg-porcelain px-7 py-4 font-mono text-xs tracking-[0.1em] text-oxblood uppercase transition-[transform,background-color] duration-500 ease-out hover:-translate-y-1 hover:bg-white"
           >
-            Test your <PH />
+            Apply to work with us
           </Link>
         </Reveal>
       </div>
