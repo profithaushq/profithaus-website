@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
+import { ELEMENTS } from "@/data/elements";
 import { Pill, OptionCard, ProgressBar } from "./pill-option";
 
 const TOTAL_STEPS = 4;
@@ -15,18 +16,18 @@ const TEAM_SIZES = [
   "30+ people",
 ];
 const WAYS_OF_WORKING = [
-  { title: "Consulting", description: "Strategic guidance" },
+  { title: "Consulting", description: "Ongoing strategy and direction" },
+  {
+    title: "Consulting and execution",
+    description: "We advise, and build what we recommend",
+  },
   { title: "Custom Partner Retainer", description: "Ongoing partnership" },
   { title: "One Time Audit", description: "Deep dive review" },
   { title: "One Time Project", description: "Specific deliverable" },
   { title: "Not sure yet", description: "We'll help you decide" },
 ];
-const SUPPORT_AREAS = [
-  "Ecommerce Trading",
-  "Website Build & Management",
-  "Digital Business Management",
-  "Other",
-];
+// The six elements, as the site names them
+const SUPPORT_AREAS = [...ELEMENTS.map((e) => e.title), "Other"];
 const BRAND_BLOCKERS = [
   "Website design/low conversion",
   "Trading strategy needs improvement",

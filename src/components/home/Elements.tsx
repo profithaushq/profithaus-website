@@ -274,6 +274,21 @@ export default function Elements() {
             </p>
           </div>
         </div>
+
+        {/* Consultancy first; execution when it fits */}
+        <Reveal className="mt-12">
+          <div className="grid gap-4 border-t border-line-strong pt-8 md:grid-cols-[14rem_1fr] md:gap-14">
+            <p className="font-mono text-xs tracking-[0.12em] text-burgundy uppercase">
+              Advice first
+            </p>
+            <p className="max-w-2xl text-base leading-relaxed text-ink">
+              The main job is consulting: ongoing strategy for the brand and the
+              business, with us in the meetings and on it. If you want it and it
+              makes sense, our team can also build what we recommend, so nothing
+              gets lost in a handover.
+            </p>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

@@ -13,7 +13,7 @@ export default function Apply() {
       <PageHeader
         eyebrow="Apply to work with us"
         title="Let's see if we're the right fit."
-        subcopy="A few quick questions about your brand. Takes about two minutes."
+        subcopy="A few quick questions about your brand. Takes about two minutes. We advise first, and can build what we recommend if you want us to."
       />
 
       <section className="mx-auto max-w-2xl px-6 py-20 sm:py-28">

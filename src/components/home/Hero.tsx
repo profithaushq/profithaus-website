@@ -131,7 +131,7 @@ export default function Hero({ ready }: { ready: boolean }) {
         <span aria-hidden className="ph-h-item block h-[2px] bg-pink" />
         <p className="ph-h-item max-w-md text-[15px] leading-relaxed text-ink">
           An e-commerce consultancy for small and medium brands, run by people
-          who have done the job in-house.
+          who have done the job in-house. We advise first, and can build it too.
         </p>
         <p className="ph-h-item">
           <Link
