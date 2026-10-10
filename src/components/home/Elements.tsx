@@ -228,7 +228,7 @@ export default function Elements() {
         {/* What the selected element does */}
         <div
           aria-live="polite"
-          className={`mt-3 grid gap-6 p-7 transition-colors duration-700 ease-out sm:p-10 md:grid-cols-[auto_1fr] md:gap-14 ${
+          className={`mt-10 grid gap-6 p-7 transition-colors duration-700 ease-out sm:p-10 md:grid-cols-[auto_1fr] md:gap-14 ${
             profitSide ? "bg-oxblood text-white" : "bg-porcelain text-oxblood"
           }`}
         >
