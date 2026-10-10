@@ -60,8 +60,7 @@ export const ELEMENTS: Element[] = [
     symbol: "Mk",
     title: "Marketing",
     side: "haus",
-    description:
-      "One strategy across paid, organic and partnerships, aimed at the same goal, so your channels stop fighting over credit for the same sale.",
+    description: "Strategy across all channels, pointed at the same target.",
   },
 ];
 
