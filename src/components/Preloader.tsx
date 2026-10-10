@@ -1,20 +1,17 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
 import Logo from "@/components/Logo";
-import PH from "@/components/PH";
 
 const SESSION_KEY = "ph-preloader-seen";
 
 /**
- * Opens on the brand's own idea: the divide draws, profit and haus slide
- * apart, and the pH reading climbs from 0.0 to 7.0 (neutral) before the
- * panel wipes away.
+ * Opens on the brand's own idea: the divide draws and profit and haus slide
+ * apart, then the panel wipes away. No counter, nothing to watch load.
  */
 export default function Preloader({ onComplete }: { onComplete: () => void }) {
-  const [reading, setReading] = useState(0);
   const panelRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const completeRef = useRef(onComplete);
@@ -49,7 +46,6 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
       if (finished) return;
       finished = true;
       tl.kill();
-      setReading(7);
       document.body.style.overflow = "";
       getLenis()?.start();
       gsap.to(panel, {
@@ -63,10 +59,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
       });
     }
 
-    const tl = gsap.timeline({
-      onUpdate: () => setReading(Math.round(tl.progress() * 70) / 10),
-      onComplete: finish,
-    });
+    const tl = gsap.timeline({ onComplete: finish });
 
     tl.to(
       q(".ph-divide"),
@@ -83,7 +76,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
         { x: 0, opacity: 1, duration: 0.9, ease: "power3.out" },
         0.35,
       )
-      .to({}, { duration: 0.5 });
+      .to({}, { duration: 0.45 });
 
     panel.addEventListener("click", finish);
 
@@ -105,13 +98,6 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
       <div ref={logoRef} className="text-[clamp(3.5rem,13vw,9rem)]">
         <Logo tone="light" />
       </div>
-      <p className="mt-10 font-mono text-xs tracking-[0.14em] text-powder uppercase tabular-nums">
-        <PH /> {reading.toFixed(1)}
-        {reading >= 7 ? " · Neutral" : ""}
-      </p>
-      <p className="mt-3 font-mono text-[10px] tracking-[0.14em] text-powder/50 uppercase">
-        Click to skip
-      </p>
     </div>
   );
 }

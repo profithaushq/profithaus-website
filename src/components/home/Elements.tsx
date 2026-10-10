@@ -39,8 +39,8 @@ function zoneOf(v: number): Zone {
 
 /**
  * "What's your brand's pH?" The instrument and the six elements. Everything
- * here answers a touch: bars set the reading, tiles pull the needle towards
- * their side, and the detail panel changes with the selected element.
+ * here answers a touch: bars set the reading, tiles move the needle to their
+ * side and hold it there, and the detail panel changes with the element.
  */
 export default function Elements() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -98,17 +98,9 @@ export default function Elements() {
   function pickElement(el: Element) {
     touched.current = true;
     setActive(el);
-    // The element pulls the brand towards its side, then it settles at 7
-    tween.current?.kill();
-    const tl = gsap.timeline({
-      onUpdate: () => setV(Math.round(needle.current.v * 10) / 10),
-    });
-    tl.to(needle.current, {
-      v: el.side === "haus" ? 9.6 : 4.4,
-      duration: 0.6,
-      ease: "power2.out",
-    }).to(needle.current, { v: 7, duration: 1.1, ease: "lux" }, "+=0.5");
-    tween.current = tl;
+    // The element pulls the brand towards its side and the reading stays
+    // there until something else is picked
+    goTo(el.side === "haus" ? 10 : 4, 0.8);
   }
 
   const zone = zoneOf(v);
