@@ -9,7 +9,10 @@
   font-weight: 400;
   font-display: swap;
   src: url("/fonts/InstrumentSerif-Regular.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
   font-family: "Instrument Serif";
@@ -17,7 +20,10 @@
   font-weight: 400;
   font-display: swap;
   src: url("/fonts/InstrumentSerif-Regular-ext.woff2") format("woff2");
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
   font-family: "Instrument Serif";
@@ -25,7 +31,10 @@
   font-weight: 400;
   font-display: swap;
   src: url("/fonts/InstrumentSerif-Italic.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
   font-family: "Instrument Serif";
@@ -33,7 +42,10 @@
   font-weight: 400;
   font-display: swap;
   src: url("/fonts/InstrumentSerif-Italic-ext.woff2") format("woff2");
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
   font-family: "Jost";
@@ -41,7 +53,10 @@
   font-weight: 300 500;
   font-display: swap;
   src: url("/fonts/Jost.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
   font-family: "Jost";
@@ -49,7 +64,10 @@
   font-weight: 300 500;
   font-display: swap;
   src: url("/fonts/Jost-ext.woff2") format("woff2");
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
   font-family: "DM Mono";
@@ -57,7 +75,10 @@
   font-weight: 400;
   font-display: swap;
   src: url("/fonts/DMMono-Regular.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
   font-family: "DM Mono";
@@ -65,7 +86,10 @@
   font-weight: 400;
   font-display: swap;
   src: url("/fonts/DMMono-Regular-ext.woff2") format("woff2");
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
 :root {
@@ -125,30 +149,13 @@ body {
 }
 
 /* Cinematic hero image drift */
-@keyframes ken-burns {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.08);
-  }
-}
-
-.animate-ken-burns {
-  animation: ken-burns 8s ease-out forwards;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-ken-burns {
-    animation: none;
-  }
-}
 
 /* Scroll reveal */
 .reveal {
   opacity: 0;
   transform: translateY(36px);
-  transition: opacity 1.2s cubic-bezier(0.19, 1, 0.22, 1),
+  transition:
+    opacity 1.2s cubic-bezier(0.19, 1, 0.22, 1),
     transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
@@ -166,28 +173,6 @@ body {
 }
 
 /* Marquee */
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.marquee-track {
-  animation: marquee 70s linear infinite;
-}
-
-.marquee-track:hover {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-  }
-}
 
 /* Lenis smooth scroll (recommended baseline CSS) */
 html.lenis,
@@ -208,47 +193,7 @@ html.lenis body {
 }
 
 /* Oversized display type (scroll-led rebuild) */
-.text-display {
-  font-size: clamp(4rem, 14vw, 16rem);
-  line-height: 0.88;
-  letter-spacing: -0.03em;
-}
-
 /* Ambient background lines */
-@keyframes ambient-drift-1 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(1.5%, -1%); }
-}
-
-@keyframes ambient-drift-2 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-1.5%, 1%); }
-}
-
-@keyframes ambient-drift-3 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(1%, 1.5%); }
-}
-
-.ambient-line-1 {
-  animation: ambient-drift-1 26s ease-in-out infinite;
-}
-
-.ambient-line-2 {
-  animation: ambient-drift-2 32s ease-in-out infinite;
-}
-
-.ambient-line-3 {
-  animation: ambient-drift-3 38s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .ambient-line-1,
-  .ambient-line-2,
-  .ambient-line-3 {
-    animation: none;
-  }
-}
 
 /* Accordion smooth expand */
 .accordion-panel {
@@ -271,20 +216,12 @@ html.lenis body {
   --ph-header-h: 6.5rem;
 }
 
-.ph-page {
-  margin-bottom: var(--ph-footer-h);
-}
-
 .ph-preloader {
   display: none;
 }
 
 html.ph-preload .ph-preloader {
   display: flex;
-}
-
-html:has([data-ph-hero]) #ph-header-mark {
-  opacity: 0;
 }
 
 .ph-outline {
@@ -298,10 +235,6 @@ html:has([data-ph-hero]) #ph-header-mark {
   }
 }
 
-html.ph-js .ph-hero-word {
-  visibility: hidden;
-}
-
 /* Titles that get split into per-letter boxes: splitting removes kerning and
    ligatures, so switch them off up front to keep the type from shifting. */
 .ph-nokern {
@@ -309,58 +242,37 @@ html.ph-js .ph-hero-word {
   font-variant-ligatures: none;
 }
 
-html.ph-js .ph-page-title {
-  visibility: hidden;
+html.ph-js .ph-h-divide {
+  transform: scaleY(0);
 }
 
-html.ph-js .ph-page-item {
-  opacity: 0;
+html.ph-js .ph-h-card {
+  clip-path: inset(100% 0 0 0);
 }
 
-html.ph-js [data-ph-hero] .ph-hero-row {
+html.ph-js .ph-h-item {
   opacity: 0;
+  transform: translateY(14px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.ph-js .ph-h-divide {
+    transform: none;
+  }
+  html.ph-js .ph-h-card {
+    clip-path: none;
+  }
+  html.ph-js .ph-h-item {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* Services: zoom-through-letters on desktop with motion, plain list otherwise */
-.ph-services-zoom {
-  display: none;
-}
-
-@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
-  html.ph-js .ph-services-zoom {
-    display: block;
-    /* The pinned stage is one screen tall; pull the next section up into that
-       space so there is no empty scroll once the last zoom has finished. */
-    margin-bottom: -100svh;
-  }
-
-  html.ph-js .ph-services-list {
-    display: none;
-  }
-}
 
 /* Pillars: dealt cards on desktop with motion, vertical list otherwise */
-.ph-pillars-stack {
-  display: none;
-}
-
-@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
-  html.ph-js .ph-pillars-stack {
-    display: block;
-  }
-
-  html.ph-js .ph-pillars-list {
-    display: none;
-  }
-}
 
 /* Phones and tablets: cards stack over one another with CSS sticky, no pinning */
-@media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
-  html.ph-js .ph-mslide {
-    position: sticky;
-    top: 0;
-  }
-}
 
 /* Phones: the background is one still frame that slowly drifts. Transform
    only, so the browser composites it with no per-frame drawing. */
@@ -392,7 +304,9 @@ button {
 @media (hover: none) {
   a,
   button {
-    transition: opacity 0.15s ease, transform 0.15s ease;
+    transition:
+      opacity 0.15s ease,
+      transform 0.15s ease;
   }
 
   a:active,
@@ -403,10 +317,70 @@ button {
 }
 
 /* Scroll-lit words: dim only when JS is running, so no-JS reads at full strength */
-html.ph-js .note-word {
-  opacity: 0.2;
+/* When a widget swaps its content (the selected element), the new content
+   settles in rather than snapping. */
+@keyframes ph-swap {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-html.ph-js .tl-word {
-  opacity: 0.15;
+.ph-swap {
+  animation: ph-swap 0.7s cubic-bezier(0.2, 0.7, 0.1, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ph-swap {
+    animation: none;
+  }
+}
+
+/* Words that settle in, once */
+html.ph-js .word-reveal .word-reveal-w span[style] {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.35em);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.1, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.1, 1);
+  transition-delay: calc(var(--i, 0) * 26ms);
+}
+
+html.ph-js .word-reveal.is-in .word-reveal-w span[style] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.ph-js .word-reveal .word-reveal-w span[style] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* The divide drawing itself, top to bottom, once */
+@keyframes ph-draw {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.ph-draw {
+  transform-origin: top;
+  animation: ph-draw 1.4s cubic-bezier(0.2, 0.7, 0.1, 1) 0.2s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ph-draw {
+    animation: none;
+  }
 }

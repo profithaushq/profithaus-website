@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import FullScreenMenu from "@/components/FullScreenMenu";
-import Footer from "@/components/FooterSignOff";
+import Footer from "@/components/SiteFooter";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import PageTransition from "@/components/PageTransition";
 import "./globals.css";
@@ -15,11 +15,7 @@ const PRELOAD_GATE = `try{var d=document.documentElement;d.classList.add('ph-js'
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className="h-full antialiased"
-    >
+    <html lang="en" suppressHydrationWarning className="h-full antialiased">
       <head>
         <script dangerouslySetInnerHTML={{ __html: PRELOAD_GATE }} />
         {/* The fonts used above the fold, fetched early */}
@@ -42,10 +38,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <SmoothScrollProvider />
         <PageTransition />
-        <div className="ph-page relative z-10 flex flex-1 flex-col bg-white">
-          <FullScreenMenu />
-          <main className="flex-1">{children}</main>
-        </div>
+        <FullScreenMenu />
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

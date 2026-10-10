@@ -18,7 +18,7 @@ export default function ContactForm() {
   if (submitted) {
     return (
       <div className="border border-brand-black/10 bg-white p-10 text-center">
-        <h3 className="font-[family-name:var(--font-manrope)] text-base font-extrabold">
+        <h3 className="font-sans text-base font-medium">
           Thanks for reaching out.
         </h3>
         <p className="mt-2 text-sm text-brand-grey">
@@ -91,14 +91,12 @@ export default function ContactForm() {
         />
       </label>
 
-      {submitError && (
-        <p className="text-sm text-brand-red">{submitError}</p>
-      )}
+      {submitError && <p className="text-sm text-brand-red">{submitError}</p>}
 
       <button
         type="submit"
         disabled={submitting}
-        className="mt-2 w-full bg-brand-black px-6 py-3 font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+        className="mt-2 w-full bg-brand-black px-6 py-3 font-mono text-sm uppercase tracking-[0.1em] text-white transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
         {submitting ? "Sending..." : "Send"}
       </button>

@@ -9,10 +9,19 @@ import Mark from "@/components/Mark";
 import Logo from "@/components/Logo";
 import PH from "@/components/PH";
 
+// Same links as the concept's site header; the last one is the call to action
+const BAR_LINKS = [
+  { href: "/#elements", label: "The elements" },
+  { href: "/#work", label: "Work" },
+  { href: "/#about", label: "About" },
+];
+
 const NAV_LINKS = [
   { href: "/", label: "Home" },
+  { href: "/#elements", label: "The elements" },
+  { href: "/#work", label: "Work" },
+  { href: "/#about", label: "About" },
   { href: "/apply", label: "Test your pH" },
-  { href: "/about-us", label: "About" },
   { href: "/faq", label: "FAQ and contact" },
 ];
 
@@ -23,6 +32,8 @@ const MORPHS = [
   { gap: 7, lift: 1.12 },
   { gap: -4, lift: 0.94 },
   { gap: 10, lift: 1.2 },
+  { gap: 3, lift: 1.05 },
+  { gap: -7, lift: 0.9 },
 ];
 
 function MenuLink({
@@ -54,7 +65,7 @@ function MenuLink({
       onClick={onClose}
       onPointerEnter={() => onHover(index)}
       onFocus={() => onHover(index)}
-      className="font-serif text-5xl leading-[1.02] tracking-[-0.02em] text-white transition-colors hover:text-powder sm:text-7xl lg:text-8xl"
+      className="font-serif text-4xl leading-[1.04] tracking-[-0.02em] text-white transition-colors hover:text-powder sm:text-6xl lg:text-7xl"
     >
       {label}
     </Link>
@@ -67,8 +78,6 @@ export default function FullScreenMenu() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const markRef = useRef<HTMLDivElement>(null);
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
-  const lastY = useRef(0);
-  const hiddenRef = useRef(false);
 
   useEffect(() => {
     const header = headerRef.current;
@@ -87,31 +96,6 @@ export default function FullScreenMenu() {
     ro.observe(header);
     return () => ro.disconnect();
   }, []);
-
-  useEffect(() => {
-    lastY.current = window.scrollY;
-
-    function handleScroll() {
-      const header = headerRef.current;
-      if (!header || open) return;
-      const y = window.scrollY;
-      const hasHero = !!document.querySelector("[data-ph-hero]");
-      const hideAfter = hasHero ? window.innerHeight * 1.5 : 80;
-      const goingDown = y > lastY.current && y > hideAfter;
-      lastY.current = y;
-      if (goingDown === hiddenRef.current) return;
-      hiddenRef.current = goingDown;
-      gsap.to(header, {
-        yPercent: goingDown ? -100 : 0,
-        duration: 0.4,
-        ease: "power3.out",
-        overwrite: "auto",
-      });
-    }
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [open]);
 
   useEffect(() => {
     const overlay = overlayRef.current;
@@ -208,55 +192,52 @@ export default function FullScreenMenu() {
         ref={headerRef}
         className="sticky top-0 z-40 border-b border-line bg-white"
       >
-        <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-6 py-4">
-          <div className="flex items-center justify-start">
-            <Link
-              id="ph-header-mark"
-              href="/"
-              aria-label="profithaus home"
-              className="block h-8 w-8 sm:h-9 sm:w-9"
-              onClick={() => setOpen(false)}
-            >
-              <Mark className="h-full w-full" />
-            </Link>
-          </div>
-
+        <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-6 py-5 sm:px-10">
           <Link
             href="/"
             aria-label="profithaus home"
-            className="shrink-0 justify-self-center text-center"
             onClick={() => setOpen(false)}
           >
-            <Logo className="text-[1.65rem] sm:text-[1.9rem]" />
-            <p className="mt-1 font-mono text-[9px] tracking-[0.14em] text-oxblood uppercase sm:text-[10px]">
-              E-commerce partner
-            </p>
+            <Logo className="text-[1.9rem] sm:text-[2.1rem]" />
           </Link>
 
-          <div className="flex items-center justify-end gap-8">
+          <nav
+            aria-label="Main"
+            className="hidden items-center gap-8 font-mono text-xs tracking-[0.08em] md:flex"
+          >
+            {BAR_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="group relative py-1 text-oxblood"
+              >
+                {link.label}
+                <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-pink transition-transform duration-500 ease-out group-hover:scale-x-100" />
+              </Link>
+            ))}
             <Link
               href="/apply"
-              aria-label="Test your pH"
-              className="hidden font-mono text-xs tracking-[0.1em] text-burgundy uppercase underline decoration-pink decoration-1 underline-offset-[6px] transition-[text-underline-offset,color] duration-300 hover:text-oxblood hover:underline-offset-[10px] sm:inline-block"
+              className="group relative py-1 text-burgundy transition-colors duration-300 hover:text-oxblood"
             >
               Test your <PH />
+              <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-pink transition-transform duration-500 ease-out group-hover:scale-x-100" />
             </Link>
+          </nav>
 
-            <button
-              type="button"
-              onClick={() => setOpen((v) => !v)}
-              className="flex flex-col gap-1.5 p-2"
-              aria-label="Toggle menu"
-              aria-expanded={open}
-            >
-              <span
-                className={`h-px w-6 bg-oxblood transition-transform duration-300 ${open ? "translate-y-[3.5px] rotate-45" : ""}`}
-              />
-              <span
-                className={`h-px w-6 bg-oxblood transition-transform duration-300 ${open ? "-translate-y-[3.5px] -rotate-45" : ""}`}
-              />
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            className="flex flex-col gap-1.5 p-2 md:hidden"
+            aria-label="Toggle menu"
+            aria-expanded={open}
+          >
+            <span
+              className={`h-px w-6 bg-oxblood transition-transform duration-300 ${open ? "translate-y-[3.5px] rotate-45" : ""}`}
+            />
+            <span
+              className={`h-px w-6 bg-oxblood transition-transform duration-300 ${open ? "-translate-y-[3.5px] -rotate-45" : ""}`}
+            />
+          </button>
         </div>
       </header>
 

@@ -89,7 +89,7 @@ export default function FaqAccordion() {
               className="flex w-full items-center justify-between gap-4 py-5 text-left transition-transform duration-300 group-hover:translate-x-1"
               aria-expanded={isOpen}
             >
-              <span className="font-[family-name:var(--font-manrope)] font-semibold text-brand-black transition-colors group-hover:text-brand-red">
+              <span className="font-sans font-medium text-brand-black transition-colors group-hover:text-brand-red">
                 {faq.question}
               </span>
               <span

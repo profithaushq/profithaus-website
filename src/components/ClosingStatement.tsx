@@ -1,37 +1,34 @@
 import Link from "next/link";
-import LitText from "@/components/LitText";
+import PH from "@/components/PH";
+import Reveal from "@/components/Reveal";
 
-/** A red closing band: one big statement that lights up, then the call to act. */
+/** An oxblood closing band: one statement, then the call to act. */
 export default function ClosingStatement({
   lead,
   statement,
-  cta,
-  href,
+  href = "/apply",
 }: {
   lead: string;
   statement: string;
-  cta: string;
-  href: string;
+  href?: string;
 }) {
   return (
-    <section className="bg-brand-red py-24 text-white sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 sm:px-10">
-        <p className="max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
-          {lead}
-        </p>
-        <LitText
-          as="h2"
-          dim={0.3}
-          className="mt-10 max-w-[22ch] font-[family-name:var(--font-manrope)] text-[clamp(2rem,5.6vw,5.5rem)] leading-[1.02] font-extrabold tracking-[-0.04em]"
-        >
-          {statement}
-        </LitText>
-        <Link
-          href={href}
-          className="mt-12 inline-block font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide underline decoration-white decoration-2 underline-offset-8 transition-[text-underline-offset] duration-300 hover:underline-offset-[0.9rem]"
-        >
-          {cta}
-        </Link>
+    <section className="bg-oxblood px-6 py-24 text-white sm:px-10 sm:py-32">
+      <div className="mx-auto max-w-[1400px]">
+        <Reveal>
+          <p className="max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
+            {lead}
+          </p>
+          <h2 className="mt-10 max-w-[22ch] font-serif text-[clamp(2.2rem,5vw,4.8rem)] leading-[1.02] tracking-[-0.02em]">
+            {statement}
+          </h2>
+          <Link
+            href={href}
+            className="mt-12 inline-block bg-porcelain px-7 py-4 font-mono text-xs tracking-[0.1em] text-oxblood uppercase transition-[transform,background-color] duration-500 ease-out hover:-translate-y-1 hover:bg-white"
+          >
+            Test your <PH />
+          </Link>
+        </Reveal>
       </div>
     </section>
   );

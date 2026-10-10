@@ -3,14 +3,12 @@
 import { useState } from "react";
 import Preloader from "@/components/Preloader";
 import Hero from "@/components/home/Hero";
-import FounderNote from "@/components/home/FounderNote";
-import BrandsMarquee from "@/components/home/BrandsMarquee";
-import PhScale from "@/components/home/PhScale";
-import ServicesZoom from "@/components/home/ServicesZoom";
-import WorkReel from "@/components/home/WorkReel";
-import DealtPillars from "@/components/home/DealtPillars";
-import TestimonialLine from "@/components/home/TestimonialLine";
-import { REEL } from "@/data/reel";
+import Idea from "@/components/home/Idea";
+import Elements from "@/components/home/Elements";
+import Principles from "@/components/home/Principles";
+import Work from "@/components/home/Work";
+import About from "@/components/home/About";
+import CtaBand from "@/components/home/CtaBand";
 
 export default function Home() {
   const [introDone, setIntroDone] = useState(false);
@@ -20,13 +18,12 @@ export default function Home() {
       {!introDone && <Preloader onComplete={() => setIntroDone(true)} />}
 
       <Hero ready={introDone} />
-      <FounderNote />
-      <BrandsMarquee />
-      <PhScale />
-      <ServicesZoom />
-      <WorkReel items={REEL} />
-      <DealtPillars />
-      <TestimonialLine />
+      <Idea />
+      <Elements />
+      <Principles />
+      <Work />
+      <About />
+      <CtaBand />
     </>
   );
 }

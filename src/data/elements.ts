@@ -72,6 +72,11 @@ const byNumber = (n: string) => ELEMENTS.find((e) => e.n === n)!;
  * side to the other. It also means neighbouring slides never share a ground,
  * so the zoom-through always reveals a different colour.
  */
-export const ELEMENTS_ALTERNATING: Element[] = ["01", "03", "02", "04", "06", "05"].map(
-  byNumber,
-);
+export const ELEMENTS_ALTERNATING: Element[] = [
+  "01",
+  "03",
+  "02",
+  "04",
+  "06",
+  "05",
+].map(byNumber);

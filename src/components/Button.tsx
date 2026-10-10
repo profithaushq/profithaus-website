@@ -22,10 +22,13 @@ export default function Button({
   return (
     <Link
       href={href}
-      className={`group inline-flex items-center justify-center gap-2 px-6 py-3 font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 ${VARIANTS[variant]}`}
+      className={`group inline-flex items-center justify-center gap-2 px-6 py-3 font-mono text-sm uppercase tracking-[0.1em] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 ${VARIANTS[variant]}`}
     >
       {children}
-      <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
+      <span
+        aria-hidden
+        className="transition-transform duration-300 group-hover:translate-x-1"
+      >
         →
       </span>
     </Link>

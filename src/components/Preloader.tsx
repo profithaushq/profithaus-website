@@ -68,7 +68,11 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
       onComplete: finish,
     });
 
-    tl.to(q(".ph-divide"), { scaleY: 1, duration: 0.8, ease: "power3.inOut" }, 0)
+    tl.to(
+      q(".ph-divide"),
+      { scaleY: 1, duration: 0.8, ease: "power3.inOut" },
+      0,
+    )
       .to(
         q(".ph-logo-profit"),
         { x: 0, opacity: 1, duration: 0.9, ease: "power3.out" },

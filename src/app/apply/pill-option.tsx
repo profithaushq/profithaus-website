@@ -12,7 +12,7 @@ export function Pill({
       type="button"
       onClick={onClick}
       aria-pressed={selected}
-      className={`border px-5 py-2.5 font-[family-name:var(--font-manrope)] text-sm font-medium transition-all duration-200 hover:-translate-y-0.5 ${
+      className={`border px-5 py-2.5 font-sans text-sm font-medium transition-all duration-200 hover:-translate-y-0.5 ${
         selected
           ? "border-brand-black bg-brand-black text-white"
           : "border-brand-black/15 text-brand-black hover:border-brand-black/40"
@@ -46,7 +46,7 @@ export function OptionCard({
       }`}
     >
       <p
-        className={`font-[family-name:var(--font-manrope)] text-lg font-extrabold ${
+        className={`font-sans text-lg font-medium ${
           selected ? "text-brand-red" : "text-brand-black"
         }`}
       >
@@ -57,16 +57,10 @@ export function OptionCard({
   );
 }
 
-export function ProgressBar({
-  step,
-  total,
-}: {
-  step: number;
-  total: number;
-}) {
+export function ProgressBar({ step, total }: { step: number; total: number }) {
   return (
     <div className="mb-2">
-      <p className="text-center font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] text-brand-grey">
+      <p className="text-center font-mono text-xs uppercase tracking-[0.12em] text-brand-grey">
         Step {step} of {total}
       </p>
       <div className="mt-4 flex gap-2">

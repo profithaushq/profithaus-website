@@ -1,27 +1,13 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
-import Marquee from "@/components/Marquee";
 import StoryBand from "@/components/StoryBand";
-import CapabilityColumns from "@/components/CapabilityColumns";
 import ClosingStatement from "@/components/ClosingStatement";
 
 export const metadata: Metadata = {
-  title: "About Us | profithaus.",
+  title: "About | profithaus",
 };
 
-// Black, grey, white: the page changes colour as the story moves on.
-const BAND_THEMES = [
-  { bg: "#141414", fg: "#ffffff", muted: "rgba(255,255,255,0.18)" },
-  { bg: "#6e6a66", fg: "#ffffff", muted: "rgba(255,255,255,0.28)" },
-  { bg: "#ffffff", fg: "#141414", muted: "rgba(20,20,20,0.14)" },
-];
-
-const PHRASES = [
-  "REAL IN-HOUSE EXPERIENCE.",
-  "SENIOR-LED, HANDS-ON.",
-  "COMMERCIAL THINKING.",
-  "RUN IT LIKE YOU OWN IT.",
-];
+const GROUNDS = ["white", "porcelain", "oxblood"] as const;
 
 const STORY = [
   {
@@ -51,40 +37,6 @@ const STORY = [
   },
 ];
 
-const CAPABILITIES = [
-  {
-    category: "Ecommerce Trading",
-    items: [
-      "Product Focus & Merchandising",
-      "Pricing & Promotional Strategy",
-      "Customer Journey Analysis",
-      "Trading Strategy & Forecasting",
-      "Performance Review & Insight Generation",
-      "Scaling Roadmaps",
-    ],
-  },
-  {
-    category: "Website Build & Management",
-    items: [
-      "Full-Service Website Builds",
-      "Ongoing Site Management",
-      "Conversion Rate Optimisation",
-      "Website Design",
-      "Performance, Uptime & Reliability",
-    ],
-  },
-  {
-    category: "Digital Business Management",
-    items: [
-      "Margins & P&L Oversight",
-      "Cost of Goods & Contribution by SKU",
-      "Trade Revenue & GP Targets & Forecasts",
-      "Commercial Decision-Making",
-      "Profitability-Led Growth Planning",
-    ],
-  },
-];
-
 export default function AboutUs() {
   return (
     <>
@@ -94,32 +46,19 @@ export default function AboutUs() {
         subcopy="Built by the people who spent years briefing agencies, chasing agencies, and quietly losing faith in them."
       />
 
-      <CapabilityColumns groups={CAPABILITIES} />
-
       {STORY.map((section, i) => (
         <StoryBand
           key={section.number}
           number={section.number}
           title={section.title}
           paragraphs={section.paragraphs}
-          {...BAND_THEMES[i % BAND_THEMES.length]}
+          ground={GROUNDS[i % GROUNDS.length]}
         />
       ))}
-
-      <section className="overflow-hidden bg-brand-black py-10 text-white sm:py-14">
-        <Marquee
-          items={PHRASES}
-          variant="display"
-          duration={140}
-          separator="·"
-        />
-      </section>
 
       <ClosingStatement
         lead="Our trading background means we think commercially at every step, setting revenue targets, forecasting GP, and making decisions backed by data, not gut feel. All joined up under one approach, so nothing operates in a silo."
         statement="We're not here to be your agency. We're here to be the part of your team that actually gets it."
-        cta="Apply to work with us"
-        href="/apply"
       />
     </>
   );
