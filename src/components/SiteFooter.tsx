@@ -29,7 +29,7 @@ export default function SiteFooter() {
               <Link
                 key={l.href + l.label}
                 href={l.href}
-                className="py-3 transition-colors duration-300 hover:text-burgundy"
+                className="py-3 underline decoration-transparent decoration-1 underline-offset-[6px] transition-[color,text-decoration-color] duration-300 hover:text-burgundy hover:decoration-pink"
               >
                 {l.label}
               </Link>

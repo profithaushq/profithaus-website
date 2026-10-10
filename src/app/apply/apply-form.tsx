@@ -46,7 +46,7 @@ const BRAND_BLOCKERS = [
 ];
 
 const inputClass =
-  "border border-brand-black/15 px-4 py-3 text-sm font-normal focus:border-brand-red focus:outline-none";
+  "border border-brand-black/15 px-4 py-3 text-sm font-normal focus:border-pink focus:ring-1 focus:ring-pink focus:outline-none";
 
 function toggleInList(list: string[], value: string) {
   return list.includes(value)

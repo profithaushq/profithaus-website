@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
@@ -67,6 +68,7 @@ function MenuLink({
 
 export default function FullScreenMenu() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const markRef = useRef<HTMLDivElement>(null);
@@ -208,7 +210,11 @@ export default function FullScreenMenu() {
                 className="group relative py-1 text-oxblood"
               >
                 {link.label}
-                <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-pink transition-transform duration-500 ease-out group-hover:scale-x-100" />
+                <span
+                  className={`absolute inset-x-0 -bottom-0.5 h-px origin-left bg-pink transition-transform duration-500 ease-out group-hover:scale-x-100 ${
+                    pathname === link.href ? "scale-x-100" : "scale-x-0"
+                  }`}
+                />
               </Link>
             ))}
             <Link
@@ -216,7 +222,11 @@ export default function FullScreenMenu() {
               className="group relative py-1 text-burgundy transition-colors duration-300 hover:text-oxblood"
             >
               Work with us
-              <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-pink transition-transform duration-500 ease-out group-hover:scale-x-100" />
+              <span
+                className={`absolute inset-x-0 -bottom-0.5 h-px origin-left bg-pink transition-transform duration-500 ease-out group-hover:scale-x-100 ${
+                  pathname === "/apply" ? "scale-x-100" : "scale-x-0"
+                }`}
+              />
             </Link>
           </nav>
 

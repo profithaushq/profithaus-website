@@ -66,7 +66,7 @@ export default function Work() {
                 {PREVIOUSLY.map((name, i) => (
                   <li
                     key={name}
-                    className="group border-t border-line-strong py-3 first:border-t-0"
+                    className="group border-t border-line-strong py-3 transition-colors duration-500 first:border-t-0 hover:border-pink"
                   >
                     <span
                       className={`inline-block font-serif text-[2rem] leading-none tracking-[-0.02em] transition-transform duration-500 ease-out group-hover:translate-x-2 ${

@@ -75,7 +75,7 @@ export default function FaqAccordion() {
   }, []);
 
   return (
-    <div ref={containerRef} className="border-t border-line-strong">
+    <div ref={containerRef} className="ph-rule border-t border-line-strong">
       {FAQS.map((faq, index) => {
         const isOpen = openIndex === index;
         return (
@@ -104,7 +104,7 @@ export default function FaqAccordion() {
             </button>
             <div className={`accordion-panel ${isOpen ? "is-open" : ""}`}>
               <div>
-                <p className="max-w-xl pb-7 pl-11 text-[15px] leading-relaxed text-ink sm:pb-9 sm:pl-[3.75rem]">
+                <p className="mb-7 ml-11 max-w-xl border-l-2 border-pink pl-5 text-[15px] leading-relaxed text-ink sm:mb-9 sm:ml-[3.75rem]">
                   {faq.answer}
                 </p>
               </div>

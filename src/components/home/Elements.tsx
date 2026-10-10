@@ -157,6 +157,8 @@ export default function Elements() {
                 >
                   <span
                     className={`block w-full transition-[height,background-color] duration-500 ease-out ${
+                      n === 7 ? "border-t-2 border-pink" : ""
+                    } ${
                       on ? "bg-oxblood" : "bg-line-strong group-hover:bg-powder"
                     }`}
                     style={{ height: on ? 44.8 : 28 }}

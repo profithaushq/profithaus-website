@@ -397,3 +397,24 @@ html.ph-js .word-reveal.is-in .word-reveal-w span[style] {
     font-size: 16px;
   }
 }
+
+/* Little hints of pink, never on lettering */
+::selection {
+  background: var(--pink);
+  color: var(--oxblood);
+}
+
+/* A short pink tab where a section's rule begins, a nod to the divide */
+.ph-rule {
+  position: relative;
+}
+
+.ph-rule::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 3.5rem;
+  height: 2px;
+  background: var(--pink);
+}

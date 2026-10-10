@@ -115,7 +115,7 @@ export default function Hero({ ready }: { ready: boolean }) {
         <p className="ph-h-item">
           <Link
             href="/apply"
-            className="group inline-flex items-center gap-3 border-b border-oxblood pb-2 text-xs font-medium tracking-[0.18em] uppercase transition-colors duration-300 hover:text-burgundy"
+            className="group inline-flex items-center gap-3 border-b-2 border-pink pb-2 text-xs font-medium tracking-[0.18em] uppercase transition-colors duration-300 hover:text-burgundy"
           >
             Apply to work with us
             <span
