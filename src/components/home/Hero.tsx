@@ -1,41 +1,88 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import LivingBackground from "@/components/LivingBackground";
 
-const PROOF = [
-  "Nearly 10 years in the industry",
-  "£50m+ in revenue managed",
-  "Previously THG, Known Nutrition and LookFantastic",
-];
-
 /**
- * The homepage opening: type first. The line is set large on the oxblood, a
- * short note under it, and the track record along the bottom. The copy rises
- * in once, then it is left alone.
+ * The homepage opening, after the 5c concept: oxblood ground, the reading
+ * (7.0) set huge and bleeding off the edge, the divide, and a white card
+ * carrying the line. Motion lives on the blocks themselves: the reading
+ * counts up, the divide draws, the card wipes open.
  */
 export default function Hero({ ready }: { ready: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
+  const intRef = useRef<HTMLSpanElement>(null);
+  const decRef = useRef<HTMLElement>(null);
   const played = useRef(false);
+
+  // Start from 0.0 so the count has somewhere to climb from
+  useLayoutEffect(() => {
+    const reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduce) return;
+    if (intRef.current) intRef.current.textContent = "0";
+    if (decRef.current) decRef.current.textContent = ".0";
+  }, []);
 
   useEffect(() => {
     if (!ready || played.current) return;
     played.current = true;
     const section = sectionRef.current;
     if (!section) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduce) return;
 
     const ctx = gsap.context(() => {
-      gsap.to(".ph-h-item", {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        stagger: 0.09,
-        ease: "lux",
-        delay: 0.1,
-      });
+      const reading = { v: 0 };
+      const tl = gsap.timeline();
+
+      tl.to(".ph-h-divide", {
+        scaleY: 1,
+        duration: 1.2,
+        ease: "power3.inOut",
+      })
+        .to(
+          reading,
+          {
+            v: 7,
+            duration: 2.2,
+            ease: "power2.out",
+            onUpdate: () => {
+              const whole = Math.floor(reading.v + 1e-6);
+              if (intRef.current) intRef.current.textContent = String(whole);
+              if (decRef.current)
+                decRef.current.textContent =
+                  "." + String(Math.round((reading.v - whole) * 10) % 10);
+            },
+            onComplete: () => {
+              if (intRef.current) intRef.current.textContent = "7";
+              if (decRef.current) decRef.current.textContent = ".0";
+            },
+          },
+          0.1,
+        )
+        .to(
+          ".ph-h-card",
+          { clipPath: "inset(0% 0 0 0)", duration: 1.3, ease: "lux" },
+          0.45,
+        )
+        .to(
+          ".ph-h-item",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            stagger: 0.1,
+            ease: "lux",
+          },
+          1.0,
+        );
     }, section);
 
     return () => ctx.revert();
@@ -45,55 +92,57 @@ export default function Hero({ ready }: { ready: boolean }) {
     <section
       ref={sectionRef}
       data-ph-hero
-      className="relative flex min-h-[30rem] flex-col overflow-hidden bg-oxblood px-6 pt-8 text-white sm:min-h-[33rem] sm:px-10 sm:pt-10"
+      className="relative min-h-[40rem] overflow-hidden bg-oxblood text-white lg:h-[calc(100svh-5.2rem)] lg:max-h-[52rem]"
     >
       {/* A quiet sheen in the oxblood, nothing more */}
-      <LivingBackground className="absolute inset-0 opacity-15" />
+      <LivingBackground className="absolute inset-0 opacity-30" />
 
-      <p className="ph-h-item relative z-10 text-[11px] font-medium tracking-[0.2em] text-powder uppercase">
-        E-commerce strategic partner
+      <p className="ph-h-item absolute top-7 right-6 z-10 font-sans font-medium text-xs tracking-[0.12em] text-powder uppercase sm:right-10">
+        Neutral · 7.0
       </p>
 
-      <div className="relative z-10 my-auto py-10 sm:py-12">
-        <h1 className="ph-h-item font-serif text-[clamp(2.2rem,4.6vw,4.7rem)] leading-[0.95] tracking-[-0.03em]">
-          Making brands harder to ignore and{" "}
-          <em className="text-powder">easier to buy from.</em>
+      {/* The reading, cropped by the edge of the frame */}
+      <p
+        aria-label="pH 7.0"
+        className="pointer-events-none absolute top-16 right-[-0.04em] font-serif leading-[0.8] tracking-[-0.05em] text-white select-none lg:top-auto lg:bottom-[6%]"
+        style={{ fontSize: "clamp(9.5rem, 36vw, 34rem)" }}
+      >
+        <span ref={intRef} aria-hidden>
+          7
+        </span>
+        <em ref={decRef} aria-hidden>
+          .0
+        </em>
+      </p>
+
+      {/* The divide: pink, vertical, edge to edge, one per layout */}
+      <span
+        aria-hidden
+        className="ph-h-divide absolute inset-y-0 left-[72%] w-[3px] origin-top bg-pink lg:left-[51.4%]"
+      />
+
+      <div className="ph-h-card absolute right-4 bottom-4 left-4 z-10 flex flex-col gap-5 bg-white p-7 text-oxblood sm:right-auto sm:bottom-12 sm:left-12 sm:w-[min(40rem,calc(51.4%-4.5rem))] sm:p-10">
+        <p className="ph-h-item font-sans font-medium text-xs tracking-[0.12em] text-burgundy uppercase">
+          E-commerce strategic partner
+        </p>
+        <h1 className="ph-h-item font-serif text-[clamp(2.4rem,4.4vw,4.1rem)] leading-[0.95] tracking-[-0.03em]">
+          Making brands harder to ignore and <em>easier to buy from.</em>
         </h1>
-
-        <div className="mt-10 flex flex-col gap-7 sm:flex-row sm:items-end sm:justify-between sm:gap-14">
-          <div className="ph-h-item max-w-2xl">
-            <p className="font-serif text-[clamp(1.7rem,2.9vw,2.6rem)] leading-[1.1] tracking-[-0.015em]">
-              Your e-commerce director,{" "}
-              <em className="text-powder">without the ridiculous salary.</em>
-            </p>
-            <p className="mt-4 text-base leading-relaxed text-white/70">
-              Senior advice for small and medium brands, from people who have
-              done the job in-house.
-            </p>
-          </div>
-          <p className="ph-h-item shrink-0">
-            <Link
-              href="/apply"
-              className="group inline-flex items-center gap-3 border-b border-pink pb-2 text-xs font-medium tracking-[0.18em] text-white uppercase transition-colors duration-300 hover:text-powder"
-            >
-              Apply to work with us
-              <span
-                aria-hidden
-                className="transition-transform duration-500 ease-out group-hover:translate-x-1.5"
-              >
-                →
-              </span>
-            </Link>
-          </p>
-        </div>
+        <span aria-hidden className="ph-h-item block h-[2px] bg-pink" />
+        <p className="ph-h-item max-w-md text-[15px] leading-relaxed text-ink">
+          Your e-commerce director, without the ridiculous salary. Senior advice
+          for small and medium brands, from people who have done the job
+          in-house. We advise first, and can build it too.
+        </p>
+        <p className="ph-h-item">
+          <Link
+            href="/apply"
+            className="inline-block bg-oxblood px-6 py-3.5 font-sans font-medium text-xs tracking-[0.1em] text-white uppercase transition-colors duration-300 hover:bg-burgundy"
+          >
+            Apply to work with us
+          </Link>
+        </p>
       </div>
-
-      {/* The track record, kept quiet */}
-      <ul className="ph-h-item relative z-10 -mx-6 flex flex-col gap-1.5 border-t border-white/15 px-6 py-5 text-[11px] font-medium tracking-[0.16em] text-powder/80 uppercase sm:-mx-10 sm:flex-row sm:flex-wrap sm:gap-x-10 sm:gap-y-1 sm:px-10">
-        {PROOF.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
     </section>
   );
 }

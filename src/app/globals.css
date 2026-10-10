@@ -242,12 +242,26 @@ html.ph-preload .ph-preloader {
   font-variant-ligatures: none;
 }
 
+html.ph-js .ph-h-divide {
+  transform: scaleY(0);
+}
+
+html.ph-js .ph-h-card {
+  clip-path: inset(100% 0 0 0);
+}
+
 html.ph-js .ph-h-item {
   opacity: 0;
   transform: translateY(14px);
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html.ph-js .ph-h-divide {
+    transform: none;
+  }
+  html.ph-js .ph-h-card {
+    clip-path: none;
+  }
   html.ph-js .ph-h-item {
     opacity: 1;
     transform: none;
