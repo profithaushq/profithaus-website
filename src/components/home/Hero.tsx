@@ -119,15 +119,16 @@ export default function Hero({ ready }: { ready: boolean }) {
       <div className="absolute right-6 bottom-8 left-6 z-10 flex flex-col gap-6 text-white sm:right-auto sm:bottom-14 sm:left-12 sm:w-[min(40rem,calc(51.4%-4.5rem))]">
         <p className="ph-h-item flex items-center gap-4 text-[11px] tracking-[0.2em] text-powder uppercase">
           <span aria-hidden className="block h-px w-8 bg-pink" />
-          E-commerce partner
+          E-commerce strategic partner
         </p>
         <h1 className="ph-h-item font-serif text-[clamp(2.6rem,4.8vw,4.6rem)] leading-[0.95] tracking-[-0.03em]">
           Making brands harder to ignore and{" "}
           <em className="text-powder">easier to buy from.</em>
         </h1>
         <p className="ph-h-item max-w-md text-[15px] leading-relaxed text-white/80">
-          An e-commerce consultancy for small and medium brands, run by people
-          who have done the job in-house. We advise first, and can build it too.
+          Your e-commerce director, without the ridiculous salary. Senior advice
+          for small and medium brands, from people who have done the job
+          in-house. We advise first, and can build it too.
         </p>
         <p className="ph-h-item">
           <Link

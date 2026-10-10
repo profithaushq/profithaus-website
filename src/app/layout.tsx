@@ -6,9 +6,9 @@ import PageTransition from "@/components/PageTransition";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "profithaus | E-commerce partner",
+  title: "profithaus | E-commerce strategic partner",
   description:
-    "profithaus is an e-commerce partner for small and medium brands, run by people who have done the job in-house. Making brands harder to ignore and easier to buy from.",
+    "profithaus is an e-commerce strategic partner for small and medium brands, run by people who have done the job in-house. Making brands harder to ignore and easier to buy from.",
 };
 
 const PRELOAD_GATE = `try{var d=document.documentElement;d.classList.add('ph-js');if(!sessionStorage.getItem('ph-preloader-seen')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('ph-preload')}}catch(e){}`;

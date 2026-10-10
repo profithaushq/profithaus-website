@@ -19,7 +19,7 @@ export default function SiteFooter() {
             <Logo className="text-[2.4rem]" />
           </Link>
           <p className="mt-3 font-sans font-medium text-[11px] tracking-[0.14em] uppercase">
-            <PH /> 7.0 · E-commerce partner
+            <PH /> 7.0 · E-commerce strategic partner
           </p>
         </div>
 

@@ -287,7 +287,8 @@ export default function Elements() {
               </p>
               <p className="mt-3 text-base leading-relaxed text-ink">
                 Ongoing strategy for the brand and the business, with us in the
-                meetings and on it.
+                meetings and on it. All the director energy, none of the
+                payroll.
               </p>
             </div>
             <div className="bg-porcelain p-7 sm:p-8">
