@@ -45,7 +45,7 @@ export default function Hero({ ready }: { ready: boolean }) {
     <section
       ref={sectionRef}
       data-ph-hero
-      className="relative flex flex-col overflow-hidden bg-oxblood px-6 pt-6 text-white sm:px-10"
+      className="relative flex min-h-[30rem] flex-col overflow-hidden bg-oxblood px-6 pt-8 text-white sm:min-h-[33rem] sm:px-10 sm:pt-10"
     >
       {/* A quiet sheen in the oxblood, nothing more */}
       <LivingBackground className="absolute inset-0 opacity-15" />
@@ -54,13 +54,13 @@ export default function Hero({ ready }: { ready: boolean }) {
         E-commerce strategic partner
       </p>
 
-      <div className="relative z-10 py-8 sm:py-10">
+      <div className="relative z-10 my-auto py-10 sm:py-12">
         <h1 className="ph-h-item font-serif text-[clamp(2.2rem,4.6vw,4.7rem)] leading-[0.95] tracking-[-0.03em]">
           Making brands harder to ignore and{" "}
           <em className="text-powder">easier to buy from.</em>
         </h1>
 
-        <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between sm:gap-14">
+        <div className="mt-10 flex flex-col gap-7 sm:flex-row sm:items-end sm:justify-between sm:gap-14">
           <p className="ph-h-item max-w-xl text-base leading-relaxed text-white/80 sm:text-[17px]">
             Your e-commerce director, without the ridiculous salary. Senior
             advice for small and medium brands, from people who have done the
@@ -84,7 +84,7 @@ export default function Hero({ ready }: { ready: boolean }) {
       </div>
 
       {/* The track record, kept quiet */}
-      <ul className="ph-h-item relative z-10 -mx-6 flex flex-col gap-1.5 border-t border-white/15 px-6 py-4 text-[11px] font-medium tracking-[0.16em] text-powder/80 uppercase sm:-mx-10 sm:flex-row sm:flex-wrap sm:gap-x-10 sm:gap-y-1 sm:px-10">
+      <ul className="ph-h-item relative z-10 -mx-6 flex flex-col gap-1.5 border-t border-white/15 px-6 py-5 text-[11px] font-medium tracking-[0.16em] text-powder/80 uppercase sm:-mx-10 sm:flex-row sm:flex-wrap sm:gap-x-10 sm:gap-y-1 sm:px-10">
         {PROOF.map((item) => (
           <li key={item}>{item}</li>
         ))}

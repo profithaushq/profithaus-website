@@ -20,7 +20,7 @@ export default function Work() {
     <section
       id="work"
       aria-labelledby="work-heading"
-      className="scroll-mt-20 bg-white px-6 pb-24 text-oxblood sm:px-10 sm:pb-32"
+      className="scroll-mt-20 bg-white px-6 pb-32 text-oxblood sm:px-10 sm:pb-44"
     >
       <div className="mx-auto max-w-[1400px]">
         <Reveal>
@@ -32,7 +32,7 @@ export default function Work() {
           </h2>
         </Reveal>
 
-        <div className="mt-8 grid gap-4 lg:grid-cols-[2fr_1fr]">
+        <div className="mt-12 grid gap-6 lg:grid-cols-[2fr_1fr]">
           <Reveal>
             <figure className="group flex h-full min-h-[22rem] flex-col justify-between bg-oxblood p-7 text-white transition-[transform,background-color] duration-500 ease-out hover:-translate-y-1.5 hover:bg-burgundy sm:p-10">
               <figcaption className="font-sans font-medium text-xs tracking-[0.12em] text-powder uppercase">

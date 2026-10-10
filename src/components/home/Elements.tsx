@@ -112,7 +112,7 @@ export default function Elements() {
       id="elements"
       ref={sectionRef}
       aria-labelledby="elements-heading"
-      className="scroll-mt-20 bg-white px-6 py-24 text-oxblood sm:px-10 sm:py-32"
+      className="scroll-mt-20 bg-white px-6 py-32 text-oxblood sm:px-10 sm:py-44"
     >
       <div className="mx-auto max-w-[1400px]">
         <Reveal>
@@ -131,7 +131,7 @@ export default function Elements() {
         </Reveal>
 
         {/* The instrument */}
-        <Reveal delay={120} className="mt-14">
+        <Reveal delay={120} className="mt-20">
           <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
             <p className="font-sans font-medium text-xs tracking-[0.1em] text-burgundy uppercase">
               <PH /> {v.toFixed(1)} · {ZONE_COPY[zone].tag}
@@ -187,7 +187,7 @@ export default function Elements() {
         </Reveal>
 
         {/* The six elements */}
-        <ul className="mt-12 grid grid-cols-3 gap-3 lg:grid-cols-6">
+        <ul className="mt-16 grid grid-cols-3 gap-4 lg:grid-cols-6">
           {ELEMENTS.map((el, i) => {
             const isActive = active.n === el.n;
             const profit = el.side === "profit";
@@ -268,7 +268,7 @@ export default function Elements() {
         </div>
 
         {/* Consultancy first; execution when it fits */}
-        <Reveal className="mt-20 sm:mt-28">
+        <Reveal className="mt-28 sm:mt-40">
           <div className="grid gap-px bg-line-strong md:grid-cols-[1.1fr_1fr_1fr]">
             <div className="bg-white py-8 pr-6 md:py-10">
               <p className="font-sans font-medium text-xs tracking-[0.12em] text-burgundy uppercase">

@@ -23,7 +23,7 @@ export default function StoryBand({
 }) {
   const dark = ground === "oxblood";
   return (
-    <section className={`px-6 py-24 sm:px-10 sm:py-32 ${GROUNDS[ground]}`}>
+    <section className={`px-6 py-32 sm:px-10 sm:py-44 ${GROUNDS[ground]}`}>
       <div className="mx-auto grid max-w-[1400px] gap-10 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
         <Reveal>
           <p

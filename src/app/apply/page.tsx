@@ -16,7 +16,7 @@ export default function Apply() {
         subcopy="A few quick questions about your brand. Takes about two minutes. We advise first, and can build what we recommend if you want us to."
       />
 
-      <section className="mx-auto max-w-2xl px-6 py-20 sm:py-28">
+      <section className="mx-auto max-w-2xl px-6 py-28 sm:py-36">
         <Reveal>
           <ApplyForm />
         </Reveal>

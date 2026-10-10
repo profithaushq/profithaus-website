@@ -22,9 +22,9 @@ export default function Idea() {
   return (
     <section
       aria-labelledby="idea-heading"
-      className="bg-porcelain px-6 py-24 text-oxblood sm:px-10 sm:py-32"
+      className="bg-porcelain px-6 py-32 text-oxblood sm:px-10 sm:py-44"
     >
-      <div className="mx-auto grid max-w-[1400px] gap-14 border-t border-line-strong pt-12 lg:grid-cols-2 lg:gap-20 lg:pt-14">
+      <div className="mx-auto grid max-w-[1400px] gap-16 border-t border-line-strong pt-14 lg:grid-cols-2 lg:gap-24 lg:pt-16">
         <Reveal>
           <p className="flex items-center gap-2.5 font-sans text-xs font-medium tracking-[0.12em] text-burgundy uppercase">
             <span>The</span>

@@ -12,7 +12,7 @@ export default function ClosingStatement({
   href?: string;
 }) {
   return (
-    <section className="bg-oxblood px-6 py-24 text-white sm:px-10 sm:py-32">
+    <section className="bg-oxblood px-6 py-32 text-white sm:px-10 sm:py-44">
       <div className="mx-auto max-w-[1400px]">
         <Reveal>
           <p className="max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">

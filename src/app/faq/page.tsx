@@ -13,13 +13,13 @@ export default function Faq() {
     <>
       <PageHeader eyebrow="Got questions" title="Frequently asked questions" />
 
-      <section className="mx-auto max-w-3xl px-6 py-20 sm:py-28">
+      <section className="mx-auto max-w-3xl px-6 py-28 sm:py-36">
         <Reveal>
           <FaqAccordion />
         </Reveal>
       </section>
 
-      <section className="bg-porcelain py-24 sm:py-32">
+      <section className="bg-porcelain py-32 sm:py-44">
         <div className="mx-auto max-w-xl px-6 text-center">
           <Reveal>
             <p className="text-brand-grey">

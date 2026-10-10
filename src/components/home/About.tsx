@@ -23,9 +23,9 @@ export default function About() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="scroll-mt-20 bg-white px-6 pb-28 text-oxblood sm:px-10 sm:pb-36"
+      className="scroll-mt-20 bg-white px-6 pb-36 text-oxblood sm:px-10 sm:pb-48"
     >
-      <div className="mx-auto max-w-[1400px] border-t border-line-strong pt-12">
+      <div className="mx-auto max-w-[1400px] border-t border-line-strong pt-14">
         <Reveal>
           <p className="font-sans font-medium text-xs tracking-[0.12em] text-burgundy uppercase">
             A note from the team
@@ -34,7 +34,7 @@ export default function About() {
             A note from the team
           </h2>
         </Reveal>
-        <div className="mt-8 grid items-start gap-12 lg:grid-cols-[1fr_21rem] lg:gap-16">
+        <div className="mt-12 grid items-start gap-14 lg:grid-cols-[1fr_21rem] lg:gap-16">
           <div>
             <WordReveal
               segments={NOTE}

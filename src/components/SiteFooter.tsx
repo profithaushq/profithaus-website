@@ -12,7 +12,7 @@ const LINKS = [
 
 export default function SiteFooter() {
   return (
-    <footer className="bg-white px-6 py-14 text-oxblood sm:px-10 sm:py-16">
+    <footer className="bg-white px-6 py-20 text-oxblood sm:px-10 sm:py-24">
       <div className="mx-auto flex max-w-[1400px] flex-col gap-12 md:flex-row md:items-end md:justify-between">
         <div>
           <Link href="/" aria-label="profithaus home">

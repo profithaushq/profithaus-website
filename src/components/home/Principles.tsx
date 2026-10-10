@@ -28,7 +28,7 @@ export default function Principles() {
   return (
     <section
       aria-labelledby="principles-heading"
-      className="bg-white px-6 pb-24 text-oxblood sm:px-10 sm:pb-32"
+      className="bg-white px-6 pb-32 text-oxblood sm:px-10 sm:pb-44"
     >
       <div className="mx-auto max-w-[1400px]">
         <Reveal>
@@ -40,7 +40,7 @@ export default function Principles() {
           </h2>
         </Reveal>
 
-        <ol className="mt-8 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="mt-12 grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
           {PRINCIPLES.map((p, i) => (
             <li key={p.n}>
               <Reveal delay={i * 90}>

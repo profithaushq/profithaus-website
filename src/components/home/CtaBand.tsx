@@ -4,7 +4,7 @@ import Reveal from "@/components/Reveal";
 export default function CtaBand() {
   return (
     <section aria-labelledby="cta-heading" className="bg-oxblood text-white">
-      <div className="mx-auto flex max-w-[1400px] flex-col justify-between gap-10 px-6 py-16 sm:px-10 sm:py-20 md:flex-row md:items-center">
+      <div className="mx-auto flex max-w-[1400px] flex-col justify-between gap-10 px-6 py-20 sm:px-10 sm:py-28 md:flex-row md:items-center">
         <Reveal>
           <h2
             id="cta-heading"
