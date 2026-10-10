@@ -1,9 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useLayoutEffect, useRef } from "react";
+import Image from "next/image";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import LivingBackground from "@/components/LivingBackground";
+
+const SHOTS = [
+  {
+    src: "/images/hero/tote.jpg",
+    alt: "A leather tote debossed with the pH seal",
+  },
+  { src: "/images/hero/glass.jpg", alt: "The pH seal on a glass of water" },
+  {
+    src: "/images/hero/plaster.jpg",
+    alt: "The profit|haus wordmark pressed into plaster",
+  },
+  { src: "/images/hero/seals.jpg", alt: "Embossed pH seals on a roll of tape" },
+  { src: "/images/hero/patch.jpg", alt: "The pH seal as an embroidered patch" },
+];
 
 /**
  * The homepage opening, after the 5c concept: oxblood ground, the reading
@@ -16,6 +31,17 @@ export default function Hero({ ready }: { ready: boolean }) {
   const intRef = useRef<HTMLSpanElement>(null);
   const decRef = useRef<HTMLElement>(null);
   const played = useRef(false);
+  const [shot, setShot] = useState(0);
+
+  // The brand in the world: a slow crossfade through the mockups
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setInterval(
+      () => setShot((n) => (n + 1) % SHOTS.length),
+      5600,
+    );
+    return () => window.clearInterval(id);
+  }, [shot]);
 
   // Start from 0.0 so the count has somewhere to climb from
   useLayoutEffect(() => {
@@ -47,6 +73,7 @@ export default function Hero({ ready }: { ready: boolean }) {
         duration: 1.2,
         ease: "power3.inOut",
       })
+        .to(".ph-h-stage", { opacity: 1, duration: 1.8, ease: "lux" }, 0.2)
         .to(
           reading,
           {
@@ -91,6 +118,54 @@ export default function Hero({ ready }: { ready: boolean }) {
     >
       {/* A quiet sheen in the oxblood, nothing more */}
       <LivingBackground className="absolute inset-0 opacity-30" />
+
+      {/* Brand imagery, duotoned into the oxblood */}
+      <div className="ph-h-stage absolute inset-0 isolate overflow-hidden bg-oxblood lg:left-[51.4%]">
+        {SHOTS.map((s, i) => (
+          <div
+            key={s.src}
+            className={`absolute inset-0 transition-opacity duration-[1600ms] ease-out ${
+              i === shot ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <Image
+              src={s.src}
+              alt={i === shot ? s.alt : ""}
+              fill
+              priority={i === 0}
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className={`object-cover mix-blend-lighten brightness-[0.75] contrast-125 grayscale transition-transform duration-[7000ms] ease-out ${
+                i === shot ? "scale-100" : "scale-[1.08]"
+              }`}
+            />
+          </div>
+        ))}
+        <div className="absolute inset-0 bg-oxblood/80 lg:bg-oxblood/30" />
+        <div
+          role="group"
+          aria-label="Brand imagery"
+          className="absolute top-5 left-6 z-10 flex lg:left-8"
+        >
+          {SHOTS.map((s, i) => (
+            <button
+              key={s.src}
+              type="button"
+              aria-label={`Show image ${i + 1} of ${SHOTS.length}`}
+              aria-pressed={i === shot}
+              onClick={() => setShot(i)}
+              className="group cursor-pointer px-1 py-3"
+            >
+              <span
+                className={`block h-[2px] w-7 transition-colors duration-500 ${
+                  i === shot
+                    ? "bg-white"
+                    : "bg-white/30 group-hover:bg-white/60"
+                }`}
+              />
+            </button>
+          ))}
+        </div>
+      </div>
 
       <p className="ph-h-item absolute top-7 right-6 z-10 font-sans font-medium text-xs tracking-[0.12em] text-powder uppercase sm:right-10">
         Neutral · 7.0

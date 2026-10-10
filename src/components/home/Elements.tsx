@@ -268,7 +268,7 @@ export default function Elements() {
         </div>
 
         {/* Consultancy first; execution when it fits */}
-        <Reveal className="mt-12">
+        <Reveal className="mt-20 sm:mt-28">
           <div className="grid gap-px bg-line-strong md:grid-cols-[1.1fr_1fr_1fr]">
             <div className="bg-white py-8 pr-6 md:py-10">
               <p className="font-sans font-medium text-xs tracking-[0.12em] text-burgundy uppercase">
