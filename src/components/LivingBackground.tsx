@@ -85,15 +85,15 @@ const FRAGMENT = /* glsl */ `
     float spec = pow(clamp(dot(n, H), 0.0, 1.0), 70.0);
     float sheen = pow(clamp(dot(n, H), 0.0, 1.0), 7.0);
 
-    vec3 black = vec3(0.055, 0.050, 0.052);
-    vec3 oxblood = vec3(0.30, 0.045, 0.058);
-    vec3 red = vec3(0.64, 0.137, 0.141);
-    vec3 pearl = vec3(0.96, 0.84, 0.80);
+    vec3 black = vec3(0.17, 0.034, 0.068);   // deep wine shadow
+    vec3 oxblood = vec3(0.369, 0.078, 0.141); // #5e1424 oxblood
+    vec3 red = vec3(0.525, 0.102, 0.176);     // #861a2d burgundy
+    vec3 pearl = vec3(0.91, 0.81, 0.81);     // #e8cfcf powder
 
     vec3 col = black;
-    col = mix(col, oxblood, smoothstep(0.5, 1.0, diff) * 0.8);
-    col += red * sheen * 0.22;
-    col += mix(red, pearl, 0.55) * spec * 0.7;
+    col = mix(col, oxblood, smoothstep(0.3, 0.9, diff) * 0.95);
+    col += red * sheen * 0.30;
+    col += mix(red, pearl, 0.6) * spec * 0.55;
 
     float g = hash(gl_FragCoord.xy + floor(uTime * 24.0)) - 0.5;
     col += g * 0.03;
@@ -253,7 +253,7 @@ export default function LivingBackground({
     <div
       ref={hostRef}
       aria-hidden
-      className={`pointer-events-none overflow-hidden bg-brand-black ${className}`}
+      className={`pointer-events-none overflow-hidden bg-oxblood ${className}`}
     />
   );
 }

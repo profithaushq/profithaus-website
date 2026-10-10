@@ -3,35 +3,16 @@
 import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 import { gsap, SplitText } from "@/lib/gsap";
+import PH from "@/components/PH";
+import { ELEMENTS_ALTERNATING } from "@/data/elements";
 
-const SERVICES = [
-  {
-    lines: ["ECOMMERCE", "TRADING"],
-    title: "Ecommerce Trading",
-    description:
-      "A data-led approach to improving how your website performs: product focus, pricing and merchandising, customer journey and overall trading strategy.",
-    bg: "#ffffff",
-    fg: "#141414",
-  },
-  {
-    lines: ["WEBSITE", "BUILD &", "MANAGEMENT"],
-    title: "Website Build & Management",
-    description:
-      "Full-service website builds and ongoing management to keep your site trading efficiently, performing smoothly, and looking every bit as premium as your brand.",
-    bg: "#141414",
-    fg: "#a42324",
-    copy: "#ffffff",
-  },
-  {
-    lines: ["DIGITAL", "BUSINESS", "MANAGEMENT"],
-    title: "Digital Business Management",
-    description:
-      "Full oversight of the commercial engine behind your site: margins, P&Ls, cost of goods and contribution by SKU, so growth decisions are made against real profitability.",
-    bg: "#a42324",
-    fg: "#141414",
-    copy: "#ffffff",
-  },
-];
+const SERVICES = ELEMENTS_ALTERNATING.map((el) => ({
+  ...el,
+  // Oxblood tile = profit side, white tile = haus side
+  bg: el.side === "profit" ? "#5e1424" : "#ffffff",
+  fg: el.side === "profit" ? "#ffffff" : "#5e1424",
+  divide: el.side === "profit" ? "#e8a9b4" : "#5e1424",
+}));
 
 /**
  * Phone and tablet version of the services: full-screen colour slides that
@@ -140,48 +121,49 @@ export default function MobileServices() {
   }, []);
 
   return (
-    <section ref={rootRef} aria-label="What we do" className="ph-mservices">
-      {SERVICES.map((service, i) => (
+    <section ref={rootRef} aria-label="The elements" className="ph-mservices">
+      {SERVICES.map((service) => (
         <article
           key={service.title}
-          className="ph-mslide relative flex h-svh flex-col justify-between overflow-hidden px-6 pt-24 pb-[17svh]"
-          style={{
-            backgroundColor: service.bg,
-            color: service.copy ?? service.fg,
-          }}
+          className="ph-mslide relative flex h-svh flex-col justify-between overflow-hidden px-6 pt-24 pb-[14svh]"
+          style={{ backgroundColor: service.bg, color: service.fg }}
         >
-          <p className="ph-mmeta font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] opacity-70">
-            {String(i + 1).padStart(2, "0")} /{" "}
-            {String(SERVICES.length).padStart(2, "0")}
+          {/* The divide: vertical, edge to edge, one per slide */}
+          <span
+            aria-hidden
+            className="absolute inset-y-0 right-5 w-[2px]"
+            style={{ backgroundColor: service.divide }}
+          />
+
+          <p className="ph-mmeta font-mono text-xs tracking-[0.12em] uppercase opacity-80">
+            Element {service.n} · {service.side}
           </p>
 
           <h3
-            className="ph-mtitle ph-nokern font-[family-name:var(--font-manrope)] text-[12.4vw] leading-[0.92] font-extrabold tracking-[-0.04em] whitespace-nowrap sm:text-[11vw]"
-            style={{ color: service.fg }}
+            className="ph-mtitle ph-nokern font-serif text-[44vw] leading-[0.85] tracking-[-0.04em] whitespace-nowrap sm:text-[30vw]"
             aria-label={service.title}
           >
-            {service.lines.map((line) => (
-              <span key={line} className="block" aria-hidden>
-                {line}
-              </span>
-            ))}
+            <span aria-hidden>{service.symbol}</span>
           </h3>
 
           <div className="ph-mcopy">
-            <p className="max-w-md text-lg leading-snug font-medium">
+            <p className="font-serif text-[2.4rem] leading-none tracking-[-0.02em]">
+              {service.title}
+            </p>
+            <p className="mt-4 max-w-md text-base leading-relaxed">
               {service.description}
             </p>
             <Link
               href="/apply"
-              className="mt-6 inline-block font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide underline decoration-current decoration-2 underline-offset-8"
+              className="mt-6 inline-block font-mono text-xs tracking-[0.1em] uppercase underline decoration-current underline-offset-[7px]"
             >
-              Book a call
+              Test your <PH />
             </Link>
           </div>
 
           <div
             aria-hidden
-            className="ph-mveil pointer-events-none absolute inset-0 z-20 bg-black opacity-0"
+            className="ph-mveil pointer-events-none absolute inset-0 z-20 bg-oxblood opacity-0"
           />
         </article>
       ))}

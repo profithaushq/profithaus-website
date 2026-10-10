@@ -12,17 +12,17 @@ export default function BrandsMarquee() {
   return (
     <section
       aria-label="Previously operated"
-      className="overflow-hidden bg-brand-black py-10 text-white sm:py-14"
+      className="overflow-hidden bg-oxblood py-10 text-white sm:py-14"
     >
-      <p className="mb-5 px-6 font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] text-white/50 sm:px-10">
-        Previously operated
+      <p className="mb-5 px-6 font-mono text-xs tracking-[0.14em] text-powder uppercase sm:px-10">
+        Previously operated · THG group, Known Nutrition
       </p>
       <Marquee
         items={BRANDS}
         variant="display"
         duration={170}
         repeat={2}
-        separator="·"
+        separator="divide"
       />
     </section>
   );

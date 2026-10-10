@@ -1,25 +1,28 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
 import { useRoll } from "@/lib/interactions";
 import Mark from "@/components/Mark";
+import Logo from "@/components/Logo";
+import PH from "@/components/PH";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/apply", label: "Apply to work with us" },
-  { href: "/about-us", label: "About Us" },
-  { href: "/faq", label: "FAQ's & Contact Us" },
+  { href: "/apply", label: "Test your pH" },
+  { href: "/about-us", label: "About" },
+  { href: "/faq", label: "FAQ and contact" },
 ];
 
+// How far the seal's p and H lean apart as each link is hovered: the divide
+// opening and closing, like the scale tipping.
 const MORPHS = [
-  { r: 124, dx: 0, dy: 0, rot: 0 },
-  { r: 146, dx: 22, dy: -6, rot: -8 },
-  { r: 104, dx: -16, dy: 8, rot: 7 },
-  { r: 136, dx: 30, dy: 4, rot: -12 },
+  { gap: 0, lift: 1 },
+  { gap: 7, lift: 1.12 },
+  { gap: -4, lift: 0.94 },
+  { gap: 10, lift: 1.2 },
 ];
 
 function MenuLink({
@@ -51,7 +54,7 @@ function MenuLink({
       onClick={onClose}
       onPointerEnter={() => onHover(index)}
       onFocus={() => onHover(index)}
-      className="font-[family-name:var(--font-manrope)] text-4xl font-extrabold tracking-tight text-white/90 transition-colors hover:text-brand-red sm:text-6xl lg:text-7xl"
+      className="font-serif text-5xl leading-[1.02] tracking-[-0.02em] text-white transition-colors hover:text-powder sm:text-7xl lg:text-8xl"
     >
       {label}
     </Link>
@@ -174,21 +177,22 @@ export default function FullScreenMenu() {
     if (!mark) return;
     const m = MORPHS[index] ?? MORPHS[0];
     const q = gsap.utils.selector(mark);
-    gsap.to(q(".ph-mark-bowl"), {
-      attr: { r: m.r },
-      duration: 0.7,
+    gsap.to(q(".ph-mark-p"), {
+      x: -m.gap,
+      duration: 0.8,
       ease: "power3.out",
       overwrite: "auto",
     });
-    gsap.to(q(".ph-mark-dot"), {
-      attr: { cx: 447 + m.dx, cy: 568 + m.dy },
-      duration: 0.7,
+    gsap.to(q(".ph-mark-h"), {
+      x: m.gap,
+      duration: 0.8,
       ease: "power3.out",
       overwrite: "auto",
     });
-    gsap.to(mark, {
-      rotate: m.rot,
-      duration: 0.9,
+    gsap.to(q(".ph-mark-divide"), {
+      scaleY: m.lift,
+      svgOrigin: "50 50",
+      duration: 0.8,
       ease: "power3.out",
       overwrite: "auto",
     });
@@ -202,15 +206,15 @@ export default function FullScreenMenu() {
     <>
       <header
         ref={headerRef}
-        className="sticky top-0 z-40 border-b border-brand-black/10 bg-white"
+        className="sticky top-0 z-40 border-b border-line bg-white"
       >
-        <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-6 py-5">
+        <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-6 py-4">
           <div className="flex items-center justify-start">
             <Link
               id="ph-header-mark"
               href="/"
-              aria-label="profithaus. home"
-              className="block h-7 w-7 sm:h-8 sm:w-8"
+              aria-label="profithaus home"
+              className="block h-8 w-8 sm:h-9 sm:w-9"
               onClick={() => setOpen(false)}
             >
               <Mark className="h-full w-full" />
@@ -219,29 +223,23 @@ export default function FullScreenMenu() {
 
           <Link
             href="/"
+            aria-label="profithaus home"
             className="shrink-0 justify-self-center text-center"
             onClick={() => setOpen(false)}
           >
-            <Image
-              src="/logo.png"
-              alt="profithaus."
-              width={200}
-              height={50}
-              priority
-              className="mx-auto h-7 w-auto sm:h-8"
-            />
-            <p className="mt-1 font-[family-name:var(--font-manrope)] text-[10px] font-medium uppercase tracking-[0.15em] text-brand-grey">
-              Ecommerce partner for luxury brands
+            <Logo className="text-[1.65rem] sm:text-[1.9rem]" />
+            <p className="mt-1 font-mono text-[9px] tracking-[0.14em] text-oxblood uppercase sm:text-[10px]">
+              E-commerce partner
             </p>
           </Link>
 
           <div className="flex items-center justify-end gap-8">
             <Link
               href="/apply"
-              aria-label="Book a call"
-              className="hidden font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide text-brand-black underline decoration-brand-red decoration-2 underline-offset-4 transition-[text-underline-offset] duration-300 hover:underline-offset-8 sm:inline-block"
+              aria-label="Test your pH"
+              className="hidden font-mono text-xs tracking-[0.1em] text-burgundy uppercase underline decoration-pink decoration-1 underline-offset-[6px] transition-[text-underline-offset,color] duration-300 hover:text-oxblood hover:underline-offset-[10px] sm:inline-block"
             >
-              Book a call
+              Test your <PH />
             </Link>
 
             <button
@@ -252,10 +250,10 @@ export default function FullScreenMenu() {
               aria-expanded={open}
             >
               <span
-                className={`h-0.5 w-6 bg-brand-black transition-transform duration-300 ${open ? "translate-y-1 rotate-45" : ""}`}
+                className={`h-px w-6 bg-oxblood transition-transform duration-300 ${open ? "translate-y-[3.5px] rotate-45" : ""}`}
               />
               <span
-                className={`h-0.5 w-6 bg-brand-black transition-transform duration-300 ${open ? "-translate-y-1 -rotate-45" : ""}`}
+                className={`h-px w-6 bg-oxblood transition-transform duration-300 ${open ? "-translate-y-[3.5px] -rotate-45" : ""}`}
               />
             </button>
           </div>
@@ -264,15 +262,15 @@ export default function FullScreenMenu() {
 
       <div
         ref={overlayRef}
-        className="fixed inset-0 z-50 hidden flex-col bg-brand-black text-white"
+        className="fixed inset-0 z-50 hidden flex-col bg-oxblood text-white"
         style={{ opacity: 0 }}
         role="dialog"
         aria-modal="true"
         aria-label="Site menu"
       >
         <div className="flex items-center justify-between px-6 py-5">
-          <span className="font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide text-white/60">
-            Menu
+          <span className="font-mono text-xs tracking-[0.14em] text-powder uppercase">
+            Menu · <PH /> 7.0
           </span>
           <button
             type="button"
@@ -280,8 +278,8 @@ export default function FullScreenMenu() {
             aria-label="Close menu"
             className="flex flex-col gap-1.5 p-2"
           >
-            <span className="h-0.5 w-6 translate-y-1 rotate-45 bg-white" />
-            <span className="h-0.5 w-6 -translate-y-1 -rotate-45 bg-white" />
+            <span className="h-px w-6 translate-y-[3.5px] rotate-45 bg-white" />
+            <span className="h-px w-6 -translate-y-[3.5px] -rotate-45 bg-white" />
           </button>
         </div>
 
@@ -307,20 +305,21 @@ export default function FullScreenMenu() {
             <div
               ref={markRef}
               className="h-[min(26vh,55vw)] w-[min(26vh,55vw)] lg:h-[min(52vh,34vw)] lg:w-[min(52vh,34vw)]"
+              style={{ ["--mark-disc" as string]: "var(--burgundy)" }}
             >
               <Mark className="h-full w-full" />
             </div>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/10 px-6 py-6 lg:px-16">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/15 px-6 py-6 lg:px-16">
           <a
             href="mailto:team@profithaus.co.uk"
-            className="font-[family-name:var(--font-manrope)] text-sm text-white/70 underline decoration-white/30 underline-offset-4 hover:text-white"
+            className="font-mono text-xs tracking-[0.1em] text-powder uppercase underline decoration-white/30 underline-offset-4 hover:text-white"
           >
             team@profithaus.co.uk
           </a>
-          <div className="flex gap-6 font-[family-name:var(--font-manrope)] text-sm text-white/50">
+          <div className="flex gap-6 font-mono text-xs tracking-[0.1em] text-powder/60 uppercase">
             <span>Instagram</span>
             <span>LinkedIn</span>
           </div>

@@ -48,14 +48,14 @@ export default function TestimonialLine() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-brand-red py-28 text-white sm:py-44"
+      className="relative overflow-hidden bg-burgundy py-28 text-white sm:py-44"
     >
       <div className="mx-auto max-w-6xl px-6">
-        <p className="font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] text-white/80">
+        <p className="font-mono text-xs tracking-[0.12em] text-powder uppercase">
           What clients say
         </p>
 
-        <blockquote className="mt-8 font-[family-name:var(--font-manrope)] text-[clamp(2.1rem,6vw,6.25rem)] leading-[1.04] font-extrabold tracking-tight">
+        <blockquote className="mt-8 font-serif text-[clamp(2.3rem,6vw,6.25rem)] leading-[1.02] tracking-[-0.02em]">
           <span aria-hidden>&ldquo;</span>
           {LINE.split(" ").map((word, i) => (
             <span key={i} className="tl-word">
@@ -65,12 +65,12 @@ export default function TestimonialLine() {
           <span aria-hidden>&rdquo;</span>
         </blockquote>
 
-        <p className="mt-10 font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-[0.15em]">
+        <p className="mt-10 font-mono text-xs tracking-[0.12em] text-powder uppercase">
           Miriam, Director at Oceans Alive
         </p>
 
         <details className="group mt-10 max-w-3xl">
-          <summary className="inline-flex cursor-pointer list-none items-center gap-3 font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide underline decoration-white decoration-2 underline-offset-8 [&::-webkit-details-marker]:hidden">
+          <summary className="inline-flex cursor-pointer list-none items-center gap-3 font-mono text-xs tracking-[0.1em] uppercase underline decoration-white underline-offset-[7px] [&::-webkit-details-marker]:hidden">
             Read the full review
             <span
               aria-hidden

@@ -4,36 +4,18 @@ import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import MobileServices from "@/components/home/MobileServices";
+import PH from "@/components/PH";
+import { ELEMENTS_ALTERNATING } from "@/data/elements";
 
-const SERVICES = [
-  {
-    lines: ["ECOMMERCE", "TRADING"],
-    title: "Ecommerce Trading",
-    description:
-      "A data-led approach to improving how your website performs: product focus, pricing and merchandising, customer journey and overall trading strategy.",
-    bg: "#ffffff",
-    copy: "text-brand-black",
-    originChar: 9,
-  },
-  {
-    lines: ["WEBSITE", "BUILD &", "MANAGEMENT"],
-    title: "Website Build & Management",
-    description:
-      "Full-service website builds and ongoing management to keep your site trading efficiently, performing smoothly, and looking every bit as premium as your brand.",
-    bg: "#141414",
-    copy: "text-white",
-    originChar: 9,
-  },
-  {
-    lines: ["DIGITAL", "BUSINESS", "MANAGEMENT"],
-    title: "Digital Business Management",
-    description:
-      "Full oversight of the commercial engine behind your site: margins, P&Ls, cost of goods and contribution by SKU, so growth decisions are made against real profitability.",
-    bg: "#a42324",
-    copy: "text-white",
-    originChar: 10,
-  },
-];
+const SERVICES = ELEMENTS_ALTERNATING.map((el) => ({
+  ...el,
+  // Oxblood tile = profit side, white tile = haus side
+  bg: el.side === "profit" ? "#5e1424" : "#ffffff",
+  copy: el.side === "profit" ? "text-white" : "text-oxblood",
+  line: el.side === "profit" ? "bg-pink" : "bg-oxblood",
+  // The zoom dives into the stem of the first letter
+  pivot: 0.16,
+}));
 
 export default function ServicesZoom() {
   const stageRef = useRef<HTMLDivElement>(null);
@@ -65,21 +47,21 @@ export default function ServicesZoom() {
         if (!w || !h) return;
         svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
         text.setAttribute("x", String(w / 2));
-        text.setAttribute("y", String(h * 0.38));
-        text
-          .querySelectorAll("tspan")
-          .forEach((t) => t.setAttribute("x", String(w / 2)));
+        text.setAttribute("y", String(h * 0.4));
 
         text.style.fontSize = "200px";
         const box = text.getBBox();
         if (box.width > 0 && box.height > 0) {
-          const byWidth = (w * 0.78) / box.width;
-          const byHeight = (h * 0.54) / box.height;
+          const byWidth = (w * 0.62) / box.width;
+          const byHeight = (h * 0.56) / box.height;
           text.style.fontSize = `${200 * Math.min(byWidth, byHeight)}px`;
         }
 
-        const ext = text.getExtentOfChar(SERVICES[i].originChar);
-        centres[i] = { x: ext.x + ext.width / 2, y: ext.y + ext.height / 2 };
+        const ext = text.getExtentOfChar(0);
+        centres[i] = {
+          x: ext.x + ext.width * SERVICES[i].pivot,
+          y: ext.y + ext.height / 2,
+        };
       });
     }
 
@@ -102,7 +84,7 @@ export default function ServicesZoom() {
               scrollTrigger: {
                 trigger: stageEl,
                 start: "top top",
-                end: () => `+=${window.innerHeight * 0.9 * layers.length}`,
+                end: () => `+=${window.innerHeight * 0.8 * layers.length}`,
                 pin: true,
                 scrub: true,
                 anticipatePin: 1,
@@ -171,8 +153,8 @@ export default function ServicesZoom() {
       </div>
 
       <section
-        className="ph-services-zoom bg-brand-black"
-        aria-label="What we do"
+        className="ph-services-zoom bg-porcelain"
+        aria-label="The elements"
       >
         <div ref={stageRef} className="relative h-svh w-full overflow-hidden">
           {SERVICES.map((service, i) => (
@@ -193,26 +175,14 @@ export default function ServicesZoom() {
                       dominantBaseline="central"
                       fill="black"
                       style={{
-                        fontFamily: "var(--font-manrope)",
-                        fontWeight: 800,
+                        fontFamily: "var(--font-serif)",
+                        fontWeight: 400,
                         letterSpacing: "-0.04em",
                         fontSize: "20vw",
                         transformBox: "fill-box",
                       }}
                     >
-                      {service.lines.map((line, li) => (
-                        <tspan
-                          key={line}
-                          x="50%"
-                          dy={
-                            li === 0
-                              ? `${-(service.lines.length - 1) * 0.45}em`
-                              : "0.9em"
-                          }
-                        >
-                          {line}
-                        </tspan>
-                      ))}
+                      {service.symbol}
                     </text>
                   </mask>
                 </defs>
@@ -226,22 +196,31 @@ export default function ServicesZoom() {
 
               <h2 className="sr-only">{service.title}</h2>
 
+              {/* The divide: vertical, edge to edge, one per layer */}
+              <span
+                aria-hidden
+                className={`absolute inset-y-0 right-7 w-[3px] ${service.line}`}
+              />
+
               <div
-                className={`ph-zoom-copy absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-6 px-6 pb-[13vh] sm:px-10 ${service.copy}`}
+                className={`ph-zoom-copy absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-6 px-6 pb-[12vh] sm:px-10 ${service.copy}`}
               >
                 <div className="max-w-2xl">
-                  <p className="font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] opacity-70">
-                    {String(i + 1).padStart(2, "0")} / {String(SERVICES.length).padStart(2, "0")}
+                  <p className="font-mono text-xs tracking-[0.12em] uppercase opacity-80">
+                    Element {service.n} · {service.side}
                   </p>
-                  <p className="mt-3 font-[family-name:var(--font-manrope)] text-lg font-medium sm:text-xl lg:text-2xl">
+                  <p className="mt-3 font-serif text-[clamp(2.4rem,4.4vw,4.2rem)] leading-none tracking-[-0.02em]">
+                    {service.title}
+                  </p>
+                  <p className="mt-4 max-w-xl text-base leading-relaxed sm:text-lg">
                     {service.description}
                   </p>
                 </div>
                 <Link
                   href="/apply"
-                  className="font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide underline decoration-current decoration-2 underline-offset-8"
+                  className="mr-10 font-mono text-xs tracking-[0.1em] uppercase underline decoration-current underline-offset-[7px]"
                 >
-                  Book a call
+                  Test your <PH />
                 </Link>
               </div>
             </div>

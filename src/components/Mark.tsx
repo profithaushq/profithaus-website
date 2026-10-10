@@ -1,48 +1,52 @@
 import type { SVGProps } from "react";
 
+const SERIF = "'Instrument Serif', Georgia, serif";
+
+/**
+ * The seal: a lowercase p, the divide and an italic H. For anywhere the
+ * wordmark will not fit: avatars, favicons, stamps and sign-offs (Brand Book 02).
+ * Colours come from --mark-disc, --mark-glyph and --mark-divide so it can sit
+ * on any ground. The divide stays pink.
+ */
 export default function Mark(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 814 814" fill="none" aria-hidden {...props}>
+    <svg viewBox="0 0 100 100" fill="none" aria-hidden {...props}>
       <circle
         className="ph-mark-disc"
-        cx="407"
-        cy="407"
-        r="391"
-        fill="var(--mark-disc, #a42324)"
+        cx="50"
+        cy="50"
+        r="50"
+        fill="var(--mark-disc, #5e1424)"
       />
-      <circle
-        className="ph-mark-ring"
-        cx="407"
-        cy="407"
-        r="384"
-        stroke="var(--mark-glyph, #ffffff)"
-        strokeWidth="14"
-        opacity="0"
-      />
-      <line
-        className="ph-mark-stem"
-        x1="295"
-        y1="190"
-        x2="295"
-        y2="567"
-        stroke="var(--mark-glyph, #ffffff)"
-        strokeWidth="46"
-      />
-      <circle
-        className="ph-mark-bowl"
-        cx="416.5"
-        cy="333.5"
-        r="124"
-        stroke="var(--mark-glyph, #ffffff)"
-        strokeWidth="45"
-      />
-      <circle
-        className="ph-mark-dot"
-        cx="447"
-        cy="568"
-        r="34"
+      <text
+        className="ph-mark-p"
+        x="35.5"
+        y="66"
+        textAnchor="middle"
+        style={{ fontFamily: SERIF, fontSize: 54 }}
         fill="var(--mark-glyph, #ffffff)"
+      >
+        p
+      </text>
+      <line
+        className="ph-mark-divide"
+        x1="50"
+        y1="26"
+        x2="50"
+        y2="74"
+        stroke="var(--mark-divide, #e8a9b4)"
+        strokeWidth="1.8"
       />
+      <text
+        className="ph-mark-h"
+        x="64.5"
+        y="64.5"
+        textAnchor="middle"
+        style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 44 }}
+        fill="var(--mark-glyph, #ffffff)"
+      >
+        H
+      </text>
     </svg>
   );
 }

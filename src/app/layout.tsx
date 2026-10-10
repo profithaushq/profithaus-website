@@ -1,27 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
 import FullScreenMenu from "@/components/FullScreenMenu";
 import Footer from "@/components/FooterSignOff";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import PageTransition from "@/components/PageTransition";
 import "./globals.css";
 
-const heading = Inter({
-  variable: "--font-heading",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "700", "800"],
-});
-
-const mono = Poppins({
-  variable: "--font-mono-accent",
-  subsets: ["latin"],
-  weight: ["500", "600"],
-});
-
 export const metadata: Metadata = {
-  title: "profithaus. | Ecommerce Partner for Luxury Brands",
+  title: "profithaus | E-commerce partner",
   description:
-    "profithaus. is an ecommerce partner for luxury brands, making brands harder to ignore and easier to buy from.",
+    "profithaus is an e-commerce partner for small and medium brands, run by people who have done the job in-house. Making brands harder to ignore and easier to buy from.",
 };
 
 const PRELOAD_GATE = `try{var d=document.documentElement;d.classList.add('ph-js');if(!sessionStorage.getItem('ph-preloader-seen')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('ph-preload')}}catch(e){}`;
@@ -31,21 +18,26 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${heading.variable} ${mono.variable} h-full antialiased`}
+      className="h-full antialiased"
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: PRELOAD_GATE }} />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font -- root layout applies site-wide, not per-page */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
-          rel="stylesheet"
-        />
+        {/* The fonts used above the fold, fetched early */}
+        {[
+          "InstrumentSerif-Regular",
+          "InstrumentSerif-Italic",
+          "Jost",
+          "DMMono-Regular",
+        ].map((name) => (
+          <link
+            key={name}
+            rel="preload"
+            href={`/fonts/${name}.woff2`}
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+        ))}
       </head>
       <body className="min-h-full flex flex-col">
         <SmoothScrollProvider />

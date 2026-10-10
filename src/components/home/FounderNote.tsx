@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
-import AmbientLines from "@/components/AmbientLines";
 
 const NOTE_SEGMENTS: { text: string; keyword?: boolean }[] = [
   { text: "We started profithaus because we were tired of watching " },
@@ -31,7 +30,6 @@ export default function FounderNote() {
 
     if (reduceMotion) {
       gsap.set(words, { opacity: 1 });
-      gsap.set(section.querySelectorAll(".note-kw-live"), { fontWeight: 800 });
       return;
     }
 
@@ -45,17 +43,10 @@ export default function FounderNote() {
         },
       });
 
+      // Each word lights up in turn; the haus words (the italic ones) arrive
+      // in burgundy as they do.
       words.forEach((word, i) => {
         tl.to(word, { opacity: 1, duration: 1, ease: "none" }, i);
-        const live = word.querySelector(".note-kw-live");
-        if (live) {
-          tl.fromTo(
-            live,
-            { fontWeight: 500 },
-            { fontWeight: 800, duration: 1.4, ease: "none" },
-            i,
-          );
-        }
       });
     }, section);
 
@@ -65,34 +56,25 @@ export default function FounderNote() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-white py-32 text-brand-black"
+      className="relative overflow-hidden bg-white py-32 text-oxblood"
     >
-      <AmbientLines />
+      {/* One divide, vertical and edge to edge, in oxblood on a light ground */}
+      <span
+        aria-hidden
+        className="absolute inset-y-0 left-3 w-px bg-oxblood sm:left-6"
+      />
       <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10">
-        <p className="font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] text-brand-red">
+        <p className="font-mono text-xs tracking-[0.12em] text-burgundy uppercase">
           A note from the founders
         </p>
 
-        <p className="mt-8 font-[family-name:var(--font-manrope)] text-2xl leading-[1.15] font-medium tracking-tight sm:text-4xl lg:text-[3.1rem]">
+        <p className="mt-8 font-serif text-[2rem] leading-[1.08] tracking-[-0.02em] sm:text-5xl lg:text-[3.8rem]">
           {NOTE_SEGMENTS.map((segment, i) =>
             segment.text.split(" ").map((word, j) =>
               word === "" ? null : (
-                <span
-                  key={`${i}-${j}`}
-                  className="note-word"
-                >
+                <span key={`${i}-${j}`} className="note-word">
                   {segment.keyword ? (
-                    <span className="inline-grid">
-                      <span
-                        aria-hidden
-                        className="invisible col-start-1 row-start-1 font-extrabold"
-                      >
-                        {word}
-                      </span>
-                      <span className="note-kw-live col-start-1 row-start-1">
-                        {word}
-                      </span>
-                    </span>
+                    <em className="text-burgundy">{word}</em>
                   ) : (
                     word
                   )}{" "}

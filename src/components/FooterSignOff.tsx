@@ -5,15 +5,23 @@ import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import LivingBackground from "@/components/LivingBackground";
 import Mark from "@/components/Mark";
+import PH from "@/components/PH";
 
 const FOOTER_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/apply", label: "Apply to work with us" },
-  { href: "/about-us", label: "About Us" },
-  { href: "/faq", label: "FAQ's & Contact Us" },
+  { href: "/apply", label: "Test your pH" },
+  { href: "/about-us", label: "About" },
+  { href: "/faq", label: "FAQ and contact" },
 ];
 
-const CLOSING_LINE = "Run it like you own it.";
+// "haus" is italic in the logo, so the second half of the line is too
+const CLOSING_WORDS = [
+  { w: "Find", i: false },
+  { w: "out", i: false },
+  { w: "where", i: false },
+  { w: "yours", i: true },
+  { w: "reads.", i: true },
+];
 
 export default function FooterSignOff() {
   const footerRef = useRef<HTMLElement>(null);
@@ -75,8 +83,8 @@ export default function FooterSignOff() {
     const q = gsap.utils.selector(mark);
     gsap.set(words, { yPercent: 110 });
     gsap.set(q(".ph-mark-disc"), { opacity: 0 });
-    gsap.set(q(".ph-mark-stem, .ph-mark-bowl"), { drawSVG: "0%" });
-    gsap.set(q(".ph-mark-dot"), { scale: 0, svgOrigin: "447 568" });
+    gsap.set(q(".ph-mark-p, .ph-mark-h"), { opacity: 0, y: 6 });
+    gsap.set(q(".ph-mark-divide"), { scaleY: 0, svgOrigin: "50 50" });
 
     const page = document.querySelector(".ph-page");
     if (!page) return;
@@ -99,14 +107,14 @@ export default function FooterSignOff() {
             0.2,
           )
           .to(
-            q(".ph-mark-stem, .ph-mark-bowl"),
-            { drawSVG: "100%", duration: 1, stagger: 0.15, ease: "power2.inOut" },
-            0.2,
+            q(".ph-mark-divide"),
+            { scaleY: 1, svgOrigin: "50 50", duration: 0.9, ease: "power3.inOut" },
+            0.3,
           )
           .to(
-            q(".ph-mark-dot"),
-            { scale: 1, svgOrigin: "447 568", duration: 0.4, ease: "back.out(2)" },
-            1.1,
+            q(".ph-mark-p, .ph-mark-h"),
+            { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power3.out" },
+            0.7,
           );
       },
     });
@@ -117,16 +125,23 @@ export default function FooterSignOff() {
   return (
     <footer
       ref={footerRef}
-      className="fixed right-0 bottom-0 left-0 z-0 isolate min-h-[80svh] overflow-hidden bg-brand-black text-white"
+      className="fixed right-0 bottom-0 left-0 z-0 isolate min-h-[80svh] overflow-hidden bg-oxblood text-white"
     >
       <LivingBackground className="absolute inset-0" paused={!live} />
 
       <div className="relative z-10 flex min-h-[80svh] flex-col justify-between px-6 py-12 sm:px-10 sm:py-16">
         <div className="flex items-start justify-between gap-8">
-          <p className="max-w-[16ch] font-[family-name:var(--font-manrope)] text-[clamp(3rem,9.5vw,10rem)] leading-[0.95] font-extrabold tracking-tight">
-            {CLOSING_LINE.split(" ").map((word, i) => (
-              <span key={i} className="mr-[0.25em] -mb-[0.16em] inline-block overflow-hidden pb-[0.16em] align-top">
-                <span className="signoff-word inline-block">{word}</span>
+          <p className="max-w-[12ch] font-serif text-[clamp(3.2rem,9.5vw,10rem)] leading-[0.95] tracking-[-0.03em]">
+            {CLOSING_WORDS.map(({ w, i: italic }, i) => (
+              <span
+                key={i}
+                className="mr-[0.22em] -mb-[0.16em] inline-block overflow-hidden pb-[0.16em] align-top"
+              >
+                <span
+                  className={`signoff-word inline-block ${italic ? "italic text-powder" : ""}`}
+                >
+                  {w}
+                </span>
               </span>
             ))}
           </p>
@@ -134,6 +149,7 @@ export default function FooterSignOff() {
           <div
             ref={markRef}
             className="hidden h-28 w-28 shrink-0 sm:block lg:h-44 lg:w-44"
+            style={{ ["--mark-disc" as string]: "var(--burgundy)" }}
           >
             <Mark className="h-full w-full" />
           </div>
@@ -143,11 +159,11 @@ export default function FooterSignOff() {
           <div>
             <a
               href="mailto:team@profithaus.co.uk"
-              className="font-[family-name:var(--font-manrope)] text-xl font-semibold underline decoration-white/40 decoration-2 underline-offset-8 hover:decoration-white"
+              className="font-serif text-3xl tracking-[-0.01em] underline decoration-pink decoration-1 underline-offset-8 hover:decoration-white"
             >
               team@profithaus.co.uk
             </a>
-            <div className="mt-5 flex gap-6 font-[family-name:var(--font-manrope)] text-sm text-white/60">
+            <div className="mt-5 flex gap-6 font-mono text-xs tracking-[0.1em] text-powder uppercase">
               <span>Instagram</span>
               <span>LinkedIn</span>
             </div>
@@ -158,7 +174,7 @@ export default function FooterSignOff() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="font-[family-name:var(--font-manrope)] text-sm font-semibold uppercase tracking-wide text-white/75 hover:text-white"
+                className="font-mono text-xs tracking-[0.1em] text-powder uppercase hover:text-white"
               >
                 {link.label}
               </Link>
@@ -166,8 +182,11 @@ export default function FooterSignOff() {
           </nav>
         </div>
 
-        <p className="mt-10 font-[family-name:var(--font-manrope)] text-xs text-white/40">
-          © {new Date().getFullYear()} profithaus.
+        <p className="mt-10 flex flex-wrap justify-between gap-4 font-mono text-[11px] tracking-[0.1em] text-powder/70 uppercase">
+          <span>© {new Date().getFullYear()} profithaus</span>
+          <span>
+            <PH /> 7.0 · Neutral
+          </span>
         </p>
       </div>
     </footer>

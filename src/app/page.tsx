@@ -5,6 +5,7 @@ import Preloader from "@/components/Preloader";
 import Hero from "@/components/home/Hero";
 import FounderNote from "@/components/home/FounderNote";
 import BrandsMarquee from "@/components/home/BrandsMarquee";
+import PhScale from "@/components/home/PhScale";
 import ServicesZoom from "@/components/home/ServicesZoom";
 import WorkReel from "@/components/home/WorkReel";
 import DealtPillars from "@/components/home/DealtPillars";
@@ -21,6 +22,7 @@ export default function Home() {
       <Hero ready={introDone} />
       <FounderNote />
       <BrandsMarquee />
+      <PhScale />
       <ServicesZoom />
       <WorkReel items={REEL} />
       <DealtPillars />

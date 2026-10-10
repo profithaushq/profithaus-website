@@ -7,11 +7,11 @@ const BASE_SPEED = 1;
 
 const VARIANTS = {
   logos:
-    "whitespace-nowrap font-[family-name:var(--font-manrope)] text-sm font-medium text-brand-grey",
+    "whitespace-nowrap font-sans text-sm font-medium text-brand-grey",
   phrase:
-    "whitespace-nowrap font-[family-name:var(--font-manrope)] text-3xl font-extrabold uppercase tracking-tight sm:text-5xl",
+    "whitespace-nowrap font-serif text-4xl tracking-[-0.02em] sm:text-6xl",
   display:
-    "whitespace-nowrap font-[family-name:var(--font-manrope)] text-[clamp(3rem,8vw,8rem)] leading-none font-extrabold uppercase tracking-tight",
+    "whitespace-nowrap font-serif text-[clamp(3.2rem,9vw,9rem)] leading-none tracking-[-0.03em]",
 };
 
 export default function Marquee({
@@ -88,7 +88,7 @@ export default function Marquee({
             <span
               className={`${VARIANTS[variant]} ${
                 variant === "display" && index % items.length % 2 === 1
-                  ? "ph-outline"
+                  ? "italic"
                   : ""
               }`}
             >
@@ -97,16 +97,12 @@ export default function Marquee({
             {separator && (
               <span
                 aria-hidden
-                className={
+                className={`inline-block bg-pink ${
                   variant === "display"
-                    ? "text-[clamp(2rem,6vw,6rem)] text-brand-red"
-                    : variant === "phrase"
-                      ? "text-3xl text-brand-red sm:text-5xl"
-                      : "text-brand-red"
-                }
-              >
-                {separator}
-              </span>
+                    ? "h-[clamp(2.4rem,7vw,7rem)] w-[2px]"
+                    : "h-8 w-[2px] sm:h-12"
+                }`}
+              />
             )}
           </span>
         ))}

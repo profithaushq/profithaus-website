@@ -3,107 +3,92 @@
 import { useLayoutEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
-type Graphic = "grid" | "chart" | "arcs" | "rays";
-
+// Brand Book 01, "How we behave"
 const PILLARS: {
   number: string;
   title: string;
   description: string;
   bg: string;
   fg: string;
-  graphic: Graphic;
+  /** The divide: pink on dark grounds, oxblood on light ones */
+  line: string;
+  /** Where the divide sits across the card, 0 to 100 */
+  at: number;
 }[] = [
   {
     number: "01",
-    title: "In-Haus DNA",
+    title: "Balance over extremes",
     description:
-      "Built from years in-house, we know how strong internal teams actually think and operate, because we've been there, done it, and made it work.",
-    bg: "#141414",
+      "Brands go wrong at the ends of the scale. We work in the middle.",
+    bg: "#5e1424",
     fg: "#ffffff",
-    graphic: "grid",
+    line: "#e8a9b4",
+    at: 50,
   },
   {
     number: "02",
-    title: "Senior Leadership",
+    title: "Operators, not observers",
     description:
-      "We've been in leadership inside D2C giants, making the big calls, rolling up our sleeves and leading execution that actually moves the business forward.",
-    bg: "#a42324",
-    fg: "#ffffff",
-    graphic: "chart",
+      "The team has run the P&L. It shows in what we recommend.",
+    bg: "#ffffff",
+    fg: "#5e1424",
+    line: "#5e1424",
+    at: 36,
   },
   {
     number: "03",
-    title: "Commercial & Creative Mindset",
-    description:
-      "We're all about performance, profitability, and industry reputation, not vanity metrics that look cute in reports but don't pay the bills.",
-    bg: "#ffffff",
-    fg: "#141414",
-    graphic: "arcs",
+    title: "Taste with a target",
+    description: "Every creative decision has a commercial job to do.",
+    bg: "#861a2d",
+    fg: "#ffffff",
+    line: "#e8a9b4",
+    at: 64,
   },
   {
     number: "04",
-    title: "360 Strategy",
+    title: "Say it plainly",
     description:
-      "From trading to website performance to the numbers behind it, we know the full picture, so if something's not converting or the margins don't add up, we've probably already spotted it.",
-    bg: "#6e6a66",
-    fg: "#ffffff",
-    graphic: "rays",
+      "If it's true, say it. No sixty-slide decks for the sake of it.",
+    bg: "#faf7f4",
+    fg: "#5e1424",
+    line: "#5e1424",
+    at: 50,
   },
 ];
 
-function PillarGraphic({ kind }: { kind: Graphic }) {
-  const common = {
-    className: "ph-pillar-line",
-    stroke: "currentColor",
-    strokeWidth: 1.5,
-    fill: "none",
-  };
-
+/**
+ * One divide per card, drawn top to bottom, plus the pH scale as a row of
+ * ticks along the foot of the card with 7 marked out.
+ */
+function PillarGraphic({ pillar }: { pillar: (typeof PILLARS)[number] }) {
+  const x = (pillar.at / 100) * 1600;
   return (
     <svg
       viewBox="0 0 1600 900"
       preserveAspectRatio="xMidYMid slice"
-      className="pointer-events-none absolute inset-0 h-full w-full opacity-30"
+      className="pointer-events-none absolute inset-0 h-full w-full"
       aria-hidden
     >
-      {kind === "grid" && (
-        <>
-          {[200, 400, 600, 800, 1000, 1200, 1400].map((x) => (
-            <path key={`v${x}`} d={`M${x} 0V900`} {...common} />
-          ))}
-          {[150, 300, 450, 600, 750].map((y) => (
-            <path key={`h${y}`} d={`M0 ${y}H1600`} {...common} />
-          ))}
-        </>
-      )}
-      {kind === "chart" && (
-        <>
-          <path d="M0 840H1600" {...common} />
-          <path
-            d="M0 760L220 700L380 720L620 560L800 600L1040 380L1220 420L1600 120"
-            {...common}
-            strokeWidth={2.5}
-          />
-          <path
-            d="M0 820L260 780L420 790L660 660L840 690L1080 500L1260 540L1600 300"
-            {...common}
-          />
-        </>
-      )}
-      {kind === "arcs" && (
-        <>
-          {[180, 360, 540, 720, 900].map((r) => (
-            <circle key={r} cx="1300" cy="900" r={r} {...common} />
-          ))}
-        </>
-      )}
-      {kind === "rays" && (
-        <>
-          {[0, 200, 400, 600, 800, 1000, 1200, 1400, 1600].map((x) => (
-            <path key={x} d={`M800 1000L${x} -100`} {...common} />
-          ))}
-        </>
-      )}
+      <path
+        className="ph-pillar-line"
+        d={`M${x} 0V900`}
+        stroke={pillar.line}
+        strokeWidth={3}
+        vectorEffect="non-scaling-stroke"
+        fill="none"
+      />
+      {Array.from({ length: 15 }, (_, i) => (
+        <path
+          key={i}
+          className="ph-pillar-line"
+          d={`M${100 + i * 100} 900V${i === 7 ? 846 : 874}`}
+          stroke={pillar.fg}
+          strokeOpacity={i === 7 ? 0.9 : 0.35}
+          strokeWidth={i === 7 ? 3 : 2}
+          vectorEffect="non-scaling-stroke"
+          fill="none"
+        />
+      ))}
     </svg>
   );
 }
@@ -117,10 +102,10 @@ function PillarFace({
 }) {
   return (
     <>
-      <PillarGraphic kind={pillar.graphic} />
+      <PillarGraphic pillar={pillar} />
       <span
         aria-hidden
-        className={`pointer-events-none absolute font-[family-name:var(--font-manrope)] leading-none font-extrabold tracking-tighter opacity-[0.08] select-none ${
+        className={`pointer-events-none absolute font-serif leading-none tracking-[-0.04em] opacity-[0.09] select-none ${
           compact
             ? "-right-[6vw] -bottom-[10vw] text-[58vw]"
             : "-right-[2vw] -bottom-[6vw] text-[42vw]"
@@ -135,25 +120,25 @@ function PillarFace({
             : "px-6 pt-10 pb-[13vh] sm:px-10 sm:pt-14 lg:pb-[33vh]"
         }`}
       >
-        <div className="flex items-center justify-between font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] opacity-70">
-          <span>How we&apos;re different</span>
+        <div className="flex items-center justify-between font-mono text-xs tracking-[0.12em] uppercase opacity-80">
+          <span>How we behave</span>
           <span>
             {pillar.number} / {String(PILLARS.length).padStart(2, "0")}
           </span>
         </div>
         <div className="ph-pillar-text">
           <h3
-            className={`max-w-[16ch] font-[family-name:var(--font-manrope)] leading-[0.95] font-extrabold tracking-tight ${
-              compact ? "text-[2.1rem]" : "text-[clamp(2.5rem,7vw,7.5rem)]"
+            className={`max-w-[14ch] font-serif leading-[0.95] tracking-[-0.025em] ${
+              compact ? "text-[2.6rem]" : "text-[clamp(2.8rem,7.6vw,8rem)]"
             }`}
           >
             {pillar.title}
           </h3>
           <p
-            className={`max-w-2xl font-medium opacity-90 ${
+            className={`max-w-xl ${
               compact
                 ? "mt-4 text-base leading-snug"
-                : "mt-6 text-lg sm:text-xl lg:text-2xl"
+                : "mt-6 text-lg leading-relaxed sm:text-xl lg:text-2xl"
             }`}
           >
             {pillar.description}
@@ -361,14 +346,14 @@ export default function DealtPillars() {
     <>
       <section
         ref={listRef}
-        className="ph-pillars-list bg-[#e9e6e2] py-16 text-brand-black"
-        aria-label="How we're different"
+        className="ph-pillars-list bg-line-strong py-16 text-oxblood"
+        aria-label="How we behave"
       >
         <div className="flex items-end justify-between px-6">
-          <p className="font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] opacity-70">
-            How we&apos;re different
+          <p className="font-mono text-xs tracking-[0.12em] uppercase opacity-80">
+            How we behave
           </p>
-          <p className="font-[family-name:var(--font-manrope)] text-xs font-semibold uppercase tracking-[0.25em] opacity-50">
+          <p className="font-mono text-xs tracking-[0.12em] uppercase opacity-60">
             Swipe
           </p>
         </div>
@@ -386,7 +371,7 @@ export default function DealtPillars() {
               <PillarFace pillar={pillar} compact />
               <div
                 aria-hidden
-                className="ph-pillar-veil pointer-events-none absolute inset-0 z-20 bg-black opacity-0"
+                className="ph-pillar-veil pointer-events-none absolute inset-0 z-20 bg-oxblood opacity-0"
               />
             </article>
           ))}
@@ -399,7 +384,7 @@ export default function DealtPillars() {
           {PILLARS.map((pillar, i) => (
             <span
               key={pillar.number}
-              className="ph-pillar-dot block h-0.5 bg-brand-black transition-[width,opacity] duration-300"
+              className="ph-pillar-dot block h-0.5 bg-oxblood transition-[width,opacity] duration-300"
               style={{
                 width: i === 0 ? "2rem" : "0.5rem",
                 opacity: i === 0 ? 1 : 0.35,
@@ -411,7 +396,7 @@ export default function DealtPillars() {
 
       <section
         className="ph-pillars-stack bg-brand-black"
-        aria-label="How we're different"
+        aria-label="How we behave"
       >
         <div ref={stageRef} className="relative h-svh w-full overflow-hidden">
           {PILLARS.map((pillar, i) => (
@@ -425,7 +410,7 @@ export default function DealtPillars() {
                 style={{ backgroundColor: pillar.bg, color: pillar.fg }}
               >
                 <PillarFace pillar={pillar} />
-                <div className="ph-card-veil absolute inset-0 z-20 bg-black opacity-0" />
+                <div className="ph-card-veil absolute inset-0 z-20 bg-oxblood opacity-0" />
               </div>
             </article>
           ))}
