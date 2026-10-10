@@ -28,10 +28,10 @@ export default function About() {
       <div className="mx-auto max-w-[1400px] border-t border-line-strong pt-12">
         <Reveal>
           <p className="font-sans font-medium text-xs tracking-[0.12em] text-burgundy uppercase">
-            A note from the founders
+            A note from the team
           </p>
           <h2 id="about-heading" className="sr-only">
-            A note from the founders
+            A note from the team
           </h2>
         </Reveal>
         <div className="mt-8 grid items-start gap-12 lg:grid-cols-[1fr_21rem] lg:gap-16">
