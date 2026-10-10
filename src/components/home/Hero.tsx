@@ -67,7 +67,8 @@ export default function Hero({ ready }: { ready: boolean }) {
           alt="Wide-leg grey trousers and a pointed black shoe on a grey studio floor"
           fill
           priority
-          sizes="100vw"
+          quality={92}
+          sizes="(min-width: 1024px) 170vw, 100vw"
           className="object-cover object-center"
         />
 
@@ -86,8 +87,19 @@ export default function Hero({ ready }: { ready: boolean }) {
           aria-hidden
           fill
           priority
-          sizes="100vw"
+          quality={92}
+          sizes="(min-width: 1024px) 170vw, 100vw"
           className="pointer-events-none object-cover object-center"
+        />
+
+        {/* A fine film grain over the whole picture, wordmark included */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.22] mix-blend-overlay"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='.33 .33 .33 0 0 .33 .33 .33 0 0 .33 .33 .33 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          }}
         />
       </div>
 
