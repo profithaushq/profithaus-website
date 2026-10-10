@@ -34,7 +34,7 @@ export default function Work() {
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[2fr_1fr]">
           <Reveal>
-            <figure className="group flex h-full min-h-[22rem] flex-col justify-between bg-oxblood p-7 text-white transition-[transform,background-color] duration-500 ease-out hover:-translate-y-1.5 hover:bg-burgundy sm:p-10">
+            <figure className="ph-rule group flex h-full min-h-[22rem] flex-col justify-between bg-oxblood p-7 text-white transition-[transform,background-color] duration-500 ease-out hover:-translate-y-1.5 hover:bg-burgundy sm:p-10">
               <figcaption className="font-sans font-medium text-xs tracking-[0.12em] text-powder uppercase">
                 What clients say
               </figcaption>
@@ -58,7 +58,7 @@ export default function Work() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="flex h-full min-h-[22rem] flex-col justify-between bg-porcelain p-7 sm:p-10">
+            <div className="ph-rule flex h-full min-h-[22rem] flex-col justify-between bg-porcelain p-7 sm:p-10">
               <p className="font-sans font-medium text-xs tracking-[0.12em] text-burgundy uppercase">
                 Previously operated
               </p>

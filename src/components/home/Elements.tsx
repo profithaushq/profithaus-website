@@ -198,7 +198,11 @@ export default function Elements() {
                       profit
                         ? "bg-oxblood text-white hover:bg-burgundy"
                         : "bg-white text-oxblood shadow-[inset_0_0_0_1px_var(--line)] hover:bg-porcelain"
-                    } ${isActive ? "outline-2 outline-offset-4 outline-oxblood" : ""}`}
+                    } after:absolute after:inset-x-0 after:bottom-0 after:h-[3px] after:origin-left after:bg-pink after:transition-transform after:duration-500 after:ease-out ${
+                      isActive
+                        ? "outline-2 outline-offset-4 outline-oxblood after:scale-x-100"
+                        : "after:scale-x-0 hover:after:scale-x-100"
+                    }`}
                   >
                     <span
                       className={`flex justify-between font-sans font-medium text-[9px] tracking-[0.08em] sm:text-[10px] ${
@@ -224,7 +228,7 @@ export default function Elements() {
         {/* What the selected element does */}
         <div
           aria-live="polite"
-          className={`mt-10 grid gap-6 p-7 transition-colors duration-700 ease-out sm:p-10 md:grid-cols-[auto_1fr] md:gap-14 ${
+          className={`mt-10 grid gap-6 border-l-[3px] border-pink p-7 transition-colors duration-700 ease-out sm:p-10 md:grid-cols-[auto_1fr] md:gap-14 ${
             profitSide ? "bg-oxblood text-white" : "bg-porcelain text-oxblood"
           }`}
         >
@@ -274,7 +278,7 @@ export default function Elements() {
                 Advice first. <em>Build</em> if it helps.
               </p>
             </div>
-            <div className="bg-porcelain p-7 sm:p-8">
+            <div className="ph-rule bg-porcelain p-7 sm:p-8">
               <p className="font-sans font-medium text-[11px] tracking-[0.12em] text-burgundy uppercase">
                 01 · The main job
               </p>
@@ -287,7 +291,7 @@ export default function Elements() {
                 payroll.
               </p>
             </div>
-            <div className="bg-porcelain p-7 sm:p-8">
+            <div className="ph-rule bg-porcelain p-7 sm:p-8">
               <p className="font-sans font-medium text-[11px] tracking-[0.12em] text-burgundy uppercase">
                 02 · When it fits
               </p>

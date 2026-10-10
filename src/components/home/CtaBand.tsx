@@ -19,7 +19,7 @@ export default function CtaBand() {
         <Reveal delay={140}>
           <Link
             href="/apply"
-            className="inline-block bg-porcelain px-7 py-4 font-sans font-medium text-xs tracking-[0.1em] text-oxblood uppercase transition-[transform,background-color] duration-500 ease-out hover:-translate-y-1 hover:bg-white"
+            className="inline-block border-b-2 border-pink bg-porcelain px-7 py-4 font-sans font-medium text-xs tracking-[0.1em] text-oxblood uppercase transition-[transform,background-color] duration-500 ease-out hover:-translate-y-1 hover:bg-white"
           >
             Apply to work with us
           </Link>

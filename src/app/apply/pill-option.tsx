@@ -68,7 +68,11 @@ export function ProgressBar({ step, total }: { step: number; total: number }) {
           <span
             key={i}
             className={`h-1 flex-1 transition-colors duration-300 ${
-              i < step ? "bg-brand-red" : "bg-brand-black/10"
+              i < step - 1
+                ? "bg-oxblood"
+                : i === step - 1
+                  ? "bg-pink"
+                  : "bg-brand-black/10"
             }`}
           />
         ))}
