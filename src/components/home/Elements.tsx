@@ -269,16 +269,39 @@ export default function Elements() {
 
         {/* Consultancy first; execution when it fits */}
         <Reveal className="mt-12">
-          <div className="grid gap-4 border-t border-line-strong pt-8 md:grid-cols-[14rem_1fr] md:gap-14">
-            <p className="font-mono text-xs tracking-[0.12em] text-burgundy uppercase">
-              Advice first
-            </p>
-            <p className="max-w-2xl text-base leading-relaxed text-ink">
-              The main job is consulting: ongoing strategy for the brand and the
-              business, with us in the meetings and on it. If you want it and it
-              makes sense, our team can also build what we recommend, so nothing
-              gets lost in a handover.
-            </p>
+          <div className="grid gap-px bg-line-strong md:grid-cols-[1.1fr_1fr_1fr]">
+            <div className="bg-white py-8 pr-6 md:py-10">
+              <p className="font-mono text-xs tracking-[0.12em] text-burgundy uppercase">
+                How we work
+              </p>
+              <p className="mt-4 font-serif text-[clamp(2.1rem,3.8vw,3.2rem)] leading-[1.05] tracking-[-0.02em]">
+                Advice first. <em>Build</em> if it helps.
+              </p>
+            </div>
+            <div className="bg-porcelain p-7 sm:p-8">
+              <p className="font-mono text-[11px] tracking-[0.12em] text-burgundy uppercase">
+                01 · The main job
+              </p>
+              <p className="mt-3 font-serif text-2xl leading-tight">
+                Consulting
+              </p>
+              <p className="mt-3 text-base leading-relaxed text-ink">
+                Ongoing strategy for the brand and the business, with us in the
+                meetings and on it.
+              </p>
+            </div>
+            <div className="bg-porcelain p-7 sm:p-8">
+              <p className="font-mono text-[11px] tracking-[0.12em] text-burgundy uppercase">
+                02 · When it fits
+              </p>
+              <p className="mt-3 font-serif text-2xl leading-tight">
+                Execution
+              </p>
+              <p className="mt-3 text-base leading-relaxed text-ink">
+                Our team can build what we recommend, so nothing gets lost in a
+                handover.
+              </p>
+            </div>
           </div>
         </Reveal>
       </div>
