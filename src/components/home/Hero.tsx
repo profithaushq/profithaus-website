@@ -1,15 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import LivingBackground from "@/components/LivingBackground";
-
-const IMAGE = {
-  src: "/images/hero/wax.jpg",
-  alt: "The pH seal pressed into silver wax",
-};
+import Mark from "@/components/Mark";
 
 const STEPS = Array.from({ length: 15 }, (_, i) => i);
 
@@ -96,7 +91,13 @@ export default function Hero({ ready }: { ready: boolean }) {
         duration: 1.2,
         ease: "power3.inOut",
       })
-        .to(".ph-h-stage", { opacity: 1, duration: 1.8, ease: "lux" }, 0.2)
+        .to(".ph-h-stage", { opacity: 1, duration: 0.2 }, 1.2)
+        .fromTo(
+          ".ph-h-seal",
+          { scale: 1.4 },
+          { scale: 1, duration: 0.7, ease: "power4.out" },
+          1.2,
+        )
         .to(
           reading,
           {
@@ -137,18 +138,18 @@ export default function Hero({ ready }: { ready: boolean }) {
       {/* A quiet sheen in the oxblood, nothing more */}
       <LivingBackground className="absolute inset-0 opacity-30" />
 
-      {/* The seal, pressed onto the divide */}
+      {/* The seal, stamped onto the divide */}
       <div className="ph-h-stage pointer-events-none absolute top-[7%] left-[51.4%] z-10 hidden -translate-x-1/2 lg:block">
-        <div className="relative isolate size-44 overflow-hidden rounded-full bg-oxblood ring-2 ring-pink xl:size-52">
-          <Image
-            src={IMAGE.src}
-            alt={IMAGE.alt}
-            fill
-            priority
-            sizes="208px"
-            className="scale-110 object-cover mix-blend-lighten brightness-[0.7] contrast-150 grayscale"
+        <div className="ph-h-seal rounded-full shadow-[0_14px_40px_rgba(0,0,0,0.35)] ring-2 ring-pink ring-offset-[7px] ring-offset-oxblood">
+          <Mark
+            className="size-36 xl:size-44"
+            style={
+              {
+                "--mark-disc": "var(--porcelain)",
+                "--mark-glyph": "var(--oxblood)",
+              } as React.CSSProperties
+            }
           />
-          <div className="absolute inset-0 bg-oxblood/30" />
         </div>
       </div>
 
