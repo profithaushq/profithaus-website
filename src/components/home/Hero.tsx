@@ -44,7 +44,7 @@ export default function Hero({ ready }: { ready: boolean }) {
     <section
       ref={sectionRef}
       data-ph-hero
-      className="relative min-h-[40rem] overflow-hidden bg-oxblood text-white lg:h-[calc(100svh-5.2rem)] lg:max-h-[52rem]"
+      className="relative overflow-hidden bg-oxblood text-white sm:min-h-[40rem] lg:h-[calc(100svh-5.2rem)] lg:max-h-[52rem]"
     >
       {/* A quiet sheen in the oxblood, nothing more */}
       <LivingBackground className="absolute inset-0 opacity-30" />
@@ -52,7 +52,7 @@ export default function Hero({ ready }: { ready: boolean }) {
       {/* The seal, zoomed in and cropped by the frame */}
       <div
         aria-hidden
-        className="pointer-events-none absolute top-10 left-1/2 w-[15rem] -translate-x-1/2 sm:-top-10 sm:right-[-8rem] sm:left-auto sm:w-[30rem] sm:translate-x-0 lg:top-1/2 lg:right-[-12%] lg:w-[clamp(34rem,56vw,60rem)] lg:-translate-y-1/2"
+        className="pointer-events-none absolute hidden sm:-top-10 sm:right-[-8rem] sm:block sm:w-[30rem] lg:top-1/2 lg:right-[-12%] lg:w-[clamp(34rem,56vw,60rem)] lg:-translate-y-1/2"
       >
         <div className="ph-h-item">
           <Mark
@@ -67,7 +67,7 @@ export default function Hero({ ready }: { ready: boolean }) {
         </div>
       </div>
 
-      <div className="absolute right-6 bottom-8 left-6 z-10 flex flex-col gap-5 sm:top-1/2 sm:right-auto sm:bottom-auto sm:left-12 sm:w-[min(36rem,calc(72%-4rem))] sm:-translate-y-1/2 lg:w-[min(38rem,calc(51.4%-6rem))]">
+      <div className="relative z-10 flex flex-col gap-5 px-6 py-16 sm:absolute sm:top-1/2 sm:right-auto sm:bottom-auto sm:left-12 sm:p-0 sm:w-[min(36rem,calc(72%-4rem))] sm:-translate-y-1/2 lg:w-[min(38rem,calc(51.4%-6rem))]">
         <p className="ph-h-item font-sans text-[11px] font-medium tracking-[0.2em] text-powder uppercase">
           E-commerce strategic partner
         </p>
