@@ -1,31 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import LivingBackground from "@/components/LivingBackground";
 
+const PROOF = [
+  { value: "Nearly 10", caption: "years in the industry", big: true },
+  { value: "£50m+", caption: "in revenue managed", big: true },
+  {
+    value: "THG, Known Nutrition",
+    caption: "LookFantastic, Coggles and more",
+    big: false,
+  },
+];
+
 /**
- * The homepage opening, after the 5c concept: oxblood ground, the reading
- * (7.0) set huge and bleeding off the edge, the divide, and a white card
- * carrying the line. Motion lives on the blocks themselves: the reading
- * counts up, the divide draws, the card wipes open.
+ * The homepage opening, after the 5c concept: oxblood ground, the divide,
+ * a white card carrying the line, and the track record set large on the
+ * other side. Motion lives on the blocks themselves: the divide draws, the
+ * card wipes open, the proof rises in.
  */
 export default function Hero({ ready }: { ready: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const intRef = useRef<HTMLSpanElement>(null);
-  const decRef = useRef<HTMLElement>(null);
   const played = useRef(false);
-
-  // Start from 0.0 so the count has somewhere to climb from
-  useLayoutEffect(() => {
-    const reduce = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (reduce) return;
-    if (intRef.current) intRef.current.textContent = "0";
-    if (decRef.current) decRef.current.textContent = ".0";
-  }, []);
 
   useEffect(() => {
     if (!ready || played.current) return;
@@ -39,7 +37,6 @@ export default function Hero({ ready }: { ready: boolean }) {
     if (reduce) return;
 
     const ctx = gsap.context(() => {
-      const reading = { v: 0 };
       const tl = gsap.timeline();
 
       tl.to(".ph-h-divide", {
@@ -47,26 +44,6 @@ export default function Hero({ ready }: { ready: boolean }) {
         duration: 1.2,
         ease: "power3.inOut",
       })
-        .to(
-          reading,
-          {
-            v: 7,
-            duration: 2.2,
-            ease: "power2.out",
-            onUpdate: () => {
-              const whole = Math.floor(reading.v + 1e-6);
-              if (intRef.current) intRef.current.textContent = String(whole);
-              if (decRef.current)
-                decRef.current.textContent =
-                  "." + String(Math.round((reading.v - whole) * 10) % 10);
-            },
-            onComplete: () => {
-              if (intRef.current) intRef.current.textContent = "7";
-              if (decRef.current) decRef.current.textContent = ".0";
-            },
-          },
-          0.1,
-        )
         .to(
           ".ph-h-card",
           { clipPath: "inset(0% 0 0 0)", duration: 1.3, ease: "lux" },
@@ -92,24 +69,33 @@ export default function Hero({ ready }: { ready: boolean }) {
     <section
       ref={sectionRef}
       data-ph-hero
-      className="relative min-h-[40rem] overflow-hidden bg-oxblood text-white lg:h-[calc(100svh-5.2rem)] lg:max-h-[52rem]"
+      className="relative min-h-[47rem] overflow-hidden sm:min-h-[40rem] bg-oxblood text-white lg:h-[calc(100svh-5.2rem)] lg:max-h-[52rem]"
     >
       {/* A quiet sheen in the oxblood, nothing more */}
       <LivingBackground className="absolute inset-0 opacity-30" />
 
-      {/* The reading, cropped by the edge of the frame */}
-      <p
-        aria-label="pH 7.0"
-        className="pointer-events-none absolute top-16 right-[-0.04em] font-serif leading-[0.8] tracking-[-0.05em] text-white select-none lg:top-auto lg:bottom-[6%]"
-        style={{ fontSize: "clamp(9.5rem, 36vw, 34rem)" }}
-      >
-        <span ref={intRef} aria-hidden>
-          7
-        </span>
-        <em ref={decRef} aria-hidden>
-          .0
-        </em>
-      </p>
+      {/* The track record, on the far side of the divide */}
+      <ul className="absolute top-8 right-6 left-6 z-10 grid grid-cols-[1fr] gap-4 pr-[34%] sm:right-10 sm:left-auto sm:pr-0 lg:top-0 lg:bottom-0 lg:left-[calc(51.4%+4rem)] lg:flex lg:flex-col lg:justify-center lg:gap-0">
+        {PROOF.map((item) => (
+          <li
+            key={item.value}
+            className="ph-h-item lg:border-t lg:border-white/20 lg:py-9 lg:first:border-t-0"
+          >
+            <p
+              className={`font-serif leading-none tracking-[-0.03em] ${
+                item.big
+                  ? "text-[clamp(1.7rem,7vw,2.2rem)] lg:text-[clamp(3.4rem,6.2vw,6rem)]"
+                  : "text-[clamp(1.3rem,5.4vw,1.7rem)] lg:text-[clamp(1.8rem,3vw,3rem)]"
+              }`}
+            >
+              {item.value}
+            </p>
+            <p className="mt-2 font-sans text-[10px] font-medium tracking-[0.16em] text-powder uppercase lg:mt-3 lg:text-xs">
+              {item.caption}
+            </p>
+          </li>
+        ))}
+      </ul>
 
       {/* The divide: pink, vertical, edge to edge, one per layout */}
       <span
@@ -118,7 +104,7 @@ export default function Hero({ ready }: { ready: boolean }) {
       />
 
       <div className="ph-h-card absolute right-4 bottom-4 left-4 z-10 flex flex-col gap-5 bg-white p-7 text-oxblood sm:right-auto sm:bottom-12 sm:left-12 sm:w-[min(40rem,calc(51.4%-4.5rem))] sm:p-10">
-        <p className="ph-h-item font-sans font-medium text-xs tracking-[0.12em] text-burgundy uppercase">
+        <p className="ph-h-item font-sans text-xs font-medium tracking-[0.12em] text-burgundy uppercase">
           E-commerce strategic partner
         </p>
         <h1 className="ph-h-item font-serif text-[clamp(2.4rem,4.4vw,4.1rem)] leading-[0.95] tracking-[-0.03em]">
@@ -133,7 +119,7 @@ export default function Hero({ ready }: { ready: boolean }) {
         <p className="ph-h-item">
           <Link
             href="/apply"
-            className="inline-block bg-oxblood px-6 py-3.5 font-sans font-medium text-xs tracking-[0.1em] text-white uppercase transition-colors duration-300 hover:bg-burgundy"
+            className="inline-block bg-oxblood px-6 py-3.5 font-sans text-xs font-medium tracking-[0.1em] text-white uppercase transition-colors duration-300 hover:bg-burgundy"
           >
             Apply to work with us
           </Link>
