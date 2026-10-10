@@ -115,12 +115,17 @@ export default function Elements() {
       className="scroll-mt-20 bg-white px-6 py-32 text-oxblood sm:px-10 sm:py-44"
     >
       <div className="mx-auto max-w-[1400px]">
-        <h2 id="elements-heading" className="sr-only">
-          What&apos;s your brand&apos;s pH?
-        </h2>
+        <Reveal>
+          <h2
+            id="elements-heading"
+            className="font-sans text-xs font-medium tracking-[0.12em] text-burgundy uppercase"
+          >
+            The elements
+          </h2>
+        </Reveal>
 
         {/* The instrument */}
-        <Reveal delay={120}>
+        <Reveal delay={120} className="mt-10">
           <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
             <p className="font-sans font-medium text-xs tracking-[0.1em] text-burgundy uppercase">
               <PH /> {v.toFixed(1)} · {ZONE_COPY[zone].tag}
