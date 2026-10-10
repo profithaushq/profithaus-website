@@ -21,7 +21,7 @@ const SIGNS = [
   {
     name: "Heidi",
     font: biro.style.fontFamily,
-    className: "text-[clamp(1.55rem,2.5vw,2.1rem)] -rotate-2 translate-y-1",
+    className: "text-[clamp(1.7rem,2.7vw,2.3rem)] -rotate-2 translate-y-1",
     ink: "#1b2238",
     delay: "0.5s",
   },
@@ -126,7 +126,11 @@ export default function Signature() {
               }}
             >
               <Letters text={sign.name} seed={i * 97 + 13} />
-              {i === 0 && <span aria-hidden>,</span>}
+              {i === 0 && (
+                <span aria-hidden className="ml-2 inline-block">
+                  ,
+                </span>
+              )}
             </span>
           </span>
         ))}
