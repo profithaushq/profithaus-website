@@ -45,7 +45,7 @@ export default function Hero({ ready }: { ready: boolean }) {
     <section
       ref={sectionRef}
       data-ph-hero
-      className="relative flex min-h-[44rem] flex-col overflow-hidden bg-oxblood px-6 pt-8 text-white sm:px-10 lg:h-[calc(100svh-5.2rem)] lg:max-h-[56rem] lg:min-h-[40rem]"
+      className="relative flex flex-col overflow-hidden bg-oxblood px-6 pt-6 text-white sm:px-10"
     >
       {/* A quiet sheen in the oxblood, nothing more */}
       <LivingBackground className="absolute inset-0 opacity-30" />
@@ -54,13 +54,13 @@ export default function Hero({ ready }: { ready: boolean }) {
         E-commerce strategic partner
       </p>
 
-      <div className="relative z-10 my-auto py-10">
-        <h1 className="ph-h-item font-serif text-[clamp(3rem,8.4vw,8.8rem)] leading-[0.92] tracking-[-0.035em]">
+      <div className="relative z-10 py-8 sm:py-10">
+        <h1 className="ph-h-item font-serif text-[clamp(2.7rem,6.4vw,6.6rem)] leading-[0.92] tracking-[-0.035em]">
           Making brands harder to ignore and{" "}
           <em className="text-powder">easier to buy from.</em>
         </h1>
 
-        <div className="mt-10 flex flex-col gap-7 sm:flex-row sm:items-end sm:justify-between sm:gap-14">
+        <div className="mt-7 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between sm:gap-14">
           <p className="ph-h-item max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
             Your e-commerce director, without the ridiculous salary. Senior
             advice for small and medium brands, from people who have done the
@@ -84,7 +84,7 @@ export default function Hero({ ready }: { ready: boolean }) {
       </div>
 
       {/* The track record */}
-      <ul className="ph-h-item relative z-10 -mx-6 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-white/20 px-6 py-6 sm:-mx-10 sm:px-10 md:grid-cols-[1fr_1fr_1.6fr] md:gap-x-10">
+      <ul className="ph-h-item relative z-10 -mx-6 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-white/20 px-6 py-5 sm:-mx-10 sm:px-10 md:grid-cols-[1fr_1fr_1.6fr] md:gap-x-10">
         {PROOF.map((item, i) => (
           <li
             key={item.value}
