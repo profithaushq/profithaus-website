@@ -54,18 +54,18 @@ export default function Hero({ ready }: { ready: boolean }) {
       }
     >
       {/* The picture: floor, then the wordmark, then the subject on top */}
-      <div className="relative h-[17rem] overflow-hidden bg-[#a8acb0] sm:h-[22rem] lg:h-[var(--stage-h)]">
+      <div className="relative h-[17rem] overflow-hidden bg-[#fbfbfb] sm:h-[22rem] lg:h-[var(--stage-h)]">
         <Image
-          src="/images/hero/studio.jpg"
-          alt="Wide-leg grey trousers and a pointed black shoe on a grey studio floor"
+          src="/images/hero/studio-burgundy.jpg"
+          alt="Wide-leg burgundy trousers and a pointed black shoe on a white studio floor"
           fill
           priority
           quality={92}
           sizes="(min-width: 1024px) 170vw, 100vw"
-          className="object-cover object-[50%_20%]"
+          className="object-cover object-[50%_71%]"
         />
 
-        <div className="pointer-events-none absolute top-[40%] left-[50.7%] -translate-x-[51.3%] -translate-y-1/2 lg:top-[41%]">
+        <div className="pointer-events-none absolute top-[40%] left-[52%] -translate-x-[51.3%] -translate-y-1/2 lg:top-[41%]">
           <div>
             <Logo
               divide={false}
@@ -76,14 +76,14 @@ export default function Hero({ ready }: { ready: boolean }) {
         </div>
 
         <Image
-          src="/images/hero/studio-subject.webp"
+          src="/images/hero/studio-burgundy-subject.webp"
           alt=""
           aria-hidden
           fill
           priority
           quality={92}
           sizes="(min-width: 1024px) 170vw, 100vw"
-          className="pointer-events-none object-cover object-[50%_20%]"
+          className="pointer-events-none object-cover object-[50%_71%]"
         />
 
         {/* A fine film grain over the whole picture, wordmark included */}
