@@ -54,7 +54,7 @@ export default function Hero({ ready }: { ready: boolean }) {
       }
     >
       {/* The picture: floor, then the wordmark, then the subject on top */}
-      <div className="relative h-[17rem] overflow-hidden bg-[#fbfbfb] sm:h-[22rem] lg:h-[var(--stage-h)]">
+      <div className="relative aspect-[2/1] overflow-hidden bg-[#fbfbfb] lg:aspect-auto lg:h-[var(--stage-h)]">
         <Image
           src="/images/hero/studio-burgundy.jpg"
           alt="Wide-leg burgundy trousers and a pointed black shoe on a white studio floor"
@@ -65,12 +65,11 @@ export default function Hero({ ready }: { ready: boolean }) {
           className="object-cover object-[50%_71%]"
         />
 
-        <div className="pointer-events-none absolute top-[40%] left-[52%] -translate-x-[51.3%] -translate-y-1/2 lg:top-[41%]">
+        <div className="pointer-events-none absolute top-[47%] left-[52%] -translate-x-[51.3%] -translate-y-1/2 lg:top-[41%]">
           <div>
             <Logo
               divide={false}
-              className="whitespace-nowrap"
-              style={{ fontSize: "min(25.5vw, calc(var(--stage-h) * 0.78))" }}
+              className="text-[27.5vw] whitespace-nowrap lg:text-[length:min(25.5vw,calc(var(--stage-h)*0.78))]"
             />
           </div>
         </div>
