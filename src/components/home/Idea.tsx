@@ -11,7 +11,11 @@ const SIDES = [
   },
   {
     key: "haus" as const,
-    name: <em>haus</em>,
+    name: (
+      <>
+        the <em>haus</em>
+      </>
+    ),
     blurb:
       "Aesthetics and brand creative. The side that makes people want it in the first place.",
   },
@@ -42,7 +46,7 @@ export default function Idea() {
           </h2>
         </Reveal>
 
-        <Reveal delay={140} className="flex flex-col justify-end gap-8">
+        <Reveal delay={140} className="flex flex-col justify-end">
           <div className="grid gap-3 sm:grid-cols-2">
             {SIDES.map((side) => {
               const profit = side.key === "profit";
@@ -56,7 +60,14 @@ export default function Idea() {
                       : "bg-white shadow-[inset_0_0_0_1px_var(--line)] hover:bg-white"
                   }`}
                 >
-                  <p className="font-serif text-4xl leading-none tracking-[-0.03em]">
+                  <p
+                    className={`font-sans text-[11px] font-medium tracking-[0.2em] uppercase ${
+                      profit ? "text-powder" : "text-burgundy"
+                    }`}
+                  >
+                    Focus on
+                  </p>
+                  <p className="mt-3 font-serif text-4xl leading-none tracking-[-0.03em]">
                     {side.name}
                   </p>
                   <p
@@ -77,12 +88,6 @@ export default function Idea() {
               );
             })}
           </div>
-
-          <p className="max-w-lg text-[15px] leading-relaxed text-ink">
-            Each service is an element. Brand positioning, content and marketing
-            pull a brand towards haus. Trading, CRO and CRM pull it towards
-            profit. The line between profit and haus is neutral: 7.0.
-          </p>
         </Reveal>
       </div>
     </section>
