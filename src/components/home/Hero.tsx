@@ -65,11 +65,11 @@ export default function Hero({ ready }: { ready: boolean }) {
           className="object-cover object-[50%_71%]"
         />
 
-        <div className="pointer-events-none absolute top-[40%] left-[52%] -translate-x-[51.3%] -translate-y-1/2 lg:top-[41%]">
+        <div className="pointer-events-none absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 lg:top-[41%]">
           <div>
             <Logo
               divide={false}
-              className="text-[27.5vw] whitespace-nowrap lg:text-[length:min(25.5vw,calc(var(--stage-h)*0.78))]"
+              className="text-[24.5vw] whitespace-nowrap lg:text-[length:min(24.5vw,calc(var(--stage-h)*0.78))]"
             />
           </div>
         </div>
