@@ -371,19 +371,21 @@ html.ph-js .word-reveal.is-in .word-reveal-w span[style] {
   }
 }
 
-/* Pencil signature: written on left to right once, when it comes into view */
-.ph-write {
-  clip-path: inset(-30% 100% -30% -5%);
+/* The signature is written one letter at a time, left to right, once, when it
+   comes into view. Each letter carries its own start (--d) and speed (--dur). */
+.ph-letter {
+  clip-path: inset(-30% 100% -30% -10%);
 }
 
-.is-visible .ph-write {
-  clip-path: inset(-30% -5% -30% -5%);
-  transition: clip-path 1s cubic-bezier(0.5, 0, 0.2, 1) var(--write-delay, 0.6s);
+.is-visible .ph-letter {
+  clip-path: inset(-30% -10% -30% -10%);
+  transition: clip-path var(--dur, 0.25s) cubic-bezier(0.45, 0, 0.25, 1)
+    var(--d, 0s);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ph-write,
-  .is-visible .ph-write {
+  .ph-letter,
+  .is-visible .ph-letter {
     clip-path: none;
     transition: none;
   }
