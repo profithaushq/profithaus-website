@@ -126,8 +126,8 @@ export default function Elements() {
 
         {/* The instrument */}
         <Reveal delay={120} className="mt-14">
-          <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
-            <p className="font-sans font-medium text-xs tracking-[0.1em] text-burgundy uppercase">
+          <div className="flex min-h-[4rem] flex-wrap items-baseline justify-between gap-x-8 gap-y-2 lg:min-h-[1.5rem]">
+            <p className="font-sans font-medium text-xs tracking-[0.1em] text-burgundy uppercase tabular-nums">
               <PH /> {v.toFixed(1)} · {ZONE_COPY[zone].tag}
             </p>
             <p
@@ -155,14 +155,18 @@ export default function Elements() {
                   onClick={() => pickBar(n)}
                   className="group flex cursor-pointer flex-col items-center gap-1.5 pt-2 outline-offset-2"
                 >
-                  <span
-                    className={`block w-full transition-[height,background-color] duration-500 ease-out ${
-                      n === 7 ? "border-t-2 border-pink" : ""
-                    } ${
-                      on ? "bg-oxblood" : "bg-line-strong group-hover:bg-powder"
-                    }`}
-                    style={{ height: on ? 44.8 : 28 }}
-                  />
+                  <span className="flex h-[44.8px] w-full items-end">
+                    <span
+                      className={`block w-full transition-[height,background-color] duration-500 ease-out ${
+                        n === 7 ? "border-t-2 border-pink" : ""
+                      } ${
+                        on
+                          ? "bg-oxblood"
+                          : "bg-line-strong group-hover:bg-powder"
+                      }`}
+                      style={{ height: on ? 44.8 : 28 }}
+                    />
+                  </span>
                   <span
                     className={`font-sans font-medium text-[11px] transition-colors duration-300 ${
                       on ? "text-oxblood" : "text-mute"
