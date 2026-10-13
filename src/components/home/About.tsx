@@ -3,7 +3,7 @@ import Image from "next/image";
 import Reveal from "@/components/Reveal";
 
 const NOTE: Segment[] = [
-  { text: "We started profithaus because we were tired of watching " },
+  { text: "We started profithaus. because we were tired of watching " },
   { text: "good brands", em: true },
   {
     text: " get let down by agencies who'd never actually run one. We've been ",

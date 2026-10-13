@@ -42,7 +42,7 @@ export default function SiteFooter() {
             >
               team@profithaus.co.uk
             </a>{" "}
-            · © {new Date().getFullYear()} profithaus
+            · © {new Date().getFullYear()} profithaus.
           </p>
         </div>
       </div>

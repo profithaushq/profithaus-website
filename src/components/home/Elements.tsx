@@ -181,7 +181,7 @@ export default function Elements() {
 
           <div className="mt-3 flex justify-between font-sans font-medium text-[10px] tracking-[0.08em] text-oxblood uppercase sm:text-[11px]">
             <span>0 · All profit, no pull</span>
-            <span className="hidden sm:inline">7 · profithaus</span>
+            <span className="hidden sm:inline">7 · profithaus.</span>
             <span>14 · All haus, no sales</span>
           </div>
         </Reveal>

@@ -5,9 +5,9 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 const FAQS = [
   {
-    question: "What is profithaus and what do you offer?",
+    question: "What is profithaus. and what do you offer?",
     answer:
-      "profithaus is an e-commerce strategic partner for small and medium brands. Most of what we do is consulting: ongoing strategy for the brand and the business, with us in the meetings and on it. Where it makes sense, our team can also build what we recommend, so nothing gets lost in a handover. We have done the job in-house, so the advice comes from people who have made the calls and lived with the results.",
+      "profithaus. is an e-commerce strategic partner for small and medium brands. Most of what we do is consulting: ongoing strategy for the brand and the business, with us in the meetings and on it. Where it makes sense, our team can also build what we recommend, so nothing gets lost in a handover. We have done the job in-house, so the advice comes from people who have made the calls and lived with the results.",
   },
   {
     question: "How does applying work?",
@@ -30,7 +30,7 @@ const FAQS = [
       "Not really, and we want to keep it that way. We advise first, we're senior and hands-on, and we're far more collaborative than a typical agency setup. We care about what the work actually does, not just ticking off deliverables.",
   },
   {
-    question: "How involved will profithaus be with my brand?",
+    question: "How involved will profithaus. be with my brand?",
     answer:
       "As involved as needed. For some brands we act as strategic support in the background, for others we become fully integrated into the day-to-day team.",
   },

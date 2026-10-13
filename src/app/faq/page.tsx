@@ -4,7 +4,7 @@ import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "FAQ and contact | profithaus",
+  title: "FAQ and contact | profithaus.",
 };
 
 export default function Faq() {

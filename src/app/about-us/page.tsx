@@ -4,7 +4,7 @@ import StoryBand from "@/components/StoryBand";
 import ClosingStatement from "@/components/ClosingStatement";
 
 export const metadata: Metadata = {
-  title: "About | profithaus",
+  title: "About | profithaus.",
 };
 
 const GROUNDS = ["white", "porcelain", "oxblood"] as const;
@@ -41,7 +41,7 @@ export default function AboutUs() {
   return (
     <>
       <PageHeader
-        eyebrow="About profithaus"
+        eyebrow="About profithaus."
         title="The agency we wished existed."
         subcopy="Built by the people who spent years briefing agencies, chasing agencies, and quietly losing faith in them."
       />

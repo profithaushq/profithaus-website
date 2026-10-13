@@ -4,7 +4,7 @@ import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Apply | profithaus",
+  title: "Apply | profithaus.",
 };
 
 export default function Apply() {
