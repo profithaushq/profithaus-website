@@ -69,7 +69,7 @@ export default function Hero({ ready }: { ready: boolean }) {
           <div>
             <Logo
               divide={false}
-              className="text-[24.5vw] whitespace-nowrap lg:text-[length:min(24.5vw,calc(var(--stage-h)*0.78))]"
+              className="text-[23.2vw] whitespace-nowrap lg:text-[length:min(23.2vw,calc(var(--stage-h)*0.78))]"
             />
           </div>
         </div>

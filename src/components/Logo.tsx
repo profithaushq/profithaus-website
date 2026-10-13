@@ -1,5 +1,6 @@
 /**
- * The profithaus wordmark: "profit" set upright, the divide, "haus" in italic.
+ * The profithaus wordmark: "profit" set upright, the divide, "haus." in italic,
+ * with its full stop.
  * Always lowercase, always one colour, always with the divide (Brand Book 02).
  * The divide is 82% of the type size and centred on the x-height; pink is
  * reserved for it, so it is the only thing that ever carries that colour.
@@ -22,7 +23,7 @@ export default function Logo({
   return (
     <span
       role="img"
-      aria-label="profithaus"
+      aria-label="profithaus."
       className={`inline-flex items-baseline font-serif leading-none tracking-[-0.04em] ${ink} ${className}`}
       style={style}
     >
@@ -39,7 +40,7 @@ export default function Logo({
         }}
       />
       <span aria-hidden className="ph-logo-haus italic">
-        haus
+        haus.
       </span>
     </span>
   );
