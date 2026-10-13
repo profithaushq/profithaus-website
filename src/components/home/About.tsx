@@ -1,7 +1,6 @@
 import WordReveal, { type Segment } from "@/components/WordReveal";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
-import Signature from "@/components/home/Signature";
 
 const NOTE: Segment[] = [
   { text: "We started profithaus because we were tired of watching " },
@@ -40,11 +39,8 @@ export default function About() {
               segments={NOTE}
               className="max-w-4xl font-serif text-[clamp(1.9rem,3.6vw,3.3rem)] leading-[1.1] tracking-[-0.015em]"
             />
-            <Reveal delay={150}>
-              <Signature />
-            </Reveal>
             <Reveal delay={200}>
-              <p className="mt-8 font-sans text-xs font-medium tracking-[0.12em] text-burgundy uppercase">
+              <p className="mt-10 font-sans text-xs font-medium tracking-[0.12em] text-burgundy uppercase">
                 Nearly 10 years in the industry · £50m+ in revenue managed
               </p>
             </Reveal>
